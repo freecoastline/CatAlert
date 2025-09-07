@@ -12,12 +12,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let label = UILabel()
-        label.text = "Hello world"
-        label.textAlignment = .center
-        label.sizeToFit()
-        view.addSubview(label)
-        label.sn
+        let tabbar = UITabBarController()
+        let catProfile = CatProfileViewController()
+        let catCurrentStatus = CatCurrentStatusViewController()
+        tabbar.viewControllers = [catProfile]
+        view.addSubview(tabbar.view)
+        catProfile.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        
     }
 
 
