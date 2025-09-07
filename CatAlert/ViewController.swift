@@ -15,10 +15,10 @@ class ViewController: UIViewController {
         let tabbar = UITabBarController()
         let catProfile = CatProfileViewController()
         let catCurrentStatus = CatCurrentStatusViewController()
-        tabbar.viewControllers = [catProfile]
+        tabbar.viewControllers = [catCurrentStatus, catProfile]
         view.addSubview(tabbar.view)
+        catCurrentStatus.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 0)
         catProfile.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        
     }
 
 
