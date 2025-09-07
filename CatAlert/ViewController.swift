@@ -20,9 +20,6 @@ class ViewController: UIViewController {
         view.addSubview(catTabbar.view)
         catCurrentStatus.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 0)
         catProfile.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        catTabbar.view.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-50)
-        }
     }
 }
 

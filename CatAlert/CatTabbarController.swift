@@ -23,5 +23,13 @@ class CatTabbarController:UITabBarController {
         tabBar.layer.insertSublayer(layer, at: 0)
         print("tabbarView:\(view.frame) tabbar:\(tabBar.bounds)")
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        var tabBarFrame = tabBar.frame
+        tabBarFrame.size.height = 60
+        tabBarFrame.origin.y = tabBarFrame.origin.y - 60
+        tabBar.frame = tabBarFrame
+    }
 }
 
