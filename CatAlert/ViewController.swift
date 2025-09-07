@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
@@ -19,10 +20,8 @@ class ViewController: UIViewController {
         view.addSubview(catTabbar.view)
         catCurrentStatus.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 0)
         catProfile.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        if let items = catTabbar.tabBar.items {
-            for item in items {
-                item.imageInsets = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
-            }
+        catTabbar.view.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-50)
         }
     }
 }
