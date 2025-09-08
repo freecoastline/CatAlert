@@ -11,7 +11,6 @@ import UIKit
 class CatProfileViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
     }
     
     
