@@ -11,6 +11,14 @@ import UIKit
 class CatProfileViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    func setupUI() {
+        setupBackGround()
+    }
+    
+    func setupBackGround() {
         let backgroundImageView = UIImageView(frame: self.view.bounds)
         let filePath = try Bundle.main.path(forResource: "PinkbackGround", ofType: "webp")
         guard let filePath else {
@@ -25,7 +33,6 @@ class CatProfileViewController:UIViewController {
         }
         backgroundImageView.contentMode = .scaleAspectFill
         view.insertSubview(backgroundImageView, at: 0)
-        print("\(view.frame)")
     }
     
 }
