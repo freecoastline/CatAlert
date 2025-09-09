@@ -11,7 +11,8 @@ import UIKit
 class CatProfileViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
+        print("\(view.frame)")
     }
-    
     
 }
