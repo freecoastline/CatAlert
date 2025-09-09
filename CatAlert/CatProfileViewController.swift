@@ -9,13 +9,18 @@ import Foundation
 import UIKit
 
 class CatProfileViewController:UIViewController {
+    lazy var infoView = CatInfoHalfView(frame: CGRect(x: 0, y: 200, width: view.bounds.width, height: view.bounds.height - 200))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
+    
+    
     func setupUI() {
         setupBackGround()
+        view.addSubview(infoView)
     }
     
     func setupBackGround() {
