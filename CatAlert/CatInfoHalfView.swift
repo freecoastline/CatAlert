@@ -18,6 +18,10 @@ class CatInfoHalfView: UIView {
         return label
     }()
         
+    lazy var navBar = {
+        
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(nameLabel)
