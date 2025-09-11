@@ -17,10 +17,6 @@ class CatInfoHalfView: UIView {
         label.textColor = .purple
         return label
     }()
-        
-    lazy var navBar = {
-        
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +26,14 @@ class CatInfoHalfView: UIView {
             make.top.equalToSuperview().offset(50)
             make.leading.equalToSuperview().offset(30)
         }
+        let segmentControl = UISegmentedControl(items: ["Profiles", "Status"])
+        addSubview(segmentControl)
+        addSubview(segmentControl)
+        segmentControl.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
         backgroundColor = .white
         layer.cornerRadius = 15
     }
