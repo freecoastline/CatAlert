@@ -18,9 +18,6 @@ class CatInfoHalfView: UIView {
         return label
     }()
     
-    
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(nameLabel)
@@ -29,7 +26,14 @@ class CatInfoHalfView: UIView {
             make.top.equalToSuperview().offset(50)
             make.leading.equalToSuperview().offset(30)
         }
-        
+        let segmentTableVC = CatInfoSegmentTableController()
+        addSubview(segmentTableVC.view)
+        segmentTableVC.view.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(20)
+            make.height.equalTo(500)
+            make.width.equalTo(300)
+            make.centerX.equalToSuperview()
+        }
         backgroundColor = .white
         layer.cornerRadius = 15
     }

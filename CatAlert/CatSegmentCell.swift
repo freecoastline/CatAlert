@@ -17,6 +17,7 @@ class CatSegmentCell:UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(segmentControl)
     }
 
     required init?(coder: NSCoder) {

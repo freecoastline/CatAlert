@@ -11,9 +11,15 @@ import UIKit
 class CatInfoSegmentTableController:UITableViewController {
     var segment = 0
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .green
+    }
+    
     @objc
     func segmentChange(sender: UISegmentedControl) {
-        
+        segment = sender.selectedSegmentIndex
+        tableView.reloadData()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -24,7 +30,8 @@ class CatInfoSegmentTableController:UITableViewController {
             guard let cell = cell as? CatSegmentCell else {
                 return cell
             }
-            cell.segmentControl.addTarget(self, action:#selector(segmentChange:) , for: .valueChanged)
+            cell.segmentControl.addTarget(self, action:#selector(segmentChange), for: .valueChanged)
+            cell.segmentControl.selectedSegmentIndex = segment
         } else {
             switch segment {
             case 0:
