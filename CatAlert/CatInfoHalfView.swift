@@ -18,6 +18,8 @@ class CatInfoHalfView: UIView {
         return label
     }()
     
+    let segmentTableVC = CatInfoSegmentTableController()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(nameLabel)
@@ -26,7 +28,7 @@ class CatInfoHalfView: UIView {
             make.top.equalToSuperview().offset(50)
             make.leading.equalToSuperview().offset(30)
         }
-        let segmentTableVC = CatInfoSegmentTableController()
+        
         addSubview(segmentTableVC.view)
         segmentTableVC.view.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(20)

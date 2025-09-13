@@ -13,7 +13,9 @@ class CatInfoSegmentTableController:UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        tableView.register(CatSegmentCell.self, forCellReuseIdentifier: "CatSegmentCell")
+        tableView.register(CatInfoCell.self, forCellReuseIdentifier: "CatInfoCell")
+        tableView.register(CatStatusCell.self, forCellReuseIdentifier: "CatStatusCell")
     }
     
     @objc
@@ -24,7 +26,6 @@ class CatInfoSegmentTableController:UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
-        
         if indexPath.row == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "CatSegmentCell", for: indexPath)
             guard let cell = cell as? CatSegmentCell else {
