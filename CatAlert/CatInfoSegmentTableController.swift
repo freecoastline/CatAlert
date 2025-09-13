@@ -31,7 +31,7 @@ class CatInfoSegmentTableController:UITableViewController {
             guard let cell = cell as? CatSegmentCell else {
                 return cell
             }
-            cell.segmentControl.addTarget(self, action:#selector(segmentChange), for: .valueChanged)
+            cell.segmentControl.addTarget(self, action:#selector(segmentChange(sender:)), for: .valueChanged)
             cell.segmentControl.selectedSegmentIndex = segment
         } else {
             switch segment {
