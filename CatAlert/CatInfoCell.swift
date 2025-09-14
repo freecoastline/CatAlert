@@ -9,9 +9,27 @@ import Foundation
 import UIKit
 
 class CatInfoCell: UITableViewCell {
+    var currentModel: CatModel?
+    
+    func updateWithModel(_ model: CatModel) {
+        currentModel = model
+        desc.text = model.description
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .green
+        setupUI()
+    }
+    
+    lazy var desc = {
+        let descLabel = UILabel()
+        descLabel.numberOfLines = 0
+        descLabel.sizeToFit()
+        return descLabel
+    }()
+    
+    func setupUI() {
+        
     }
 
     required init?(coder: NSCoder) {

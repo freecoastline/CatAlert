@@ -36,6 +36,7 @@ class CatInfoHalfView: UIView {
             make.width.equalTo(300)
             make.centerX.equalToSuperview()
         }
+        segmentTableVC.updateWithModel(catStatusViewModel.model)
         backgroundColor = .white
         layer.cornerRadius = 15
     }

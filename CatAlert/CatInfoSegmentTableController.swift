@@ -10,12 +10,17 @@ import UIKit
 
 class CatInfoSegmentTableController:UITableViewController {
     var segment = 0
+    var catModel:CatModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CatSegmentCell.self, forCellReuseIdentifier: "CatSegmentCell")
         tableView.register(CatInfoCell.self, forCellReuseIdentifier: "CatInfoCell")
         tableView.register(CatStatusCell.self, forCellReuseIdentifier: "CatStatusCell")
+    }
+    
+    func updateWithModel(_ model: CatModel) {
+        catModel = model
     }
     
     @objc
@@ -37,6 +42,10 @@ class CatInfoSegmentTableController:UITableViewController {
             switch segment {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "CatInfoCell", for: indexPath)
+                guard let cell = cell as? CatInfoCell else {
+                    return cell
+                }
+                cell.updateWithModel(catModel)
             case 1:
                 cell = tableView.dequeueReusableCell(withIdentifier: "CatStatusCell", for: indexPath)
             default:
