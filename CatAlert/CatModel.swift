@@ -9,7 +9,7 @@ import Foundation
 
 struct CatModel {
     var name:String
-    var gendre:String
+    var gender:String
     var kind:String
     var description:String
     var bornWay:String
