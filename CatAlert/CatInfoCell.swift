@@ -29,7 +29,7 @@ class CatInfoCell: UITableViewCell {
     }()
     
     func setupUI() {
-        
+        addSubview(desc)
     }
 
     required init?(coder: NSCoder) {

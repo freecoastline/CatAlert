@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 class CatInfoMiddleView:UIView {
+    enum InfoType {
+        case Kind
+        case Gender
+    }
+    
+    let type:InfoType = .Kind
+    
     lazy var iconImageView = {
         let imageView = UIImageView()
         return imageView
@@ -26,6 +33,18 @@ class CatInfoMiddleView:UIView {
         content.font = .systemFont(ofSize: 12)
         return content
     }()
+    
+    func updateWithModel(_ model:CatModel) {
+        if type == .Kind {
+            titleLabel.text = model.bornWay
+            iconImageView.image = .init(systemName: "pawprint.circle.fill")
+            contentLabel.text = model.kind
+        } else if type == .Gender {
+            titleLabel.text = "Gender"
+            iconImageView.image = .init(systemName: "figure.wave")
+            contentLabel.text = model.gender
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
