@@ -38,19 +38,19 @@ class CatInfoCell: UITableViewCell {
     func setupUI() {
         breedView.type = .Kind
         genderView.type = .Gender
-        addSubview(breedView)
-        addSubview(genderView)
-        addSubview(desc)
+        contentView.addSubview(breedView)
+        contentView.addSubview(genderView)
+        contentView.addSubview(desc)
         breedView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview()
         }
         genderView.snp.makeConstraints { make in
             make.centerY.equalTo(breedView)
-            make.leading.equalTo(breedView.snp.trailing).offset(100)
+            make.leading.equalTo(breedView.snp.trailing).offset(10)
         }
         desc.snp.makeConstraints { make in
-            make.top.equalTo(breedView.snp.bottom).offset(50)
+            make.top.equalTo(breedView.snp.bottom).offset(10)
         }
         
         

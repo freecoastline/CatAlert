@@ -16,11 +16,10 @@ class CatProfileViewController:UIViewController {
         setupUI()
     }
     
-    
-    
     func setupUI() {
         setupBackGround()
         view.addSubview(infoView)
+        
     }
     
     func setupBackGround() {

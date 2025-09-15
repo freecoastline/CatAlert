@@ -18,6 +18,15 @@ class CatInfoHalfView: UIView {
         return label
     }()
     
+    lazy var PhotoLabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.textColor = .purple
+        label.text = "Gallery"
+        return label
+    }()
+    
     let segmentTableVC = CatInfoSegmentTableController()
     
     override init(frame: CGRect) {
@@ -32,10 +41,16 @@ class CatInfoHalfView: UIView {
         addSubview(segmentTableVC.view)
         segmentTableVC.view.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(20)
-            make.height.equalTo(500)
+            make.height.equalTo(300)
             make.width.equalTo(300)
             make.centerX.equalToSuperview()
         }
+        addSubview(PhotoLabel)
+        PhotoLabel.snp.makeConstraints { make in
+            make.top.equalTo(segmentTableVC.view.snp.bottom).offset(20)
+            make.leading.equalTo(nameLabel)
+        }
+        
         segmentTableVC.updateWithModel(catStatusViewModel.model)
         backgroundColor = .white
         layer.cornerRadius = 15
