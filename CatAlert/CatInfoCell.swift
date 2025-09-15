@@ -10,10 +10,14 @@ import UIKit
 
 class CatInfoCell: UITableViewCell {
     var currentModel: CatModel?
+    let breedView = CatInfoMiddleView()
+    let genderView = CatInfoMiddleView()
     
     func updateWithModel(_ model: CatModel) {
         currentModel = model
         desc.text = model.description
+        breedView.updateWithModel(model)
+        genderView.updateWithModel(model)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,11 +29,28 @@ class CatInfoCell: UITableViewCell {
         let descLabel = UILabel()
         descLabel.numberOfLines = 0
         descLabel.sizeToFit()
+        descLabel.textColor = .gray
         return descLabel
     }()
     
+    let screenWidth = UIScreen.main.bounds.size.width
+    
     func setupUI() {
+        breedView.type = .Kind
+        genderView.type = .Gender
+        addSubview(breedView)
+        addSubview(genderView)
         addSubview(desc)
+        breedView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+        }
+        genderView.snp.makeConstraints { make in
+            make.centerY.equalTo(breedView)
+            make.left.equalTo(breedView.snp.rightMargin).offset(10)
+        }
+        desc.snp.makeConstraints { make in
+            make.top.equalTo(breedView.snp_bottomMargin).offset(10)
+        }
     }
 
     required init?(coder: NSCoder) {

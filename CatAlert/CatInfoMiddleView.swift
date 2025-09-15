@@ -14,7 +14,7 @@ class CatInfoMiddleView:UIView {
         case Gender
     }
     
-    let type:InfoType = .Kind
+    var type:InfoType = .Kind
     
     lazy var iconImageView = {
         let imageView = UIImageView()

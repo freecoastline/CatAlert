@@ -42,7 +42,7 @@ class CatInfoSegmentTableController:UITableViewController {
             switch segment {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "CatInfoCell", for: indexPath)
-                guard let cell = cell as? CatInfoCell else {
+                guard let cell = cell as? CatInfoCell, let catModel else {
                     return cell
                 }
                 cell.updateWithModel(catModel)
