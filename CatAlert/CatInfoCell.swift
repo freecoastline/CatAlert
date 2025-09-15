@@ -25,6 +25,15 @@ class CatInfoCell: UITableViewCell {
         setupUI()
     }
     
+    lazy var PhotoLabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.textColor = .purple
+        label.text = "Gallery"
+        return label
+    }()
+    
     lazy var desc = {
         let descLabel = UILabel()
         descLabel.numberOfLines = 0
@@ -52,7 +61,11 @@ class CatInfoCell: UITableViewCell {
         desc.snp.makeConstraints { make in
             make.top.equalTo(breedView.snp.bottom).offset(50)
         }
-        
+        contentView.addSubview(PhotoLabel)
+        PhotoLabel.snp.makeConstraints { make in
+            make.top.equalTo(desc.snp.bottom).offset(20)
+            make.leading.equalToSuperview()
+        }
         
     }
 
