@@ -60,6 +60,7 @@ class CatInfoCell: UITableViewCell {
         }
         desc.snp.makeConstraints { make in
             make.top.equalTo(breedView.snp.bottom).offset(50)
+            make.left.right.equalToSuperview()
         }
         contentView.addSubview(PhotoLabel)
         PhotoLabel.snp.makeConstraints { make in

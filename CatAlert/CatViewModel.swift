@@ -8,7 +8,7 @@
 import Foundation
 
 class CatViewModel {
-    let model = CatModel(name: "HUHU", gender: "girl", kind: "British short", description: "fat", bornWay: "breed")
+    let model = CatModel(name: "HUHU", gender: "girl", kind: "British short", description: "fatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfat", bornWay: "Breed")
 
     func name() -> String {
         model.name
