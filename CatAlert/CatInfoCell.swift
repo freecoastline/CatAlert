@@ -42,14 +42,15 @@ class CatInfoCell: UITableViewCell {
         addSubview(genderView)
         addSubview(desc)
         breedView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview()
         }
         genderView.snp.makeConstraints { make in
             make.centerY.equalTo(breedView)
-            make.left.equalTo(breedView.snp.rightMargin).offset(10)
+            make.leading.equalTo(breedView.snp.trailing).offset(10)
         }
         desc.snp.makeConstraints { make in
-            make.top.equalTo(breedView.snp_bottomMargin).offset(10)
+            make.top.equalTo(breedView.snp.bottom).offset(10)
         }
     }
 
