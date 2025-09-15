@@ -47,11 +47,13 @@ class CatInfoCell: UITableViewCell {
         }
         genderView.snp.makeConstraints { make in
             make.centerY.equalTo(breedView)
-            make.leading.equalTo(breedView.snp.trailing).offset(10)
+            make.leading.equalTo(breedView.snp.trailing).offset(100)
         }
         desc.snp.makeConstraints { make in
-            make.top.equalTo(breedView.snp.bottom).offset(10)
+            make.top.equalTo(breedView.snp.bottom).offset(50)
         }
+        
+        
     }
 
     required init?(coder: NSCoder) {
