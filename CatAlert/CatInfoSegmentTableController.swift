@@ -17,6 +17,7 @@ class CatInfoSegmentTableController:UITableViewController {
         tableView.register(CatSegmentCell.self, forCellReuseIdentifier: "CatSegmentCell")
         tableView.register(CatInfoCell.self, forCellReuseIdentifier: "CatInfoCell")
         tableView.register(CatStatusCell.self, forCellReuseIdentifier: "CatStatusCell")
+        tableView.separatorStyle = .none
     }
     
     func updateWithModel(_ model: CatModel) {
