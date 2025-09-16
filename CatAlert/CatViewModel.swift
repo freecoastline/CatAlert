@@ -16,8 +16,11 @@ class CatViewModel {
         guard let url = URL(string: imageURL) else {
             return
         }
-        guard let data = try? Data(contentsOf: url) else {
-            return
+        var data = Data()
+        do {
+            data = try Data(contentsOf: url)
+        } catch {
+            print(error.localizedDescription)
         }
         guard let image = UIImage(data: data) else {
             return
