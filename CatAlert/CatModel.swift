@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct CatModel {
     var name:String
@@ -13,4 +14,5 @@ struct CatModel {
     var kind:String
     var description:String
     var bornWay:String
+    var images:[UIImage]
 }

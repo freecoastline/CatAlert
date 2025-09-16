@@ -17,6 +17,7 @@ class CatInfoSegmentTableController:UITableViewController {
         tableView.register(CatSegmentCell.self, forCellReuseIdentifier: "CatSegmentCell")
         tableView.register(CatInfoCell.self, forCellReuseIdentifier: "CatInfoCell")
         tableView.register(CatStatusCell.self, forCellReuseIdentifier: "CatStatusCell")
+        tableView.register(CatAlbumCell.self, forCellReuseIdentifier: "CatAlbumCell")
         tableView.separatorStyle = .none
     }
     
@@ -39,7 +40,7 @@ class CatInfoSegmentTableController:UITableViewController {
             }
             cell.segmentControl.addTarget(self, action:#selector(segmentChange(sender:)), for: .valueChanged)
             cell.segmentControl.selectedSegmentIndex = segment
-        } else {
+        } else if indexPath.row == 1 {
             switch segment {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "CatInfoCell", for: indexPath)
@@ -52,8 +53,14 @@ class CatInfoSegmentTableController:UITableViewController {
             default:
                 break
             }
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "CatAlbumCell", for: indexPath)
+            guard let cell = cell as? CatAlbumCell, let images = catModel?.images else {
+                return cell
+            }
+            cell.catImage = images[indexPath.row - 2]
         }
-        return cell 
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
