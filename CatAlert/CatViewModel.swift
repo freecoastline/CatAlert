@@ -6,11 +6,30 @@
 //
 
 import Foundation
+import UIKit
 
 class CatViewModel {
-    let model = CatModel(name: "HUHU", gender: "girl", kind: "British short", description: "fatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfat", bornWay: "Breed")
+    var model:CatModel?
+    
+    init() {
+        let imageURL = "/Users/ken/Documents/CatAlert/CatAlert/IMG_4933.JPG"
+        guard let url = URL(string: imageURL) else {
+            return
+        }
+        guard let data = try? Data(contentsOf: url) else {
+            return
+        }
+        guard let image = UIImage(data: data) else {
+            return
+        }
+        let images = [image]
+        model = CatModel(name: "HUHU", gender: "girl", kind: "British short", description: "fatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfat", bornWay: "Breed", images: images)
+    }
 
     func name() -> String {
-        model.name
+        guard let name = model?.name else {
+            return "NULL"
+        }
+        return name
     }
 }

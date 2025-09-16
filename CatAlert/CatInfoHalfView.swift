@@ -37,10 +37,13 @@ class CatInfoHalfView: UIView {
             make.width.equalTo(UIScreen.main.bounds.size.width)
             make.centerX.equalToSuperview()
         }
-        
-        segmentTableVC.updateWithModel(catStatusViewModel.model)
         backgroundColor = .white
         layer.cornerRadius = 15
+        guard let viewModel = catStatusViewModel.model else {
+            return
+        }
+        segmentTableVC.updateWithModel(viewModel)
+        
     }
 
     required init?(coder: NSCoder) {
