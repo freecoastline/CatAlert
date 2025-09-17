@@ -12,10 +12,11 @@ class CatViewModel {
     var model:CatModel?
     
     init() {
-        let imageURL = "/Users/ken/Documents/CatAlert/CatAlert/IMG_4933.JPG"
-        guard let url = URL(string: imageURL) else {
+        let filePath = Bundle.main.path(forResource: "IMG_4933", ofType: "JPG")
+        guard let filePath else {
             return
         }
+        let url = URL(filePath: filePath)
         var data = Data()
         do {
             data = try Data(contentsOf: url)
