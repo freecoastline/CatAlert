@@ -58,13 +58,13 @@ class CatInfoSegmentTableController:UITableViewController {
             guard let cell = cell as? CatAlbumCell, let images = catModel?.images else {
                 return cell
             }
-            cell.catImage = images[indexPath.row - 2]
+            cell.updateWithImage(images[indexPath.row - 2])
         }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        3
     }
     
     

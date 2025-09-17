@@ -66,6 +66,7 @@ class CatInfoCell: UITableViewCell {
         PhotoLabel.snp.makeConstraints { make in
             make.top.equalTo(desc.snp.bottom).offset(20)
             make.leading.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
     }
