@@ -68,7 +68,6 @@ class CatInfoCell: UITableViewCell {
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
     }
 
     required init?(coder: NSCoder) {

@@ -18,8 +18,11 @@ class CatAlbumCell:UITableViewCell {
         let view = UIImageView()
         contentView.addSubview(view)
         view.image = image
+        view.contentMode = .scaleAspectFit
         view.snp.makeConstraints { make in
-            make.size.height.equalTo(100)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(100)
+            make.size.equalToSuperview()
         }
     }
 
