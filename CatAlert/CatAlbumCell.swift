@@ -9,17 +9,16 @@ import Foundation
 import UIKit
 
 class CatAlbumCell:UITableViewCell {
-   
+    var photo = UIImageView()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     func updateWithImage(_ image:UIImage) {
-        let view = UIImageView()
-        contentView.addSubview(view)
-        view.image = image
-        view.contentMode = .scaleAspectFit
-        view.snp.makeConstraints { make in
+        contentView.addSubview(photo)
+        photo.image = image
+        photo.contentMode = .scaleAspectFit
+        photo.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(200)
             make.size.equalToSuperview()

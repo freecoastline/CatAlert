@@ -67,6 +67,17 @@ class CatInfoSegmentTableController:UITableViewController {
         5
     }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        guard let cell = cell as? CatAlbumCell else {
+            return
+        }
+        
+        UIView.animate(withDuration: 1.0, animations: {() -> Void in
+            cell.photo.transform = CGAffineTransform(scaleX: 2, y: 2)
+        }, completion: {(_ finished: Bool) -> Void in
+            cell.photo.transform = CGAffineTransform(scaleX: 1, y: 1)
+        })
+    }
     
 }
