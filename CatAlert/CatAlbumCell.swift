@@ -21,7 +21,7 @@ class CatAlbumCell:UITableViewCell {
         view.contentMode = .scaleAspectFit
         view.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(200)
             make.size.equalToSuperview()
         }
     }
