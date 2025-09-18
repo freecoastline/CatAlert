@@ -53,7 +53,7 @@ class CatInfoSegmentTableController:UITableViewController {
             default:
                 break
             }
-        } else {
+        } else if segment == 0, indexPath.row > 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "CatAlbumCell", for: indexPath)
             guard let cell = cell as? CatAlbumCell, let images = catModel?.images else {
                 return cell

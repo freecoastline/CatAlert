@@ -12,18 +12,7 @@ class CatViewModel {
     var model:CatModel?
     
     init() {
-        let filePath = Bundle.main.path(forResource: "IMG_4933", ofType: "JPG")
-        guard let filePath else {
-            return
-        }
-        let url = URL(filePath: filePath)
-        var data = Data()
-        do {
-            data = try Data(contentsOf: url)
-        } catch {
-            print(error.localizedDescription)
-        }
-        guard let image = UIImage(data: data) else {
+        guard let image = ImageReader.getImage(from: "IMG_6364", type: "JPG") else {
             return
         }
         let images = [image]
