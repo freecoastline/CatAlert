@@ -33,16 +33,13 @@ class CatInfoHalfView: UIView {
         segmentTableVC.view.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(50)
-            make.height.equalTo(300)
+            make.height.equalTo(500)
             make.width.equalTo(UIScreen.main.bounds.size.width)
             make.centerX.equalToSuperview()
         }
         backgroundColor = .white
         layer.cornerRadius = 15
-        guard let viewModel = catStatusViewModel.model else {
-            return
-        }
-        segmentTableVC.updateWithModel(viewModel)
+        segmentTableVC.updateWithModel(catStatusViewModel.model)
         
     }
 

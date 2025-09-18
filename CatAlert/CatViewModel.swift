@@ -9,20 +9,19 @@ import Foundation
 import UIKit
 
 class CatViewModel {
-    var model:CatModel?
+    var model = CatModel(name: "HUHU", gender: "girl", kind: "British short", description: "fatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfat", bornWay: "Breed", imagesString: ["IMG_6364", "IMG_5771", "IMG_6317", "IMG_6364"], images: [])
     
     init() {
-        guard let image = ImageReader.getImage(from: "IMG_6364", type: "JPG") else {
-            return
+        var images = [UIImage]()
+        for imagesString in model.imagesString {
+            if let image = ImageReader.getImage(from: imagesString, type: "JPG") {
+                images.append(image)
+            }
         }
-        let images = [image]
-        model = CatModel(name: "HUHU", gender: "girl", kind: "British short", description: "fatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfatfat", bornWay: "Breed", images: images)
+        model.images = images
     }
 
     func name() -> String {
-        guard let name = model?.name else {
-            return "NULL"
-        }
-        return name
+        model.name
     }
 }

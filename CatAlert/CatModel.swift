@@ -14,5 +14,6 @@ struct CatModel {
     var kind:String
     var description:String
     var bornWay:String
+    var imagesString:[String]
     var images:[UIImage]
 }
