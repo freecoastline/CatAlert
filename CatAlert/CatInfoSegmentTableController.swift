@@ -64,7 +64,11 @@ class CatInfoSegmentTableController:UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        if segment == 0 {
+            5
+        } else {
+            2
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
