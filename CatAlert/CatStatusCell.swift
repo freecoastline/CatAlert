@@ -31,7 +31,7 @@ class CatStatusCell:UITableViewCell {
     
     @objc
     func touchDown() {
-        checkListButton.backgroundColor = .blue
+        checkListButton.backgroundColor = .clear
     }
     
     
@@ -43,6 +43,7 @@ class CatStatusCell:UITableViewCell {
             }
             checkListButton.backgroundColor = .purple
         }
+        
     }
     
     @objc

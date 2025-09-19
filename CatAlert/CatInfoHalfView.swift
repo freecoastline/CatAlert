@@ -40,7 +40,6 @@ class CatInfoHalfView: UIView {
         backgroundColor = .white
         layer.cornerRadius = 15
         segmentTableVC.updateWithModel(catStatusViewModel.model)
-        
     }
 
     required init?(coder: NSCoder) {
