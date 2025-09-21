@@ -11,6 +11,7 @@ import UIKit
 class CatInfoSegmentTableController:UITableViewController {
     var segment = 0
     var catModel:CatModel?
+    lazy var dailyCareViewController = CatDailyCareViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,15 +74,15 @@ class CatInfoSegmentTableController:UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        guard let cell = cell as? CatAlbumCell else {
-            return
+        if let cell = cell as? CatAlbumCell {
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                cell.photo.transform = CGAffineTransform(scaleX: 2, y: 2)
+            }, completion: {(_ finished: Bool) -> Void in
+                
+            })
+        } else if let cell = cell as? CatStatusCell {
+            self.present(dailyCareViewController, animated: true)
         }
-        
-        UIView.animate(withDuration: 0.5, animations: {() -> Void in
-            cell.photo.transform = CGAffineTransform(scaleX: 2, y: 2)
-        }, completion: {(_ finished: Bool) -> Void in
-            
-        })
     }
     
 }

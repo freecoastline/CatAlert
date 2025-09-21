@@ -16,8 +16,6 @@ class CatCurrentStatusViewController:UIViewController {
         setupUI()
     }
     
-
-    
     func setupUI() {
 
     }

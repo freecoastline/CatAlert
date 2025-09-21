@@ -26,12 +26,13 @@ class CatStatusCell:UITableViewCell {
         checkListButton.addTarget(self, action: #selector(touchDown), for: .touchDown)
         checkListButton.addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
         checkListButton.addTarget(self, action: #selector(touchUpOutside), for: .touchUpOutside)
+        checkListButton.isUserInteractionEnabled = false
     }
     
     
     @objc
     func touchDown() {
-        checkListButton.backgroundColor = .clear
+        checkListButton.alpha = 0.5
     }
     
     
@@ -41,14 +42,13 @@ class CatStatusCell:UITableViewCell {
             guard let self else {
                 return
             }
-            checkListButton.backgroundColor = .purple
+            checkListButton.alpha = 1.0
         }
-        
     }
     
     @objc
     func touchUpOutside() {
-        checkListButton.backgroundColor = .purple
+        checkListButton.alpha = 1.0
     }
     
     required init?(coder: NSCoder) {
