@@ -80,7 +80,7 @@ class CatInfoSegmentTableController:UITableViewController {
             }, completion: {(_ finished: Bool) -> Void in
                 
             })
-        } else if let cell = cell as? CatStatusCell {
+        } else if cell is CatStatusCell {
             self.present(dailyCareViewController, animated: true)
         }
     }
