@@ -14,10 +14,28 @@ class CatDailyCareViewController:UIViewController {
         setupUI()
     }
     
+    lazy var dailyCareLabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.textColor = .purple
+        label.text = "Daily Care"
+        return label
+    }()
+    
+    
     func setupUI() {
-        view.backgroundColor = .green
         if let superView = view.superview {
             view.frame = superView.bounds
         }
+        view.addSubview(dailyCareLabel)
+        dailyCareLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        
+        
+        
     }
 }
