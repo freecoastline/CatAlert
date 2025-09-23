@@ -9,7 +9,12 @@ import Foundation
 import UIKit
 
 class CatPhotoGalleryCell:UITableViewCell {
-    
+    private enum Constants {
+        static let cellHeight = 200.0
+        static let itemSize = CGSize(width: 200.0, height: 200.0)
+        static let minimumSpacing = 6.0
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -19,15 +24,15 @@ class CatPhotoGalleryCell:UITableViewCell {
         contentView.addSubview(photoCollectionView)
         photoCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(Constants.cellHeight)
         }
     }
     
     lazy var photoCollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumLineSpacing = 6
+        flowLayout.minimumLineSpacing = Constants.minimumSpacing
         flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: 200, height: 200)
+        flowLayout.itemSize = Constants.itemSize
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(CatAlbumCell.self, forCellWithReuseIdentifier: "CatAlbumCell")
