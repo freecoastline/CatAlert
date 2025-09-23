@@ -28,7 +28,7 @@ private enum CellIdentifier: String {
     case segment = "CatSegmentCell"
     case info = "CatInfoCell"
     case status = "CatStatusCell" 
-    case album = "CatAlbumCell"
+    case gallery = "CatPhotoGalleryCell"
 }
 
 /// Constants for row indices in the table view
@@ -60,13 +60,8 @@ class CatInfoSegmentTableController: UITableViewController {
     
     private lazy var dailyCareViewController = CatDailyCareViewController()
     
-    // MARK: - Computed Properties
-    private var numberOfAlbumImages: Int {
-        catModel?.images.count ?? 0
-    }
-    
     private var totalRowsForProfile: Int {
-        RowIndex.albumStart + numberOfAlbumImages
+        RowIndex.albumStart + 1
     }
     
     // MARK: - Lifecycle
@@ -80,7 +75,7 @@ class CatInfoSegmentTableController: UITableViewController {
         tableView.register(CatSegmentCell.self, forCellReuseIdentifier: CellIdentifier.segment.rawValue)
         tableView.register(CatInfoCell.self, forCellReuseIdentifier: CellIdentifier.info.rawValue)
         tableView.register(CatStatusCell.self, forCellReuseIdentifier: CellIdentifier.status.rawValue)
-        tableView.register(CatAlbumCell.self, forCellReuseIdentifier: CellIdentifier.album.rawValue)
+        tableView.register(CatPhotoGalleryCell.self, forCellReuseIdentifier: CellIdentifier.gallery.rawValue)
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
@@ -119,7 +114,7 @@ class CatInfoSegmentTableController: UITableViewController {
         case RowIndex.content:
             return configureContentCell(at: indexPath)
         default:
-            return configureAlbumCell(at: indexPath)
+            return configureGalleryCell(at: indexPath)
         }
     }
     
@@ -166,9 +161,9 @@ class CatInfoSegmentTableController: UITableViewController {
         return cell
     }
     
-    private func configureAlbumCell(at indexPath: IndexPath) -> UITableViewCell {
+    private func configureGalleryCell(at indexPath: IndexPath) -> UITableViewCell {
         guard selectedSegment == .profile,
-              let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.album.rawValue, for: indexPath) as? CatAlbumCell,
+              let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.gallery.rawValue, for: indexPath) as? CatPhotoGalleryCell,
               let images = catModel?.images else {
             return UITableViewCell()
         }
@@ -178,7 +173,7 @@ class CatInfoSegmentTableController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.updateWithImage(images[imageIndex])
+        cell.updateWithImages(images)
         cell.selectionStyle = .none
         return cell
     }
@@ -188,8 +183,6 @@ class CatInfoSegmentTableController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         
         switch cell {
-        case let albumCell as CatAlbumCell:
-            animateAlbumCell(albumCell)
         case is CatStatusCell:
             presentDailyCareViewController()
         default:

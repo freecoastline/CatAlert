@@ -8,10 +8,11 @@
 import Foundation
 import UIKit
 
-class CatAlbumCell:UITableViewCell {
+class CatAlbumCell:UICollectionViewCell {
     var photo = UIImageView()
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     func updateWithImage(_ image:UIImage) {
