@@ -157,7 +157,7 @@ class CatInfoSegmentTableController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.selectionStyle = .default
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -165,11 +165,6 @@ class CatInfoSegmentTableController: UITableViewController {
         guard selectedSegment == .profile,
               let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.gallery.rawValue, for: indexPath) as? CatPhotoGalleryCell,
               let images = catModel?.images else {
-            return UITableViewCell()
-        }
-        
-        let imageIndex = indexPath.row - RowIndex.albumStart
-        guard imageIndex >= 0 && imageIndex < images.count else {
             return UITableViewCell()
         }
         

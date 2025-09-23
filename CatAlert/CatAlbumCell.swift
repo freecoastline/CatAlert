@@ -13,16 +13,19 @@ class CatAlbumCell:UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
+    }
+    
+    func setupUI() {
+        contentView.addSubview(photo)
+        photo.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        photo.contentMode = .scaleAspectFit
     }
     
     func updateWithImage(_ image:UIImage) {
-        contentView.addSubview(photo)
         photo.image = image
-        photo.contentMode = .scaleAspectFit
-        photo.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.size.equalToSuperview()
-        }
     }
 
     required init?(coder: NSCoder) {

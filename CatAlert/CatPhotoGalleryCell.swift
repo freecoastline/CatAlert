@@ -19,7 +19,7 @@ class CatPhotoGalleryCell:UITableViewCell {
         contentView.addSubview(photoCollectionView)
         photoCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(200)
         }
     }
     
@@ -48,6 +48,9 @@ class CatPhotoGalleryCell:UITableViewCell {
     
     func updateWithImages(_ images: [UIImage]) {
         currentImages = images
+        DispatchQueue.main.async { [weak self] in
+            self?.photoCollectionView.reloadData()
+        }
     }
 }
 
