@@ -27,7 +27,7 @@ class CatPhotoGalleryCell:UITableViewCell {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 6
         flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: 260, height: 130)
+        flowLayout.itemSize = CGSize(width: 200, height: 200)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(CatAlbumCell.self, forCellWithReuseIdentifier: "CatAlbumCell")
