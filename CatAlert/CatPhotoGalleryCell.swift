@@ -11,7 +11,7 @@ import UIKit
 class CatPhotoGalleryCell:UITableViewCell {
     private enum Constants {
         static let cellHeight = 200.0
-        static let itemSize = CGSize(width: 200.0, height: 200.0)
+        static let itemSize = CGSize(width: 130.0, height: 130.0)
         static let minimumSpacing = 6.0
     }
 
@@ -33,11 +33,13 @@ class CatPhotoGalleryCell:UITableViewCell {
         flowLayout.minimumLineSpacing = Constants.minimumSpacing
         flowLayout.scrollDirection = .horizontal
         flowLayout.itemSize = Constants.itemSize
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(CatAlbumCell.self, forCellWithReuseIdentifier: "CatAlbumCell")
         collection.delegate = self
         collection.dataSource = self
+        collection.showsHorizontalScrollIndicator = false
         return collection
     }()
     
@@ -49,7 +51,6 @@ class CatPhotoGalleryCell:UITableViewCell {
         }
         return currentImages.count
     }
-    
     
     func updateWithImages(_ images: [UIImage]) {
         currentImages = images
@@ -69,11 +70,11 @@ extension CatPhotoGalleryCell:UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatAlbumCell", for: indexPath) as? CatAlbumCell,
-              let currentImages, indexPath.row < numberOfImages else {
-            return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatAlbumCell", for: indexPath)
+        guard let albumCell = cell as? CatAlbumCell, let currentImages, indexPath.row < numberOfImages else {
+            return cell
         }
-        cell.updateWithImage(currentImages[indexPath.row])
-        return cell
+        albumCell.updateWithImage(currentImages[indexPath.row])
+        return albumCell
     }
 }

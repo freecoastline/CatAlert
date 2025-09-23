@@ -28,6 +28,11 @@ class CatAlbumCell:UICollectionViewCell {
         photo.image = image
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photo.image = nil
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
