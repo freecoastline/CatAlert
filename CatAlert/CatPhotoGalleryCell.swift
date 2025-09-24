@@ -40,17 +40,9 @@ class CatPhotoGalleryCell:UITableViewCell {
         collection.delegate = self
         collection.dataSource = self
         collection.showsHorizontalScrollIndicator = false
+        collection.isUserInteractionEnabled = true
         return collection
     }()
-    
-    
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer == photoCollectionView.panGestureRecognizer  {
-            let velocity = photoCollectionView.panGestureRecognizer.velocity(in: photoCollectionView)
-            return abs(velocity.x) > abs(velocity.y)
-        }
-        return true
-    }
 
     var currentImages:[UIImage]?
     private var numberOfImages:Int {

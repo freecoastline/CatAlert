@@ -22,7 +22,6 @@ class CatAlbumCell:UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         photo.contentMode = .scaleAspectFit
-        photo.isUserInteractionEnabled = false
         backgroundColor = .gray
     }
     
