@@ -79,8 +79,6 @@ class CatInfoSegmentTableController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
-//        tableView.delaysContentTouches = false
-//        tableView.canCancelContentTouches = false
     }
     
     // MARK: - Public Methods
