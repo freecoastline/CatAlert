@@ -32,9 +32,8 @@ class CatInfoHalfView: UIView {
         addSubview(segmentTableVC.view)
         segmentTableVC.view.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(50)
             make.height.equalTo(500)
-            make.width.equalTo(UIScreen.main.bounds.size.width)
+            make.width.equalTo(UIScreen.main.bounds.size.width - 50)
             make.centerX.equalToSuperview()
         }
         backgroundColor = .white
