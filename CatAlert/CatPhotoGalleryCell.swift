@@ -33,7 +33,7 @@ class CatPhotoGalleryCell:UITableViewCell {
         flowLayout.minimumLineSpacing = Constants.minimumSpacing
         flowLayout.scrollDirection = .horizontal
         flowLayout.itemSize = Constants.itemSize
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(CatAlbumCell.self, forCellWithReuseIdentifier: "CatAlbumCell")
@@ -44,6 +44,14 @@ class CatPhotoGalleryCell:UITableViewCell {
     }()
     
     
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == photoCollectionView.panGestureRecognizer  {
+            let velocity = photoCollectionView.panGestureRecognizer.velocity(in: photoCollectionView)
+            return abs(velocity.x) > abs(velocity.y)
+        }
+        return true
+    }
+
     var currentImages:[UIImage]?
     private var numberOfImages:Int {
         guard let currentImages else {

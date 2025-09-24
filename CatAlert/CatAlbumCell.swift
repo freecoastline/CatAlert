@@ -22,6 +22,8 @@ class CatAlbumCell:UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         photo.contentMode = .scaleAspectFit
+        photo.isUserInteractionEnabled = false
+        backgroundColor = .gray
     }
     
     func updateWithImage(_ image:UIImage) {
