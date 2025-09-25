@@ -11,6 +11,11 @@ import SnapKit
 
 
 class CatCurrentStatusViewController:UIViewController {
+    private lazy var scrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
