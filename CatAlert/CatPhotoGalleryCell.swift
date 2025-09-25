@@ -75,6 +75,14 @@ extension CatPhotoGalleryCell:UICollectionViewDataSource {
             return cell
         }
         albumCell.updateWithImage(currentImages[indexPath.row])
+
+        #if DEBUG
+        print("📱 Cell \(indexPath.row) configured:")
+        print("   - isUserInteractionEnabled: \(albumCell.isUserInteractionEnabled)")
+        print("   - contentView.isUserInteractionEnabled: \(albumCell.contentView.isUserInteractionEnabled)")
+        print("   - photo.isUserInteractionEnabled: \(albumCell.photo.isUserInteractionEnabled)")
+        #endif
+
         return albumCell
     }
 }

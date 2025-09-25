@@ -210,3 +210,11 @@ class CatInfoSegmentTableController: UITableViewController {
         present(dailyCareViewController, animated: true)
     }
 }
+
+extension CatInfoSegmentTableController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        #if DEBUG
+        print("tableView Did Scroll currentContentOffset: \(scrollView.contentOffset)")
+        #endif
+    }
+}
