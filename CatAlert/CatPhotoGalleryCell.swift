@@ -12,7 +12,7 @@ class CatPhotoGalleryCell:UITableViewCell {
     private enum Constants {
         static let cellHeight = 200.0
         static let itemSize = CGSize(width: 130.0, height: 130.0)
-        static let minimumSpacing = 6.0
+        static let minimumSpacing = 36.0
     }
 
     required init?(coder: NSCoder) {
