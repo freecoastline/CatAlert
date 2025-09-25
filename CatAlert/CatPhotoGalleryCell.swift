@@ -78,3 +78,12 @@ extension CatPhotoGalleryCell:UICollectionViewDataSource {
         return albumCell
     }
 }
+
+
+extension CatPhotoGalleryCell:UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        #if DEBUG
+        print("Gallery Did Scroll currentContentOffset: \(scrollView.contentOffset)")
+        #endif
+    }
+}
