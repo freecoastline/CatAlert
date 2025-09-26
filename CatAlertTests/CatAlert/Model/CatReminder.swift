@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct CatReminder {
+    let id:UUID
+    var catId:String
+    var title:String
+}
