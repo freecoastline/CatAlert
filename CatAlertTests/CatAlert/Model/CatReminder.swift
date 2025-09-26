@@ -11,6 +11,7 @@ struct CatReminder {
     let id:UUID
     var catId:String
     var title:String
+    var type:CatCareType
     var createAt:Date
     var frequency:ReminderFrequency
 }
@@ -18,4 +19,10 @@ struct CatReminder {
 enum ReminderFrequency {
     case daily
     case weekly
+}
+
+enum CatCareType {
+    case food
+    case water
+    case play
 }
