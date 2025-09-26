@@ -34,26 +34,102 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2B16275E2E6BE162008A6507 /* Exceptions for "CatAlert" folder in "CatAlert" target */ = {
+		BE7D5BE62E8624A0008BB2CF /* Exceptions for "CatAlertTests" folder in "CatAlert" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				"/Localized: CatAlert/LaunchScreen.storyboard",
+				"/Localized: CatAlert/Main.storyboard",
+				CatAlert/AppDelegate.swift,
+				CatAlert/Assets.xcassets,
+				CatAlert/CatAlbumCell.swift,
+				CatAlert/CatCareCell.swift,
+				CatAlert/CatDailyCareViewController.swift,
+				CatAlert/CatInfoCell.swift,
+				CatAlert/CatInfoHalfView.swift,
+				CatAlert/CatInfoMiddleView.swift,
+				CatAlert/CatInfoSegmentTableController.swift,
+				CatAlert/CatModel.swift,
+				CatAlert/CatPhotoGalleryCell.swift,
+				CatAlert/CatProfileViewController.swift,
+				CatAlert/CatSegmentCell.swift,
+				CatAlert/CatStatus/CatCurrentStatusViewController.swift,
+				CatAlert/CatStatus/CatStatusCardView.swift,
+				CatAlert/CatStatus/FeedingTaskCard.swift,
+				CatAlert/CatStatus/TaskCardView.swift,
+				CatAlert/CatStatus/WaterTaskCard.swift,
+				CatAlert/CatStatusCell.swift,
+				CatAlert/CatTabbarController.swift,
+				CatAlert/CatViewModel.swift,
+				CatAlert/ImageReader.swift,
+				CatAlert/IMG_4933.JPG,
+				CatAlert/IMG_5771.JPG,
+				CatAlert/IMG_6317.JPG,
+				CatAlert/IMG_6364.JPG,
+				CatAlert/IMG_7585.JPG,
+				CatAlert/IMG_7595.JPG,
+				CatAlert/PinkbackGround.webp,
+				CatAlert/Reminder/AddReminderViewController.swift,
+				CatAlert/Reminder/EditReminderViewController.swift,
+				CatAlert/Reminder/ReminderSettingsViewController.swift,
+				CatAlert/Reminder/ReminderTypeSelectionViewController.swift,
+				CatAlert/SceneDelegate.swift,
+				CatAlert/ViewController.swift,
 			);
 			target = 2B1627352E6BE15F008A6507 /* CatAlert */;
+		};
+		BE7D5BE72E8624A0008BB2CF /* Exceptions for "CatAlertTests" folder in "CatAlertTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: CatAlert/LaunchScreen.storyboard",
+				"/Localized: CatAlert/Main.storyboard",
+				CatAlert/AppDelegate.swift,
+				CatAlert/Assets.xcassets,
+				CatAlert/CatAlbumCell.swift,
+				CatAlert/CatCareCell.swift,
+				CatAlert/CatDailyCareViewController.swift,
+				CatAlert/CatInfoCell.swift,
+				CatAlert/CatInfoHalfView.swift,
+				CatAlert/CatInfoMiddleView.swift,
+				CatAlert/CatInfoSegmentTableController.swift,
+				CatAlert/CatModel.swift,
+				CatAlert/CatPhotoGalleryCell.swift,
+				CatAlert/CatProfileViewController.swift,
+				CatAlert/CatSegmentCell.swift,
+				CatAlert/CatStatus/CatCurrentStatusViewController.swift,
+				CatAlert/CatStatus/CatStatusCardView.swift,
+				CatAlert/CatStatus/FeedingTaskCard.swift,
+				CatAlert/CatStatus/TaskCardView.swift,
+				CatAlert/CatStatus/WaterTaskCard.swift,
+				CatAlert/CatStatusCell.swift,
+				CatAlert/CatTabbarController.swift,
+				CatAlert/CatViewModel.swift,
+				CatAlert/ImageReader.swift,
+				CatAlert/IMG_4933.JPG,
+				CatAlert/IMG_5771.JPG,
+				CatAlert/IMG_6317.JPG,
+				CatAlert/IMG_6364.JPG,
+				CatAlert/IMG_7585.JPG,
+				CatAlert/IMG_7595.JPG,
+				CatAlert/Info.plist,
+				CatAlert/PinkbackGround.webp,
+				CatAlert/Reminder/AddReminderViewController.swift,
+				CatAlert/Reminder/EditReminderViewController.swift,
+				CatAlert/Reminder/ReminderSettingsViewController.swift,
+				CatAlert/Reminder/ReminderTypeSelectionViewController.swift,
+				CatAlert/SceneDelegate.swift,
+				CatAlert/ViewController.swift,
+			);
+			target = 2B16274B2E6BE162008A6507 /* CatAlertTests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2B1627382E6BE15F008A6507 /* CatAlert */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2B16275E2E6BE162008A6507 /* Exceptions for "CatAlert" folder in "CatAlert" target */,
-			);
-			path = CatAlert;
-			sourceTree = "<group>";
-		};
 		2B16274F2E6BE162008A6507 /* CatAlertTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BE7D5BE62E8624A0008BB2CF /* Exceptions for "CatAlertTests" folder in "CatAlert" target */,
+				BE7D5BE72E8624A0008BB2CF /* Exceptions for "CatAlertTests" folder in "CatAlertTests" target */,
+			);
 			path = CatAlertTests;
 			sourceTree = "<group>";
 		};
@@ -93,7 +169,6 @@
 		2B16272D2E6BE15F008A6507 = {
 			isa = PBXGroup;
 			children = (
-				2B1627382E6BE15F008A6507 /* CatAlert */,
 				2B16274F2E6BE162008A6507 /* CatAlertTests */,
 				2B1627592E6BE162008A6507 /* CatAlertUITests */,
 				2B1627372E6BE15F008A6507 /* Products */,
@@ -124,9 +199,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				2B1627382E6BE15F008A6507 /* CatAlert */,
 			);
 			name = CatAlert;
 			packageProductDependencies = (
