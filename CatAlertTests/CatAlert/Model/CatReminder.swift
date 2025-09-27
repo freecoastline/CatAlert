@@ -14,6 +14,13 @@ struct CatReminder {
     var type:CatCareType
     var createAt:Date
     var frequency:ReminderFrequency
+    var isEnabled:Bool
+    var scheduledTime:[ReminderTime]?
+}
+
+struct ReminderTime {
+    let minute:Int
+    let hour:Int
 }
 
 enum ReminderFrequency {
