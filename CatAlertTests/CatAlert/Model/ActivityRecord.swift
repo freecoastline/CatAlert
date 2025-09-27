@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ActivityRecord {
+struct ActivityRecord:Codable {
     let id: UUID
     let reminderId: UUID
     let catId: String

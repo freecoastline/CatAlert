@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CatReminder {
+struct CatReminder:Codable {
     let id:UUID
     var catId:String
     var title:String
