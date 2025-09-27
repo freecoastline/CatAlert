@@ -56,8 +56,11 @@ class NotificationManager {
         }
     }
     
-    func cancelNotification(for reminderId: UUID) {
-        
+    func cancelNotification(for reminderId: UUID) async {
+        let notifications = await UNUserNotificationCenter.current().pendingNotificationRequests()
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: notifications.filter { $0.identifier.hasPrefix(reminderId.uuidString)}
+            .map(\.identifier)
+        )
     }
     
     func handleNotificationResponse(_ response: UNNotificationResponse) {
