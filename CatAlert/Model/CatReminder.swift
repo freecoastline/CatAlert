@@ -10,7 +10,7 @@ import Foundation
 struct CatReminder:Codable {
     let id:UUID
     var catId:String
-    var title:String
+    var title:String 
     var type:CatCareType
     var createAt:Date
     var frequency:ReminderFrequency
@@ -18,12 +18,12 @@ struct CatReminder:Codable {
     var scheduledTime:[ReminderTime] = []
 }
 
-struct ReminderTime {
+struct ReminderTime: Codable {
     let minute:Int
     let hour:Int
     
     init?(minute: Int, hour: Int) {
-        guard (0...59).contains(minute), (0...24).contains(hour) else {
+        guard (0...59).contains(minute), (0...23).contains(hour) else {
             return nil
         }
         self.minute = minute
