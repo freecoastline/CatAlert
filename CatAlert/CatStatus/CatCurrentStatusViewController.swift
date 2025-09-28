@@ -24,7 +24,8 @@ class CatCurrentStatusViewController:UIViewController {
     }
     
     func setupUI() {
-        view.addSubview(headerStatusView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(headerStatusView)
         headerStatusView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(70)
