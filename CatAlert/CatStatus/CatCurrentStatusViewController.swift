@@ -11,6 +11,8 @@ import SnapKit
 
 
 class CatCurrentStatusViewController:UIViewController {
+    private lazy var headerStatusView = CatInfoHeaderView(frame: .zero)
+    
     private lazy var scrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -22,6 +24,14 @@ class CatCurrentStatusViewController:UIViewController {
     }
     
     func setupUI() {
-
+        view.addSubview(headerStatusView)
+        headerStatusView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(70)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+        }
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
