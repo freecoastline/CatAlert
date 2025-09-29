@@ -12,7 +12,6 @@ class CatInfoHeaderView: UIView {
     private lazy var avatarImageView = {
         let avatar = UIImageView()
         avatar.contentMode = .scaleAspectFit
-        avatar.image = .init(systemName: "pawprint.circle")
         return avatar
     }()
     
@@ -20,7 +19,6 @@ class CatInfoHeaderView: UIView {
         let label = UILabel()
         label.textColor = .systemPink
         label.font = .systemFont(ofSize: 14)
-        label.text = "4.5"
         label.sizeToFit()
         return label
     }()
@@ -30,7 +28,6 @@ class CatInfoHeaderView: UIView {
         label.textColor = .systemPink
         label.font = .systemFont(ofSize: 14)
         label.sizeToFit()
-        label.text = "胡胡"
         return label
     }()
     
@@ -38,12 +35,11 @@ class CatInfoHeaderView: UIView {
         let label = UILabel()
         label.textColor = .systemPink
         label.font = .systemFont(ofSize: 14)
-        label.text = "健康状态："
         label.sizeToFit()
         return label
     }()
     
-    private lazy var healthyConditionLabel = {
+    private lazy var healthyConditionView = {
         let view = UIView()
         view.backgroundColor = .blue
         return view
@@ -56,6 +52,13 @@ class CatInfoHeaderView: UIView {
         return stack
     }()
     
+    func update(with model: CatSimpleInfoModel) {
+        nameLabel.text = model.name
+        ageLabel.text = String(describing: model.age)
+        avatarImageView.image = model.avatarImage
+        healthyConditionView.backgroundColor = model.healthCondition.color
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(stackView)
@@ -63,7 +66,8 @@ class CatInfoHeaderView: UIView {
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(ageLabel)
         stackView.addArrangedSubview(healthConditionTitle)
-        stackView.addArrangedSubview(healthyConditionLabel)
+        stackView.addArrangedSubview(healthyConditionView)
+        
         
         stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(100)
@@ -75,7 +79,7 @@ class CatInfoHeaderView: UIView {
             make.height.width.equalTo(50)
         }
         
-        healthyConditionLabel.snp.makeConstraints { make in
+        healthyConditionView.snp.makeConstraints { make in
             make.height.equalToSuperview()
             make.width.equalTo(100)
         }
