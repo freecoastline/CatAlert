@@ -55,7 +55,7 @@ class CatInfoHeaderView: UIView {
     
     func update(with model: CatSimpleInfoModel) {
         nameLabel.text = model.name
-        ageLabel.text = String(describing: model.age)
+        ageLabel.text = String(format: "%.1f", model.age)
         avatarImageView.image = model.avatarImage
         healthyConditionView.backgroundColor = model.healthCondition.color
     }
@@ -68,11 +68,10 @@ class CatInfoHeaderView: UIView {
         stackView.addArrangedSubview(ageLabel)
         stackView.addArrangedSubview(healthConditionTitle)
         stackView.addArrangedSubview(healthyConditionView)
-        
+        stackView.distribution = .fillEqually
         
         stackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.leading.trailing.equalToSuperview().inset(12)
         }
         
         avatarImageView.snp.makeConstraints { make in
