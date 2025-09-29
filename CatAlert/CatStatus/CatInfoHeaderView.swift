@@ -34,6 +34,7 @@ class CatInfoHeaderView: UIView {
     private lazy var healthConditionTitle = {
         let label = UILabel()
         label.textColor = .systemPink
+        label.text = "健康状态："
         label.font = .systemFont(ofSize: 14)
         label.sizeToFit()
         return label
@@ -70,7 +71,6 @@ class CatInfoHeaderView: UIView {
         
         
         stackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
         }
