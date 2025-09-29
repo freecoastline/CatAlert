@@ -26,14 +26,15 @@ struct CatSimpleInfoModel {
     }
     
     mutating func loadImageIfNeeded() {
-        guard !avatarImageUrl.isEmpty,
-              let image = ImageReader.getImage(from: avatarImageUrl, type: "JPG") else {
-            return
+        guard _avatarImage == nil else { return }
+        if !avatarImageUrl.isEmpty{
+            let image = ImageReader.getImage(from: avatarImageUrl, type: "JPG")
+            _avatarImage = image
+        } else {
+            _avatarImage = defaultImage
         }
-        _avatarImage = image
     }
     
-
     init(name: String, age: Double, healthCondition: HealthCondition, avatarImageUrl: String) {
         self.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
         self.age = max(0, age)
