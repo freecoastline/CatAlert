@@ -27,7 +27,7 @@ struct CatSimpleInfoModel {
     
     mutating func loadImageIfNeeded() {
         guard _avatarImage == nil else { return }
-        if !avatarImageUrl.isEmpty{
+        if !avatarImageUrl.isEmpty {
             let image = ImageReader.getImage(from: avatarImageUrl, type: "JPG")
             _avatarImage = image
         } else {

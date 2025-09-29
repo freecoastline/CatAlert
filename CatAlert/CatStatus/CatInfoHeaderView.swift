@@ -68,7 +68,7 @@ class CatInfoHeaderView: UIView {
         stackView.addArrangedSubview(ageLabel)
         stackView.addArrangedSubview(healthConditionTitle)
         stackView.addArrangedSubview(healthyConditionView)
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
         
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(12)
