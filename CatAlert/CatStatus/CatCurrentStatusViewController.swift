@@ -36,6 +36,18 @@ class CatCurrentStatusViewController:UIViewController {
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        headerStatusView.delegate = self
         headerStatusView.update(with: catModel)
+    }
+}
+
+extension CatCurrentStatusViewController: CatInfoHeaderViewDelegate {
+    func jumpToProfile() {
+        if let profileVC = tabBarController.viewControllers?.first(where: {
+            $0 is CatProfileViewController
+        }) {
+            tabBarController.selectedViewController = profileVC
+            return
+        }
     }
 }

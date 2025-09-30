@@ -8,12 +8,32 @@
 import Foundation
 import UIKit
 
+protocol CatInfoHeaderViewDelegate {
+    func jumpToProfile()
+}
+
 class CatInfoHeaderView: UIView {
+    var delegate:CatInfoHeaderViewDelegate?
+    
     private lazy var avatarImageView = {
         let avatar = UIImageView()
         avatar.contentMode = .scaleAspectFit
+        avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(jumpToProfile)))
         return avatar
     }()
+    
+    @objc private func jumpToProfile() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.avatarImageView.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.avatarImageView.transform = .identity
+            }
+        }
+        let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        impactGenerator.impactOccurred()
+        delegate?.jumpToProfile()
+    }
     
     private lazy var ageLabel = {
         let label = UILabel()
@@ -77,6 +97,9 @@ class CatInfoHeaderView: UIView {
         avatarImageView.snp.makeConstraints { make in
             make.height.width.equalTo(50)
         }
+        avatarImageView.layer.cornerRadius = 25.0
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.isUserInteractionEnabled = true
         
         healthyConditionView.snp.makeConstraints { make in
             make.height.equalToSuperview()
