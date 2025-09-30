@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 class ProgressIndicator:UIView {
+//    func calculateTodayProgress() -> TaskProgress {
+//        
+//    }
+    
     
 }
