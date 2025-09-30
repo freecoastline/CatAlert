@@ -21,8 +21,8 @@ class CatCurrentStatusViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         catModel.loadImageIfNeeded() //预加载
+        setupUI()
     }
     
     func setupUI() {
