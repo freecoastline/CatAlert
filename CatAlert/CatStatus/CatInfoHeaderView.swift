@@ -9,30 +9,34 @@ import Foundation
 import UIKit
 
 protocol CatInfoHeaderViewDelegate {
-    func jumpToProfile()
+    func didTapAavatar()
 }
 
 class CatInfoHeaderView: UIView {
     var delegate:CatInfoHeaderViewDelegate?
+    private static let avatarSize:CGFloat = 50
+    private static let animationDuration: TimeInterval = 0.1  // ✅ 动画时长固定
+    private static let scaleDown: CGFloat = 0.95     // ✅ 缩放比例固定
     
     private lazy var avatarImageView = {
         let avatar = UIImageView()
         avatar.contentMode = .scaleAspectFit
-        avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(jumpToProfile)))
+        avatar.layer.cornerRadius = Self.avatarSize / 2
+        avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAavatar)))
         return avatar
     }()
     
-    @objc private func jumpToProfile() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.avatarImageView.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+    @objc private func didTapAavatar() {
+        UIView.animate(withDuration: Self.animationDuration, animations: {
+            self.avatarImageView.transform = CGAffineTransform(scaleX: Self.scaleDown, y: Self.scaleDown)
         }) { _ in
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: Self.animationDuration) {
                 self.avatarImageView.transform = .identity
             }
         }
         let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
         impactGenerator.impactOccurred()
-        delegate?.jumpToProfile()
+        delegate?.didTapAavatar()
     }
     
     private lazy var ageLabel = {
@@ -95,7 +99,7 @@ class CatInfoHeaderView: UIView {
         }
         
         avatarImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(50)
+            make.height.width.equalTo(Self.avatarSize)
         }
         avatarImageView.layer.cornerRadius = 25.0
         avatarImageView.layer.masksToBounds = true
