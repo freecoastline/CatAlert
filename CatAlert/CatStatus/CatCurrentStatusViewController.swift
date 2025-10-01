@@ -30,7 +30,7 @@ class CatCurrentStatusViewController:UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(headerStatusView)
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         headerStatusView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
