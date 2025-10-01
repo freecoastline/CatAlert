@@ -43,7 +43,7 @@ class CatCurrentStatusViewController:UIViewController {
 }
 
 extension CatCurrentStatusViewController: CatInfoHeaderViewDelegate {
-    func didTapAavatar() {
+    func didTapAvatar() {
         if let profileVC = tabBarController?.viewControllers?.first(where: {
             $0 is CatProfileViewController
         }) {

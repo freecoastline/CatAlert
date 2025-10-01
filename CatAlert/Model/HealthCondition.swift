@@ -26,4 +26,17 @@ enum HealthCondition {
             return .systemRed
         }
     }
+    
+    var displayText:String {
+        switch self {
+        case .excellent:
+            return "超棒"
+        case .good:
+            return "好"
+        case .normal:
+            return "普通"
+        case .needsAttention:
+            return "需要照顾了哦"   
+        }
+    }
 }
