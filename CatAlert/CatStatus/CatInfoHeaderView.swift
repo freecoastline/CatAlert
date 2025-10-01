@@ -20,7 +20,7 @@ class CatInfoHeaderView: UIView {
     
     private lazy var avatarImageView = {
         let avatar = UIImageView()
-        avatar.contentMode = .scaleAspectFit
+        avatar.contentMode = .scaleAspectFill
         avatar.layer.cornerRadius = Self.avatarSize / 2
         avatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapAavatar)))
         return avatar
@@ -101,12 +101,11 @@ class CatInfoHeaderView: UIView {
         avatarImageView.snp.makeConstraints { make in
             make.height.width.equalTo(Self.avatarSize)
         }
-        avatarImageView.layer.cornerRadius = 25.0
         avatarImageView.layer.masksToBounds = true
         avatarImageView.isUserInteractionEnabled = true
         
         healthyConditionView.snp.makeConstraints { make in
-            make.height.equalToSuperview()
+            make.height.equalTo(30)
             make.width.equalTo(100)
         }
         
