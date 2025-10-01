@@ -55,3 +55,33 @@ class ReminderManager: ObservableObject {
         activeReminders
     }
 }
+
+
+extension ReminderManager {
+    func calculateTodayProgress() -> TaskProgress {
+        let now = Date()
+        let calendar = Calendar.current
+        
+        var completed = 0, expired = 0, upcoming = 0
+        let oneHourLater = calendar.date(byAdding: .second, value: 3600, to: now) ?? now
+        todayActivities.forEach { record in
+            switch record.status {
+            case .completed:
+                completed += 1
+            case .expired:
+                expired += 1
+            case .pending where record.scheduledTime < oneHourLater && record.scheduledTime > now :
+                upcoming += 1
+            default: break
+            }
+        }
+        
+        return TaskProgress(
+            totalTasks: todayActivities.count,
+            completedTasks: completed,
+            overdueTasks: expired,
+            upcomingTasks: upcoming
+        )
+    }
+    
+}

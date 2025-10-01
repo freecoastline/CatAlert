@@ -31,12 +31,12 @@ struct ReminderTime: Codable {
     }
 }
 
-enum ReminderFrequency {
+enum ReminderFrequency: Codable {
     case daily
     case weekly
 }
 
-enum CatCareType {
+enum CatCareType: Codable {
     case food
     case water
     case play

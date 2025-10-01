@@ -29,7 +29,7 @@ extension ActivityRecord {
     }
 }
 
-enum ActivityStatus {
+enum ActivityStatus:Codable {
     case completed
     case skipped
     case expired
