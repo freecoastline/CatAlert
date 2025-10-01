@@ -23,18 +23,19 @@ class CatCurrentStatusViewController:UIViewController {
         super.viewDidLoad()
         catModel.loadImageIfNeeded() //预加载
         setupUI()
+        view.backgroundColor = .green
     }
     
     func setupUI() {
         view.addSubview(scrollView)
         scrollView.addSubview(headerStatusView)
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
         headerStatusView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(70)
             make.top.equalTo(view.safeAreaLayoutGuide)
-        }
-        scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         headerStatusView.delegate = self
         headerStatusView.update(with: catModel)
