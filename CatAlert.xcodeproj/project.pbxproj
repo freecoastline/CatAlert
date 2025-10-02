@@ -70,6 +70,7 @@
 				IMG_6364.JPG,
 				IMG_7585.JPG,
 				IMG_7595.JPG,
+				Managers/DataPersistenceManager.swift,
 				Managers/ReminderManager.swift,
 				Model/ActivityRecord.swift,
 				Model/CatReminder.swift,
@@ -134,6 +135,13 @@
 			);
 			target = 2B16274B2E6BE162008A6507 /* CatAlertTests */;
 		};
+		BECF44A42E8E0D63009C9033 /* Exceptions for "CatAlert" folder in "CatAlertUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Managers/DataPersistenceManager.swift,
+			);
+			target = 2B1627552E6BE162008A6507 /* CatAlertUITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -152,6 +160,7 @@
 			exceptions = (
 				BEB262CF2E87843F009E1C80 /* Exceptions for "CatAlert" folder in "CatAlert" target */,
 				BEB262D02E87843F009E1C80 /* Exceptions for "CatAlert" folder in "CatAlertTests" target */,
+				BECF44A42E8E0D63009C9033 /* Exceptions for "CatAlert" folder in "CatAlertUITests" target */,
 			);
 			path = CatAlert;
 			sourceTree = "<group>";

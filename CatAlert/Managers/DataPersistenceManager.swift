@@ -7,11 +7,14 @@
 
 import Foundation
 class DataPersistenceManager {
+    static let shared = DataPersistenceManager()
+    
+    private init() {}
     
     // MARK: - 通用的保存和加载函数
     
     /// 通用保存函数 - 将任意 Codable 数组保存到指定文件
-    private func saveData<T: Codable>(_ data: [T], to fileName: String) throws {
+    func saveData<T: Codable>(_ data: [T], to fileName: String) throws {
         let fileURL = getFileURL(for: fileName)
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
@@ -21,7 +24,7 @@ class DataPersistenceManager {
     }
     
     /// 通用加载函数 - 从指定文件加载任意 Codable 数组
-    private func loadData<T: Codable>(_ type: T.Type, from fileName: String) throws -> [T] {
+    func loadData<T: Codable>(_ type: T.Type, from fileName: String) throws -> [T] {
         let fileURL = getFileURL(for: fileName)
         
         // 检查文件是否存在
@@ -36,51 +39,6 @@ class DataPersistenceManager {
         let result = try decoder.decode([T].self, from: data)
         
         return result
-    }
-    
-    // MARK: - 具体业务函数
-    
-    // 保存提醒数据
-    func saveReminders(_ reminders: [CatReminder]) throws {
-        try saveData(reminders, to: "reminders.json")
-    }
-    
-    func loadReminders() throws -> [CatReminder] {
-        return try loadData(CatReminder.self, from: "reminders.json")
-    }
-
-    // 保存活动记录
-    func saveActivityRecords(_ records: [ActivityRecord]) throws {
-        try saveData(records, to: "activity_records.json")
-    }
-    
-    func loadActivityRecords() throws -> [ActivityRecord] {
-        try loadData(ActivityRecord.self, from: "activity_records.json")
-    }
-    
-    // 增量更新
-    func updateReminder(_ reminder: CatReminder) throws {
-        var reminders = try loadReminders()
-        
-        if let index = reminders.firstIndex(where: { $0.id == reminder.id }) {
-            reminders[index] = reminder
-        } else {
-            reminders.append(reminder)
-        }
-        
-        try saveReminders(reminders)
-    }
-    
-    func deleteReminder(id: UUID) throws {
-        var reminders = try loadReminders()
-        reminders.removeAll { $0.id == id }
-        try saveReminders(reminders)
-    }
-    
-    func addActivityRecord(_ record: ActivityRecord) throws {
-        var records = try loadActivityRecords()
-        records.append(record)
-        try saveActivityRecords(records)
     }
     
     //文件管理

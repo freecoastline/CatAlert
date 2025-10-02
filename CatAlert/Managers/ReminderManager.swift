@@ -13,46 +13,98 @@ class ReminderManager: ObservableObject {
     @Published var todayActivities: [ActivityRecord] = []
     
     // 核心方法：
+    private init() {
+        loadData()
+    }
     
-    // 创建新提醒
+    private func loadData() {
+        activeReminders = loadReminders()
+        let activities = loadActivityRecords()
+        let todayStartTime = Calendar.current.startOfDay(for: Date())
+        guard let tomorrowStartTime = Calendar.current.date(byAdding: .day, value: 1, to: todayStartTime) else {
+            return
+        }
+        todayActivities = activities.filter({
+            (todayStartTime..<tomorrowStartTime).contains($0.scheduledTime)
+        })
+    }
+    
+// MARK: - Private Persistence
+    private func saveReminders() {
+        do {
+            try DataPersistenceManager.shared.saveData(activeReminders, to: "reminders.json")
+        } catch {
+            print("Failed to save reminders: \(error)")
+        }
+    }
+    
+    private func loadReminders() -> [CatReminder] {
+        do {
+            return try DataPersistenceManager.shared.loadData(CatReminder.self, from: "reminders.json")
+        } catch {
+            print("Failed to load reminders: \(error)")
+            return []
+        }
+    }
+
+    private func saveActivityRecords() {
+        do {
+            try DataPersistenceManager.shared.saveData(todayActivities, to: "activity_records.json")
+        } catch {
+            print("Failed to save activities: \(error)")
+        }
+    }
+    
+    private func loadActivityRecords() -> [ActivityRecord] {
+        do {
+            return try DataPersistenceManager.shared.loadData(ActivityRecord.self, from: "activity_records.json")
+        } catch {
+            print("Failed to load activities: \(error)")
+            return []
+        }
+    }
+    
+// MARK: - Public API
     func createReminder(_ reminder: CatReminder) {
         activeReminders.append(reminder)
-    }
-    // 更新提醒
-    func updateReminder(_ reminder: CatReminder) {
-        
+        saveReminders()
     }
     
-    // 删除提醒
     func deleteReminder(id: UUID) {
-        activeReminders.removeAll { reminder in
-            reminder.id == id
+        guard activeReminders.contains(where: { $0.id == id }) else {
+            return
         }
+        activeReminders.removeAll { $0.id == id }
+        saveReminders()
     }
-    
-    // 启用/禁用
+
     func toggleReminder(id: UUID, enabled: Bool) {
-        if let index = activeReminders.firstIndex(where: { $0.id == id }) {
-            activeReminders[index].isEnabled = enabled
+        guard let index = activeReminders.firstIndex(where: { $0.id == id }) else {
+            return
         }
+        activeReminders[index].isEnabled = enabled
+        saveReminders()
     }
     
-    // 标记完成
-    func markActivityCompleted(id: UUID, notes: String?) {
-        if let index = todayActivities.firstIndex(where: { $0.id == id}) {
-            todayActivities[index].status = .completed
-            todayActivities[index].completeTime = Date()
+    func updateReminder(_ reminder: CatReminder) {
+        guard let index = activeReminders.firstIndex(where: { $0.id == reminder.id }) else {
+            return
         }
+        activeReminders[index] = reminder
+        saveReminders()
     }
     
-    // 获取今日待办
-    func getTodayPendingActivities() -> [ActivityRecord] {
-        todayActivities
+    func markActivityCompleted(id: UUID) {
+        guard let index = todayActivities.firstIndex(where: { $0.id == id}) else {
+            return
+        }
+        todayActivities[index].status = .completed
+        todayActivities[index].completeTime = Date()
+        saveActivityRecords()
     }
     
-    // 获取即将到期提醒
     func getUpcomingReminders() -> [CatReminder] {
-        activeReminders
+        return []
     }
 }
 
