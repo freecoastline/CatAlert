@@ -29,6 +29,10 @@ struct ReminderTime: Codable {
         self.minute = minute
         self.hour = hour
     }
+    
+    var displayTime:String {
+        String(format: "%02d:%02d", hour, minute)
+    }
 }
 
 enum ReminderFrequency: Codable {
