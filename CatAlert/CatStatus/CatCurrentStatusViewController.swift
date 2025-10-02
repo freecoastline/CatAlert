@@ -19,6 +19,44 @@ class CatCurrentStatusViewController:UIViewController {
         return scrollView
     }()
     
+    //任务列表
+    private lazy var taskStackView = {
+        let stack = UIStackView()
+        stack.spacing = 8.0
+        stack.axis = .vertical
+        return stack
+    }()
+    
+    //任务header
+    private lazy var sectionHeaderView: UIView = {
+         let view = UIView()
+
+         let titleLabel = UILabel()
+         titleLabel.text = "今日任务"
+         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+
+         let countBadge = UILabel()
+         countBadge.font = .systemFont(ofSize: 14, weight: .medium)
+         countBadge.textColor = .systemOrange
+         countBadge.tag = 100 // 用于后续更新
+
+         view.addSubview(titleLabel)
+         view.addSubview(countBadge)
+
+         titleLabel.snp.makeConstraints { make in
+             make.left.equalToSuperview().offset(16)
+             make.centerY.equalToSuperview()
+         }
+
+         countBadge.snp.makeConstraints { make in
+             make.left.equalTo(titleLabel.snp.right).offset(8)
+             make.centerY.equalToSuperview()
+         }
+
+         return view
+     }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         catModel.loadImageIfNeeded() //预加载
