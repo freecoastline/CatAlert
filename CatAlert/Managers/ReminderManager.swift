@@ -104,7 +104,30 @@ class ReminderManager: ObservableObject {
     }
     
     func getUpcomingReminders() -> [CatReminder] {
-        return []
+        let now = Date()
+        let calendar = Calendar.current
+        guard let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: now) else {
+            return []
+        }
+        return activeReminders.filter { reminder in
+            guard reminder.isEnabled else {
+                return false
+            }
+            return reminder.scheduledTime.contains(where: { reminderTime in
+                for dayOffset in 0...1 {
+                    guard let targetDay = calendar.date(byAdding: .day, value: dayOffset, to: calendar.startOfDay(for: now)) else {
+                        continue
+                    }
+                    guard let scheduledTime = calendar.date(bySettingHour: reminderTime.hour, minute: reminderTime.minute, second: 0, of: targetDay) else {
+                        continue
+                    }
+                    if (now..<oneHourLater).contains(scheduledTime) {
+                        return true
+                    }
+                }
+                return false
+            })
+        }
     }
 }
 
@@ -115,7 +138,7 @@ extension ReminderManager {
         let calendar = Calendar.current
         
         var completed = 0, expired = 0, upcoming = 0
-        let oneHourLater = calendar.date(byAdding: .second, value: 3600, to: now) ?? now
+        let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: now) ?? now
         todayActivities.forEach { record in
             switch record.status {
             case .completed:
