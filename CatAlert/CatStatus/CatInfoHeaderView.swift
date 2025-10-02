@@ -45,7 +45,7 @@ class CatInfoHeaderView: UIView {
     private lazy var ageLabel = {
         let label = UILabel()
         label.textColor = .systemPink
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.sizeToFit()
         return label
     }()
@@ -53,7 +53,7 @@ class CatInfoHeaderView: UIView {
     private lazy var nameLabel = {
         let label = UILabel()
         label.textColor = .systemPink
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.sizeToFit()
         return label
     }()
@@ -82,7 +82,6 @@ class CatInfoHeaderView: UIView {
     private lazy var healthStatusBadge = {
         let container = UIView()
         container.layer.cornerRadius = 15.0
-        container.backgroundColor = .gray
         container.addSubview(self.healthStatusLabel)
         container.addSubview(self.healthIndicatorDot)
         self.healthStatusLabel.snp.makeConstraints { make in
@@ -90,7 +89,7 @@ class CatInfoHeaderView: UIView {
             make.centerY.equalToSuperview()
         }
         self.healthIndicatorDot.snp.makeConstraints { make in
-            make.left.equalTo(self.healthStatusLabel.snp.right).offset(10)
+            make.left.equalTo(self.healthStatusLabel.snp.right).offset(6)
             make.width.height.equalTo(CatInfoHeaderView.indicatorSize)
             make.right.equalToSuperview().offset(-Self.badgePadding)
             make.centerY.equalToSuperview()
@@ -101,9 +100,8 @@ class CatInfoHeaderView: UIView {
     
     private lazy var healthStatusLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .systemPink
-        label.backgroundColor = .yellow
         return label
     }()
     
@@ -113,9 +111,9 @@ class CatInfoHeaderView: UIView {
         stackView.addArrangedSubview(avatarImageView)
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(ageLabel)
+        stackView.addArrangedSubview(healthStatusBadge)
         let spacer = UIView()
         stackView.addArrangedSubview(spacer)
-        stackView.addArrangedSubview(healthStatusBadge)
         stackView.spacing = 8.0
         stackView.alignment = .center
         
