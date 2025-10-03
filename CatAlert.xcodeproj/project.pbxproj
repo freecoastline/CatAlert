@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BBDF5BA2E6D379B0006186F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2BBDF5B92E6D379B0006186F /* SnapKit */; };
+		27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27AAD2B42E90082100C1AC34 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,7 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BBDF5BA2E6D379B0006186F /* SnapKit in Frameworks */,
+				27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +230,7 @@
 			);
 			name = CatAlert;
 			packageProductDependencies = (
-				2BBDF5B92E6D379B0006186F /* SnapKit */,
+				27AAD2B42E90082100C1AC34 /* SnapKit */,
 			);
 			productName = CatAlert;
 			productReference = 2B1627362E6BE15F008A6507 /* CatAlert.app */;
@@ -316,7 +316,8 @@
 			mainGroup = 2B16272D2E6BE15F008A6507;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2BBDF5B82E6D379B0006186F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				27387BF22E8FF741002B96B3 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				27BDF9762E9007DA00743EC8 /* XCLocalSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2B1627372E6BE15F008A6507 /* Products */;
@@ -676,21 +677,27 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		27BDF9762E9007DA00743EC8 /* XCLocalSwiftPackageReference "SnapKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = SnapKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
-		2BBDF5B82E6D379B0006186F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		27387BF22E8FF741002B96B3 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
+				minimumVersion = 1.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2BBDF5B92E6D379B0006186F /* SnapKit */ = {
+		27AAD2B42E90082100C1AC34 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2BBDF5B82E6D379B0006186F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
