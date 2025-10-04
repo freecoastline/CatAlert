@@ -10,4 +10,10 @@ import UIKit
 
 class TaskCardView:UIView {
 // MARK: UIComponnets
+    private lazy var containerView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 12
+        return view
+    }()
 }
