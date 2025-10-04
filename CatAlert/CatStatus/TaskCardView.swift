@@ -49,7 +49,7 @@ class TaskCardView:UIView {
         let button = UIButton(type: .custom)
         button.addTarget(self, action: #selector(tapComplete), for: .touchUpInside)
         return button
-    }
+    }()
     
     @objc private func tapComplete() {
         
