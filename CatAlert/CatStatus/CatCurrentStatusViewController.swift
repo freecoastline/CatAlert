@@ -8,11 +8,27 @@
 import Foundation
 import UIKit
 import SnapKit
-
+import Combine
 
 class CatCurrentStatusViewController:UIViewController {
+    private var cancellables = Set<AnyCancellable>()
     private lazy var headerStatusView = CatInfoHeaderView(frame: .zero)
     var catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
+    private func observeDataChange() {
+        ReminderManager.shared.$todayActivities.sink { [weak self] _ in
+            guard let self else {
+                return
+            }
+            loadTasks()
+        }.store(in: &cancellables)
+    }
+    
+    private func loadTasks() {
+        let activities = ReminderManager.shared.todayActivities
+        activities.forEach { record in
+            Ω
+        }
+    }
     
     private lazy var scrollView = {
         let scrollView = UIScrollView()
@@ -60,6 +76,7 @@ class CatCurrentStatusViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         catModel.loadImageIfNeeded() //预加载
+        observeDataChange()
         setupUI()
     }
     
