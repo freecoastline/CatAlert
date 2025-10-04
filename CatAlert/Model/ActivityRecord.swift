@@ -15,6 +15,17 @@ struct ActivityRecord:Codable {
     var scheduledTime: Date
     var completeTime: Date?
     var status: ActivityStatus
+    
+    var typeString = {
+        switch type {
+        case .food:
+            "food"
+        case .water:
+            "water"
+        case .play:
+            "play"
+        }
+    }
 }
 
 extension ActivityRecord {

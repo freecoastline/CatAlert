@@ -19,7 +19,7 @@ class TaskCardView:UIView {
     }
     
     func configure(with activity:ActivityRecord) {
-        
+        titleLabel.text  = activity.typeString
     }
     
 // MARK: UIComponnets
