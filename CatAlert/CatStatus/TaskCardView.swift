@@ -28,7 +28,7 @@ class TaskCardView:UIView {
     func configure(with activity:ActivityRecord) {
         titleLabel.text  = activity.typeString
         timeLabel.text = dateFormatter.string(from: activity.scheduledTime)
-
+        configureIcon(for: activity.type)
         switch activity.status {
         case .completed:
             containerView.alpha = 0.6
