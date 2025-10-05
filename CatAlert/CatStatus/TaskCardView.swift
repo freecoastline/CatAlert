@@ -12,10 +12,34 @@ import Combine
 class TaskCardView:UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        self.addSubview(containerView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(timeLabel)
+        containerView.addSubview(iconImageView)
+        containerView.addSubview(completeButton)
+        
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(iconImageView.snp.right).offset(12)
+            make.top.equalToSuperview().offset(12)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.bottom.equalToSuperview().offset(-12)
+            make.left.equalTo(titleLabel)
+        }
     }
     
     private var dateFormatter = {
