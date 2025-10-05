@@ -28,7 +28,18 @@ class TaskCardView:UIView {
     func configure(with activity:ActivityRecord) {
         titleLabel.text  = activity.typeString
         timeLabel.text = dateFormatter.string(from: activity.scheduledTime)
-        switch activity.type {
+
+        
+    }
+    
+    private func configureIcon(for type:CatCareType) {
+        iconImageView.clipsToBounds = true
+        iconImageView.snp.remakeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.height.width.equalTo(40)
+            make.centerY.equalToSuperview()
+        }
+        switch type {
         case .food:
             iconImageView.image = UIImage(systemName: "fork.knife")
             iconImageView.backgroundColor = .systemOrange
@@ -39,8 +50,8 @@ class TaskCardView:UIView {
             iconImageView.image = UIImage(systemName: "gamecontroller.fill")
             iconImageView.backgroundColor = .systemGreen
         }
-        
     }
+    
     
 // MARK: UIComponnets
     private lazy var containerView = {
