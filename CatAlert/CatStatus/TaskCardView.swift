@@ -18,9 +18,16 @@ class TaskCardView:UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var dateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.locale = Locale(identifier: "zh_CN")
+        return formatter
+    }()
+    
     func configure(with activity:ActivityRecord) {
         titleLabel.text  = activity.typeString
-        timeLabel.text = String(describing: activity.scheduledTime)
+        timeLabel.text = dateFormatter.string(from: activity.scheduledTime)
         switch activity.type {
         case .food:
             iconImageView.image = UIImage(systemName: "fork.knife")
