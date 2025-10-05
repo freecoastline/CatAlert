@@ -20,6 +20,19 @@ class TaskCardView:UIView {
     
     func configure(with activity:ActivityRecord) {
         titleLabel.text  = activity.typeString
+        timeLabel.text = String(describing: activity.scheduledTime)
+        switch activity.type {
+        case .food:
+            iconImageView.image = UIImage(systemName: "fork.knife")
+            iconImageView.backgroundColor = .systemOrange
+        case .water:
+            iconImageView.image = UIImage(systemName: "drop.fill")
+            iconImageView.backgroundColor = .systemBlue
+        case .play:
+            iconImageView.image = UIImage(systemName: "gamecontroller.fill")
+            iconImageView.backgroundColor = .systemGreen
+        }
+        
     }
     
 // MARK: UIComponnets
@@ -43,6 +56,12 @@ class TaskCardView:UIView {
         label.textColor = .secondaryLabel
         label.sizeToFit()
         return label
+    }()
+    
+    private lazy var iconImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        return view
     }()
     
     private lazy var completeButton = {

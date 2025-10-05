@@ -16,7 +16,7 @@ struct ActivityRecord:Codable {
     var completeTime: Date?
     var status: ActivityStatus
     
-    var typeString = {
+    var typeString: String {
         switch type {
         case .food:
             "food"
