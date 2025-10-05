@@ -53,6 +53,12 @@ class TaskCardView:UIView {
         titleLabel.text  = activity.typeString
         timeLabel.text = dateFormatter.string(from: activity.scheduledTime)
         configureIcon(for: activity.type)
+        // 重置默认状态
+        timeLabel.textColor = .secondaryLabel
+        containerView.alpha = 1.0
+        completeButton.isEnabled = true
+        completeButton.tintColor = .systemGray
+        
         switch activity.status {
         case .completed:
             containerView.alpha = 0.6
@@ -62,6 +68,7 @@ class TaskCardView:UIView {
         case .expired:
             containerView.alpha = 0.4
             timeLabel.textColor = .systemRed
+            completeButton.isEnabled = false
         case .pending:
             containerView.alpha = 1.0
             completeButton.isEnabled = true
@@ -72,6 +79,7 @@ class TaskCardView:UIView {
     
     private func configureIcon(for type:CatCareType) {
         iconImageView.clipsToBounds = true
+        iconImageView.layer.cornerRadius = 8.0
         iconImageView.snp.remakeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.height.width.equalTo(40)
