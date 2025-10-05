@@ -29,7 +29,21 @@ class TaskCardView:UIView {
         titleLabel.text  = activity.typeString
         timeLabel.text = dateFormatter.string(from: activity.scheduledTime)
 
-        
+        switch activity.status {
+        case .completed:
+            containerView.alpha = 0.6
+            completeButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            completeButton.tintColor = .systemGreen
+            completeButton.isEnabled = false
+        case .expired:
+            containerView.alpha = 0.4
+            timeLabel.textColor = .systemRed
+        case .pending:
+            containerView.alpha = 1.0
+            completeButton.isEnabled = true
+        case .skipped:
+            containerView.alpha = 0.5
+        }
     }
     
     private func configureIcon(for type:CatCareType) {
@@ -84,6 +98,8 @@ class TaskCardView:UIView {
     
     private lazy var completeButton = {
         let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        button.tintColor = .systemGray
         button.addTarget(self, action: #selector(tapComplete), for: .touchUpInside)
         return button
     }()
