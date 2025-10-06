@@ -40,6 +40,12 @@ class TaskCardView:UIView {
             make.bottom.equalToSuperview().offset(-12)
             make.left.equalTo(titleLabel)
         }
+        
+        completeButton.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.height.width.equalTo(28)
+            make.centerY.equalToSuperview()
+        }
     }
     
     private var dateFormatter = {
