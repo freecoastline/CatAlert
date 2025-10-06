@@ -25,7 +25,6 @@ class TaskCardView:UIView {
         containerView.addSubview(timeLabel)
         containerView.addSubview(iconImageView)
         containerView.addSubview(completeButton)
-        
         containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(8)
         }
@@ -54,7 +53,7 @@ class TaskCardView:UIView {
         }
     }
     
-    private var dateFormatter = {
+    private static let dateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         formatter.locale = Locale(identifier: "zh_CN")
@@ -62,16 +61,15 @@ class TaskCardView:UIView {
     }()
     
     func configure(with activity:ActivityRecord) {
+        resetToDefaultState()
         titleLabel.text  = activity.typeString
-        timeLabel.text = dateFormatter.string(from: activity.scheduledTime)
+        timeLabel.text = Self.dateFormatter.string(from: activity.scheduledTime)
         configureIcon(for: activity.type)
-        // 重置默认状态
-        timeLabel.textColor = .secondaryLabel
-        containerView.alpha = 1.0
-        completeButton.isEnabled = true
-        completeButton.tintColor = .systemGray
-        
-        switch activity.status {
+        applyStatusStyle(with: activity.status)
+    }
+    
+    private func applyStatusStyle(with status: ActivityStatus) {
+        switch status {
         case .completed:
             containerView.alpha = 0.6
             completeButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
@@ -89,9 +87,15 @@ class TaskCardView:UIView {
         }
     }
     
+    private func resetToDefaultState() {
+        timeLabel.textColor = .secondaryLabel
+        containerView.alpha = 1.0
+        completeButton.isEnabled = true
+        completeButton.tintColor = .systemGray
+        completeButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+    }
+    
     private func configureIcon(for type:CatCareType) {
-        iconImageView.clipsToBounds = true
-        iconImageView.layer.cornerRadius = 8.0
         switch type {
         case .food:
             iconImageView.image = UIImage(systemName: "fork.knife")
@@ -131,7 +135,9 @@ class TaskCardView:UIView {
     
     private lazy var iconImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 8.0
         return view
     }()
     
