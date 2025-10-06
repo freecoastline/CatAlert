@@ -88,17 +88,27 @@ class CatCurrentStatusViewController:UIViewController {
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        scrollView.addSubview(sectionHeaderView)
-        sectionHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(headerStatusView.snp_bottomMargin).offset(10)
-        }
-        scrollView.addSubview(taskStackView)
         headerStatusView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(70)
             make.width.equalToSuperview()
             make.top.equalToSuperview()
         }
+        
+        scrollView.addSubview(sectionHeaderView)
+        sectionHeaderView.snp.makeConstraints { make in
+            make.top.equalTo(headerStatusView.snp_bottomMargin).offset(10)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        scrollView.addSubview(taskStackView)
+
+        taskStackView.snp.makeConstraints { make in
+            make.top.equalTo(sectionHeaderView.snp.bottom).offset(12)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-12)
+        }
+        
         headerStatusView.delegate = self
         headerStatusView.update(with: catModel)
     }
