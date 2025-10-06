@@ -26,6 +26,10 @@ class CatCurrentStatusViewController:UIViewController {
     }
     
     private func loadTasks() {
+        taskStackView.arrangedSubviews.forEach { view in
+            taskStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
         let activities = ReminderManager.shared.todayActivities
         activities.forEach { record in
             let cardView = TaskCardView()
