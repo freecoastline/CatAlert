@@ -23,9 +23,6 @@ class CatCurrentStatusViewController:UIViewController {
                 }
                 loadTasks()
             }.store(in: &cancellables)
-
-        // 初始加载
-        loadTasks()
     }
     
     private func loadTasks() {
