@@ -80,6 +80,9 @@ class CatCurrentStatusViewController:UIViewController {
         catModel.loadImageIfNeeded() //预加载
         observeDataChange()
         setupUI()
+        #if DEBUG
+        ReminderManager.shared.generateTestData()
+        #endif
     }
     
     func setupUI() {
