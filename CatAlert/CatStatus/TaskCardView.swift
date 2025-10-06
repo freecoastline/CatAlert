@@ -40,7 +40,7 @@ class TaskCardView:UIView {
         }
         
         completeButton.snp.makeConstraints { make in
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().offset(-16)
             make.height.width.equalTo(28)
             make.centerY.equalToSuperview()
         }
@@ -99,12 +99,15 @@ class TaskCardView:UIView {
         case .food:
             iconImageView.image = UIImage(systemName: "fork.knife")
             iconImageView.backgroundColor = .systemOrange
+            iconImageView.tintColor = .white  // 添加白色前景色
         case .water:
             iconImageView.image = UIImage(systemName: "drop.fill")
             iconImageView.backgroundColor = .systemBlue
+            iconImageView.tintColor = .white  // 添加白色前景色
         case .play:
             iconImageView.image = UIImage(systemName: "gamecontroller.fill")
             iconImageView.backgroundColor = .systemGreen
+            iconImageView.tintColor = .white  // 添加白色前景色
         }
     }
     

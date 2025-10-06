@@ -106,7 +106,7 @@ class CatCurrentStatusViewController:UIViewController {
         
         scrollView.addSubview(sectionHeaderView)
         sectionHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(headerStatusView.snp_bottomMargin).offset(10)
+            make.top.equalTo(headerStatusView.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(40)
         }
