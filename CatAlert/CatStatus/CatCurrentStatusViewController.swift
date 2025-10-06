@@ -15,12 +15,17 @@ class CatCurrentStatusViewController:UIViewController {
     private lazy var headerStatusView = CatInfoHeaderView(frame: .zero)
     var catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
     private func observeDataChange() {
-        ReminderManager.shared.$todayActivities.sink { [weak self] _ in
-            guard let self else {
-                return
-            }
-            loadTasks()
-        }.store(in: &cancellables)
+        ReminderManager.shared.$todayActivities
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                loadTasks()
+            }.store(in: &cancellables)
+
+        // 初始加载
+        loadTasks()
     }
     
     private func loadTasks() {

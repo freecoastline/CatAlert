@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Combine
+
 class ReminderManager: ObservableObject {
     static let shared = ReminderManager()
     
