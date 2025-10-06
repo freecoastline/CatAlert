@@ -46,6 +46,12 @@ class TaskCardView:UIView {
             make.height.width.equalTo(28)
             make.centerY.equalToSuperview()
         }
+        
+        iconImageView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.height.width.equalTo(40)
+            make.centerY.equalToSuperview()
+        }
     }
     
     private var dateFormatter = {
@@ -86,11 +92,6 @@ class TaskCardView:UIView {
     private func configureIcon(for type:CatCareType) {
         iconImageView.clipsToBounds = true
         iconImageView.layer.cornerRadius = 8.0
-        iconImageView.snp.remakeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.height.width.equalTo(40)
-            make.centerY.equalToSuperview()
-        }
         switch type {
         case .food:
             iconImageView.image = UIImage(systemName: "fork.knife")
