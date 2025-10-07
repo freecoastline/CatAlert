@@ -12,6 +12,7 @@ import Combine
 
 class CatCurrentStatusViewController:UIViewController {
     private var cancellables = Set<AnyCancellable>()
+    private var displayedCardIds:[UUID] = []
     private lazy var headerStatusView = CatInfoHeaderView(frame: .zero)
     var catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
     private func observeDataChange() {
@@ -26,11 +27,25 @@ class CatCurrentStatusViewController:UIViewController {
     }
     
     private func loadTasks() {
+        let activities = ReminderManager.shared.todayActivities
+        let activityIds = activities.map(\.id)
+        
+        if displayedCardIds == activityIds {
+            zip(taskStackView.arrangedSubviews.compactMap({ $0 as? TaskCardView }), activities)
+                .forEach { cardView, activityRecord in
+                    cardView.configure(with: activityRecord)
+                }
+            updateBadgeCount(activities.count)
+            return
+        }
+        
+        displayedCardIds = activityIds
+        
         taskStackView.arrangedSubviews.forEach { view in
             taskStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-        let activities = ReminderManager.shared.todayActivities
+        
         activities.forEach { record in
             let cardView = TaskCardView()
             cardView.configure(with: record)
@@ -42,14 +57,14 @@ class CatCurrentStatusViewController:UIViewController {
             }
             taskStackView.addArrangedSubview(cardView)
         }
-        if let badge = sectionHeaderView.viewWithTag(100) as? UILabel {
-            if activities.isEmpty {
-                badge.isHidden = true
-            } else {
-                badge.isHidden = false
-                badge.text = "\(activities.count)"
-            }
+    }
+    
+    private func updateBadgeCount(_ count: Int) {
+        guard let badge = sectionHeaderView.viewWithTag(100) as? UILabel else {
+            return
         }
+        badge.isHidden = count == 0
+        badge.text = "(\(count))"
     }
     
     private lazy var scrollView = {
@@ -74,9 +89,11 @@ class CatCurrentStatusViewController:UIViewController {
          titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
 
          let countBadge = UILabel()
+         countBadge.text = "(0)"
          countBadge.font = .systemFont(ofSize: 14, weight: .medium)
          countBadge.textColor = .systemOrange
          countBadge.tag = 100 // 用于后续更新
+        
 
          view.addSubview(titleLabel)
          view.addSubview(countBadge)
