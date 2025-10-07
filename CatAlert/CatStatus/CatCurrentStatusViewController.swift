@@ -36,6 +36,9 @@ class CatCurrentStatusViewController:UIViewController {
             cardView.configure(with: record)
             taskStackView.addArrangedSubview(cardView)
         }
+        if let badge = sectionHeaderView.viewWithTag(100) as? UILabel {
+            badge.text = "\(activities.count)"
+        }
     }
     
     private lazy var scrollView = {
