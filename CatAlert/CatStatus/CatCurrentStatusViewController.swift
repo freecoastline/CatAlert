@@ -34,13 +34,21 @@ class CatCurrentStatusViewController:UIViewController {
         activities.forEach { record in
             let cardView = TaskCardView()
             cardView.configure(with: record)
-            cardView.onComplete = {
-                ReminderManager.shared.markActivityCompleted(id: $0)
+            cardView.onComplete = { [weak self] id in
+                guard let self else {
+                    return
+                }
+                ReminderManager.shared.markActivityCompleted(id: id)
             }
             taskStackView.addArrangedSubview(cardView)
         }
         if let badge = sectionHeaderView.viewWithTag(100) as? UILabel {
-            badge.text = "\(activities.count)"
+            if activities.isEmpty {
+                badge.isHidden = true
+            } else {
+                badge.isHidden = false
+                badge.text = "\(activities.count)"
+            }
         }
     }
     

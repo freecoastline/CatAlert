@@ -19,11 +19,11 @@ struct ActivityRecord:Codable {
     var typeString: String {
         switch type {
         case .food:
-            "food"
+            "喂食"
         case .water:
-            "water"
+            "换水"
         case .play:
-            "play"
+            "玩耍"
         }
     }
 }

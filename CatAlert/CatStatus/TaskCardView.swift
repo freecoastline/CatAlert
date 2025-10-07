@@ -10,7 +10,7 @@ import UIKit
 
 class TaskCardView:UIView {
     private var activityId:UUID?
-    var onComplete: ((UUID) -> (Void))?
+    var onComplete: ((UUID) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +28,7 @@ class TaskCardView:UIView {
         containerView.addSubview(iconImageView)
         containerView.addSubview(completeButton)
         containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(8)
+            make.edges.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -116,7 +116,7 @@ class TaskCardView:UIView {
     }
     
     
-// MARK: UIComponnets
+// MARK: - UI Components
     private lazy var containerView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -159,6 +159,7 @@ class TaskCardView:UIView {
         guard let activityId, let onComplete else {
             return
         }
+        completeButton.isEnabled = false
         onComplete(activityId)
     }
 }
