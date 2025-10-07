@@ -16,7 +16,8 @@ class ViewController: UIViewController {
         let catTabbar = CatTabbarController()
         let catProfile = CatProfileViewController()
         let catCurrentStatus = CatCurrentStatusViewController()
-        catTabbar.viewControllers = [catCurrentStatus, catProfile]
+        let reminderSetingPage = ReminderSettingsViewController()
+        catTabbar.viewControllers = [catCurrentStatus, reminderSetingPage, catProfile]
         view.addSubview(catTabbar.view)
         addChild(catTabbar)
         catCurrentStatus.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 0)
