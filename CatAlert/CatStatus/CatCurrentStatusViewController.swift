@@ -49,14 +49,12 @@ class CatCurrentStatusViewController:UIViewController {
         activities.forEach { record in
             let cardView = TaskCardView()
             cardView.configure(with: record)
-            cardView.onComplete = { [weak self] id in
-                guard let self else {
-                    return
-                }
+            cardView.onComplete = { id in
                 ReminderManager.shared.markActivityCompleted(id: id)
             }
             taskStackView.addArrangedSubview(cardView)
         }
+        updateBadgeCount(activities.count)
     }
     
     private func updateBadgeCount(_ count: Int) {

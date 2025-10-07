@@ -162,7 +162,7 @@ class TaskCardView:UIView {
         completeButton.isEnabled = false
         UIView.animate(withDuration: 0.2) { [weak self] in
             guard let self else { return }
-            completeButton.alpha = 0.6
+            containerView.alpha = 0.6
             completeButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             completeButton.tintColor = .systemGreen
         }
