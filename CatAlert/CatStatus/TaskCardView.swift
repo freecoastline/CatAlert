@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class TaskCardView:UIView {
+    private var activityId:UUID?
+    var onComplete: ((UUID) -> (Void))?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -65,6 +68,7 @@ class TaskCardView:UIView {
         timeLabel.text = Self.dateFormatter.string(from: activity.scheduledTime)
         configureIcon(for: activity.type)
         applyStatusStyle(with: activity.status)
+        activityId = activity.id
     }
     
     private func applyStatusStyle(with status: ActivityStatus) {
@@ -152,6 +156,9 @@ class TaskCardView:UIView {
     }()
     
     @objc private func tapComplete() {
-        
+        guard let activityId, let onComplete else {
+            return
+        }
+        onComplete(activityId)
     }
 }
