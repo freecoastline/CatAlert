@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class CatTabBarController:UITabBarController {
+    private let customTabBarHeight:CGFloat = 60.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBarController()
@@ -17,7 +19,7 @@ class CatTabBarController:UITabBarController {
     
     private func setupTabBarController() {
         let layer = CAShapeLayer()
-        layer.path = UIBezierPath(roundedRect: CGRect(x: 30, y: tabBar.bounds.minY + 5, width: tabBar.bounds.width - 60, height: 60), cornerRadius: tabBar.bounds.height / 2).cgPath
+        layer.path = UIBezierPath(roundedRect: CGRect(x: 30, y: tabBar.bounds.minY - 10, width: tabBar.bounds.width - 60, height: customTabBarHeight), cornerRadius: customTabBarHeight / 2).cgPath
         layer.shadowColor = UIColor.gray.cgColor
         layer.fillColor = UIColor.white.cgColor
         layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
@@ -38,8 +40,7 @@ class CatTabBarController:UITabBarController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var tabBarFrame = tabBar.frame
-        tabBarFrame.size.height = 60
-        tabBarFrame.origin.y = tabBarFrame.origin.y - 60
+        tabBarFrame.size.height = customTabBarHeight
         tabBar.frame = tabBarFrame
     }
 }
