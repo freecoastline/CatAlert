@@ -9,5 +9,17 @@ import Foundation
 import UIKit
 
 class ReminderSettingsViewController:UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBar()
+        setupUI()
+    }
     
+    private func setupNavigationBar() {
+        
+    }
+    
+    private func setupUI() {
+        
+    }
 }
