@@ -8,7 +8,16 @@
 import Foundation
 import UIKit
 
-class ReminderSettingsViewController:UIViewController {
+class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
+    private lazy var tableView = {
+        let table = UITableView(frame: .zero, style: .plain)
+        table.separatorStyle = .none
+        table.delegate = self
+        table.dataSource = self
+        table.register(ReminderCell.self, forCellReuseIdentifier: "ReminderCell")
+        return table
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -36,5 +45,25 @@ class ReminderSettingsViewController:UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.left.bottom.right.equalToSuperview()
+        }
+    }
+}
+
+
+extension ReminderSettingsViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
 }
