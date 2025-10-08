@@ -35,6 +35,6 @@ class ReminderSettingsViewController:UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor(red: 0xF2/255.0, green: 0xF2/255.0, blue: 0xF7/255.0, alpha: 1.0)
+        view.backgroundColor = .white
     }
 }
