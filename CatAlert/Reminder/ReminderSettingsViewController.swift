@@ -20,8 +20,8 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     }()
     
     private var cancellables = Set<AnyCancellable>()
-    private var allReminders:[CatReminder] = []
-    private let sectionType:[CatCareType] = [.food, .water, .play]
+    private var allReminders: [CatReminder] = []
+    private let sectionTypes: [CatCareType] = [.food, .water, .play]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +39,18 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
                     return
                 }
                 allReminders = newAllReminders
+                tableView.reloadData()
             }.store(in: &cancellables)
     }
     
-    private func reminder(for section: Int) -> [CatReminder] {
-        let type = sectionType[section]
+    private func reminders(for section: Int) -> [CatReminder] {
+        let type = sectionTypes[section]
         let reminders = allReminders.filter { $0.type == type }
         return reminders
     }
     
     private func reminder(at indexPath: IndexPath) -> CatReminder? {
-        let reminders = reminder(for: indexPath.section)
+        let reminders = reminders(for: indexPath.section)
         guard indexPath.row < reminders.count else {
             return nil
         }
@@ -88,14 +89,18 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
 
 extension ReminderSettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        sectionTypes.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return reminders(for: section).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell") as? ReminderCell, let reminder = reminder(at: indexPath) else {
+            return UITableViewCell()
+        }
+        cell.configure(with: reminder)
+        return cell
     }
 }

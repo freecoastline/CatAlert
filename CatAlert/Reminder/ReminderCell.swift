@@ -9,5 +9,7 @@ import Foundation
 import UIKit
 
 class ReminderCell:UITableViewCell {
-    
+    func configure(with reminder: CatReminder) {
+        
+    }
 }
