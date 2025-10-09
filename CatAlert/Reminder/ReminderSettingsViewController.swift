@@ -41,6 +41,28 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
             }.store(in: &cancellables)
     }
     
+    private func reminder(for section: Int) -> [CatReminder] {
+        let type:CatCareType = {
+            switch section {
+            case 0:
+                    .food
+            case 1:
+                    .water
+            case 2:
+                    .play
+            default:
+                    .play
+            }
+        }()
+        let reminders = allReminders.filter { $0.type == type }
+        return reminders
+    }
+    
+    private func reminder(for indexPath: IndexPath) -> CatReminder {
+        let reminders = reminder(for: indexPath.section)
+        return reminders[indexPath.row]
+    }
+    
     private func setupNavigationBar() {
         // 设置标题
         title = "提醒设置"
