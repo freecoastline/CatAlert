@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     private lazy var tableView = {
@@ -18,10 +19,26 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
         return table
     }()
     
+    private var cancellables = Set<AnyCancellable>()
+    
+    private var allReminders = ReminderManager.shared.activeReminders
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI()
+        observeDataChange()
+    }
+    
+    private func observeDataChange() {
+        ReminderManager.shared.$activeReminders
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] newAllReminders in
+            guard let self else {
+                return
+            }
+            allReminders = newAllReminders
+        }.store(in: &cancellables)
     }
     
     private func setupNavigationBar() {
