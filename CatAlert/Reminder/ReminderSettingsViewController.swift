@@ -44,14 +44,11 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     private func reminder(for section: Int) -> [CatReminder] {
         let type:CatCareType = {
             switch section {
-            case 0:
-                    .food
-            case 1:
-                    .water
-            case 2:
-                    .play
+            case 0: .food
+            case 1: .water
+            case 2: .play
             default:
-                    .play
+                fatalError("Invalid section: \(section)")
             }
         }()
         let reminders = allReminders.filter { $0.type == type }
