@@ -38,7 +38,7 @@ class ReminderCell: UITableViewCell {
         return label
     }()
     
-    private lazy var enableSwitch:UISwitch = {
+    private lazy var enableSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return toggle
