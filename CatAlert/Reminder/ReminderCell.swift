@@ -14,6 +14,10 @@ class ReminderCell:UITableViewCell {
         return view
     }()
     
+    private var reminder:CatReminder?
+    
+    var OnToggle: ((UUID, Bool) -> Void)?
+    
     private let typeIconLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 28)
@@ -36,10 +40,17 @@ class ReminderCell:UITableViewCell {
     
     private let enableSwitch = {
         let toggle = UISwitch()
+        toggle.addTarget(ReminderCell.self, action: #selector(switchValueChanged), for: .valueChanged)
         return toggle
     }()
     
-    
+    @objc private func switchValueChanged(_ sender: UISwitch) {
+        guard let reminderId = reminder?.id else {
+            return
+        }
+        OnToggle?(reminderId, sender.isOn)
+    }
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
