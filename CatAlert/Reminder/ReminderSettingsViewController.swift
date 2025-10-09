@@ -20,11 +20,11 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     }()
     
     private var cancellables = Set<AnyCancellable>()
-    
-    private var allReminders = ReminderManager.shared.activeReminders
+    private var allReminders:[CatReminder] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        allReminders = ReminderManager.shared.activeReminders
         setupNavigationBar()
         setupUI()
         observeDataChange()
@@ -32,13 +32,13 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     
     private func observeDataChange() {
         ReminderManager.shared.$activeReminders
-        .receive(on: DispatchQueue.main)
-        .sink { [weak self] newAllReminders in
-            guard let self else {
-                return
-            }
-            allReminders = newAllReminders
-        }.store(in: &cancellables)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newAllReminders in
+                guard let self else {
+                    return
+                }
+                allReminders = newAllReminders
+            }.store(in: &cancellables)
     }
     
     private func setupNavigationBar() {
