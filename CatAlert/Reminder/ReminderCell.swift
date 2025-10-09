@@ -61,7 +61,33 @@ class ReminderCell:UITableViewCell {
         containerView.addSubview(enableSwitch)
         
         containerView.snp.makeConstraints { make in
-            
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.top.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().offset(-8)
+            make.height.equalTo(80)
+        }
+        
+        typeIconLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.height.equalTo(40)
+            make.centerY.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(typeIconLabel.snp.right).offset(12)
+            make.right.equalTo(enableSwitch.snp.left).offset(12)
+            make.top.equalToSuperview().offset(20)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.left.right.equalTo(titleLabel)
+        }
+        
+        enableSwitch.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-12)
         }
     }
     
