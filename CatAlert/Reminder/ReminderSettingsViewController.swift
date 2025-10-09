@@ -101,7 +101,7 @@ extension ReminderSettingsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.configure(with: reminder)
-        cell.OnToggle = { reminderId, isOn in
+        cell.onToggle = { reminderId, isOn in
             ReminderManager.shared.toggleReminder(id: reminderId, enabled: isOn)
         }
         return cell

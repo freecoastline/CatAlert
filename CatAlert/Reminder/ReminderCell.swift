@@ -8,39 +8,39 @@
 import Foundation
 import UIKit
 
-class ReminderCell:UITableViewCell {
-    private let containerView = {
+class ReminderCell: UITableViewCell {
+    private lazy var containerView = {
         let view = UIView()
         return view
     }()
     
-    private var reminder:CatReminder?
+    private var reminder: CatReminder?
     
-    var OnToggle: ((UUID, Bool) -> Void)?
+    var onToggle: ((UUID, Bool) -> Void)?
     
-    private let typeIconLabel = {
+    private lazy var typeIconLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 28)
         return label
     }()
     
-    private let titleLabel = {
+    private lazy var titleLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .black
         return label
     }()
     
-    private let timeLabel = {
+    private lazy var timeLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
         return label
     }()
     
-    private let enableSwitch = {
+    private lazy var enableSwitch:UISwitch = {
         let toggle = UISwitch()
-        toggle.addTarget(ReminderCell.self, action: #selector(switchValueChanged), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return toggle
     }()
     
@@ -48,7 +48,7 @@ class ReminderCell:UITableViewCell {
         guard let reminderId = reminder?.id else {
             return
         }
-        OnToggle?(reminderId, sender.isOn)
+        onToggle?(reminderId, sender.isOn)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -87,7 +87,7 @@ class ReminderCell:UITableViewCell {
         
         titleLabel.snp.makeConstraints { make in
             make.left.equalTo(typeIconLabel.snp.right).offset(12)
-            make.right.equalTo(enableSwitch.snp.left).offset(12)
+            make.right.equalTo(enableSwitch.snp.left).offset(-12)
             make.top.equalToSuperview().offset(20)
         }
         
@@ -101,8 +101,5 @@ class ReminderCell:UITableViewCell {
             make.right.equalToSuperview().offset(-12)
         }
     }
-    
-    
-    
 }
  
