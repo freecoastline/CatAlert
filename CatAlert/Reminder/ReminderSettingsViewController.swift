@@ -21,6 +21,7 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     
     private var cancellables = Set<AnyCancellable>()
     private var allReminders:[CatReminder] = []
+    private let sectionType:[CatCareType] = [.food, .water, .play]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,21 +43,16 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     }
     
     private func reminder(for section: Int) -> [CatReminder] {
-        let type:CatCareType = {
-            switch section {
-            case 0: .food
-            case 1: .water
-            case 2: .play
-            default:
-                fatalError("Invalid section: \(section)")
-            }
-        }()
+        let type = sectionType[section]
         let reminders = allReminders.filter { $0.type == type }
         return reminders
     }
     
-    private func reminder(for indexPath: IndexPath) -> CatReminder {
+    private func reminder(at indexPath: IndexPath) -> CatReminder? {
         let reminders = reminder(for: indexPath.section)
+        guard indexPath.row < reminders.count else {
+            return nil
+        }
         return reminders[indexPath.row]
     }
     
