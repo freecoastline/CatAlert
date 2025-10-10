@@ -63,6 +63,7 @@ class ReminderCell: UITableViewCell {
     func configure(with reminder: CatReminder) {
         self.reminder = reminder
         titleLabel.text = reminder.title
+        selectionStyle = .none
         switch reminder.type {
         case .food:
             typeIconLabel.text = "🍖"
