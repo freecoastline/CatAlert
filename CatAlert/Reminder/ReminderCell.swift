@@ -109,7 +109,7 @@ class ReminderCell: UITableViewCell {
         }
         
         typeIconLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(12)
             make.width.height.equalTo(40)
             make.centerY.equalToSuperview()
         }
