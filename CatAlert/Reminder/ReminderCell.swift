@@ -76,7 +76,26 @@ class ReminderCell: UITableViewCell {
         }
         
         enableSwitch.isOn = reminder.isEnabled
-
+        timeLabel.text = formatTimeAndFrequency(reminder.scheduledTime, frequency: reminder.frequency)
+    }
+    
+    private func formatTimeAndFrequency(_ scheduledTimes: [ReminderTime], frequency: ReminderFrequency) -> String {
+        let sortedTimes = scheduledTimes.sorted { t1, t2 in
+            if t1.hour < t2.hour {
+                return true
+            } else if  t1.hour == t2.hour {
+                return t1.minute < t2.minute
+            }
+            return false
+        }
+        
+        let timeString =  sortedTimes.map { time in
+            let newTime = String(format: "%02d, %02d", time.hour, time.minute)
+            return newTime
+        }
+        
+        let frequecyString = frequency == .daily ? "每天" : "每周"
+        return frequecyString + timeString.joined(separator: ",")
     }
     
     private func setupUI() {
