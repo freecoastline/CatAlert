@@ -163,6 +163,100 @@ extension ReminderManager {
 
     // MARK: - Test Data Generation
     func generateTestData() {
+        generateTestReminders()
+        generateTestActivities()
+    }
+
+    private func generateTestReminders() {
+        let testCatId = "test_cat"
+        let now = Date()
+        var reminders: [CatReminder] = []
+
+        // 1. 每日喂食提醒 - 早中晚三次
+        let foodReminder1 = CatReminder(
+            id: UUID(),
+            catId: testCatId,
+            title: "早餐时间",
+            type: .food,
+            createAt: now,
+            frequency: .daily,
+            isEnabled: true,
+            scheduledTime: [ReminderTime(minute: 0, hour: 8)!]
+        )
+        reminders.append(foodReminder1)
+
+        let foodReminder2 = CatReminder(
+            id: UUID(),
+            catId: testCatId,
+            title: "午餐时间",
+            type: .food,
+            createAt: now,
+            frequency: .daily,
+            isEnabled: true,
+            scheduledTime: [ReminderTime(minute: 0, hour: 12)!]
+        )
+        reminders.append(foodReminder2)
+
+        let foodReminder3 = CatReminder(
+            id: UUID(),
+            catId: testCatId,
+            title: "晚餐时间",
+            type: .food,
+            createAt: now,
+            frequency: .daily,
+            isEnabled: true,
+            scheduledTime: [ReminderTime(minute: 30, hour: 18)!]
+        )
+        reminders.append(foodReminder3)
+
+        // 2. 换水提醒 - 每天两次
+        let waterReminder1 = CatReminder(
+            id: UUID(),
+            catId: testCatId,
+            title: "换水提醒",
+            type: .water,
+            createAt: now,
+            frequency: .daily,
+            isEnabled: true,
+            scheduledTime: [
+                ReminderTime(minute: 30, hour: 9)!,
+                ReminderTime(minute: 30, hour: 17)!
+            ]
+        )
+        reminders.append(waterReminder1)
+
+        // 3. 玩耍提醒 - 每天一次
+        let playReminder1 = CatReminder(
+            id: UUID(),
+            catId: testCatId,
+            title: "陪胡胡玩耍",
+            type: .play,
+            createAt: now,
+            frequency: .daily,
+            isEnabled: true,
+            scheduledTime: [ReminderTime(minute: 0, hour: 15)!]
+        )
+        reminders.append(playReminder1)
+
+        // 4. 禁用的提醒示例
+        let disabledReminder = CatReminder(
+            id: UUID(),
+            catId: testCatId,
+            title: "夜宵时间（已禁用）",
+            type: .food,
+            createAt: now,
+            frequency: .daily,
+            isEnabled: false,
+            scheduledTime: [ReminderTime(minute: 0, hour: 20)!]
+        )
+        reminders.append(disabledReminder)
+
+        activeReminders = reminders
+        saveReminders()
+        print("✅ 已生成 \(reminders.count) 条提醒测试数据")
+    }
+
+    private func generateTestActivities() {
         let calendar = Calendar.current
         let now = Date()
         let testReminderId = UUID()
@@ -219,6 +313,6 @@ extension ReminderManager {
         }
 
         todayActivities = activities
-        print("✅ 已生成 \(activities.count) 条测试数据")
+        print("✅ 已生成 \(activities.count) 条活动测试数据")
     }
 }
