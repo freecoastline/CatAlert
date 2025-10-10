@@ -61,7 +61,22 @@ class ReminderCell: UITableViewCell {
     }
     
     func configure(with reminder: CatReminder) {
+        self.reminder = reminder
+        titleLabel.text = reminder.title
+        switch reminder.type {
+        case .food:
+            typeIconLabel.text = "🍖"
+            containerView.backgroundColor = UIColor.systemOrange.withAlphaComponent(0.1)
+        case .water:
+            typeIconLabel.text = "💧"
+            containerView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
+        case .play:
+            typeIconLabel.text = "🎾"
+            containerView.backgroundColor = UIColor.systemPurple.withAlphaComponent(0.1)
+        }
         
+        enableSwitch.isOn = reminder.isEnabled
+
     }
     
     private func setupUI() {
