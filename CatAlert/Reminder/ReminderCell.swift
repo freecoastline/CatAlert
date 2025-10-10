@@ -81,21 +81,15 @@ class ReminderCell: UITableViewCell {
     
     private func formatTimeAndFrequency(_ scheduledTimes: [ReminderTime], frequency: ReminderFrequency) -> String {
         let sortedTimes = scheduledTimes.sorted { t1, t2 in
-            if t1.hour < t2.hour {
-                return true
-            } else if  t1.hour == t2.hour {
-                return t1.minute < t2.minute
-            }
-            return false
+            (t1.hour, t1.minute) < (t2.hour, t2.minute)
         }
         
         let timeString =  sortedTimes.map { time in
-            let newTime = String(format: "%02d, %02d", time.hour, time.minute)
-            return newTime
+            return time.displayTime
         }
         
-        let frequecyString = frequency == .daily ? "每天" : "每周"
-        return frequecyString + timeString.joined(separator: ",")
+        let frequencyString = frequency == .daily ? "每天" : "每周"
+        return frequencyString + " " + timeString.joined(separator: ",")
     }
     
     private func setupUI() {
