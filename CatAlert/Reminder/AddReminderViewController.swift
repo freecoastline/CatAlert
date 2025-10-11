@@ -14,6 +14,7 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
     // MARK: - UI Components
     private lazy var tableView: UITableView = {
         let table = UITableView()
+        table.register(TextFieldCell.self, forCellReuseIdentifier: "TextFieldCell")
         table.delegate = self
         table.dataSource = self
         return table
