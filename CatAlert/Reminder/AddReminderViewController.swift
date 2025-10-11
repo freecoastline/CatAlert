@@ -67,7 +67,41 @@ extension AddReminderViewController: UITableViewDataSource {
         }
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        switch FormSection(rawValue: indexPath.section) {
+        case .basic:
+            return cellForBasicSection(at: indexPath)
+        case .times:
+            return cellForTimeSection(at: indexPath)
+        default:
+            return UITableViewCell()
+        }
     }
+    
+    private func cellForBasicSection(at indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell") as? TextFieldCell else {
+                return UITableViewCell()
+            }
+            cell.onTextChanged = {[weak self] str in
+                guard let self else {
+                    return
+                }
+                reminderTitle = str
+            }
+            return cell
+        case 1:
+            return UITableViewCell()
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    private func cellForTimeSection(at indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
 }
