@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TextFieldcell:UITableViewCell {
+class TextFieldCell:UITableViewCell {
     private lazy var iconLabel = {
         let label = UILabel()
         label.text = "📝"
@@ -27,6 +27,8 @@ class TextFieldcell:UITableViewCell {
         let container = UIView()
         return container
     }()
+    
+    var onTextChanged:((String) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
