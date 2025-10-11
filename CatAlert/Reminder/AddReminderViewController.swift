@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 
 class AddReminderViewController:UIViewController, UITableViewDelegate {
-    
+    // MARK: - UI Components
+    private var reminderTitle:String = ""
+    private var reminderType:CatCareType = .food
+    private var reminderTimes:[ReminderTime] = []
+    private var reminderFrequency:ReminderFrequency = .daily
     
     // MARK: - UI Components
     private lazy var tableView: UITableView = {
