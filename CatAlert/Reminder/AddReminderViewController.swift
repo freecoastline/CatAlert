@@ -9,7 +9,22 @@ import Foundation
 import UIKit
 
 class AddReminderViewController:UIViewController, UITableViewDelegate {
-    // MARK: - UI Components
+    enum FormSection:Int {
+        case basic = 0
+        case times = 1
+        var title:String {
+            switch self {
+            case .basic:
+                "基本信息"
+            case .times:
+                "提醒时间"
+            default:
+                fatalError("No valid section")
+            }
+        }
+        
+    }
+    // MARK: - Models
     private var reminderTitle:String = ""
     private var reminderType:CatCareType = .food
     private var reminderTimes:[ReminderTime] = []
@@ -24,7 +39,7 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
         return table
     }()
     
-    private let saveButton:UIBarButtonItem = {
+    private lazy var saveButton = {
         let item = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(saveButtonTapped))
         return item
     }()
