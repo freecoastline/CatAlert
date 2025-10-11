@@ -18,8 +18,6 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
                 "基本信息"
             case .times:
                 "提醒时间"
-            default:
-                fatalError("No valid section")
             }
         }
         
@@ -50,6 +48,7 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         title = "新建提醒"
         navigationItem.rightBarButtonItem = saveButton
     }
