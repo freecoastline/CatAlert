@@ -17,7 +17,7 @@ class TextFieldCell:UITableViewCell {
     
     private lazy var textField = {
         let field = UITextField()
-        field.placeholder = "请输入提醒标题"
+        field.placeholder = "[请输入提醒标题______________]"
         field.font = .systemFont(ofSize: 16)
         return field
     }()
