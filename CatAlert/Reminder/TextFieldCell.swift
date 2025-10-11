@@ -5,7 +5,6 @@
 //  Created by ken on 2025/10/11.
 //
 
-import Foundation
 import UIKit
 
 class TextFieldCell:UITableViewCell {
@@ -36,12 +35,14 @@ class TextFieldCell:UITableViewCell {
     }
     
     private func setupUI() {
+        selectionStyle = .none
         contentView.addSubview(containerView)
         containerView.addSubview(iconLabel)
         containerView.addSubview(textField)
         containerView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-12)
+            make.top.bottom.equalToSuperview()
             make.centerY.equalToSuperview()
         }
         
@@ -53,6 +54,7 @@ class TextFieldCell:UITableViewCell {
         textField.snp.makeConstraints { make in
             make.left.equalTo(iconLabel.snp.right).offset(12)
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview()
         }
     }
     
