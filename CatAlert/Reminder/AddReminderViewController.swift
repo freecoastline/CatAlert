@@ -51,6 +51,10 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         title = "新建提醒"
         navigationItem.rightBarButtonItem = saveButton
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 
@@ -66,8 +70,6 @@ extension AddReminderViewController: UITableViewDataSource {
             return 0
         }
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch FormSection(rawValue: indexPath.section) {
