@@ -18,9 +18,17 @@ class TextFieldCell:UITableViewCell {
     private lazy var textField = {
         let field = UITextField()
         field.placeholder = "[请输入提醒标题______________]"
+        field.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         field.font = .systemFont(ofSize: 16)
         return field
     }()
+    
+    @objc private func textFieldDidChange() {
+        guard let text = textField.text else {
+            return
+        }
+        onTextChanged?(text)
+    }
     
     private lazy var containerView = {
         let container = UIView()

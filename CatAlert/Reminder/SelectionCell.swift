@@ -23,6 +23,7 @@ class SelectionCell: UITableViewCell {
     private lazy var valueLabel = { // "喂食" 或 "每天"
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0)
+        label.textColor = .systemGray
         return label
     }()
     
@@ -58,7 +59,7 @@ class SelectionCell: UITableViewCell {
         }
         
         arrowImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(16)
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
@@ -83,6 +84,4 @@ class SelectionCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-
 }

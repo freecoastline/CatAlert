@@ -38,10 +38,29 @@ struct ReminderTime: Codable {
 enum ReminderFrequency: Codable {
     case daily
     case weekly
+    var displayname:String {
+        switch self {
+        case .daily:
+            "每天"
+        case .weekly:
+            "每周"
+        }
+    }
 }
 
 enum CatCareType: Codable {
     case food
     case water
     case play
+    
+    var displayname:String {
+        switch self {
+        case .food:
+            "喂食"
+        case .water:
+            "喂水"
+        case .play:
+            "玩耍"
+        }
+    }
 }

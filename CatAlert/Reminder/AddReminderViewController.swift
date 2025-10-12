@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class AddReminderViewController:UIViewController, UITableViewDelegate {
-    enum FormSection:Int {
+class AddReminderViewController: UIViewController, UITableViewDelegate {
+    enum FormSection: Int {
         case basic = 0
         case times = 1
         var title:String {
@@ -23,10 +23,10 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
         
     }
     // MARK: - Models
-    private var reminderTitle:String = ""
-    private var reminderType:CatCareType = .food
-    private var reminderTimes:[ReminderTime] = []
-    private var reminderFrequency:ReminderFrequency = .daily
+    private var reminderTitle: String = ""
+    private var reminderType: CatCareType = .food
+    private var reminderTimes: [ReminderTime] = []
+    private var reminderFrequency: ReminderFrequency = .daily
     
     // MARK: - UI Components
     private lazy var tableView: UITableView = {
@@ -64,6 +64,10 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
 extension AddReminderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return FormSection(rawValue: section)?.title
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,7 +112,7 @@ extension AddReminderViewController: UITableViewDataSource {
             cell.configure(
                 icon: "🏷️",
                 title: "类型",
-                value: "喂食"
+                value: reminderType.displayname
             )
             return cell
         case 2:
@@ -118,7 +122,7 @@ extension AddReminderViewController: UITableViewDataSource {
             cell.configure(
                 icon: "🔁",
                 title: "频率",
-                value: "每天"
+                value: reminderFrequency.displayname
             )
             return cell
         default:
