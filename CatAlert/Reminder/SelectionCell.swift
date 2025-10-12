@@ -5,10 +5,9 @@
 //  Created by ken on 2025/10/12.
 //
 
-import Foundation
 import UIKit
 
-class SelectionCell:UITableViewCell {
+class SelectionCell: UITableViewCell {
     private lazy var iconLabel = { // 🏷️ 或 🔁
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0)
@@ -29,13 +28,14 @@ class SelectionCell:UITableViewCell {
     
     private lazy var arrowImageView = {
         let view = UIImageView()
-        view.image = .init(systemName: "greaterthan")
+        view.image = .init(systemName: "chevron.right")
         return view
     }()
     
     private lazy var containerView = UIView()
     
     private func setupUI() {
+        selectionStyle = .none
         contentView.addSubview(containerView)
         containerView.addSubview(iconLabel)
         containerView.addSubview(titleLabel)
@@ -58,15 +58,21 @@ class SelectionCell:UITableViewCell {
         }
         
         arrowImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(24)
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
         
         valueLabel.snp.makeConstraints { make in
-            make.right.equalTo(titleLabel.snp.left).offset(-12)
+            make.right.equalTo(arrowImageView.snp.left).offset(-12)
             make.centerY.equalToSuperview()
         }
+    }
+    
+    func configure(icon: String, title: String, value: String) {
+        iconLabel.text = icon
+        titleLabel.text = title
+        valueLabel.text = value
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

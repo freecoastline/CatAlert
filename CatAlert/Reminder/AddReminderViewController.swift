@@ -105,6 +105,21 @@ extension AddReminderViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell") as? SelectionCell else {
                 return UITableViewCell()
             }
+            cell.configure(
+                icon: "🏷️",
+                title: "类型",
+                value: "喂食"
+            )
+            return cell
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell") as? SelectionCell else {
+                return UITableViewCell()
+            }
+            cell.configure(
+                icon: "🔁",
+                title: "频率",
+                value: "每天"
+            )
             return cell
         default:
             return UITableViewCell()
