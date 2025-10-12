@@ -48,11 +48,13 @@ class TextFieldCell:UITableViewCell {
         iconLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.width.equalTo(24)
         }
         
         textField.snp.makeConstraints { make in
             make.left.equalTo(iconLabel.snp.right).offset(12)
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview()
         }
     }
     
