@@ -34,6 +34,7 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
         table.register(TextFieldCell.self, forCellReuseIdentifier: "TextFieldCell")
         table.delegate = self
         table.dataSource = self
+        table.separatorStyle = .none
         return table
     }()
     
