@@ -53,7 +53,6 @@ class TextFieldCell:UITableViewCell {
         textField.snp.makeConstraints { make in
             make.left.equalTo(iconLabel.snp.right).offset(12)
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview()
         }
     }
     
