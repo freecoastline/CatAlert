@@ -61,6 +61,10 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
 
 
 extension AddReminderViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return FormSection(rawValue: section)?.title
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch FormSection(rawValue: section) {
         case .basic:
