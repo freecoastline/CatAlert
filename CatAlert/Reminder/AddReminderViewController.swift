@@ -32,6 +32,7 @@ class AddReminderViewController:UIViewController, UITableViewDelegate {
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.register(TextFieldCell.self, forCellReuseIdentifier: "TextFieldCell")
+        table.register(SelectionCell.self, forCellReuseIdentifier: "SelectionCell")
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = .none
@@ -101,7 +102,10 @@ extension AddReminderViewController: UITableViewDataSource {
             }
             return cell
         case 1:
-            return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell") as? SelectionCell else {
+                return UITableViewCell()
+            }
+            return cell
         default:
             return UITableViewCell()
         }
