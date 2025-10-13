@@ -85,6 +85,7 @@
 				Reminder/ReminderTypeSelectionViewController.swift,
 				Reminder/SelectionCell.swift,
 				Reminder/TextFieldCell.swift,
+				Reminder/TimeCell.swift,
 				SceneDelegate.swift,
 				ViewController.swift,
 			);
@@ -136,6 +137,7 @@
 				Reminder/ReminderTypeSelectionViewController.swift,
 				Reminder/SelectionCell.swift,
 				Reminder/TextFieldCell.swift,
+				Reminder/TimeCell.swift,
 				SceneDelegate.swift,
 				ViewController.swift,
 			);
