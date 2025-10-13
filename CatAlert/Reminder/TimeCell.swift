@@ -10,6 +10,7 @@ import UIKit
 class TimeCell: UITableViewCell {
     private lazy var iconLabel = {
         let label = UILabel()
+        label.text = "🕐"
         label.font = .systemFont(ofSize: 16.0)
         return label
     }()
@@ -45,8 +46,7 @@ class TimeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(icon: String, indexString: String, timeString: String) {
-        iconLabel.text = icon
+    func configure(indexString: String, timeString: String) {
         indexLabel.text = indexString
         timeLabel.text = timeString
     }

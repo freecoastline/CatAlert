@@ -33,6 +33,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
         let table = UITableView()
         table.register(TextFieldCell.self, forCellReuseIdentifier: "TextFieldCell")
         table.register(SelectionCell.self, forCellReuseIdentifier: "SelectionCell")
+        table.register(TimeCell.self, forCellReuseIdentifier: "TimeCell")
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = .none
@@ -131,7 +132,16 @@ extension AddReminderViewController: UITableViewDataSource {
     }
     
     private func cellForTimeSection(at indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        if indexPath.row == reminderTimes.count {
+            
+        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TimeCell") as? TimeCell else {
+            return UITableViewCell()
+        }
+        let indexString = "时间 \(indexPath.row)"
+        let timeString = reminderTimes[indexPath.row].displayTime
+        cell.configure(indexString: indexString, timeString: timeString)
+        return cell
     }
     
 }
