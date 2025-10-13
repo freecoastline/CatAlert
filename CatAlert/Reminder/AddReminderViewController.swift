@@ -43,8 +43,13 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     
     private lazy var saveButton = {
         let item = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(saveButtonTapped))
+        item.isEnabled = false
         return item
     }()
+    
+    private func updateSaveButtonState() {
+        saveButton.isEnabled = true
+    }
     
     
     @objc private func saveButtonTapped() {
@@ -104,6 +109,7 @@ extension AddReminderViewController: UITableViewDataSource {
                 guard let self else {
                     return
                 }
+                updateSaveButtonState()
                 reminderTitle = str
             }
             return cell
