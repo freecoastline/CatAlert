@@ -48,7 +48,21 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     }()
     
     private func updateSaveButtonState() {
-        saveButton.isEnabled = true
+        saveButton.isEnabled = isFormValid()
+    }
+    
+    private func isFormValid() -> Bool {
+        // 标题不能为空
+        guard !reminderTitle.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return false
+        }
+
+        // 至少需要一个提醒时间
+        guard !reminderTimes.isEmpty else {
+            return false
+        }
+
+        return true
     }
     
     
