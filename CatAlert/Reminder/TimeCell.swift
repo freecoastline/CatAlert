@@ -5,7 +5,6 @@
 //  Created by ken on 2025/10/13.
 //
 
-import Foundation
 import UIKit
 
 class TimeCell: UITableViewCell {
@@ -35,6 +34,8 @@ class TimeCell: UITableViewCell {
         return view
     }()
     
+    private lazy var containerView = UIView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -49,8 +50,6 @@ class TimeCell: UITableViewCell {
         indexLabel.text = indexString
         timeLabel.text = timeString
     }
-    
-    private lazy var containerView = UIView()
     
     private func setupUI() {
         selectionStyle = .none
@@ -68,11 +67,13 @@ class TimeCell: UITableViewCell {
         iconLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.width.equalTo(24)
         }
         
         indexLabel.snp.makeConstraints { make in
             make.left.equalTo(iconLabel.snp.right).offset(12)
             make.centerY.equalToSuperview()
+            make.width.equalTo(60)
         }
         
         arrowImageView.snp.makeConstraints { make in
