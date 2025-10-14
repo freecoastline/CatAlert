@@ -112,14 +112,14 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     }
     
     private func showFrequencySelector() {
-        let alert = UIAlertController(title: "选择频率", message: "", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "选择频率", message: nil, preferredStyle: .actionSheet)
         
-        let frequencyItem: [(title: String, frequency: ReminderFrequency)] = [
+        let frequencyItems: [(title: String, frequency: ReminderFrequency)] = [
             ("每天", .daily),
             ("每周", .weekly)
         ]
         
-        frequencyItem.forEach { title, frequency in
+        frequencyItems.forEach { title, frequency in
             alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
                 guard let self else {
                     return
