@@ -33,7 +33,6 @@ class AddButtonCell: UITableViewCell {
         contentView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)
-            make.right.equalToSuperview().offset(-12)
             make.top.bottom.equalToSuperview().inset(8)
         }
     }
