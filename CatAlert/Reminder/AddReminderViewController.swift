@@ -80,6 +80,41 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
         self.present(alert, animated: true)
     }
     
+    private func showTypeSelector() {
+        let alert = UIAlertController(title: "选择类型", message: "", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "喂食", style: .default, handler: { [weak self] action in
+            guard let self else {
+                return
+            }
+            reminderType = .food
+            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "喂水", style: .default, handler: { [weak self] action in
+            guard let self else {
+                return
+            }
+            reminderType = .water
+            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        }))
+
+        alert.addAction(UIAlertAction(title: "玩耍", style: .default, handler: { [weak self] action in
+            guard let self else {
+                return
+            }
+            reminderType = .play
+            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func showFrequencySelector() {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "新建提醒"
@@ -109,6 +144,21 @@ extension AddReminderViewController: UITableViewDataSource {
             return reminderTimes.count + 1
         default:
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch FormSection(rawValue: indexPath.section) {
+        case .basic:
+            switch indexPath.row {
+            case 1: showTypeSelector()
+            case 2: showFrequencySelector()
+            default: break
+            }
+        case .times:
+            print("To be done")
+        default:
+            break
         }
     }
     
