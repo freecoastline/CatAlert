@@ -235,8 +235,12 @@ extension AddReminderViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddButtonCell") as? AddButtonCell else {
                 return UITableViewCell()
             }
-            cell.onTapAdd = {
-                
+            cell.onTapAdd = { [weak self] in
+                guard let self else {
+                    return
+                }
+                let timePickVC = TimePickerViewController()
+                navigationController?.pushViewController(timePickVC, animated: true)
             }
             return cell
         }
