@@ -112,7 +112,25 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     }
     
     private func showFrequencySelector() {
+        let alert = UIAlertController(title: "选择频率", message: "", preferredStyle: .actionSheet)
         
+        let frequencyItem: [(title: String, frequency: ReminderFrequency)] = [
+            ("每天", .daily),
+            ("每周", .weekly)
+        ]
+        
+        frequencyItem.forEach { title, frequency in
+            alert.addAction(UIAlertAction(title: title, style: .default, handler: { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                reminderFrequency = frequency
+                tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+            }))
+        }
+
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+        present(alert, animated: true)
     }
     
     override func viewDidLoad() {
