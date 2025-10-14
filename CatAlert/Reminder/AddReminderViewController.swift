@@ -67,7 +67,17 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     
     
     @objc private func saveButtonTapped() {
-        
+        guard isFormValid() else {
+            showAlert("表单信息有误，请重新填写")
+            return
+        }
+    }
+    
+    private func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "确定", style: .default)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
     }
     
     override func viewDidLoad() {

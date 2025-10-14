@@ -25,7 +25,6 @@ class AddButtonCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        
     }
     
     private func setupUI() {
