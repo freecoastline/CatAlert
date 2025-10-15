@@ -174,7 +174,12 @@ extension AddReminderViewController: UITableViewDataSource {
             default: break
             }
         case .times:
-            print("To be done")
+            if indexPath.row < reminderTimes.count {
+                let timePicker = TimePickerViewController()
+                timePicker.onTimeSelected = { reminderTime in
+                    
+                }
+            }
         default:
             break
         }

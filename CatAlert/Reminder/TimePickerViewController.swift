@@ -8,8 +8,8 @@
 import UIKit
 
 class TimePickerViewController: UIViewController {
-    private var initialHour = 8
-    private var initialMinute = 0
+    var initialHour = 8
+    var initialMinute = 0
     var onTimeSelected: ((ReminderTime) -> Void)?
     
     private lazy var datePicker = {
