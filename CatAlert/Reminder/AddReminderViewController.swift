@@ -200,6 +200,7 @@ extension AddReminderViewController: UITableViewDataSource {
         
         reminderTimes.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+        updateSaveButtonState()
     }
     
     private func cellForBasicSection(at indexPath: IndexPath) -> UITableViewCell {
