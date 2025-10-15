@@ -191,6 +191,17 @@ extension AddReminderViewController: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard FormSection(rawValue: indexPath.section) == .times,
+              indexPath.row < reminderTimes.count,
+              editingStyle == .delete else {
+            return
+        }
+        
+        reminderTimes.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     private func cellForBasicSection(at indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
