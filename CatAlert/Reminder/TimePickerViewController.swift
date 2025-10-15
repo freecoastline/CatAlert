@@ -16,6 +16,7 @@ class TimePickerViewController: UIViewController {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
         picker.preferredDatePickerStyle = .wheels
+        picker.locale = Locale(identifier: "zh_CN")
         return picker
     }()
     
@@ -26,6 +27,7 @@ class TimePickerViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(datePicker)
+        view.backgroundColor = .systemBackground
         datePicker.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
@@ -45,7 +47,12 @@ class TimePickerViewController: UIViewController {
         let datePickerDate = datePicker.date
         let current = Calendar.current
         let components = current.dateComponents([.hour, .minute], from: datePickerDate)
-        onTimeSelected?(components.hour ?? 0, components.minute ?? 0)
+        
+        if let hour = components.hour, let minute = components.minute {
+            onTimeSelected?(hour, minute)
+        }
+        
+        navigationController?.popViewController(animated: true)
     }
     
 }
