@@ -10,6 +10,7 @@ import UIKit
 class TimePickerViewController: UIViewController {
     private var initialHour = 8
     private var initialMinite = 0
+    var onTimeSelected: ((Int, Int) -> Void)?
     
     private lazy var datePicker = {
         let picker = UIDatePicker()
@@ -32,16 +33,19 @@ class TimePickerViewController: UIViewController {
         title = "设置时间"
         
         let current = Calendar.current
-        if let initialDate = current.date(bySettingHour: initialHour, minute: initialHour, second: 0, of: Date()) {
+        if let initialDate = current.date(bySettingHour: initialHour, minute: initialMinite, second: 0, of: Date()) {
             datePicker.date = initialDate
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(saveTime))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(doneButtonTapped))
         
     }
     
-    @objc private func saveTime() {
-        
+    @objc private func doneButtonTapped() {
+        let datePickerDate = datePicker.date
+        let current = Calendar.current
+        let components = current.dateComponents([.hour, .minute], from: datePickerDate)
+        onTimeSelected?(components.hour ?? 0, components.minute ?? 0)
     }
     
 }
