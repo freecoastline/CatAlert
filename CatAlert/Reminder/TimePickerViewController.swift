@@ -10,7 +10,7 @@ import UIKit
 class TimePickerViewController: UIViewController {
     private var initialHour = 8
     private var initialMinite = 0
-    var onTimeSelected: ((Int, Int) -> Void)?
+    var onTimeSelected: ((ReminderTime) -> Void)?
     
     private lazy var datePicker = {
         let picker = UIDatePicker()
@@ -48,8 +48,8 @@ class TimePickerViewController: UIViewController {
         let current = Calendar.current
         let components = current.dateComponents([.hour, .minute], from: datePickerDate)
         
-        if let hour = components.hour, let minute = components.minute {
-            onTimeSelected?(hour, minute)
+        if let hour = components.hour, let minute = components.minute, let reminderTime = ReminderTime(minute: minute, hour: hour) {
+            onTimeSelected?(reminderTime)
         }
         
         navigationController?.popViewController(animated: true)
