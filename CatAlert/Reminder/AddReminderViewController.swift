@@ -240,6 +240,17 @@ extension AddReminderViewController: UITableViewDataSource {
                     return
                 }
                 let timePickVC = TimePickerViewController()
+                timePickVC.onTimeSelected = { [weak self] reminderTime in
+                    guard let self else {
+                        return
+                    }
+                    if reminderTimes.contains(where: { $0.hour == reminderTime.hour && $0.minute == reminderTime.minute }) {
+                        showAlert("该时间已存在")
+                        return
+                    }
+                    reminderTimes.append(reminderTime)
+                    tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+                }
                 navigationController?.pushViewController(timePickVC, animated: true)
             }
             return cell

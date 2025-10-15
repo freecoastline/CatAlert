@@ -9,7 +9,7 @@ import UIKit
 
 class TimePickerViewController: UIViewController {
     private var initialHour = 8
-    private var initialMinite = 0
+    private var initialMinute = 0
     var onTimeSelected: ((ReminderTime) -> Void)?
     
     private lazy var datePicker = {
@@ -35,7 +35,7 @@ class TimePickerViewController: UIViewController {
         title = "设置时间"
         
         let current = Calendar.current
-        if let initialDate = current.date(bySettingHour: initialHour, minute: initialMinite, second: 0, of: Date()) {
+        if let initialDate = current.date(bySettingHour: initialHour, minute: initialMinute, second: 0, of: Date()) {
             datePicker.date = initialDate
         }
         
