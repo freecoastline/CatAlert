@@ -19,13 +19,13 @@ class NotificationManager {
     
     func requestNotificationPermission(completion: @escaping (Bool) -> Void ) {
         center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-            DispatchQueue.main.async {
-                completion(success)
-            }
             if success {
                 print("request authorization success")
             } else if let error {
                 print("request authorization error: \(error.localizedDescription)")
+            }
+            DispatchQueue.main.async {
+                completion(success)
             }
         }
     }
