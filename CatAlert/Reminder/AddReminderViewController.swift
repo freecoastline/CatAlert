@@ -71,13 +71,14 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
             showAlert("表单信息有误，请重新填写")
             return
         }
-        
-        let reminder = CatReminder(id: UUID(), catId: "胡胡", title: reminderTitle, type: reminderType, createAt: Date(), frequency: reminderFrequency, isEnabled: true)
-        
+
+        var reminder = CatReminder(id: UUID(), catId: "胡胡", title: reminderTitle, type: reminderType, createAt: Date(), frequency: reminderFrequency, isEnabled: true)
+        reminder.scheduledTime = reminderTimes
+
         ReminderManager.shared.createReminder(reminder)
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
-        
+
         navigationController?.popViewController(animated: true)
     }
     
