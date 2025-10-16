@@ -174,12 +174,19 @@ extension AddReminderViewController: UITableViewDataSource {
             default: break
             }
         case .times:
+            let timePicker = TimePickerViewController()
             if indexPath.row < reminderTimes.count {
-                let timePicker = TimePickerViewController()
-                timePicker.onTimeSelected = { reminderTime in
-                    
+                timePicker.initialHour = reminderTimes[indexPath.row].hour
+                timePicker.initialMinute = reminderTimes[indexPath.row].minute
+                timePicker.onTimeSelected = { [weak self] reminderTime in
+                    guard let self else {
+                        return
+                    }
+                    reminderTimes[indexPath.row] = reminderTime
                 }
+                tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
             }
+            navigationController?.pushViewController(timePicker, animated: true)
         default:
             break
         }
