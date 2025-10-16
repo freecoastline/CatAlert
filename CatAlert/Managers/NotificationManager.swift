@@ -13,14 +13,23 @@ class NotificationManager {
     // 2. 调度/取消本地通知
     // 3. 处理通知响应
     // 4. 管理通知设置
+    static let shared = NotificationManager()
+    private let center = UNUserNotificationCenter.current()
+    
     
     func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
                 print("request authorization success")
             } else if let error {
                 print("request authorization error: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    func checkAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        center.getNotificationSettings { settings in
+            completion(settings.authorizationStatus)
         }
     }
     
@@ -46,7 +55,7 @@ class NotificationManager {
             let identifier = "\(reminder.id.uuidString)_\(hour)_\(minute)"
             let request = UNNotificationRequest(identifier: identifier, content: mutableContent, trigger: trigger)
             
-            UNUserNotificationCenter.current().add(request) { error in
+            center.add(request) { error in
                 if let error = error {
                     print("调度通知失败: \(error.localizedDescription)")
                 } else {
@@ -58,7 +67,7 @@ class NotificationManager {
     
     func cancelNotification(for reminderId: UUID) async {
         let notifications = await UNUserNotificationCenter.current().pendingNotificationRequests()
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: notifications.filter { $0.identifier.hasPrefix(reminderId.uuidString)}
+        center.removePendingNotificationRequests(withIdentifiers: notifications.filter { $0.identifier.hasPrefix(reminderId.uuidString)}
             .map(\.identifier)
         )
     }
