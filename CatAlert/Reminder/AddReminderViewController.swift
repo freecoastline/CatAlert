@@ -182,8 +182,11 @@ extension AddReminderViewController: UITableViewDataSource {
                     guard let self else {
                         return
                     }
-                    let duplicate = reminderTimes.contains { $0.hour == reminderTime.hour && $0.minute == reminderTime.minute }
+                    let duplicate = reminderTimes.enumerated().contains { index, time in
+                        index != indexPath.row && time.hour == reminderTime.hour && time.minute == reminderTime.minute
+                    }
                     if duplicate {
+                        showAlert("该时间已存在")
                         return
                     }
                     reminderTimes[indexPath.row] = reminderTime
@@ -278,6 +281,8 @@ extension AddReminderViewController: UITableViewDataSource {
                         return
                     }
                     reminderTimes.append(reminderTime)
+                    reminderTimes.sort { $0.hour < $1.hour || ($0.hour == $1.hour && $0.minute < $1.minute) }
+                    updateSaveButtonState()
                     tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
                 }
                 navigationController?.pushViewController(timePickVC, animated: true)
