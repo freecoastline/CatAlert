@@ -15,10 +15,13 @@ class NotificationManager {
     // 4. 管理通知设置
     static let shared = NotificationManager()
     private let center = UNUserNotificationCenter.current()
+    private init() {}
     
-    
-    func requestNotificationPermission() {
+    func requestNotificationPermission(completion: @escaping (Bool) -> Void ) {
         center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            DispatchQueue.main.async {
+                completion(success)
+            }
             if success {
                 print("request authorization success")
             } else if let error {
@@ -29,7 +32,9 @@ class NotificationManager {
     
     func checkAuthorizationStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
         center.getNotificationSettings { settings in
-            completion(settings.authorizationStatus)
+            DispatchQueue.main.async {
+                completion(settings.authorizationStatus)
+            }
         }
     }
     
