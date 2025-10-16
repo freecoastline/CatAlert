@@ -183,8 +183,8 @@ extension AddReminderViewController: UITableViewDataSource {
                         return
                     }
                     reminderTimes[indexPath.row] = reminderTime
+                    tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
                 }
-                tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
             }
             navigationController?.pushViewController(timePicker, animated: true)
         default:
