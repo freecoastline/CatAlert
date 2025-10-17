@@ -114,7 +114,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
         ReminderManager.shared.createReminder(reminder)
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
-
+        NotificationManager.shared.scheduleNotification(for: reminder)
         navigationController?.popViewController(animated: true)
     }
     
