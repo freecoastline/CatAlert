@@ -97,7 +97,14 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     
     
     private func showPermissionDeniedAlert() {
-        
+        let alert = UIAlertController(title: "无法发送通知", message: "请在设置中允许通知权限，以便及时收到提醒", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+        alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        }))
+        present(alert, animated: true)
     }
     
     private func saveReminder() {
