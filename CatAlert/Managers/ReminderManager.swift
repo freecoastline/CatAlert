@@ -82,11 +82,18 @@ class ReminderManager: ObservableObject {
         saveReminders()
     }
 
-    func toggleReminder(id: UUID, enabled: Bool) {
+    func toggleReminder(id: UUID, enabled: Bool) async {
         guard let index = activeReminders.firstIndex(where: { $0.id == id }) else {
             return
         }
         activeReminders[index].isEnabled = enabled
+        if enabled {
+            // 启用时调度通知
+            NotificationManager.shared.scheduleNotification(for: activeReminders[index])
+        } else {
+            // 禁用时取消通知
+            await NotificationManager.shared.cancelNotification(for: id)
+        }
         saveReminders()
     }
     
