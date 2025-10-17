@@ -56,12 +56,12 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
         guard !reminderTitle.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false
         }
-
+        
         // 至少需要一个提醒时间
         guard !reminderTimes.isEmpty else {
             return false
         }
-
+        
         return true
     }
     
@@ -71,7 +71,36 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
             showAlert("表单信息有误，请重新填写")
             return
         }
-
+        
+        NotificationManager.shared.checkAuthorizationStatus { [weak self] status in
+            guard let self else {
+                return
+            }
+            if status == .notDetermined {
+                NotificationManager.shared.requestNotificationPermission { [weak self] granted in
+                    guard let self else {
+                        return
+                    }
+                    if granted {
+                        saveReminder()
+                    } else {
+                        showPermissionDeniedAlert()
+                    }
+                }
+            } else if status == .authorized {
+                saveReminder()
+            } else {
+                showPermissionDeniedAlert()
+            }
+        }
+    }
+    
+    
+    private func showPermissionDeniedAlert() {
+        
+    }
+    
+    private func saveReminder() {
         var reminder = CatReminder(id: UUID(), catId: "胡胡", title: reminderTitle, type: reminderType, createAt: Date(), frequency: reminderFrequency, isEnabled: true)
         reminder.scheduledTime = reminderTimes
 
