@@ -69,14 +69,16 @@ class ReminderManager: ObservableObject {
 // MARK: - Public API
     func createReminder(_ reminder: CatReminder) {
         activeReminders.append(reminder)
+        NotificationManager.shared.scheduleNotification(for: reminder)
         saveReminders()
     }
     
-    func deleteReminder(id: UUID) {
+    func deleteReminder(id: UUID) async {
         guard activeReminders.contains(where: { $0.id == id }) else {
             return
         }
         activeReminders.removeAll { $0.id == id }
+        await NotificationManager.shared.cancelNotification(for: id)
         saveReminders()
     }
 
