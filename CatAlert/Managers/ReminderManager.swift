@@ -97,11 +97,15 @@ class ReminderManager: ObservableObject {
         saveReminders()
     }
     
-    func updateReminder(_ reminder: CatReminder) {
+    func updateReminder(_ reminder: CatReminder) async {
         guard let index = activeReminders.firstIndex(where: { $0.id == reminder.id }) else {
             return
         }
         activeReminders[index] = reminder
+        await NotificationManager.shared.cancelNotification(for: reminder.id)
+        if reminder.isEnabled {
+            NotificationManager.shared.scheduleNotification(for: reminder)
+        }
         saveReminders()
     }
     

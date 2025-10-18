@@ -49,7 +49,7 @@ class NotificationManager {
             dateComponents.minute = minute
             dateComponents.hour = hour
             
-            var mutableContent = UNMutableNotificationContent()
+            let mutableContent = UNMutableNotificationContent()
             mutableContent.title = reminder.title
             mutableContent.body = getNotificationMessage(for: reminder.type)
             mutableContent.sound = .default

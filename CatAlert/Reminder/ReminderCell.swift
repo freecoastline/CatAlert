@@ -16,7 +16,7 @@ class ReminderCell: UITableViewCell {
     
     private var reminder: CatReminder?
     
-    var onToggle: ((UUID, Bool) -> Void)?
+    var onToggle: ((UUID, Bool) async -> Void)?
     
     private lazy var typeIconLabel = {
         let label = UILabel()
@@ -44,11 +44,11 @@ class ReminderCell: UITableViewCell {
         return toggle
     }()
     
-    @objc private func switchValueChanged(_ sender: UISwitch) {
+    @objc private func switchValueChanged(_ sender: UISwitch) async {
         guard let reminderId = reminder?.id else {
             return
         }
-        onToggle?(reminderId, sender.isOn)
+        await onToggle?(reminderId, sender.isOn)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
