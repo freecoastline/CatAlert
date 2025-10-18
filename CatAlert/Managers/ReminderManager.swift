@@ -94,6 +94,7 @@ class ReminderManager: ObservableObject {
             // 禁用时取消通知
             await NotificationManager.shared.cancelNotification(for: id)
         }
+        await NotificationManager.shared.updateNotification(for: activeReminders[index])
         saveReminders()
     }
     
@@ -106,6 +107,7 @@ class ReminderManager: ObservableObject {
         if reminder.isEnabled {
             NotificationManager.shared.scheduleNotification(for: reminder)
         }
+        await NotificationManager.shared.updateNotification(for: reminder)
         saveReminders()
     }
     

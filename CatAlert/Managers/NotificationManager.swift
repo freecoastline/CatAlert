@@ -70,6 +70,13 @@ class NotificationManager {
         }
     }
     
+    func updateNotification(for reminder: CatReminder) async {
+        await cancelNotification(for: reminder.id)
+        if reminder.isEnabled {
+            scheduleNotification(for: reminder)
+        }
+    }
+    
     func cancelNotification(for reminderId: UUID) async {
         let notifications = await UNUserNotificationCenter.current().pendingNotificationRequests()
         center.removePendingNotificationRequests(withIdentifiers: notifications.filter { $0.identifier.hasPrefix(reminderId.uuidString)}
