@@ -26,8 +26,8 @@ class NotificationManager {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let request = UNNotificationRequest(identifier: "test", content: mutableContent, trigger: trigger)
         center.add(request) { error in
-            if error != nil {
-                print("通知测试失败：\(String(describing: error?.localizedDescription))")
+            if let error {
+                print("通知测试失败：\(error.localizedDescription)")
             } else {
                 print("通知测试成功")
             }
