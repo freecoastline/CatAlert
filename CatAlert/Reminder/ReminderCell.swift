@@ -11,6 +11,8 @@ import UIKit
 class ReminderCell: UITableViewCell {
     private lazy var containerView = {
         let view = UIView()
+        view.layer.cornerRadius = 10.0
+        view.clipsToBounds = true
         return view
     }()
     
@@ -107,7 +109,6 @@ class ReminderCell: UITableViewCell {
         containerView.addSubview(timeLabel)
         containerView.addSubview(typeIconLabel)
         containerView.addSubview(enableSwitch)
-        containerView.layer.cornerRadius = 10.0
         
         containerView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
