@@ -107,6 +107,7 @@ class ReminderCell: UITableViewCell {
         containerView.addSubview(timeLabel)
         containerView.addSubview(typeIconLabel)
         containerView.addSubview(enableSwitch)
+        containerView.layer.cornerRadius = 10.0
         
         containerView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
