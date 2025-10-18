@@ -17,6 +17,25 @@ class NotificationManager {
     private let center = UNUserNotificationCenter.current()
     private init() {}
     
+    #if DEBUG
+    func testScheduleNotification() {
+        let mutableContent = UNMutableNotificationContent()
+        mutableContent.title = "测试"
+        mutableContent.body = "测试文案测试文案测试文案测试文案"
+        mutableContent.sound = .default
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "test", content: mutableContent, trigger: trigger)
+        center.add(request) { error in
+            if error != nil {
+                print("通知测试失败：\(String(describing: error?.localizedDescription))")
+            } else {
+                print("通知测试成功")
+            }
+        }
+    }
+    
+    #endif
+    
     func requestNotificationPermission(completion: @escaping (Bool) -> Void ) {
         center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {

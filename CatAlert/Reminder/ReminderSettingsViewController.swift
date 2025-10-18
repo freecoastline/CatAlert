@@ -60,10 +60,22 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
         return reminders[indexPath.row]
     }
     
+    @objc private func testNotification() {
+        NotificationManager.shared.requestNotificationPermission { granted in
+            if granted {
+                NotificationManager.shared.testScheduleNotification()
+            } else {
+                print("通知授权失败")
+            }
+        }
+    }
+    
     private func setupNavigationBar() {
         // 设置标题
         title = "提醒设置"
 
+        let testButton = UIBarButtonItem(title: "通知测试", style: .plain, target: self, action: #selector(testNotification))
+        
         // 添加右侧 + 按钮
         let addButton = UIBarButtonItem(
             image: UIImage(systemName: "plus.circle.fill"),
@@ -71,7 +83,7 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
             target: self,
             action: #selector(addButtonTapped)
         )
-        navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItems = [testButton, addButton]
     }
 
     @objc private func addButtonTapped() {
