@@ -112,9 +112,29 @@ class CatCurrentStatusViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupGradientBackground()
         catModel.loadImageIfNeeded() //预加载
         observeDataChange()
         setupUI()
+    }
+    
+    private func setupGradientBackground() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+
+        // 温暖舒适的渐变色
+        gradientLayer.colors = [
+            UIColor(red: 0.98, green: 0.95, blue: 0.92, alpha: 1.0).cgColor,  // 淡米色
+            UIColor(red: 0.95, green: 0.92, blue: 0.95, alpha: 1.0).cgColor   // 淡紫色
+        ]
+
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+
+        view.layer.insertSublayer(gradientLayer, at: 0)
+
+        view.layoutIfNeeded()
     }
     
     func setupUI() {
