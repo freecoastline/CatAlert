@@ -44,11 +44,19 @@ class ReminderCell: UITableViewCell {
         return toggle
     }()
     
-    @objc private func switchValueChanged(_ sender: UISwitch) async {
+    @objc private func switchValueChanged(_ sender: UISwitch) {
         guard let reminderId = reminder?.id else {
             return
         }
-        await onToggle?(reminderId, sender.isOn)
+        sender.isEnabled = false
+        Task {
+            await onToggle?(reminderId, sender.isOn)
+            
+            await MainActor.run {
+                sender.isEnabled = true
+            }
+        }
+        
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
