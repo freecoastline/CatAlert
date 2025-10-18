@@ -160,7 +160,8 @@ class CatCurrentStatusViewController:UIViewController {
 
         taskStackView.snp.makeConstraints { make in
             make.top.equalTo(sectionHeaderView.snp.bottom).offset(12)
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
             make.bottom.equalToSuperview().offset(-12)
         }
         
