@@ -11,6 +11,15 @@ import UIKit
 class TaskCardView:UIView {
     private var activityId:UUID?
     var onComplete: ((UUID) -> Void)?
+    private static let buttonIconSize:CGFloat = 60.0
+    
+    private func createButtonImage(_ sysName: String) -> UIImage {
+        let configuration = UIImage.SymbolConfiguration(pointSize: Self.buttonIconSize, weight: .medium)
+        guard let image =  UIImage(systemName: sysName, withConfiguration: configuration) else {
+            return UIImage()
+        }
+        return image
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -149,7 +158,7 @@ class TaskCardView:UIView {
     
     private lazy var completeButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        button.setImage(createButtonImage("checkmark.circle"), for: .normal)
         button.tintColor = .systemGray
         button.addTarget(self, action: #selector(tapComplete), for: .touchUpInside)
         return button
@@ -163,7 +172,7 @@ class TaskCardView:UIView {
         UIView.animate(withDuration: 0.2) { [weak self] in
             guard let self else { return }
             containerView.alpha = 0.6
-            completeButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            completeButton.setImage(createButtonImage("checkmark.circle.fill"), for: .normal)
             completeButton.tintColor = .systemGreen
         }
         onComplete(activityId)
