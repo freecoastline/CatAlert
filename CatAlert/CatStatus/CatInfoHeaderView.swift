@@ -81,7 +81,10 @@ class CatInfoHeaderView: UIView {
     
     private lazy var healthStatusBadge = {
         let container = UIView()
-        container.layer.cornerRadius = 15.0
+        container.backgroundColor = UIColor.systemPink.withAlphaComponent(0.1)
+        container.layer.cornerRadius = 18.0
+        container.layer.borderWidth = 1
+        container.layer.borderColor = UIColor.systemPink.withAlphaComponent(0.3).cgColor
         container.addSubview(self.healthStatusLabel)
         container.addSubview(self.healthIndicatorDot)
         self.healthStatusLabel.snp.makeConstraints { make in
