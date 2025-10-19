@@ -44,7 +44,7 @@ class TaskCardView:UIView {
         
         completeButton.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-16)
-            make.height.width.equalTo(28)
+            make.height.width.equalTo(40)
             make.centerY.equalToSuperview()
         }
         

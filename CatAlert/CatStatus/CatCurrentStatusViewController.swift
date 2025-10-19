@@ -121,6 +121,7 @@ class CatCurrentStatusViewController:UIViewController {
     private func setupGradientBackground() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
+        gradientLayer.name = "backgroundGradient"  // 命名以便后续查找
 
         // 温暖舒适的渐变色
         gradientLayer.colors = [
@@ -133,26 +134,54 @@ class CatCurrentStatusViewController:UIViewController {
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
 
         view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 
-        view.layoutIfNeeded()
+    // ✨ 适配屏幕旋转
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let gradientLayer = view.layer.sublayers?.first(where: { $0.name == "backgroundGradient" }) as? CAGradientLayer {
+            gradientLayer.frame = view.bounds
+        }
     }
     
+    // ✨ Header 的卡片容器
+    private lazy var headerCardContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 16
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 8
+        return view
+    }()
+
     func setupUI() {
         view.addSubview(scrollView)
-        scrollView.addSubview(headerStatusView)
+
+        // ✨ 添加卡片容器包裹 header
+        scrollView.addSubview(headerCardContainer)
+        headerCardContainer.addSubview(headerStatusView)
+
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+
+        headerCardContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.width.equalToSuperview().offset(-32)
+            make.height.equalTo(80)
+        }
+
         headerStatusView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(70)
-            make.width.equalToSuperview()
-            make.top.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         scrollView.addSubview(sectionHeaderView)
         sectionHeaderView.snp.makeConstraints { make in
-            make.top.equalTo(headerStatusView.snp.bottom).offset(10)
+            make.top.equalTo(headerCardContainer.snp.bottom).offset(20)  // 从 headerCardContainer 开始
             make.left.right.equalToSuperview()
             make.height.equalTo(40)
         }
