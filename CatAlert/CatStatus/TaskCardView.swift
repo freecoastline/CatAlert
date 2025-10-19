@@ -11,7 +11,7 @@ import UIKit
 class TaskCardView:UIView {
     private var activityId:UUID?
     var onComplete: ((UUID) -> Void)?
-    private static let buttonIconSize:CGFloat = 60.0
+    private static let buttonIconSize:CGFloat = 28.0
     
     private func createButtonImage(_ sysName: String) -> UIImage {
         let configuration = UIImage.SymbolConfiguration(pointSize: Self.buttonIconSize, weight: .medium)
@@ -84,7 +84,7 @@ class TaskCardView:UIView {
         switch status {
         case .completed:
             containerView.alpha = 0.6
-            completeButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            completeButton.setImage(createButtonImage("checkmark.circle.fill"), for: .normal)
             completeButton.tintColor = .systemGreen
             completeButton.isEnabled = false
         case .expired:
@@ -104,7 +104,7 @@ class TaskCardView:UIView {
         containerView.alpha = 1.0
         completeButton.isEnabled = true
         completeButton.tintColor = .systemGray
-        completeButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        completeButton.setImage(createButtonImage("checkmark.circle"), for: .normal)
     }
     
     private func configureIcon(for type:CatCareType) {
