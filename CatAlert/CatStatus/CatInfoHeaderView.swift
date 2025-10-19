@@ -194,7 +194,6 @@ class CatInfoHeaderView: UIView {
         // 添加头像容器和头像
         addSubview(avatarContainerView)
         avatarContainerView.addSubview(avatarImageView)
-        avatarContainerView.addSubview(onlineIndicator)
 
         // 设置信息堆栈
         infoStackView.addArrangedSubview(nameLabel)
@@ -205,6 +204,8 @@ class CatInfoHeaderView: UIView {
         stackView.addArrangedSubview(avatarContainerView)
         stackView.addArrangedSubview(infoStackView)
 
+        addSubview(onlineIndicator)
+        
         // 添加弹性空间
         let spacer = UIView()
         spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -231,7 +232,7 @@ class CatInfoHeaderView: UIView {
         }
 
         onlineIndicator.snp.makeConstraints { make in
-            make.right.bottom.equalToSuperview().offset(-2)
+            make.right.bottom.equalTo(avatarContainerView).offset(-2)
             make.width.height.equalTo(Self.onlineIndicatorSize)
         }
 
