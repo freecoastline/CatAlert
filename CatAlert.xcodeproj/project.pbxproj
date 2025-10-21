@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27AAD2B42E90082100C1AC34 /* SnapKit */; };
+		BE0B676E2EA7BB6000A99522 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE0B676D2EA7BB6000A99522 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +50,9 @@
 				CatInfoMiddleView.swift,
 				CatInfoSegmentTableController.swift,
 				CatModel.swift,
+				CatNewProfileViewController.swift,
 				CatPhotoGalleryCell.swift,
 				CatProfileViewController.swift,
-				CatProfileViewControllerNew.swift,
 				CatSegmentCell.swift,
 				CatStatus/CatCurrentStatusViewController.swift,
 				CatStatus/CatInfoHeaderView.swift,
@@ -110,9 +111,9 @@
 				CatInfoMiddleView.swift,
 				CatInfoSegmentTableController.swift,
 				CatModel.swift,
+				CatNewProfileViewController.swift,
 				CatPhotoGalleryCell.swift,
 				CatProfileViewController.swift,
-				CatProfileViewControllerNew.swift,
 				CatSegmentCell.swift,
 				CatStatus/CatCurrentStatusViewController.swift,
 				CatStatus/CatInfoHeaderView.swift,
@@ -188,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */,
+				BE0B676E2EA7BB6000A99522 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +248,7 @@
 			name = CatAlert;
 			packageProductDependencies = (
 				27AAD2B42E90082100C1AC34 /* SnapKit */,
+				BE0B676D2EA7BB6000A99522 /* SnapKit */,
 			);
 			productName = CatAlert;
 			productReference = 2B1627362E6BE15F008A6507 /* CatAlert.app */;
@@ -331,8 +334,7 @@
 			mainGroup = 2B16272D2E6BE15F008A6507;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				27387BF22E8FF741002B96B3 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				27BDF9762E9007DA00743EC8 /* XCLocalSwiftPackageReference "SnapKit" */,
+				BE0B676C2EA7BB6000A99522 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2B1627372E6BE15F008A6507 /* Products */;
@@ -692,20 +694,13 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		27BDF9762E9007DA00743EC8 /* XCLocalSwiftPackageReference "SnapKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = SnapKit;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
-		27387BF22E8FF741002B96B3 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+		BE0B676C2EA7BB6000A99522 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.1;
+				minimumVersion = 5.7.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -713,6 +708,11 @@
 /* Begin XCSwiftPackageProductDependency section */
 		27AAD2B42E90082100C1AC34 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = SnapKit;
+		};
+		BE0B676D2EA7BB6000A99522 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE0B676C2EA7BB6000A99522 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
