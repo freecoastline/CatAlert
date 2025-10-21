@@ -25,6 +25,15 @@ class CatProfileViewControllerNew: UIViewController {
     }
     
     private func setupUI() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
