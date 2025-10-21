@@ -24,6 +24,7 @@ class CatNewProfileViewController: UIViewController {
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "TempCell")
         collection.dataSource = self
         collection.delegate = self
         return collection
@@ -33,6 +34,7 @@ class CatNewProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNavigationBar()
     }
     
     // MARK: Setup
@@ -44,6 +46,11 @@ class CatNewProfileViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    private func setupNavigationBar() {
+        
+    }
+    
 }
 
 extension CatNewProfileViewController: UICollectionViewDelegate {
@@ -56,9 +63,9 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath) else {
-            return UICollectionViewCell()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TempCell", for: indexPath)
+        // 临时设置背景色，方便调试
+        cell.backgroundColor = indexPath.section % 2 == 0 ? .systemGray6 : .white
         return cell
     }
     
