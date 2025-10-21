@@ -29,7 +29,7 @@ class CatTabBarController:UITabBarController {
         layer.masksToBounds = false
         tabBar.layer.insertSublayer(layer, at: 0)
         
-        let catProfile = CatProfileViewController()
+        let catProfile = CatProfileViewControllerNew()
         let catCurrentStatus = CatCurrentStatusViewController()
         let reminderSettingsPage = ReminderSettingsViewController()
 

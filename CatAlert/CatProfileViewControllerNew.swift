@@ -25,6 +25,7 @@ class CatProfileViewControllerNew: UIViewController {
     }
     
     private func setupUI() {
+        title = "猫咪资料"
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
