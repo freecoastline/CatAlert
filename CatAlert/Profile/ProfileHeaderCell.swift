@@ -21,6 +21,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .label
+        label.textAlignment = .center
         return nameLabel
     }()
     
@@ -28,8 +29,54 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .secondaryLabel
-        return nameLabel
+        label.textAlignment = .center
+        return handleLabel
     }()
+    
+    private lazy var followingCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var followingTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var followingStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [followingCountLabel, followingCountLabel])
+        stack.axis = .vertical
+        stack.spacing = 5.0
+        stack.alignment = .center
+        return stack
+    }()
+    
+    private lazy var followingCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var followingTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var followingStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [followingCountLabel, followingCountLabel])
+        stack.axis = .vertical
+        stack.spacing = 5.0
+        stack.alignment = .center
+        return stack
+    }()
+    
     
     // MARK: Initializations
     override init(frame: CGRect) {
@@ -44,6 +91,8 @@ class ProfileHeaderCell: UICollectionViewCell {
     // MARK: Setup
     private func setupUI() {
         contentView.addSubview(avatarImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(handleLabel)
     }
     
     // MARK: Public Methods
