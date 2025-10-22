@@ -39,7 +39,6 @@ class CatNewProfileViewController: UIViewController {
     
     // MARK: Setup
     private func setupUI() {
-        title = "猫咪资料"
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -48,15 +47,20 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        
+        title = "猫咪资料"
+
     }
     
 }
 
+
+// MARK: - UICollectionViewDelegate
 extension CatNewProfileViewController: UICollectionViewDelegate {
 
 }
 
+
+// MARK: - UICollectionViewDataSource
 extension CatNewProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         2
