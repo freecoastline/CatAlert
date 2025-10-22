@@ -8,6 +8,9 @@
 import UIKit
 
 class ProfileHeaderCell: UICollectionViewCell {
+    // MARK: - Constants
+    private static let avatarWidth:CGFloat = 100.0
+    
     // MARK: UI components
     private lazy var avatarImageView:UIImageView = {
         let view = UIImageView()
@@ -117,14 +120,26 @@ class ProfileHeaderCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life cycle
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+    }
+    
     // MARK: Setup
     private func setupUI() {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(handleLabel)
         contentView.addSubview(statsView)
+        avatarImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.height.width.equalTo(Self.avatarWidth)
+            make.centerX.equalToSuperview()
+        }
+        
+        
     }
     
     // MARK: Public Methods
-    
 }
