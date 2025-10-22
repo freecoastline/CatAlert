@@ -55,28 +55,57 @@ class ProfileHeaderCell: UICollectionViewCell {
         return stack
     }()
     
-    private lazy var followingCountLabel: UILabel = {
+    private lazy var followerCountLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var followingTitleLabel: UILabel = {
+    private lazy var followerTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .center
         return label
     }()
     
-    private lazy var followingStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [followingCountLabel, followingCountLabel])
+    private lazy var followerStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [followerCountLabel, followerTitleLabel])
         stack.axis = .vertical
         stack.spacing = 5.0
         stack.alignment = .center
         return stack
     }()
     
+    private lazy var likesCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var likesTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var likesStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [likesCountLabel, likesTitleLabel])
+        stack.axis = .vertical
+        stack.spacing = 5.0
+        stack.alignment = .center
+        return stack
+    }()
+    
+    private lazy var statsView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [followingStackView, followerStackView, likesStackView])
+        stack.distribution = .equalSpacing
+        stack.alignment = .center
+        stack.axis = .horizontal
+        return stack
+    }()
     
     // MARK: Initializations
     override init(frame: CGRect) {
@@ -93,6 +122,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(handleLabel)
+        contentView.addSubview(statsView)
     }
     
     // MARK: Public Methods
