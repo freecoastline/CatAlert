@@ -10,11 +10,17 @@ import UIKit
 import SnapKit
 
 class CatNewProfileViewController: UIViewController {
+    // MARK: - Property
     enum ProfileSection: Int, CaseIterable {
         case header
-        case stats
         case bio
         case videos
+    }
+    
+    var catModel: CatModel? {
+        didSet {
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: UI Component
@@ -24,7 +30,8 @@ class CatNewProfileViewController: UIViewController {
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "TempCell")
+        collection.register(ProfileHeaderCell.self, forCellWithReuseIdentifier: "ProfileHeaderCell")
+        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         collection.dataSource = self
         collection.delegate = self
         return collection
@@ -63,14 +70,36 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension CatNewProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
+        guard let section = ProfileSection(rawValue: section) else {
+            return 0
+        }
+        switch section {
+        case .header:
+            return 1
+        case .bio:
+            return 1
+        case .videos:
+            return 6
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TempCell", for: indexPath)
-        // 临时设置背景色，方便调试
-        cell.backgroundColor = indexPath.section % 2 == 0 ? .systemGray6 : .white
-        return cell
+        guard let section = ProfileSection(rawValue: indexPath.section) else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
+        }
+
+        switch section {
+        case .header:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
+            if let model = catModel {
+                cell.configure(with: model)
+            }
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
+            cell.backgroundColor = indexPath.section % 2 == 0 ? .systemGray6 : .white
+            return cell
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

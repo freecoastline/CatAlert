@@ -142,4 +142,23 @@ class ProfileHeaderCell: UICollectionViewCell {
     }
     
     // MARK: Public Methods
+    public func configure(with model: CatModel) {
+        nameLabel.text = model.name
+        handleLabel.text = "@\(model.kind)"
+
+        // 设置头像图片
+        if let firstImage = model.images.first {
+            avatarImageView.image = firstImage
+        }
+
+        // 暂时使用模拟数据
+        followingCountLabel.text = "42"
+        followingTitleLabel.text = "关注"
+
+        followerCountLabel.text = "128"
+        followerTitleLabel.text = "粉丝"
+
+        likesCountLabel.text = "256"
+        likesTitleLabel.text = "获赞"
+    }
 }
