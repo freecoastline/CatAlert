@@ -51,7 +51,7 @@ class ProfileHeaderCell: UICollectionViewCell {
     }()
     
     private lazy var followingStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [followingCountLabel, followingCountLabel])
+        let stack = UIStackView(arrangedSubviews: [followingCountLabel, followingTitleLabel])
         stack.axis = .vertical
         stack.spacing = 5.0
         stack.alignment = .center
@@ -156,14 +156,12 @@ class ProfileHeaderCell: UICollectionViewCell {
     }
     
     // MARK: Public Methods
-    public func configure(with model: CatModel) {
+    public func configure(with model: CatSimpleInfoModel) {
         nameLabel.text = model.name
-        handleLabel.text = "@\(model.kind)"
+        handleLabel.text = "@英短"
 
         // 设置头像图片
-        if let firstImage = model.images.first {
-            avatarImageView.image = firstImage
-        }
+        avatarImageView.image = model.avatarImage
 
         // 暂时使用模拟数据
         followingCountLabel.text = "42"

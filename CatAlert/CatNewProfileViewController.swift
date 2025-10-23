@@ -17,7 +17,7 @@ class CatNewProfileViewController: UIViewController {
         case videos
     }
     
-    var catModel: CatModel? {
+    var catModel: CatSimpleInfoModel? {
         didSet {
             self.collectionView.reloadData()
         }
@@ -61,19 +61,8 @@ class CatNewProfileViewController: UIViewController {
 
     // MARK: - Data
     private func loadMockData() {
-        // 使用项目中已有的图片
-        let images = ["IMG_4933", "IMG_5771", "IMG_6317", "IMG_6364", "IMG_7585", "IMG_7595"]
-            .compactMap { UIImage(named: $0) }
-
-        catModel = CatModel(
-            name: "小橘猫",
-            gender: "公",
-            kind: "橘猫",
-            description: "一只可爱的橘猫，喜欢晒太阳和吃罐头",
-            bornWay: "领养",
-            imagesString: [],
-            images: images
-        )
+        catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
+        catModel?.loadImageIfNeeded()
     }
     
 }
