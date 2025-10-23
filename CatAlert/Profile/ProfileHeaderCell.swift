@@ -138,7 +138,21 @@ class ProfileHeaderCell: UICollectionViewCell {
             make.centerX.equalToSuperview()
         }
         
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(avatarImageView.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
         
+        handleLabel.snp.makeConstraints { make in
+            make.left.equalTo(nameLabel.snp.right).offset(6)
+            make.centerY.equalTo(nameLabel)
+        }
+        
+        statsView.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom)
+            make.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+        }
     }
     
     // MARK: Public Methods
