@@ -155,7 +155,8 @@ class ProfileHeaderCell: UICollectionViewCell {
         }
         
         statsView.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom)
+            make.top.equalTo(nameLabel.snp.bottom).offset(15)
+            make.height.equalTo(60)
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
         }
