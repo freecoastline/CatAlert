@@ -9,10 +9,10 @@ import UIKit
 
 class ProfileHeaderCell: UICollectionViewCell {
     // MARK: - Constants
-    private static let avatarWidth:CGFloat = 100.0
+    private static let avatarWidth: CGFloat = 100.0
     
     // MARK: UI components
-    private lazy var avatarImageView:UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .systemGray5
         view.contentMode = .scaleAspectFill
@@ -40,6 +40,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
+        label.textColor = .label
         return label
     }()
     
@@ -47,6 +48,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .center
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -62,6 +64,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
+        label.textColor = .label
         return label
     }()
     
@@ -69,6 +72,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .center
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -84,6 +88,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
+        label.textColor = .label
         return label
     }()
     
@@ -91,6 +96,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .center
+        label.textColor = .secondaryLabel
         return label
     }()
     
@@ -144,14 +150,14 @@ class ProfileHeaderCell: UICollectionViewCell {
         }
         
         handleLabel.snp.makeConstraints { make in
-            make.left.equalTo(nameLabel.snp.right).offset(6)
+            make.leading.equalTo(nameLabel.snp.trailing).offset(6)
             make.centerY.equalTo(nameLabel)
         }
         
         statsView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom)
             make.bottom.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
         }
     }
     
