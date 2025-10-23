@@ -111,6 +111,7 @@ class ProfileHeaderCell: UICollectionViewCell {
     private lazy var statsView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [followingStackView, followerStackView, likesStackView])
         stack.distribution = .equalSpacing
+        stack.spacing = 12.0
         stack.alignment = .center
         stack.axis = .horizontal
         return stack
@@ -129,7 +130,6 @@ class ProfileHeaderCell: UICollectionViewCell {
     // MARK: - Life cycle
     override func layoutSubviews() {
         super.layoutSubviews()
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
     }
     
     // MARK: Setup
@@ -138,6 +138,8 @@ class ProfileHeaderCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(handleLabel)
         contentView.addSubview(statsView)
+        avatarImageView.layer.cornerRadius = Self.avatarWidth / 2
+        
         avatarImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.height.width.equalTo(Self.avatarWidth)
