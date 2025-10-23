@@ -42,6 +42,7 @@ class CatNewProfileViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
+        loadMockData()
     }
     
     // MARK: Setup
@@ -56,6 +57,23 @@ class CatNewProfileViewController: UIViewController {
     private func setupNavigationBar() {
         title = "猫咪资料"
 
+    }
+
+    // MARK: - Data
+    private func loadMockData() {
+        // 使用项目中已有的图片
+        let images = ["IMG_4933", "IMG_5771", "IMG_6317", "IMG_6364", "IMG_7585", "IMG_7595"]
+            .compactMap { UIImage(named: $0) }
+
+        catModel = CatModel(
+            name: "小橘猫",
+            gender: "公",
+            kind: "橘猫",
+            description: "一只可爱的橘猫，喜欢晒太阳和吃罐头",
+            bornWay: "领养",
+            imagesString: [],
+            images: images
+        )
     }
     
 }

@@ -25,7 +25,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .label
         label.textAlignment = .center
-        return nameLabel
+        return label
     }()
     
     private lazy var handleLabel: UILabel = {
@@ -33,7 +33,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .secondaryLabel
         label.textAlignment = .center
-        return handleLabel
+        return label
     }()
     
     private lazy var followingCountLabel: UILabel = {
