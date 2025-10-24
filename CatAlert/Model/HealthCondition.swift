@@ -17,7 +17,7 @@ enum HealthCondition {
     var color:UIColor {
         switch self {
         case .excellent:
-            return .systemBlue
+            return .blue
         case .good:
             return .systemGreen
         case .normal:

@@ -117,6 +117,12 @@ class ProfileHeaderCell: UICollectionViewCell {
         return stack
     }()
     
+    private lazy var avatarShadowContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     // MARK: Initializations
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -134,20 +140,30 @@ class ProfileHeaderCell: UICollectionViewCell {
     
     // MARK: Setup
     private func setupUI() {
-        contentView.addSubview(avatarImageView)
+        contentView.addSubview(avatarShadowContainer)
+        avatarShadowContainer.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(handleLabel)
         contentView.addSubview(statsView)
         avatarImageView.layer.cornerRadius = Self.avatarWidth / 2
         
-        avatarImageView.snp.makeConstraints { make in
+        avatarShadowContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.height.width.equalTo(Self.avatarWidth)
             make.centerX.equalToSuperview()
         }
         
+        avatarImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        avatarShadowContainer.layer.borderColor = UIColor.black.cgColor
+        avatarShadowContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
+        avatarShadowContainer.layer.shadowOpacity = 0.2
+        avatarShadowContainer.layer.shadowRadius = 6
+        
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(avatarImageView.snp.bottom).offset(10)
+            make.top.equalTo(avatarShadowContainer.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
         }
         
