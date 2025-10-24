@@ -150,7 +150,9 @@ class ProfileHeaderCell: UICollectionViewCell {
         avatarShadowContainer.layer.cornerRadius = Self.avatarWidth / 2
 
         // 设置头像图片圆角（稍小一点以形成间隙）
-        let imageInset: CGFloat = 5.0 // 边框和图片之间的间隙
+        let borderWidth: CGFloat = 3.0  // 边框宽度
+        let gapWidth: CGFloat = 3.0     // 边框内侧的间隙宽度
+        let imageInset: CGFloat = borderWidth + gapWidth // 总内边距 = 边框 + 间隙
         avatarImageView.layer.cornerRadius = (Self.avatarWidth - imageInset * 2) / 2
 
         avatarShadowContainer.snp.makeConstraints { make in
@@ -196,7 +198,7 @@ class ProfileHeaderCell: UICollectionViewCell {
 
         // 将边框设置在容器上，这样边框和图片之间会有间隙
         avatarShadowContainer.layer.borderColor = model.healthCondition.color.cgColor
-        avatarShadowContainer.layer.borderWidth = 5.0
+        avatarShadowContainer.layer.borderWidth = 3.0
         
         // 暂时使用模拟数据
         followingCountLabel.text = "42"
