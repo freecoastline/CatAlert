@@ -152,7 +152,9 @@ class ProfileHeaderCell: UICollectionViewCell {
         // 设置头像图片圆角（稍小一点以形成间隙）
         let borderWidth: CGFloat = 3.0  // 边框宽度
         let gapWidth: CGFloat = 3.0     // 边框内侧的间隙宽度
-        let imageInset: CGFloat = borderWidth + gapWidth // 总内边距 = 边框 + 间隙
+        // 注意：border 是居中绘制的，一半在内一半在外
+        // 所以实际需要的内边距 = border宽度的一半 + 想要的间隙
+        let imageInset: CGFloat = (borderWidth / 2) + gapWidth // 1.5 + 3 = 4.5pt
         avatarImageView.layer.cornerRadius = (Self.avatarWidth - imageInset * 2) / 2
 
         avatarShadowContainer.snp.makeConstraints { make in
