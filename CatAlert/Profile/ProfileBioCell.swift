@@ -31,8 +31,7 @@ class ProfileBioCell: UICollectionViewCell {
     private func setupUI() {
         contentView.addSubview(bioLabel)
         bioLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(5)
+            make.edges.equalToSuperview().inset(16)
         }
     }
     
