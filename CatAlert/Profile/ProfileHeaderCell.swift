@@ -172,7 +172,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         // 设置头像图片
         avatarImageView.image = model.avatarImage
         avatarImageView.layer.borderColor = model.healthCondition.color.cgColor
-        avatarImageView.layer.borderWidth = 1.0
+        avatarImageView.layer.borderWidth = 5.0
         
         // 暂时使用模拟数据
         followingCountLabel.text = "42"
