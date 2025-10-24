@@ -81,6 +81,7 @@
 				Model/HealthCondition.swift,
 				Model/TaskProgress.swift,
 				PinkbackGround.webp,
+				Profile/ProfileBioCell.swift,
 				Profile/ProfileHeaderCell.swift,
 				Reminder/AddButtonCell.swift,
 				Reminder/AddReminderViewController.swift,

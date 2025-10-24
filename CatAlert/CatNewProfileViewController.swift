@@ -32,6 +32,7 @@ class CatNewProfileViewController: UIViewController {
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(ProfileHeaderCell.self, forCellWithReuseIdentifier: "ProfileHeaderCell")
+        collection.register(ProfileBioCell.self, forCellWithReuseIdentifier: "ProfileBioCell")
         collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         collection.dataSource = self
         collection.delegate = self
@@ -99,6 +100,12 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         switch section {
         case .header:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
+            if let model = catModel {
+                cell.configure(with: model)
+            }
+            return cell
+        case .bio:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileBioCell", for: indexPath) as! ProfileBioCell
             if let model = catModel {
                 cell.configure(with: model)
             }
