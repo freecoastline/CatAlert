@@ -119,7 +119,7 @@ class ProfileHeaderCell: UICollectionViewCell {
     
     private lazy var avatarShadowContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = .systemBackground // 设置背景色以形成间隙效果
         return view
     }()
     
@@ -145,19 +145,25 @@ class ProfileHeaderCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(handleLabel)
         contentView.addSubview(statsView)
-        avatarImageView.layer.cornerRadius = Self.avatarWidth / 2
-        
+
+        // 设置容器圆角（边框会显示在这里）
+        avatarShadowContainer.layer.cornerRadius = Self.avatarWidth / 2
+
+        // 设置头像图片圆角（稍小一点以形成间隙）
+        let imageInset: CGFloat = 5.0 // 边框和图片之间的间隙
+        avatarImageView.layer.cornerRadius = (Self.avatarWidth - imageInset * 2) / 2
+
         avatarShadowContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.height.width.equalTo(Self.avatarWidth)
             make.centerX.equalToSuperview()
         }
-        
+
         avatarImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(imageInset)
         }
-        
-        avatarShadowContainer.layer.borderColor = UIColor.black.cgColor
+
+        // 阴影效果
         avatarShadowContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
         avatarShadowContainer.layer.shadowOpacity = 0.2
         avatarShadowContainer.layer.shadowRadius = 6
@@ -187,8 +193,10 @@ class ProfileHeaderCell: UICollectionViewCell {
 
         // 设置头像图片
         avatarImageView.image = model.avatarImage
-        avatarImageView.layer.borderColor = model.healthCondition.color.cgColor
-        avatarImageView.layer.borderWidth = 5.0
+
+        // 将边框设置在容器上，这样边框和图片之间会有间隙
+        avatarShadowContainer.layer.borderColor = model.healthCondition.color.cgColor
+        avatarShadowContainer.layer.borderWidth = 5.0
         
         // 暂时使用模拟数据
         followingCountLabel.text = "42"
