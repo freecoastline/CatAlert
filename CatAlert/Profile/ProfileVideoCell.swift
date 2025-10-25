@@ -64,5 +64,27 @@ class ProfileVideoCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Public Methods
+    func configure(with image: UIImage?, playCount: Int) {
+        guard let image else {
+            return
+        }
+        thumbnailImageView.image = image
+        playCountLabel.text = formatHelper(playCount)
+    }
+    
+    
+    // MARK: - Helper
+    private func formatHelper(_ count: Int) -> String {
+        if count < 1000 {
+            return "\(count)"
+        } else if count < 10000 {
+            return String(format: "%.1f", count / 1000) + "k"
+        } else if count < 1000000 {
+            return "\(count / 1000)k"
+        } else {
+            return "\(count / 1000000)M"
+        }
+    }
     
 }
