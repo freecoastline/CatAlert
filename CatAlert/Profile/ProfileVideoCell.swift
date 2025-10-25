@@ -11,6 +11,9 @@ class ProfileVideoCell: UICollectionViewCell {
     // MARK: - UI Components
     private var thumbnailImageView: UIImageView = {
         let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.backgroundColor = .systemGray5
         return view
     }()
     
