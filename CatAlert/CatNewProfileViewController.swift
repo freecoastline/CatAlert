@@ -28,11 +28,11 @@ class CatNewProfileViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(ProfileHeaderCell.self, forCellWithReuseIdentifier: "ProfileHeaderCell")
         collection.register(ProfileBioCell.self, forCellWithReuseIdentifier: "ProfileBioCell")
+        collection.register(ProfileVideoCell.self, forCellWithReuseIdentifier: "ProfileVideoCell")
         collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         collection.dataSource = self
         collection.delegate = self
@@ -120,4 +120,36 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         ProfileSection.allCases.count
     }
+}
+
+
+extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let section = ProfileSection(rawValue: indexPath.section) else {
+            return .zero
+        }
+        
+        let width = collectionView.bounds.width
+        switch section {
+        case .header:
+            return CGSize(width: width, height: 250)
+        case .bio:
+            return CGSize(width: width, height: 60)
+        case .videos:
+            let spacing:CGFloat = 2
+            let totalSpacing = spacing * 2
+            let itemWidth = (width - totalSpacing) / 3.0
+            let itemHeight = itemWidth * 1.3
+            return CGSize(width: itemWidth, height: itemHeight)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        ProfileSection(rawValue: section) == .videos ? 2.0 : 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        ProfileSection(rawValue: section) == .videos ? 2.0 : 0
+    }
+    
 }
