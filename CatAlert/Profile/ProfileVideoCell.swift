@@ -66,20 +66,21 @@ class ProfileVideoCell: UICollectionViewCell {
     
     // MARK: - Public Methods
     func configure(with image: UIImage?, playCount: Int) {
-        guard let image else {
+        guard playCount >= 0 else {
+            assertionFailure("PlayCount should not be negative")
             return
         }
         thumbnailImageView.image = image
-        playCountLabel.text = formatHelper(playCount)
+        playCountLabel.text = formatPlayCount(playCount)
     }
     
     
     // MARK: - Helper
-    private func formatHelper(_ count: Int) -> String {
+    private func formatPlayCount(_ count: Int) -> String {
         if count < 1000 {
             return "\(count)"
         } else if count < 10000 {
-            return String(format: "%.1f", count / 1000) + "k"
+            return String(format: "%.1f", Double(count) / 1000.0) + "k"
         } else if count < 1000000 {
             return "\(count / 1000)k"
         } else {
