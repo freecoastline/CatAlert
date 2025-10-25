@@ -83,6 +83,7 @@
 				PinkbackGround.webp,
 				Profile/ProfileBioCell.swift,
 				Profile/ProfileHeaderCell.swift,
+				Profile/ProfileVideoCell.swift,
 				Reminder/AddButtonCell.swift,
 				Reminder/AddReminderViewController.swift,
 				Reminder/EditReminderViewController.swift,
