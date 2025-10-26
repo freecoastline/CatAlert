@@ -54,7 +54,6 @@ class CatNewProfileViewController: UIViewController {
     
     private lazy var imageZoomImageView: UIImageView = {
         let image = UIImageView()
-        image.isHidden = true
         image.isUserInteractionEnabled = true
         image.contentMode = .scaleAspectFit
         return image
