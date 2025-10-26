@@ -140,7 +140,17 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
         let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
-        print("点击了第 \(indexPath.item) 张图片 cellInCollectionViewframe: \(cellframeInCollectionView), cellInViewFrame: \(frameInView)")
+        
+        imageZoomImageView.frame = cellframeInCollectionView
+        imageZoomImageView.image = image
+        imageZoomBackgroundView.alpha = 0
+        imageZoomBackgroundView.isHidden = false
+        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            imageZoomImageView.frame = frameInView
+            imageZoomBackgroundView.alpha = 1
+        }
     }
 }
 
