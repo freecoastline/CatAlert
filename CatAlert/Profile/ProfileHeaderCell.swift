@@ -110,7 +110,7 @@ class ProfileHeaderCell: UICollectionViewCell {
     
     private lazy var statsView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [followingStackView, followerStackView, likesStackView])
-        stack.distribution = .equalSpacing
+        stack.distribution = .fillEqually
         stack.spacing = 12.0
         stack.alignment = .center
         stack.axis = .horizontal
@@ -186,7 +186,8 @@ class ProfileHeaderCell: UICollectionViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(15)
             make.height.equalTo(60)
             make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(220)
         }
     }
     
