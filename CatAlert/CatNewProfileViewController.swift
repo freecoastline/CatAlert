@@ -98,7 +98,19 @@ class CatNewProfileViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate
 extension CatNewProfileViewController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let section = ProfileSection(rawValue: indexPath.section),
+              section == .videos else {
+            return
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
+            return
+        }
+        let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
+        let cellframeInCollectionView = cell.frame
+        let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
+        print("点击了第 \(indexPath.item) 张图片 cellInCollectionViewframe: \(cellframeInCollectionView), cellInViewFrame: \(frameInView)")
+    }
 }
 
 
