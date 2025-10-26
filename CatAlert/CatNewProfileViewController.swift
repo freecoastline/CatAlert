@@ -75,6 +75,18 @@ class CatNewProfileViewController: UIViewController {
             "IMG_6317",
             "IMG_6364",
             "IMG_7585",
+            "IMG_7595",
+            "IMG_4933",
+            "IMG_5771",
+            "IMG_6317",
+            "IMG_6364",
+            "IMG_7585",
+            "IMG_7595",
+            "IMG_4933",
+            "IMG_5771",
+            "IMG_6317",
+            "IMG_6364",
+            "IMG_7585",
             "IMG_7595"
         ].compactMap({ imageStr in
             ImageReader.getImage(from: imageStr, type: "JPG")
@@ -102,7 +114,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         case .bio:
             return 1
         case .videos:
-            return 6
+            return mockImages.count
         }
     }
     
