@@ -17,11 +17,16 @@ class CatNewProfileViewController: UIViewController {
         case videos
     }
     
+    
     var catModel: CatSimpleInfoModel? {
         didSet {
             self.collectionView.reloadData()
         }
     }
+    
+    // MARK: - Test
+    private var mockImages: [UIImage] = []
+    private var mockPlayCounts = [62, 30, 26, 31, 27, 95]
     
     // MARK: UI Component
     private lazy var collectionView = {
@@ -58,13 +63,22 @@ class CatNewProfileViewController: UIViewController {
     
     private func setupNavigationBar() {
         title = "猫咪资料"
-
     }
 
     // MARK: - Data
     private func loadMockData() {
         catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
         catModel?.loadImageIfNeeded()
+        mockImages = [
+            "IMG_4933",
+            "IMG_5771",
+            "IMG_6317",
+            "IMG_6364",
+            "IMG_7585",
+            "IMG_7595"
+        ].compactMap({ imageStr in
+            ImageReader.getImage(from: imageStr, type: "JPG")
+        })
     }
     
 }
@@ -111,8 +125,10 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
-            cell.backgroundColor = indexPath.section % 2 == 0 ? .systemGray6 : .white
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
+            let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
+            let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
+            cell.configure(with: image, playCount: playCount)
             return cell
         }
     }
