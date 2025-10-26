@@ -44,6 +44,22 @@ class CatNewProfileViewController: UIViewController {
         return collection
     }()
     
+    private lazy var imageZoomBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.9)
+        view.isHidden = true
+        view.alpha = 0
+        return view
+    }()
+    
+    private lazy var imageZoomImageView: UIImageView = {
+        let image = UIImageView()
+        image.isHidden = true
+        image.isUserInteractionEnabled = true
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +72,21 @@ class CatNewProfileViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
+        view.addSubview(imageZoomBackgroundView)
+        imageZoomBackgroundView.addSubview(imageZoomImageView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        imageZoomBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        imageZoomImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        imageZoomBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomImageTap)))
     }
     
     private func setupNavigationBar() {
@@ -93,6 +121,10 @@ class CatNewProfileViewController: UIViewController {
         })
     }
     
+    // MARK: - Gesture
+    @objc private func handleZoomImageTap() {
+        
+    }
 }
 
 
