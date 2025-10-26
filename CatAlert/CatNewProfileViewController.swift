@@ -148,7 +148,7 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
         let width = collectionView.bounds.width
         switch section {
         case .header:
-            return CGSize(width: width, height: 250)
+            return CGSize(width: width, height: 200)
         case .bio:
             return CGSize(width: width, height: 60)
         case .videos:
