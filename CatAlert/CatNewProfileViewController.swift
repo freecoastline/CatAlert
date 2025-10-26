@@ -141,14 +141,14 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
         
-        imageZoomImageView.frame = cellframeInCollectionView
+        imageZoomImageView.frame = frameInView
         imageZoomImageView.image = image
         imageZoomBackgroundView.alpha = 0
         imageZoomBackgroundView.isHidden = false
         
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
-            imageZoomImageView.frame = frameInView
+            imageZoomImageView.frame = view.bounds
             imageZoomBackgroundView.alpha = 1
         }
     }
