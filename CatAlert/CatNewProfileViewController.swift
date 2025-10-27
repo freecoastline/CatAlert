@@ -83,10 +83,6 @@ class CatNewProfileViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        imageZoomImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         imageZoomBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomImageTap)))
     }
     
