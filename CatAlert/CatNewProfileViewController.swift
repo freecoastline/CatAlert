@@ -127,9 +127,10 @@ class CatNewProfileViewController: UIViewController {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
             imageZoomImageView.frame = zoomedCellFrame
+            imageZoomBackgroundView.alpha = 0
         } completion: { [weak self] _ in
             guard let self else { return }
-            imageZoomBackgroundView.alpha = 0
+            imageZoomImageView.image = nil
             imageZoomBackgroundView.isHidden = true
         }
     }
