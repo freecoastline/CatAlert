@@ -24,6 +24,8 @@ class CatNewProfileViewController: UIViewController {
         }
     }
     
+    private var zoomedCellFrame: CGRect = .zero
+    
     // MARK: - Test
     private var mockImages: [UIImage] = []
     private var mockPlayCounts = [62, 30, 26, 31, 27, 95]
@@ -122,7 +124,14 @@ class CatNewProfileViewController: UIViewController {
     
     // MARK: - Gesture
     @objc private func handleZoomImageTap() {
-        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            imageZoomImageView.frame = zoomedCellFrame
+        } completion: { [weak self] _ in
+            guard let self else { return }
+            imageZoomBackgroundView.alpha = 0
+            imageZoomBackgroundView.isHidden = true
+        }
     }
 }
 
@@ -141,6 +150,7 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
         
+        zoomedCellFrame = frameInView
         imageZoomImageView.frame = frameInView
         imageZoomImageView.image = image
         imageZoomBackgroundView.alpha = 0
