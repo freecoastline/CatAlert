@@ -76,4 +76,22 @@ class ProfileActionBar: UIView {
         return button
     }()
     
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(Tab.favorite.title, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
+        button.tag = Tab.favorite.rawValue
+        button.addTarget(self, action: #selector(tabButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(Tab.like.title, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
+        button.tag = Tab.like.rawValue
+        button.addTarget(self, action: #selector(tabButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
+    
 }
