@@ -53,7 +53,7 @@ class ProfileActionBar: UIView {
     
     
     // MARK: - Actions
-    private func tabButtonTapped(_ sender: UIButton) {
+    @objc private func tabButtonTapped(_ sender: UIButton) {
         
     }
     
@@ -66,5 +66,14 @@ class ProfileActionBar: UIView {
         
     }
     
+    // MARK: - UI Components
+    private lazy var albumButton: UIButton = {
+        let button = UIButton()
+        button.tag = Tab.album.rawValue
+        button.setTitle(Tab.album.title, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
+        button.addTarget(self, action: #selector(tabButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }()
     
 }
