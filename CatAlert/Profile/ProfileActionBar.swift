@@ -94,4 +94,14 @@ class ProfileActionBar: UIView {
         return button
     }()
     
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [albumButton, favoriteButton, likeButton])
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .equalSpacing
+        return stack
+    }()
+    
+    
+    
 }
