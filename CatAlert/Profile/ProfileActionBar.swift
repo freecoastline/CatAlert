@@ -37,10 +37,12 @@ class ProfileActionBar: UIView {
     }
     
     // MARK: - Properties
-    var tabTapped: ((Tab) -> Void)?
+    var onTabChanged: ((Tab) -> Void)?
     var currentTab: Tab = .album {
         didSet {
-            
+            updateButtonState()
+            moveIndicator(to: currentTab)
+            onTabChanged?(currentTab)
         }
     }
     
@@ -49,6 +51,20 @@ class ProfileActionBar: UIView {
         
     }
     
+    
+    // MARK: - Actions
+    private func tabButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    // MARK: - Helper
+    private func updateButtonState() {
+        
+    }
+    
+    private func moveIndicator(to tab: Tab) {
+        
+    }
     
     
 }
