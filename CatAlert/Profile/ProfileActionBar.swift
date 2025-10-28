@@ -48,7 +48,19 @@ class ProfileActionBar: UIView {
     
     // MARK: - Setup
     private func setupUI() {
+        addSubview(stackView)
+        addSubview(indicator)
         
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        indicator.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalTo(albumButton)
+            make.height.equalTo(3)
+            make.width.equalTo(20)
+        }
     }
     
     
