@@ -61,21 +61,30 @@ class ProfileActionBar: UIView {
             make.height.equalTo(3)
             make.width.equalTo(20)
         }
+        
+        updateButtonState()
     }
     
     
     // MARK: - Actions
     @objc private func tabButtonTapped(_ sender: UIButton) {
-        
+        guard let tab = Tab(rawValue: sender.tag) else {
+            return
+        }
+        currentTab = tab
     }
     
     // MARK: - Helper
     private func updateButtonState() {
+        let selectorColor = UIColor.black
+        let normalColor = UIColor.gray
         
+        albumButton.setTitleColor(currentTab == .album ? selectorColor : normalColor, for: .normal)
+        favoriteButton.setTitleColor(currentTab == .favorite ? selectorColor : normalColor, for: .normal)
+        likeButton.setTitleColor(currentTab == .like ? selectorColor : normalColor, for: .normal)
     }
     
     private func moveIndicator(to tab: Tab) {
-        
     }
     
     // MARK: - UI Components
