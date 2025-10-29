@@ -97,8 +97,11 @@ class ProfileActionBar: UIView {
         
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
-            indicator.snp.updateConstraints { make in
+            indicator.snp.remakeConstraints { make in
                 make.centerX.equalTo(targetButton)
+                make.height.equalTo(3)
+                make.width.equalTo(20)
+                make.bottom.equalToSuperview()
             }
             layoutIfNeeded()
         }
