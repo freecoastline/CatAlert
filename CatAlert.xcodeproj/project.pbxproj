@@ -82,6 +82,7 @@
 				Model/TaskProgress.swift,
 				PinkbackGround.webp,
 				Profile/ProfileActionBar.swift,
+				Profile/ProfileActionBarCell.swift,
 				Profile/ProfileBioCell.swift,
 				Profile/ProfileHeaderCell.swift,
 				Profile/ProfileVideoCell.swift,

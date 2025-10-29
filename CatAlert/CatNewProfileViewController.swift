@@ -14,6 +14,7 @@ class CatNewProfileViewController: UIViewController {
     enum ProfileSection: Int, CaseIterable {
         case header
         case bio
+        case actionBar
         case videos
     }
     
@@ -175,6 +176,8 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return 1
         case .videos:
             return mockImages.count
+        case .actionBar:
+            return 1
         }
     }
     
@@ -195,6 +198,9 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             if let model = catModel {
                 cell.configure(with: model)
             }
+            return cell
+        case .actionBar:
+            let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileActionBarCell", for: indexPath) as! ProfileActionBarCell
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
@@ -229,6 +235,8 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
             let itemWidth = (width - totalSpacing) / 3.0
             let itemHeight = itemWidth * 1.3
             return CGSize(width: itemWidth, height: itemHeight)
+        case .actionBar:
+            return CGSize(width: width, height: 60)
         }
     }
     
