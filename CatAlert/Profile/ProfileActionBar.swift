@@ -85,6 +85,21 @@ class ProfileActionBar: UIView {
     }
     
     private func moveIndicator(to tab: Tab) {
+        let currentButton = switch tab {
+        case .album:
+            albumButton
+        case .favorite:
+            favoriteButton
+        case .like:
+            likeButton
+        }
+        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            indicator.snp.makeConstraints { make in
+                make.top.equalTo(currentButton.snp.bottom)
+            }
+        }
     }
     
     // MARK: - UI Components
