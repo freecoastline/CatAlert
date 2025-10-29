@@ -85,26 +85,28 @@ class ProfileActionBar: UIView {
     }
     
     private func moveIndicator(to tab: Tab) {
-        let currentButton = switch tab {
+        let targetButton: UIButton
+        switch tab {
         case .album:
-            albumButton
+            targetButton = albumButton
         case .favorite:
-            favoriteButton
+            targetButton = favoriteButton
         case .like:
-            likeButton
+            targetButton = likeButton
         }
         
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
-            indicator.snp.makeConstraints { make in
-                make.top.equalTo(currentButton.snp.bottom)
+            indicator.snp.updateConstraints { make in
+                make.centerX.equalTo(targetButton)
             }
+            layoutIfNeeded()
         }
     }
     
     // MARK: - UI Components
     private lazy var albumButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.tag = Tab.album.rawValue
         button.setTitle(Tab.album.title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
@@ -134,7 +136,7 @@ class ProfileActionBar: UIView {
         let stack = UIStackView(arrangedSubviews: [albumButton, favoriteButton, likeButton])
         stack.axis = .horizontal
         stack.alignment = .fill
-        stack.distribution = .equalSpacing
+        stack.distribution = .fillEqually
         return stack
     }()
     

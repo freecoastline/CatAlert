@@ -41,6 +41,7 @@ class CatNewProfileViewController: UIViewController {
         collection.register(ProfileHeaderCell.self, forCellWithReuseIdentifier: "ProfileHeaderCell")
         collection.register(ProfileBioCell.self, forCellWithReuseIdentifier: "ProfileBioCell")
         collection.register(ProfileVideoCell.self, forCellWithReuseIdentifier: "ProfileVideoCell")
+        collection.register(ProfileActionBarCell.self, forCellWithReuseIdentifier: "ProfileActionBarCell")
         collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         collection.dataSource = self
         collection.delegate = self
