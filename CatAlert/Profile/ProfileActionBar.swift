@@ -50,6 +50,13 @@ class ProfileActionBar: UIView {
     private func setupUI() {
         addSubview(stackView)
         addSubview(indicator)
+        addSubview(topSeparator)
+        
+        topSeparator.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.height.equalTo(1.0)
+            make.width.equalToSuperview()
+        }
         
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -150,6 +157,10 @@ class ProfileActionBar: UIView {
         return view
     }()
 
-    
+    private lazy var topSeparator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .separator
+        return view
+    }()
 }
 

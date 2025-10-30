@@ -244,7 +244,7 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
             let itemHeight = itemWidth * 1.3
             return CGSize(width: itemWidth, height: itemHeight)
         case .actionBar:
-            return CGSize(width: width, height: 60)
+            return CGSize(width: width, height: 44)
         }
     }
     
