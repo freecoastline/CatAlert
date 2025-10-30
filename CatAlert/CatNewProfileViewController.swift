@@ -35,9 +35,11 @@ class CatNewProfileViewController: UIViewController {
     private var zoomedCellFrame: CGRect = .zero
     
     // MARK: - Test
-    private var mockImages: [UIImage] = []
+    private var albumImages: [UIImage] = []
+    private var favoriteImages: [UIImage] = []
+    private var likeImages: [UIImage] = []
     private var mockPlayCounts = [62, 30, 26, 31, 27, 95]
-    
+     
     // MARK: UI Component
     private lazy var collectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -103,7 +105,7 @@ class CatNewProfileViewController: UIViewController {
     private func loadMockData() {
         catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
         catModel?.loadImageIfNeeded()
-        mockImages = [
+        albumImages = [
             "IMG_4933",
             "IMG_5771",
             "IMG_6317",
@@ -125,6 +127,8 @@ class CatNewProfileViewController: UIViewController {
         ].compactMap({ imageStr in
             ImageReader.getImage(from: imageStr, type: "JPG")
         })
+        favoriteImages = Array(albumImages.prefix(6))
+        likeImages = Array(albumImages.prefix(3))
     }
     
     // MARK: - Gesture
@@ -151,6 +155,15 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
         }
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
+        }
+        var mockImages = [UIImage]()
+        switch currentTab {
+        case .album:
+            mockImages = albumImages
+        case .favorite:
+            mockImages = favoriteImages
+        case .like:
+            mockImages = likeImages
         }
         let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
         let cellframeInCollectionView = cell.frame
@@ -183,7 +196,14 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         case .bio:
             return 1
         case .videos:
-            return mockImages.count
+            switch currentTab {
+            case .album:
+                return albumImages.count
+            case .favorite:
+                return favoriteImages.count
+            case .like:
+                return likeImages.count
+            }
         case .actionBar:
             return 1
         }
@@ -215,6 +235,15 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         default:
+            var mockImages = [UIImage]()
+            switch currentTab {
+            case .album:
+                mockImages = albumImages
+            case .favorite:
+                mockImages = favoriteImages
+            case .like:
+                mockImages = likeImages
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
             let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
             let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
