@@ -38,7 +38,7 @@ class ProfileActionBar: UIView {
     
     // MARK: - Properties
     var onTabChanged: ((Tab) -> Void)?
-    var currentTab: Tab = .album {
+    private lazy var currentTab: Tab = .album {
         didSet {
             updateButtonState()
             moveIndicator(to: currentTab)
@@ -162,5 +162,11 @@ class ProfileActionBar: UIView {
         view.backgroundColor = .separator
         return view
     }()
+    
+    // MARK: - Configure
+    func configure(currentTab: Tab, onTabChanged: @escaping (Tab) -> Void) {
+        self.currentTab = currentTab
+        self.onTabChanged = onTabChanged
+    }
 }
 

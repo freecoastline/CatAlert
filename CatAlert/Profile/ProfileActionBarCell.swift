@@ -8,6 +8,7 @@
 import UIKit
 
 class ProfileActionBarCell: UICollectionViewCell {
+    typealias Tab = ProfileActionBar.Tab
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,5 +28,10 @@ class ProfileActionBarCell: UICollectionViewCell {
         actionBar.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    // MARK: - Configure
+    func configure(currentTab: Tab, onTabChanged: @escaping (Tab) -> Void) {
+        actionBar.configure(currentTab: currentTab, onTabChanged: onTabChanged)
     }
 }

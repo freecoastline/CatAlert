@@ -209,6 +209,10 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return cell
         case .actionBar:
             let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileActionBarCell", for: indexPath) as! ProfileActionBarCell
+            cell.configure(currentTab: currentTab) { [weak self] tab in
+                guard let self else { return }
+                currentTab = tab
+            }
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
