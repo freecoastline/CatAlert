@@ -18,6 +18,11 @@ class CatNewProfileViewController: UIViewController {
         case videos
     }
     
+    private lazy var currentTab: ProfileActionBar.Tab = .album {
+        didSet {
+            self.collectionView.reloadSections(IndexSet(integer: ProfileSection.videos.rawValue))
+        }
+    }
     
     var catModel: CatSimpleInfoModel? {
         didSet {
