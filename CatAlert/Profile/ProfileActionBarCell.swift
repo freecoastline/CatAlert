@@ -19,7 +19,7 @@ class ProfileActionBarCell: UICollectionViewCell {
     }
     
     // MARK: - UIComponent
-    private var actionBar = ProfileActionBar(frame: .zero)
+    private lazy var actionBar = ProfileActionBar(frame: .zero)
     
     // MARK: - Setup
     private func setupUI() {
