@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class CatNewProfileViewController: UIViewController {
+    typealias Tab = ProfileActionBar.Tab
+    
     // MARK: - Property
     enum ProfileSection: Int, CaseIterable {
         case header
@@ -18,7 +20,7 @@ class CatNewProfileViewController: UIViewController {
         case videos
     }
     
-    private lazy var currentTab: ProfileActionBar.Tab = .album {
+    private lazy var currentTab: Tab = .album {
         didSet {
             self.collectionView.reloadSections(IndexSet(integer: ProfileSection.videos.rawValue))
         }
