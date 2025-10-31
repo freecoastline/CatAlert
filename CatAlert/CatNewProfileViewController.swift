@@ -156,11 +156,11 @@ class CatNewProfileViewController: UIViewController {
             currentScale = min(max(0.3, gesture.scale * lastScale), 3.0)
             imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
         case .ended, .cancelled:
-            if currentScale > 0.8 {
+            if currentScale < 0.8 {
+                dismissImageView()
+            } else if currentScale {
                 currentScale = 1.0
                 imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
-            } else {
-                dismissImageView()
             }
         default:
             break
