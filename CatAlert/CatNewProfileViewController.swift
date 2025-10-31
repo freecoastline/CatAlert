@@ -142,15 +142,7 @@ class CatNewProfileViewController: UIViewController {
     
     // MARK: - Gesture
     @objc private func handleZoomImageTap() {
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self else { return }
-            imageZoomImageView.frame = zoomedCellFrame
-            imageZoomBackgroundView.alpha = 0
-        } completion: { [weak self] _ in
-            guard let self else { return }
-            imageZoomImageView.image = nil
-            imageZoomBackgroundView.isHidden = true
-        }
+        dismissImageView()
     }
     
     @objc private func handleImagePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -168,7 +160,7 @@ class CatNewProfileViewController: UIViewController {
                 currentScale = 1.0
                 imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
             } else {
-                
+                dismissImageView()
             }
         default:
             break
@@ -177,6 +169,19 @@ class CatNewProfileViewController: UIViewController {
     
     @objc private func handleImagePan(_ gesture: UIPanGestureRecognizer) {
         
+    }
+    
+    // MARK: - Dissmiss
+    private func dismissImageView() {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            imageZoomImageView.frame = zoomedCellFrame
+            imageZoomBackgroundView.alpha = 0
+        } completion: { [weak self] _ in
+            guard let self else { return }
+            imageZoomImageView.image = nil
+            imageZoomBackgroundView.isHidden = true
+        }
     }
 }
 
