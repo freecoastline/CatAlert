@@ -13,6 +13,9 @@ class CatNewProfileViewController: UIViewController {
     typealias Tab = ProfileActionBar.Tab
     
     // MARK: - Property
+    private var lastScale: CGFloat = 1.0
+    private var currentScale: CGFloat = 1.0
+    
     enum ProfileSection: Int, CaseIterable {
         case header
         case bio
@@ -150,11 +153,23 @@ class CatNewProfileViewController: UIViewController {
         }
     }
     
-    @objc private func handleImagePinch(_ gesture: UIGestureRecognizer) {
-        
+    @objc private func handleImagePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let imageView = gesture.view else {
+            return
+        }
+        switch gesture.state {
+        case .began:
+            lastScale = currentScale
+        case .changed:
+            currentScale = min(max(0.3, gesture.scale * lastScale), 3.0)
+            imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
+        //case .ended:。
+        @unknown default:
+            fatalError()
+        }
     }
     
-    @objc private func handleImagePan(_ gesture: UIGestureRecognizer) {
+    @objc private func handleImagePan(_ gesture: UIPanGestureRecognizer) {
         
     }
 }
@@ -197,6 +212,13 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
     }
 }
 
+
+// MARK: - GestureRecognizerDelegate
+extension CatNewProfileViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
+    }
+}
 
 // MARK: - UICollectionViewDataSource
 extension CatNewProfileViewController: UICollectionViewDataSource {
