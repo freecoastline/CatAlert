@@ -69,6 +69,12 @@ class CatNewProfileViewController: UIViewController {
         let image = UIImageView()
         image.isUserInteractionEnabled = true
         image.contentMode = .scaleAspectFit
+        let pinGesture = UIPinchGestureRecognizer(target: self, action: #selector(handleImagePinch(_:)))
+        image.addGestureRecognizer(pinGesture)
+        pinGesture.delegate = self
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleImagePan(_:)))
+        image.addGestureRecognizer(panGesture)
+        panGesture.delegate = self
         return image
     }()
     
@@ -142,6 +148,14 @@ class CatNewProfileViewController: UIViewController {
             imageZoomImageView.image = nil
             imageZoomBackgroundView.isHidden = true
         }
+    }
+    
+    @objc private func handleImagePinch(_ gesture: UIGestureRecognizer) {
+        
+    }
+    
+    @objc private func handleImagePan(_ gesture: UIGestureRecognizer) {
+        
     }
 }
 
