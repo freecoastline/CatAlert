@@ -13,7 +13,6 @@ class CatNewProfileViewController: UIViewController {
     typealias Tab = ProfileActionBar.Tab
     
     // MARK: - Property
-    private var lastScale: CGFloat = 1.0
     private var currentScale: CGFloat = 1.0
     
     enum ProfileSection: Int, CaseIterable {
@@ -159,17 +158,15 @@ class CatNewProfileViewController: UIViewController {
             return
         }
         switch gesture.state {
-        case .began:
-            lastScale = currentScale
         case .changed:
-            currentScale = min(max(0.3, gesture.scale * lastScale), 3.0)
-            imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
+            let newScale = min(max(0.3, gesture.scale * currentScale), 3.0)
+            currentScale = newScale
+            imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
         case .ended, .cancelled:
             if currentScale < 0.5 {
                 dismissImageView()
             } else {
                 currentScale = 1.0
-                lastScale = 1.0
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
                     imageView.transform = .identity
                 }
@@ -183,7 +180,7 @@ class CatNewProfileViewController: UIViewController {
         
     }
     
-    // MARK: - Dissmiss
+    // MARK: - Dismiss
     private func dismissImageView() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
@@ -191,10 +188,10 @@ class CatNewProfileViewController: UIViewController {
             imageZoomBackgroundView.alpha = 0
         } completion: { [weak self] _ in
             guard let self else { return }
-            lastScale = 1.0
             currentScale = 1.0
             imageZoomImageView.image = nil
             imageZoomBackgroundView.isHidden = true
+            imageZoomImageView.transform = .identity
         }
     }
 }
