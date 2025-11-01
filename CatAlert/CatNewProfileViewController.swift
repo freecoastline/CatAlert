@@ -13,6 +13,7 @@ class CatNewProfileViewController: UIViewController {
     typealias Tab = ProfileActionBar.Tab
     
     // MARK: - Property
+    private var lastScale: CGFloat = 1.0
     private var currentScale: CGFloat = 1.0
     
     enum ProfileSection: Int, CaseIterable {
@@ -160,10 +161,11 @@ class CatNewProfileViewController: UIViewController {
             return
         }
         switch gesture.state {
+        case .began:
+            lastScale = currentScale
         case .changed:
-            let newScale = min(max(0.2, gesture.scale * currentScale), 3.0)
-            currentScale = newScale
-            imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
+            currentScale = min(max(0.2, gesture.scale * lastScale), 3.0)
+            imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
         case .ended, .cancelled:
             if currentScale < 0.3 {
                 dismissImageView()
@@ -191,6 +193,7 @@ class CatNewProfileViewController: UIViewController {
         } completion: { [weak self] _ in
             guard let self else { return }
             currentScale = 1.0
+            lastScale = 1.0
             imageZoomImageView.image = nil
             imageZoomBackgroundView.isHidden = true
             imageZoomImageView.transform = .identity
