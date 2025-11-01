@@ -31,7 +31,7 @@ class ProfileActionBarCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    func configure(currentTab: Tab, onTabChanged: @escaping (Tab) -> Void) {
-        actionBar.configure(currentTab: currentTab, onTabChanged: onTabChanged)
+    func configure(onTabChanged: @escaping (Tab) -> Void) {
+        actionBar.configure(onTabChanged: onTabChanged)
     }
 }

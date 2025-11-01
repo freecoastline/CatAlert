@@ -16,10 +16,10 @@ class CatNewProfileViewController: UIViewController {
     private var currentScale: CGFloat = 1.0
     
     enum ProfileSection: Int, CaseIterable {
-        case header
-        case bio
-        case actionBar
-        case videos
+        case header    // 0
+        case bio       // 1
+        case actionBar // 2
+        case videos    // 3
     }
     
     private lazy var currentTab: Tab = .album {
@@ -261,7 +261,10 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("📱 cellForItemAt called - section: \(indexPath.section), item: \(indexPath.item)")
+
         guard let section = ProfileSection(rawValue: indexPath.section) else {
+            print("⚠️ Unknown section: \(indexPath.section)")
             return collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
         }
 
@@ -280,12 +283,13 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return cell
         case .actionBar:
             let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileActionBarCell", for: indexPath) as! ProfileActionBarCell
-            cell.configure(currentTab: currentTab) { [weak self] tab in
+            cell.configure() { [weak self] tab in
                 guard let self else { return }
                 currentTab = tab
             }
             return cell
-        default:
+        case .videos:
+            print("📱 videos section - item: \(indexPath.item), currentTabImages.count: \(currentTabImages.count)")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
             let image = currentTabImages.count > indexPath.item ? currentTabImages[indexPath.item] : nil
             let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0

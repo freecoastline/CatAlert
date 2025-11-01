@@ -164,8 +164,7 @@ class ProfileActionBar: UIView {
     }()
     
     // MARK: - Configure
-    func configure(currentTab: Tab, onTabChanged: @escaping (Tab) -> Void) {
-        self.currentTab = currentTab
+    func configure(onTabChanged: @escaping (Tab) -> Void) {
         self.onTabChanged = onTabChanged
     }
 }
