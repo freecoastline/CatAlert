@@ -159,11 +159,11 @@ class CatNewProfileViewController: UIViewController {
         }
         switch gesture.state {
         case .changed:
-            let newScale = min(max(0.3, gesture.scale * currentScale), 3.0)
+            let newScale = min(max(0.2, gesture.scale * currentScale), 3.0)
             currentScale = newScale
             imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
         case .ended, .cancelled:
-            if currentScale < 0.5 {
+            if currentScale < 0.3 {
                 dismissImageView()
             } else {
                 currentScale = 1.0
@@ -286,7 +286,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         default:
-            var mockImages = cureentTabImages
+            let mockImages = cureentTabImages
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
             let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
             let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
