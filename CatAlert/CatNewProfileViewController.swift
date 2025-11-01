@@ -36,7 +36,7 @@ class CatNewProfileViewController: UIViewController {
     
     private var zoomedCellFrame: CGRect = .zero
     
-    private var cureentTabImages:[UIImage] { switch currentTab {
+    private var currentTabImages:[UIImage] { switch currentTab {
     case .album:
         return albumImages
     case .favorite:
@@ -254,7 +254,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         case .bio:
             return 1
         case .videos:
-            return cureentTabImages.count
+            return currentTabImages.count
         case .actionBar:
             return 1
         }
@@ -287,7 +287,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
-            let image = cureentTabImages.count > indexPath.item ? cureentTabImages[indexPath.item] : nil
+            let image = currentTabImages.count > indexPath.item ? currentTabImages[indexPath.item] : nil
             let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
             cell.configure(with: image, playCount: playCount)
             return cell
