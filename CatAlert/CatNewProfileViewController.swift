@@ -37,6 +37,15 @@ class CatNewProfileViewController: UIViewController {
     
     private var zoomedCellFrame: CGRect = .zero
     
+    private var cureentTabImages:[UIImage] { switch currentTab {
+    case .album:
+        return albumImages
+    case .favorite:
+        return favoriteImages
+    case .like:
+        return likeImages
+    } }
+    
     // MARK: - Test
     private var albumImages: [UIImage] = []
     private var favoriteImages: [UIImage] = []
@@ -160,10 +169,9 @@ class CatNewProfileViewController: UIViewController {
                 dismissImageView()
             } else {
                 currentScale = 1.0
+                lastScale = 1.0
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
-                    [weak self] in
-                    guard let self else { return }
-                    imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
+                    imageView.transform = .identity
                 }
             }
         default:
@@ -183,6 +191,8 @@ class CatNewProfileViewController: UIViewController {
             imageZoomBackgroundView.alpha = 0
         } completion: { [weak self] _ in
             guard let self else { return }
+            lastScale = 1.0
+            currentScale = 1.0
             imageZoomImageView.image = nil
             imageZoomBackgroundView.isHidden = true
         }
@@ -247,14 +257,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         case .bio:
             return 1
         case .videos:
-            switch currentTab {
-            case .album:
-                return albumImages.count
-            case .favorite:
-                return favoriteImages.count
-            case .like:
-                return likeImages.count
-            }
+            return cureentTabImages.count
         case .actionBar:
             return 1
         }
@@ -286,15 +289,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         default:
-            var mockImages = [UIImage]()
-            switch currentTab {
-            case .album:
-                mockImages = albumImages
-            case .favorite:
-                mockImages = favoriteImages
-            case .like:
-                mockImages = likeImages
-            }
+            var mockImages = cureentTabImages
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
             let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
             let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
