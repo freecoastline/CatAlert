@@ -286,9 +286,8 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         default:
-            let mockImages = cureentTabImages
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
-            let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
+            let image = cureentTabImages.count > indexPath.item ? cureentTabImages[indexPath.item] : nil
             let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
             cell.configure(with: image, playCount: playCount)
             return cell
