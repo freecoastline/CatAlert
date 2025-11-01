@@ -167,7 +167,7 @@ class CatNewProfileViewController: UIViewController {
                 dismissImageView()
             } else {
                 currentScale = 1.0
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
                     imageView.transform = .identity
                 }
             }
