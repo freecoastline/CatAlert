@@ -186,13 +186,13 @@ class CatNewProfileViewController: UIViewController {
         
         switch gesture.state {
         case .began:
-            imageViewOriginalCenter = view.center
+            imageViewOriginalCenter = imageView.center
         case .changed:
             let transition = gesture.translation(in: view)
             let newCenter = CGPoint(x: imageViewOriginalCenter.x + transition.x, y: imageViewOriginalCenter.y + transition.y)
             imageView.center = newCenter
             
-            if currentScale < 1.0 {
+            if currentScale <= 1.0 {
                 let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
                 let maxDistance: CGFloat = 200.0
                 imageZoomBackgroundView.alpha = max(0.3, 1.0 - (distance / maxDistance) * 0.7)
@@ -204,15 +204,17 @@ class CatNewProfileViewController: UIViewController {
             let transition = gesture.translation(in: view)
             let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
             
-            if distance > 150 {
-                dismissImageView()
-            } else {
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
-                    [weak self] in
-                    guard let self else { return }
-                    imageView.center = view.center
-                    imageView.transform = .identity
-                    imageZoomBackgroundView.alpha = 1.0
+            if currentScale <= 1.0 {
+                if distance > 150 {
+                    dismissImageView()
+                } else {
+                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                        [weak self] in
+                        guard let self else { return }
+                        imageView.center = view.center
+                        imageView.transform = .identity
+                        imageZoomBackgroundView.alpha = 1.0
+                    }
                 }
             }
         default:
