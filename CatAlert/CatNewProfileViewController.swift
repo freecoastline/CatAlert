@@ -199,7 +199,20 @@ class CatNewProfileViewController: UIViewController {
             let scale = max(0.7, 1.0 - (distance / maxDistance) * 0.3)
             imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
         case .ended, .cancelled:
-            print("pan gesture end && calcelled")
+            let transition = gesture.translation(in: view)
+            let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
+            
+            if distance > 150 {
+                dismissImageView()
+            } else {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                    [weak self] in
+                    guard let self else { return }
+                    imageView.center = view.center
+                    imageView.transform = .identity
+                    imageZoomBackgroundView.alpha = 1.0
+                }
+            }
         default:
             break
         }
