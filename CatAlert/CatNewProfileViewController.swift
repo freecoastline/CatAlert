@@ -194,9 +194,9 @@ class CatNewProfileViewController: UIViewController {
             
             let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
             let maxDistance: CGFloat = 200.0
-            imageZoomBackgroundView.alpha = max(0.3, 1.0 - distance / maxDistance)
+            imageZoomBackgroundView.alpha = max(0.3, 1.0 - (distance / maxDistance) * 0.7)
             
-            let scale = max(0.7, 1.0 - distance / maxDistance)
+            let scale = max(0.7, 1.0 - (distance / maxDistance) * 0.3)
             imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
         case .ended, .cancelled:
             print("pan gesture end && calcelled")
