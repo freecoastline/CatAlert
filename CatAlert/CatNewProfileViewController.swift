@@ -106,7 +106,7 @@ class CatNewProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(imageZoomBackgroundView)
-        imageZoomBackgroundView.addSubview(imageZoomImageView)
+        view.addSubview(imageZoomImageView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
