@@ -277,7 +277,7 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
 // MARK: - GestureRecognizerDelegate
 extension CatNewProfileViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        true
+        false
     }
 }
 
