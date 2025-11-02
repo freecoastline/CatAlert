@@ -168,9 +168,9 @@ class CatNewProfileViewController: UIViewController {
             currentScale = min(max(0.2, gesture.scale * lastScale), 3.0)
             imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
         case .ended, .cancelled:
-            if currentScale < 0.3 {
+            if currentScale < 0.8 {
                 dismissImageView()
-            } else {
+            } else if currentScale < 1.0 {
                 currentScale = 1.0
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
                     imageView.transform = .identity
