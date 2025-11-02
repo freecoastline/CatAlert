@@ -181,7 +181,7 @@ class CatNewProfileViewController: UIViewController {
     }
     
     @objc private func handleImagePan(_ gesture: UIPanGestureRecognizer) {
-        
+        print("gesture situation: \(gesture.state)")
     }
     
     // MARK: - Dismiss
