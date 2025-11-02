@@ -192,12 +192,14 @@ class CatNewProfileViewController: UIViewController {
             let newCenter = CGPoint(x: imageViewOriginalCenter.x + transition.x, y: imageViewOriginalCenter.y + transition.y)
             imageView.center = newCenter
             
-            let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
-            let maxDistance: CGFloat = 200.0
-            imageZoomBackgroundView.alpha = max(0.3, 1.0 - (distance / maxDistance) * 0.7)
-            
-            let scale = max(0.7, 1.0 - (distance / maxDistance) * 0.3)
-            imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            if currentScale < 1.0 {
+                let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
+                let maxDistance: CGFloat = 200.0
+                imageZoomBackgroundView.alpha = max(0.3, 1.0 - (distance / maxDistance) * 0.7)
+                
+                let scale = max(0.7, 1.0 - (distance / maxDistance) * 0.3)
+                imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
         case .ended, .cancelled:
             let transition = gesture.translation(in: view)
             let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
