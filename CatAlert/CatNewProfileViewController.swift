@@ -15,6 +15,7 @@ class CatNewProfileViewController: UIViewController {
     // MARK: - Property
     private var lastScale: CGFloat = 1.0
     private var currentScale: CGFloat = 1.0
+    private var imageViewOriginalCenter: CGPoint = .zero
     
     enum ProfileSection: Int, CaseIterable {
         case header    // 0
@@ -181,7 +182,20 @@ class CatNewProfileViewController: UIViewController {
     }
     
     @objc private func handleImagePan(_ gesture: UIPanGestureRecognizer) {
-        print("gesture situation: \(gesture.state)")
+        guard let imageView = gesture.view else { return }
+        
+        switch gesture.state {
+        case .began:
+            imageViewOriginalCenter = view.center
+        case .changed:
+            let transition = gesture.translation(in: view)
+            let newCenter = CGPoint(x: imageViewOriginalCenter.x + transition.x, y: imageViewOriginalCenter.y + transition.y)
+            imageView.center = newCenter
+        case .ended, .cancelled:
+            print("pan gesture end && calcelled")
+        default:
+            break
+        }
     }
     
     // MARK: - Dismiss
