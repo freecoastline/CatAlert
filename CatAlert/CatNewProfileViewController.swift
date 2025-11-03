@@ -90,6 +90,10 @@ class CatNewProfileViewController: UIViewController {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleImagePan(_:)))
         image.addGestureRecognizer(panGesture)
         panGesture.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        image.addGestureRecognizer(tapGesture)
+        tapGesture.numberOfTapsRequired = 2
+        tapGesture.delegate = self
         return image
     }()
     
@@ -165,7 +169,7 @@ class CatNewProfileViewController: UIViewController {
         case .began:
             lastScale = currentScale
         case .changed:
-            currentScale = min(max(0.2, gesture.scale * lastScale), 3.0)
+            currentScale = min(max(0.5, gesture.scale * lastScale), 3.0)
             imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
         case .ended, .cancelled:
             if currentScale < 0.8 {
@@ -225,6 +229,14 @@ class CatNewProfileViewController: UIViewController {
             }
         default:
             break
+        }
+    }
+    
+    @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
+        guard let imageView = gesture.view else { return }
+        let newScale = currentScale > 1.0 ? 1.0 : 2.0
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+            imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
         }
     }
     
