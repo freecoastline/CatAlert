@@ -85,6 +85,7 @@
 				Profile/ProfileActionBarCell.swift,
 				Profile/ProfileBioCell.swift,
 				Profile/ProfileHeaderCell.swift,
+				Profile/ProfileMediaItem.swift,
 				Profile/ProfileVideoCell.swift,
 				Reminder/AddButtonCell.swift,
 				Reminder/AddReminderViewController.swift,
