@@ -216,6 +216,12 @@ class CatNewProfileViewController: UIViewController {
                         imageZoomBackgroundView.alpha = 1.0
                     }
                 }
+            } else {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                    [weak self] in
+                    guard let self else { return }
+                    imageView.center = view.center
+                }
             }
         default:
             break
