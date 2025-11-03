@@ -235,6 +235,7 @@ class CatNewProfileViewController: UIViewController {
     @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
         guard let imageView = gesture.view else { return }
         let newScale = currentScale > 1.0 ? 1.0 : 2.0
+        currentScale = newScale
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
             imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
         }
