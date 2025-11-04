@@ -15,6 +15,7 @@ class VideoPlayerViewController: UIViewController {
     private var playerLayer: AVPlayerLayer?
     private let videoURL: URL
     private let closeButtonHeight: CGFloat =  40.0
+    private let playPauseButtonHeight: CGFloat = 60.0
     
     // MARK: - Init
     init(videoURL: URL) {
@@ -34,9 +35,28 @@ class VideoPlayerViewController: UIViewController {
         button.tintColor = .white
         button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         button.layer.cornerRadius = closeButtonHeight / 2
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var playPauseButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        button.layer.cornerRadius = playPauseButtonHeight / 2
+        button.addTarget(self, action: #selector(playPauseButtonTapped), for: .touchUpInside)
         return button
     }()
     
     
+    // MARK: - Selector
+    @objc private func closeButtonTapped() {
+        
+    }
+    
+    @objc private func playPauseButtonTapped() {
+        
+    }
     
 }
