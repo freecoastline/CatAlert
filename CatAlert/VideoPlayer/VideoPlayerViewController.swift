@@ -11,13 +11,13 @@ import AVFoundation
 
 class VideoPlayerViewController: UIViewController {
     // MARK: - Properties
-    private let player: AVPlayer?
-    private let playerLayer: AVPlayerLayer?
+    private var player: AVPlayer?
+    private var playerLayer: AVPlayerLayer?
     private let videoURL: URL
     
     init(videoURL: URL) {
         self.videoURL = videoURL
-        super.init()
+        super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .fullScreen
     }
     
