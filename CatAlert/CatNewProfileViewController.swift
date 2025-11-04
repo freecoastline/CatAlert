@@ -54,6 +54,10 @@ class CatNewProfileViewController: UIViewController {
     private var favoriteImages: [UIImage] = []
     private var likeImages: [UIImage] = []
     private var mockPlayCounts = [62, 30, 26, 31, 27, 95]
+    
+    private var albumMediaItems: [ProfileMediaItem] = []
+    private var favoriteMediaItems: [ProfileMediaItem] = []
+    private var likeMediaItems: [ProfileMediaItem] = []
      
     // MARK: UI Component
     private lazy var collectionView = {
@@ -154,6 +158,17 @@ class CatNewProfileViewController: UIViewController {
         })
         favoriteImages = Array(albumImages.prefix(6))
         likeImages = Array(albumImages.prefix(3))
+        
+        albumMediaItems = albumImages.enumerated().map { index, image in
+            if index % 2 == 0 {
+                return ProfileMediaItem.image(image, playCount: index * 10)
+            } else {
+                let videoURL = URL(string:"https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4")
+                return ProfileMediaItem.video(thumbnail: image, videoURL: videoURL, playCount: index * 10)
+            }
+        }
+        favoriteMediaItems = Array(favoriteMediaItems.prefix(6))
+        likeMediaItems = Array(albumMediaItems.prefix(3))
     }
     
     // MARK: - Gesture
