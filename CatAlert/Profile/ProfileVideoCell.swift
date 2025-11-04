@@ -74,6 +74,10 @@ class ProfileVideoCell: UICollectionViewCell {
         playCountLabel.text = formatPlayCount(playCount)
     }
     
+    func configure(with mediaItem: ProfileMediaItem) {
+        thumbnailImageView.image = mediaItem.thumbnail
+        playCountLabel.text = formatPlayCount(mediaItem.playCount)
+    }
     
     // MARK: - Helper
     private func formatPlayCount(_ count: Int) -> String {
