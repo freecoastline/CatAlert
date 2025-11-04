@@ -11,8 +11,8 @@ import AVFoundation
 
 class VideoPlayerViewController: UIViewController {
     // MARK: - Properties
-    private let player = AVPlayer()
-    private let playerLayer = AVPlayerLayer()
+    private let player: AVPlayer?
+    private let playerLayer: AVPlayerLayer?
     private let videoURL: URL
     
     init(videoURL: URL) {
