@@ -254,6 +254,7 @@ class CatNewProfileViewController: UIViewController {
             imageZoomImageView.image = nil
             imageZoomBackgroundView.isHidden = true
             imageZoomImageView.transform = .identity
+            imageZoomImageView.isHidden = true
         }
     }
 }
@@ -269,22 +270,14 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
         }
-        var mockImages = [UIImage]()
-        switch currentTab {
-        case .album:
-            mockImages = albumImages
-        case .favorite:
-            mockImages = favoriteImages
-        case .like:
-            mockImages = likeImages
-        }
-        let image = mockImages.count > indexPath.item ? mockImages[indexPath.item] : nil
+        let image = currentTabImages.count > indexPath.item ? currentTabImages[indexPath.item] : nil
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
         
         zoomedCellFrame = frameInView
         imageZoomImageView.frame = frameInView
         imageZoomImageView.image = image
+        imageZoomImageView.isHidden = false
         imageZoomBackgroundView.alpha = 0
         imageZoomBackgroundView.isHidden = false
         
