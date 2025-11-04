@@ -98,6 +98,7 @@
 				Reminder/TimeCell.swift,
 				Reminder/TimePickerViewController.swift,
 				SceneDelegate.swift,
+				VideoPlayer/VideoPlayerViewController.swift,
 				ViewController.swift,
 			);
 			target = 2B1627352E6BE15F008A6507 /* CatAlert */;
