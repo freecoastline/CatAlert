@@ -70,7 +70,7 @@ class VideoPlayerViewController: UIViewController {
     
     // MARK: - Selector
     @objc private func closeButtonTapped() {
-        
+        dismiss(animated: true)
     }
     
     @objc private func playPauseButtonTapped() {
