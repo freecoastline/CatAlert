@@ -28,6 +28,13 @@ class VideoPlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LikfeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupPlayer()
+        setupUI()
+    }
+    
     // MARK: - UI Components
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -59,4 +66,13 @@ class VideoPlayerViewController: UIViewController {
         
     }
     
+    
+    // MARK: - Setup
+    private func setupUI() {
+        
+    }
+    
+    private func setupPlayer() {
+        
+    }
 }
