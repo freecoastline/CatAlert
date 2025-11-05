@@ -29,7 +29,7 @@ class VideoPlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - LikfeCycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPlayer()
@@ -96,7 +96,7 @@ class VideoPlayerViewController: UIViewController {
         
         if let playerLayer {
             playerLayer.videoGravity = .resizeAspect
-            playerLayer.bounds = view.frame
+            playerLayer.frame = view.bounds
             view.layer.addSublayer(playerLayer)
         }
         
