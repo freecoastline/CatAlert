@@ -74,7 +74,19 @@ class VideoPlayerViewController: UIViewController {
     
     // MARK: - Setup
     private func setupUI() {
+        view.addSubview(closeButton)
+        view.addSubview(playPauseButton)
         
+        closeButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.height.width.equalTo(40)
+        }
+        
+        playPauseButton.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.width.equalToSuperview()
+        }
     }
     
     private func setupPlayer() {
