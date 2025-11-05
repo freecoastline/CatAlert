@@ -41,6 +41,11 @@ class VideoPlayerViewController: UIViewController {
         playerLayer?.frame = view.bounds
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        player?.pause()
+    }
+    
     // MARK: - UI Components
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
