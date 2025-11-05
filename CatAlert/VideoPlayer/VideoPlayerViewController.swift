@@ -36,6 +36,11 @@ class VideoPlayerViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer?.frame = view.bounds
+    }
+    
     // MARK: - UI Components
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .system)
