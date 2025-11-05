@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class VideoPlayerViewController: UIViewController {
     // MARK: - Properties
@@ -67,12 +68,29 @@ class VideoPlayerViewController: UIViewController {
     }
     
     
+    @objc private func playerDidEndPlaying() {
+        
+    }
+    
     // MARK: - Setup
     private func setupUI() {
         
     }
     
     private func setupPlayer() {
+        player = AVPlayer(url: videoURL)
         
+        playerLayer = AVPlayerLayer(player: player)
+        
+        if let playerLayer {
+            playerLayer.videoGravity = .resizeAspect
+            playerLayer.bounds = view.frame
+            view.layer.addSublayer(playerLayer)
+        }
+        
+        player?.play()
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidEndPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
     }
+    
+    
 }
