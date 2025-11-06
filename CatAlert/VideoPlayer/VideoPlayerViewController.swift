@@ -98,12 +98,12 @@ class VideoPlayerViewController: UIViewController {
         closeButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-20)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(closeButtonHeight)
         }
         
         playPauseButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.width.equalToSuperview()
+            make.height.width.equalTo(playPauseButtonHeight)
         }
     }
     
