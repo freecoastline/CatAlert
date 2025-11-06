@@ -85,8 +85,9 @@ class VideoPlayerViewController: UIViewController {
     }
     
     
-    @objc private func playerDidEndPlaying() {
-        
+    @objc private func playerDidFinishPlaying() {
+        player?.seek(to: .zero)
+        playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
     }
     
     // MARK: - Setup
@@ -118,7 +119,7 @@ class VideoPlayerViewController: UIViewController {
         }
         
         player?.play()
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidEndPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
     }
     
     
