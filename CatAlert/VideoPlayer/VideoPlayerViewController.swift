@@ -29,6 +29,12 @@ class VideoPlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter().removeObserver(self)
+        player?.pause()
+        player = nil
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
