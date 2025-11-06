@@ -284,13 +284,13 @@ class CatNewProfileViewController: UIViewController {
         }
     }
     
-    // MARK: - OpenViewer
+    // MARK: - Helper methods
     private func openImageViewer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
         }
         
-        let image = currentTabImages.count > indexPath.item ? currentTabImages[indexPath.item] : nil
+        let image = mediaItem.imageData
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
         
