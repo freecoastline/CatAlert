@@ -283,19 +283,13 @@ class CatNewProfileViewController: UIViewController {
             imageZoomImageView.isHidden = true
         }
     }
-}
-
-
-// MARK: - UICollectionViewDelegate
-extension CatNewProfileViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let section = ProfileSection(rawValue: indexPath.section),
-              section == .videos else {
-            return
-        }
+    
+    // MARK: - OpenViewer
+    private func openImageViewer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
         }
+        
         let image = currentTabImages.count > indexPath.item ? currentTabImages[indexPath.item] : nil
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
@@ -311,6 +305,32 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
             guard let self else { return }
             imageZoomImageView.frame = view.bounds
             imageZoomBackgroundView.alpha = 1
+        }
+    }
+    
+    private func openVideoPlayer(with mediaItem: ProfileMediaItem) {
+        
+    }
+}
+
+
+// MARK: - UICollectionViewDelegate
+extension CatNewProfileViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let section = ProfileSection(rawValue: indexPath.section),
+              section == .videos else {
+            return
+        }
+        guard currentTabMediaItems.count > indexPath.item else {
+            return
+        }
+        
+        let mediaItem = currentTabMediaItems[indexPath.item]
+        switch mediaItem.type {
+        case .video:
+            openVideoPlayer(with: mediaItem)
+        case .image:
+            openImageViewer(for: indexPath, with: mediaItem)
         }
     }
 }
