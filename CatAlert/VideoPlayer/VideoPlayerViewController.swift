@@ -74,7 +74,14 @@ class VideoPlayerViewController: UIViewController {
     }
     
     @objc private func playPauseButtonTapped() {
-        
+        guard let player else { return }
+        if player.timeControlStatus == .playing {
+            player.pause()
+            playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        } else {
+            player.play()
+            playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        }
     }
     
     
