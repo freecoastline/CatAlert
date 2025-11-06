@@ -309,7 +309,11 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func openVideoPlayer(with mediaItem: ProfileMediaItem) {
-        
+        guard let videoURL = mediaItem.videoURL else {
+            return
+        }
+        let playerVC = VideoPlayerViewController(videoURL: videoURL)
+        present(playerVC, animated: true)
     }
 }
 

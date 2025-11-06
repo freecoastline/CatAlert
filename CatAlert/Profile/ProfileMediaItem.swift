@@ -21,11 +21,11 @@ struct ProfileMediaItem {
     
     // MARK: - convenience init
     static func image(_ imageData: UIImage?, playCount: Int) -> ProfileMediaItem {
-        ProfileMediaItem(type: .image, imageData: imageData, thumbnail: imageData, videoURL: nil, playCount: 0)
+        ProfileMediaItem(type: .image, imageData: imageData, thumbnail: imageData, videoURL: nil, playCount: playCount)
     }
     
     static func video(thumbnail: UIImage?, videoURL: URL?, playCount:Int) -> ProfileMediaItem {
-        ProfileMediaItem(type: .video, imageData: nil, thumbnail: thumbnail, videoURL: videoURL, playCount: 0)
+        ProfileMediaItem(type: .video, imageData: nil, thumbnail: thumbnail, videoURL: videoURL, playCount: playCount)
     }
 }
 
