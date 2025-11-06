@@ -26,7 +26,9 @@ class CatNewProfileViewController: UIViewController {
     
     private lazy var currentTab: Tab = .album {
         didSet {
-            self.collectionView.reloadSections(IndexSet(integer: ProfileSection.videos.rawValue))
+            UIView.performWithoutAnimation {
+                self.collectionView.reloadSections(IndexSet(integer: ProfileSection.videos.rawValue))
+            }
         }
     }
     
@@ -178,7 +180,7 @@ class CatNewProfileViewController: UIViewController {
                 return ProfileMediaItem.video(thumbnail: image, videoURL: videoURL, playCount: index * 10)
             }
         }
-        favoriteMediaItems = Array(favoriteMediaItems.prefix(6))
+        favoriteMediaItems = Array(albumMediaItems.prefix(6))
         likeMediaItems = Array(albumMediaItems.prefix(3))
     }
     
@@ -359,7 +361,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         case .bio:
             return 1
         case .videos:
-            return currentTabImages.count
+            return currentTabMediaItems.count
         case .actionBar:
             return 1
         }
@@ -394,11 +396,11 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         case .videos:
-            print("📱 videos section - item: \(indexPath.item), currentTabImages.count: \(currentTabImages.count)")
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
-            let image = currentTabImages.count > indexPath.item ? currentTabImages[indexPath.item] : nil
-            let playCount = mockPlayCounts.count > indexPath.item ? mockPlayCounts[indexPath.item] : 0
-            cell.configure(with: image, playCount: playCount)
+            if currentTabMediaItems.count > indexPath.item {
+                let mediaItem = currentTabMediaItems[indexPath.item]
+                cell.configure(with: mediaItem)
+            }
             return cell
         }
     }
