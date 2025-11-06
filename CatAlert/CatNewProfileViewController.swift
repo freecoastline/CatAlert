@@ -49,6 +49,17 @@ class CatNewProfileViewController: UIViewController {
         }
     }
     
+    private var currentTabMediaItems: [ProfileMediaItem] {
+        switch currentTab {
+        case .album:
+            return albumMediaItems
+        case .favorite:
+            return favoriteMediaItems
+        case .like:
+            return likeMediaItems
+        }
+    }
+    
     // MARK: - Test
     private var albumImages: [UIImage] = []
     private var favoriteImages: [UIImage] = []
