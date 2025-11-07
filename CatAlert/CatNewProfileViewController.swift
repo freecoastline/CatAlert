@@ -53,10 +53,6 @@ class CatNewProfileViewController: UIViewController {
     
     // MARK: - Test
     private var albumImages: [UIImage] = []
-    private var favoriteImages: [UIImage] = []
-    private var likeImages: [UIImage] = []
-    private var mockPlayCounts = [62, 30, 26, 31, 27, 95]
-    
     private var albumMediaItems: [ProfileMediaItem] = []
     private var favoriteMediaItems: [ProfileMediaItem] = []
     private var likeMediaItems: [ProfileMediaItem] = []
@@ -158,8 +154,6 @@ class CatNewProfileViewController: UIViewController {
         ].compactMap({ imageStr in
             ImageReader.getImage(from: imageStr, type: "JPG")
         })
-        favoriteImages = Array(albumImages.prefix(6))
-        likeImages = Array(albumImages.prefix(3))
         
         albumMediaItems = albumImages.enumerated().map { index, image in
             if index % 2 == 0 {
