@@ -327,6 +327,11 @@ class CatNewProfileViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    enum MediaCaptureType {
+        case photo
+        case video
+    }
+   
     private func photoShoot() {
         
     }
