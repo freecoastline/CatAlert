@@ -158,10 +158,9 @@ class ProfileHeaderCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(handleLabel)
         contentView.addSubview(statsView)
-
+        avatarShadowContainer.addSubview(avatarAddButton)
         // 设置容器圆角（边框会显示在这里）
         avatarShadowContainer.layer.cornerRadius = Self.avatarWidth / 2
-
         // 设置头像图片圆角（稍小一点以形成间隙）
         let borderWidth: CGFloat = 3.0  // 边框宽度
         let gapWidth: CGFloat = 3.0     // 边框内侧的间隙宽度
@@ -176,6 +175,11 @@ class ProfileHeaderCell: UICollectionViewCell {
             make.centerX.equalToSuperview()
         }
 
+        avatarAddButton.snp.makeConstraints { make in
+            make.right.trailing.equalToSuperview()
+            make.height.width.equalTo(Self.avatarAddButtonHeight)
+        }
+        
         avatarImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(imageInset)
         }
