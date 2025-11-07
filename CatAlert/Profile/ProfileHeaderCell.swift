@@ -131,11 +131,15 @@ class ProfileHeaderCell: UICollectionViewCell {
         button.clipsToBounds = true
         button.layer.cornerRadius = Self.avatarAddButtonHeight / 2
         button.backgroundColor = .blue
-        button.addTarget(self, action: #selector(getter: addButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleAddButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    @objc var addButtonTapped: (() -> Void)?
+    var addButtonTapped: (() -> Void)?
+    
+    @objc private func handleAddButtonTapped() {
+        addButtonTapped?()
+    }
     
     // MARK: Initializations
     override init(frame: CGRect) {
