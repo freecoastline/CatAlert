@@ -302,6 +302,40 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func showMediaFunctions() {
+        let alert = UIAlertController(title: "", message: "媒体选项", preferredStyle: .actionSheet)
+        
+        let photoAction = UIAlertAction(title: "拍照", style: .default) { [weak self] _ in
+            guard let self else { return }
+            photoShoot()
+        }
+        alert.addAction(photoAction)
+        
+        let videoAction = UIAlertAction(title: "录像", style: .default) { [weak self] _ in
+            guard let self else { return }
+            videoShoot()
+        }
+        alert.addAction(videoAction)
+        
+        let libraryAction = UIAlertAction(title: "打开相册", style: .default) { [weak self] _ in
+            guard let self else { return }
+            openLibrary()
+        }
+        alert.addAction(libraryAction)
+        
+        let cancel = UIAlertAction(title: "取消", style: .cancel)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    
+    private func photoShoot() {
+        
+    }
+    
+    private func videoShoot() {
+        
+    }
+    
+    private func openLibrary() {
         
     }
 }
