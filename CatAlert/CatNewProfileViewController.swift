@@ -40,17 +40,6 @@ class CatNewProfileViewController: UIViewController {
     
     private var zoomedCellFrame: CGRect = .zero
     
-    private var currentTabImages: [UIImage] {
-        switch currentTab {
-        case .album:
-            return albumImages
-        case .favorite:
-            return favoriteImages
-        case .like:
-            return likeImages
-        }
-    }
-    
     private var currentTabMediaItems: [ProfileMediaItem] {
         switch currentTab {
         case .album:
