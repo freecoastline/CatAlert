@@ -10,6 +10,7 @@ import UIKit
 class ProfileHeaderCell: UICollectionViewCell {
     // MARK: - Constants
     private static let avatarWidth: CGFloat = 100.0
+    private static let avatarAddButtonHeight: CGFloat = 32.0
     
     // MARK: UI components
     private lazy var avatarImageView: UIImageView = {
@@ -122,6 +123,18 @@ class ProfileHeaderCell: UICollectionViewCell {
         view.backgroundColor = .systemBackground // 设置背景色以形成间隙效果
         return view
     }()
+    
+    private lazy var avatarAddButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .white
+        button.clipsToBounds = true
+        button.layer.cornerRadius = Self.avatarAddButtonHeight / 2
+        button.addTarget(self, action: #selector(getter: addButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc var addButtonTapped: (() -> Void)?
     
     // MARK: Initializations
     override init(frame: CGRect) {
