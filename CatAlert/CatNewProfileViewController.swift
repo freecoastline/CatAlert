@@ -300,6 +300,10 @@ class CatNewProfileViewController: UIViewController {
         let playerVC = VideoPlayerViewController(videoURL: videoURL)
         present(playerVC, animated: true)
     }
+    
+    private func showMediaFunctions() {
+        
+    }
 }
 
 
@@ -363,6 +367,10 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
             if let model = catModel {
                 cell.configure(with: model)
+            }
+            cell.addButtonTapped = { [weak self] in
+                guard let self else { return }
+                showMediaFunctions()
             }
             return cell
         case .bio:
