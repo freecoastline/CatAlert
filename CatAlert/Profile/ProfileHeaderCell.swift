@@ -130,6 +130,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         button.tintColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = Self.avatarAddButtonHeight / 2
+        button.backgroundColor = .blue
         button.addTarget(self, action: #selector(getter: addButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -176,7 +177,7 @@ class ProfileHeaderCell: UICollectionViewCell {
         }
 
         avatarAddButton.snp.makeConstraints { make in
-            make.right.trailing.equalToSuperview()
+            make.right.bottom.equalToSuperview()
             make.height.width.equalTo(Self.avatarAddButtonHeight)
         }
         
