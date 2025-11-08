@@ -342,17 +342,24 @@ class CatNewProfileViewController: UIViewController {
         picker.allowsEditing = true
 
         if type == .photo {
-            picker.mediaTypes = ["public.photo"]
+            picker.mediaTypes = ["public.image"]
         } else if type == .video {
             picker.mediaTypes = ["public.video"]
             picker.videoQuality = .typeHigh
-            picker.videoMaximumDuration = 60 
+            picker.videoMaximumDuration = 60
         }
         present(picker, animated: true)
     }
     
     private func openLibrary() {
-        
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+            return
+        }
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true)
     }
 }
 
