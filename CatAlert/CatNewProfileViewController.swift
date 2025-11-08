@@ -335,7 +335,7 @@ class CatNewProfileViewController: UIViewController {
    
     private func openCamera(for type: MediaCaptureType) {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
+            showAlert(title: "相机不可用", message: "当前设备不支持相机功能", showSettings: false)
             return
         }
         let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
@@ -349,12 +349,12 @@ class CatNewProfileViewController: UIViewController {
                     if grant {
                         presentCameraPicker(for: type)
                     } else {
-                        showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频")
+                        showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频", showSettings: true)
                     }
                 }
             }
         case .restricted, .denied:
-            showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
+            showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频", showSettings: true)
         case .authorized:
             presentCameraPicker(for: type)
         @unknown default:
@@ -389,9 +389,19 @@ class CatNewProfileViewController: UIViewController {
         present(picker, animated: true)
     }
     
-    private func showAlert(title: String, message: String) {
+    private func showAlert(title: String, message: String, showSettings: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确定", style: .default))
+        if showSettings {
+            alert.addAction(UIAlertAction(title: "取消", style: .default))
+            alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { action in
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "确定", style: .default))
+        }
+        
         present(alert, animated: true)
     }
 }
