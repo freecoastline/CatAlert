@@ -344,7 +344,7 @@ class CatNewProfileViewController: UIViewController {
         if type == .photo {
             picker.mediaTypes = ["public.image"]
         } else if type == .video {
-            picker.mediaTypes = ["public.video"]
+            picker.mediaTypes = ["public.movie"]
             picker.videoQuality = .typeHigh
             picker.videoMaximumDuration = 60
         }
