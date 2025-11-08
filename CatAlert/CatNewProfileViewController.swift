@@ -333,22 +333,24 @@ class CatNewProfileViewController: UIViewController {
     }
    
     private func openCamera(for type: MediaCaptureType) {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            return
-        }
-        let picker = UIImagePickerController()
-        picker.sourceType = .camera
-        picker.delegate = self
-        picker.allowsEditing = true
-
-        if type == .photo {
-            picker.mediaTypes = ["public.image"]
-        } else if type == .video {
-            picker.mediaTypes = ["public.movie"]
-            picker.videoQuality = .typeHigh
-            picker.videoMaximumDuration = 60
-        }
-        present(picker, animated: true)
+        showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
+//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+//            showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
+//            return
+//        }
+//        let picker = UIImagePickerController()
+//        picker.sourceType = .camera
+//        picker.delegate = self
+//        picker.allowsEditing = true
+//
+//        if type == .photo {
+//            picker.mediaTypes = ["public.image"]
+//        } else if type == .video {
+//            picker.mediaTypes = ["public.movie"]
+//            picker.videoQuality = .typeHigh
+//            picker.videoMaximumDuration = 60
+//        }
+//        present(picker, animated: true)
     }
     
     private func openLibrary() {
@@ -360,6 +362,12 @@ class CatNewProfileViewController: UIViewController {
         picker.delegate = self
         picker.allowsEditing = true
         present(picker, animated: true)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default))
+        present(alert, animated: true)
     }
 }
 
