@@ -343,14 +343,14 @@ class CatNewProfileViewController: UIViewController {
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] grant in
                 guard let self else { return }
-                guard grant else {
-                    showAlert(title: "授权失败", message: "当前设备不支持相机功能")
-                    return
-                }
                 DispatchQueue.main.async {
                     [weak self] in
                     guard let self else { return }
-                    presentCameraPicker(for: type)
+                    if grant {
+                        presentCameraPicker(for: type)
+                    } else {
+                        showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频")
+                    }
                 }
             }
         case .restricted, .denied:
