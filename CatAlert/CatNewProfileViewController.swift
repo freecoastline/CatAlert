@@ -333,7 +333,22 @@ class CatNewProfileViewController: UIViewController {
     }
    
     private func openCamera(for type: MediaCaptureType) {
-        
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            return
+        }
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = self
+        picker.allowsEditing = true
+
+        if type == .photo {
+            picker.mediaTypes = ["public.photo"]
+        } else if type == .video {
+            picker.mediaTypes = ["public.video"]
+            picker.videoQuality = .typeHigh
+            picker.videoMaximumDuration = 60 
+        }
+        present(picker, animated: true)
     }
     
     private func openLibrary() {
@@ -467,5 +482,11 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         ProfileSection(rawValue: section) == .videos ? 2.0 : 0
     }
+    
+}
+
+
+
+extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
 }
