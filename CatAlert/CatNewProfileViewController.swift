@@ -306,13 +306,13 @@ class CatNewProfileViewController: UIViewController {
         
         let photoAction = UIAlertAction(title: "拍照", style: .default) { [weak self] _ in
             guard let self else { return }
-            photoShoot()
+            openCamera(for: .photo)
         }
         alert.addAction(photoAction)
         
         let videoAction = UIAlertAction(title: "录像", style: .default) { [weak self] _ in
             guard let self else { return }
-            videoShoot()
+            openCamera(for: .video)
         }
         alert.addAction(videoAction)
         
@@ -332,11 +332,7 @@ class CatNewProfileViewController: UIViewController {
         case video
     }
    
-    private func photoShoot() {
-        
-    }
-    
-    private func videoShoot() {
+    private func openCamera(for type: MediaCaptureType) {
         
     }
     
