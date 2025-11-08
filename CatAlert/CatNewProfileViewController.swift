@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import AVFoundation
 
 class CatNewProfileViewController: UIViewController {
     typealias Tab = ProfileActionBar.Tab
@@ -333,24 +334,48 @@ class CatNewProfileViewController: UIViewController {
     }
    
     private func openCamera(for type: MediaCaptureType) {
-        showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
-//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-//            showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
-//            return
-//        }
-//        let picker = UIImagePickerController()
-//        picker.sourceType = .camera
-//        picker.delegate = self
-//        picker.allowsEditing = true
-//
-//        if type == .photo {
-//            picker.mediaTypes = ["public.image"]
-//        } else if type == .video {
-//            picker.mediaTypes = ["public.movie"]
-//            picker.videoQuality = .typeHigh
-//            picker.videoMaximumDuration = 60
-//        }
-//        present(picker, animated: true)
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
+            return
+        }
+        let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
+        switch cameraStatus {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] grant in
+                guard let self else { return }
+                guard grant else {
+                    showAlert(title: "授权失败", message: "当前设备不支持相机功能")
+                    return
+                }
+                DispatchQueue.main.async {
+                    [weak self] in
+                    guard let self else { return }
+                    presentCameraPicker(for: type)
+                }
+            }
+        case .restricted, .denied:
+            showAlert(title: "相机不可用", message: "当前设备不支持相机功能")
+        case .authorized:
+            presentCameraPicker(for: type)
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    private func presentCameraPicker(for type: MediaCaptureType) {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = self
+        picker.allowsEditing = true
+
+        if type == .photo {
+            picker.mediaTypes = ["public.image"]
+        } else if type == .video {
+            picker.mediaTypes = ["public.movie"]
+            picker.videoQuality = .typeHigh
+            picker.videoMaximumDuration = 60
+        }
+        present(picker, animated: true)
     }
     
     private func openLibrary() {
