@@ -407,6 +407,10 @@ class CatNewProfileViewController: UIViewController {
         
         present(alert, animated: true)
     }
+    
+    private func reloadVideoSection() {
+        
+    }
 }
 
 
@@ -558,12 +562,12 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
     }
     
     func handleImage(with info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.originalImage] else {
+        guard let image = info[.originalImage] as? UIImage else {
             showAlert(title: "获取图片失败")
             return
         }
         
-    //    addMediaToAlbum(with: image)
+        addMediaToAlbum(image: image)
     }
     
     func handleVideo(with info: [UIImagePickerController.InfoKey : Any]) {
@@ -573,7 +577,7 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
         }
         
         let thumbnail = generateThumbnail(from: videoURL)
-    //     addMediaToAlbum(_ videoURL: videoURL, thumbnail: UIImage)
+        addMediaToAlbum(videoURL: videoURL, thumbnail: thumbnail)
     }
     
     func generateThumbnail(from videoURL: URL) -> UIImage? {
@@ -591,7 +595,15 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
         }
     }
     
+    func addMediaToAlbum(image: UIImage) {
+        let mediaItem = ProfileMediaItem.image(image, playCount: 0)
+        albumMediaItems.insert(mediaItem, at: 0)
+        reloadVideoSection()
+    }
     
-    
-    
+    func addMediaToAlbum(videoURL: URL, thumbnail: UIImage) {
+        let mediaItem = ProfileMediaItem.video(thumbnail: thumbnail, videoURL: videoURL, playCount: 0)
+        albumMediaItems.insert(mediaItem, at: 0)
+        reloadVideoSection()
+    }
 }
