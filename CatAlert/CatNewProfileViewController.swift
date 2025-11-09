@@ -539,13 +539,29 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-
+// MARK: - UIImagePickerControllerDelegate
 extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let mediaType = info[.mediaType] as? String {
+            if mediaType == "public.image" {
+                handleImage(with: info)
+            } else if mediaType == "public.video" {
+                handleVideo(with: info)
+            }
+        }
+    }
+    
+    func handleImage(with: [UIImagePickerController.InfoKey : Any]) {
+        
+    }
+    
+    func handleVideo(with: [UIImagePickerController.InfoKey : Any]) {
         
     }
     
