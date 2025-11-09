@@ -341,8 +341,7 @@ class CatNewProfileViewController: UIViewController {
         let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
         switch cameraStatus {
         case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { [weak self] grant in
-                guard let self else { return }
+            AVCaptureDevice.requestAccess(for: .video) { grant in
                 DispatchQueue.main.async {
                     [weak self] in
                     guard let self else { return }
@@ -358,7 +357,11 @@ class CatNewProfileViewController: UIViewController {
         case .authorized:
             presentCameraPicker(for: type)
         @unknown default:
-            fatalError()
+            showAlert(
+                title: "未知错误",
+                message: "无法确定相机权限状态，请稍后再试",
+                showSettings: false
+            )
         }
     }
     
@@ -392,12 +395,12 @@ class CatNewProfileViewController: UIViewController {
     private func showAlert(title: String, message: String, showSettings: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if showSettings {
-            alert.addAction(UIAlertAction(title: "取消", style: .default))
             alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { action in
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }
             }))
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel))
         } else {
             alert.addAction(UIAlertAction(title: "确定", style: .default))
         }
