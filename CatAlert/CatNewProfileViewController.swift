@@ -395,7 +395,7 @@ class CatNewProfileViewController: UIViewController {
     private func showAlert(title: String, message: String, showSettings: Bool) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if showSettings {
-            alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { action in
+            alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { _ in
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }
