@@ -567,16 +567,29 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
     }
     
     func handleVideo(with info: [UIImagePickerController.InfoKey : Any]) {
-        guard let videoURL = info[.mediaURL] else {
+        guard let videoURL = info[.mediaURL] as? URL else {
             showAlert(title: "获取视频失败")
             return
         }
         
-        
+        let thumbnail = generateThumbnail(from: videoURL)
     //     addMediaToAlbum(_ videoURL: videoURL, thumbnail: UIImage)
     }
     
-    func generateThumbnail
+    func generateThumbnail(from videoURL: URL) -> UIImage? {
+        let asset = AVURLAsset(url: videoURL)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+//        imageGenerator.appliesPreferredTrackTransform = true
+        do {
+            let time = CMTime(seconds: 0, preferredTimescale: 1)
+            let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+            return UIImage(cgImage: cgImage)
+        } catch {
+            showAlert(title: "获取缩略图失败")
+            return nil
+        }
+    }
     
     
     
