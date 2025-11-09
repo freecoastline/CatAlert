@@ -555,7 +555,7 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
         if let mediaType = info[.mediaType] as? String {
             if mediaType == "public.image" {
                 handleImage(with: info)
-            } else if mediaType == "public.video" {
+            } else if mediaType == "public.movie" {
                 handleVideo(with: info)
             }
         }
@@ -586,7 +586,7 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
         let asset = AVURLAsset(url: videoURL)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         
-//        imageGenerator.appliesPreferredTrackTransform = true
+        imageGenerator.appliesPreferredTrackTransform = true
         do {
             let time = CMTime(seconds: 0, preferredTimescale: 1)
             let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
