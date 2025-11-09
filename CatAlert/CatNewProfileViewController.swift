@@ -392,7 +392,7 @@ class CatNewProfileViewController: UIViewController {
         present(picker, animated: true)
     }
     
-    private func showAlert(title: String, message: String, showSettings: Bool) {
+    private func showAlert(title: String, message: String = "", showSettings: Bool = false) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if showSettings {
             alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { _ in
@@ -557,13 +557,28 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
         }
     }
     
-    func handleImage(with: [UIImagePickerController.InfoKey : Any]) {
+    func handleImage(with info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] else {
+            showAlert(title: "获取图片失败")
+            return
+        }
         
+    //    addMediaToAlbum(with: image)
     }
     
-    func handleVideo(with: [UIImagePickerController.InfoKey : Any]) {
+    func handleVideo(with info: [UIImagePickerController.InfoKey : Any]) {
+        guard let videoURL = info[.mediaURL] else {
+            showAlert(title: "获取视频失败")
+            return
+        }
         
+        
+    //     addMediaToAlbum(_ videoURL: videoURL, thumbnail: UIImage)
     }
+    
+    func generateThumbnail
+    
+    
     
     
 }
