@@ -409,7 +409,7 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func reloadVideoSection() {
-        
+        collectionView.reloadSections(IndexSet(integer: ProfileSection.videos.rawValue))
     }
 }
 
@@ -576,7 +576,9 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
             return
         }
         
-        let thumbnail = generateThumbnail(from: videoURL)
+        guard let thumbnail = generateThumbnail(from: videoURL) else {
+            return
+        }
         addMediaToAlbum(videoURL: videoURL, thumbnail: thumbnail)
     }
     
