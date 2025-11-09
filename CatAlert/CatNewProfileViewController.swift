@@ -541,5 +541,7 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
 
 
 extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+    }
 }
