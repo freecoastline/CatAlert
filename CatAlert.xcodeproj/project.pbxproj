@@ -42,6 +42,7 @@
 				"/Localized: Main.storyboard",
 				AppDelegate.swift,
 				Assets.xcassets,
+				Auth/AuthToken.swift,
 				Auth/User.swift,
 				CatAlbumCell.swift,
 				CatCareCell.swift,
