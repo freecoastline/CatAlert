@@ -22,10 +22,10 @@ struct AuthToken: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case accessToken
-        case refreshToken
-        case issueAt
-        case expiredIn
+        case accessToken = "access_token"
+        case refreshToken = "refresh_token"
+        case issueAt = "issue_at"
+        case expiredIn = "expired_in"
     }
     
     init(from decoder: any Decoder) throws {
