@@ -13,6 +13,12 @@ class TokenManager {
     static let shared = TokenManager()
     private init() {}
     
+    // MARK: - Constants
+    private enum KeychainKeys {
+        static let service = "com.catal.service"
+        static let account = "authToken"
+    }
+    
     // MARK: - Public Methods
     func saveToken(_ token: AuthToken) throws {
         
