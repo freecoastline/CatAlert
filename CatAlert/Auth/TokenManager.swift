@@ -21,6 +21,14 @@ class TokenManager {
     
     // MARK: - Public Methods
     func saveToken(_ token: AuthToken) throws {
+        let encoder = JSONEncoder()
+        let tokenData = try encoder.encode(token)
+        let query: [String : Any] = [
+            kSecClass as String : kSecClassGenericPassword,
+            kSecAttrService as String : KeychainKeys.service,
+            kSecAttrAccount as String : KeychainKeys.account,
+            kSecValueData as String : tokenData
+        ]
         
     }
     
