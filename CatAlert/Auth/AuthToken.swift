@@ -21,10 +21,26 @@ struct AuthToken: Codable {
         return false
     }
     
+    enum CodingKeys: String, CodingKey {
+        case accessToken
+        case refreshToken
+        case issueAt
+        case expiredIn
+    }
+
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.accessToken = try container.decode(String.self, forKey: .accessToken)
+        self.refreshToken = try container.decode(String.self, forKey: .refreshToken)
+        self.issueAt = try container.decodeIfPresent(Date.self, forKey: .issueAt) ?? Date()
+        self.expiredIn = try container.decode(TimeInterval.self, forKey: .expiredIn)
+    }
+    
     init(accessToken: String, refreshToken: String, expiredIn: TimeInterval) {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.issueAt = Date()
         self.expiredIn = expiredIn
-    }
+    }    
 }
