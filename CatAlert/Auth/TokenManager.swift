@@ -30,6 +30,8 @@ class TokenManager {
             kSecValueData as String : tokenData
         ]
         
+        SecItemDelete(query as CFDictionary)
+        
     }
     
     func loadToken() -> AuthToken? {
