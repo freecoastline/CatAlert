@@ -27,7 +27,6 @@ struct AuthToken: Codable {
         case issueAt
         case expiredIn
     }
-
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -42,5 +41,13 @@ struct AuthToken: Codable {
         self.refreshToken = refreshToken
         self.issueAt = Date()
         self.expiredIn = expiredIn
-    }    
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(accessToken, forKey: .accessToken)
+        try container.encode(refreshToken, forKey: .refreshToken)
+        try container.encode(issueAt, forKey: .issueAt)
+        try container.encode(expiredIn, forKey: .expiredIn)
+    }
 }
