@@ -18,6 +18,18 @@ class NetworkService {
     static let shared = NetworkService()
     private init() {}
     
+    // MARK: - Properties
+    private let session = URLSession.shared
+    private let baseURL = "https://api.example.com"
+    
     // MARK: - Public Method
+    func request<T: Codable>(
+        url: String,
+        method: HTTPMethod,
+        body: Encodable
+    ) -> T {
+        
+    }
+    
     
 }
