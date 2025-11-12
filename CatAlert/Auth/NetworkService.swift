@@ -26,7 +26,8 @@ class NetworkService {
     func request<T: Codable>(
         url: String,
         method: HTTPMethod,
-        body: Encodable
+        body: Encodable? = nil,
+        requrieAuth: Bool = false
     ) async throws -> T  {
         let fullURL = baseURL + url
         guard let url = URL(string: fullURL) else {
