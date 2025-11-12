@@ -13,4 +13,11 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-
+class NetworkService {
+    // MARK: - Singleton
+    static let shared = NetworkService()
+    private init() {}
+    
+    // MARK: - Public Method
+    
+}
