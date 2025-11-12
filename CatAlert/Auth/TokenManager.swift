@@ -38,6 +38,16 @@ class TokenManager {
     }
     
     func loadToken() -> AuthToken? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String : KeychainKeys.service,
+            kSecAttrAccount as String : KeychainKeys.account,
+            kSecReturnData as String : true,
+            kSecMatchLimit as String : kSecMatchLimitOne
+        ]
+        var result: AnyObject?
+        SecItemCopyMatching(query as CFDictionary, &result)
+        
         
     }
     
