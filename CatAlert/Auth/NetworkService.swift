@@ -27,7 +27,16 @@ class NetworkService {
         url: String,
         method: HTTPMethod,
         body: Encodable
-    ) -> T {
+    ) async throws -> T  {
+        let fullURL = baseURL + url
+        guard let url = URL(string: fullURL) else {
+            throw AuthError.networkError("无效url")
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         
     }
     
