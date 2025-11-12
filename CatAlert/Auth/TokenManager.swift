@@ -46,9 +46,16 @@ class TokenManager {
             kSecMatchLimit as String : kSecMatchLimitOne
         ]
         var result: AnyObject?
-        SecItemCopyMatching(query as CFDictionary, &result)
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard status == errSecSuccess else {
+            return nil
+        }
         
-        
+        guard let tokenData = result as? Data else {
+            return nil
+        }
+        let decoder = JSONDecoder()
+        return try? decoder.decode(AuthToken.self, from: tokenData)
     }
     
     func deleteToken() {
