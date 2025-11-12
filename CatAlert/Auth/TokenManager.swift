@@ -75,6 +75,9 @@ class TokenManager {
     }
     
     func isTokenValid() -> Bool {
-        
+        guard let token = loadToken() else {
+            return false
+        }
+        return !token.isExpired
     }
 }
