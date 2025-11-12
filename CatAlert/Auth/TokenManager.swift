@@ -31,7 +31,10 @@ class TokenManager {
         ]
         
         SecItemDelete(query as CFDictionary)
-        
+        let status = SecItemAdd(query as CFDictionary, nil)
+        guard status == errSecSuccess else {
+            throw AuthError.unknown("保存Token失败")
+        }
     }
     
     func loadToken() -> AuthToken? {
