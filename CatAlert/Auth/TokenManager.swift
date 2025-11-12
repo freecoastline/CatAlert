@@ -59,7 +59,19 @@ class TokenManager {
     }
     
     func deleteToken() {
-        
+        let query: [String : Any] = [
+            kSecClass as String : kSecClassGenericPassword,
+            kSecAttrService as String : KeychainKeys.service,
+            kSecAttrAccount as String : KeychainKeys.account
+        ]
+        let status = SecItemDelete(query as CFDictionary)
+        if status == errSecSuccess {
+            print("✅ Token 删除成功")
+        } else if status == errSecItemNotFound {
+            print("ℹ️ Token 本来就不存在")
+        } else {
+            print("⚠️ 删除 Token 时出现异常，状态码：\(status)")
+        }
     }
     
     func isTokenValid() -> Bool {
