@@ -54,7 +54,17 @@ class NetworkService {
     
         let (data, response) = try await session.data(for: request)
         
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw AuthError.networkError("无效的响应，可能并非HTTP协议")
+        }
         
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw AuthError.networkError("401")
+        }
+        
+        let decoder = JSONDecoder()
+        let result = try decoder.decode(T.self, from: data)
+        return result
     }
     
     
