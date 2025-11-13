@@ -46,7 +46,12 @@ class NetworkService {
             request.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
         }
         
-        
+        if let body = body {
+            let encoder = JSONEncoder()
+            let bodyData: Data = try encoder.encode(body)
+            request.httpBody = bodyData
+        }
+    
     }
     
     
