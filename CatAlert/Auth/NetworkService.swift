@@ -52,6 +52,9 @@ class NetworkService {
             request.httpBody = bodyData
         }
     
+        let (data, response) = try await session.data(for: request)
+        
+        
     }
     
     
