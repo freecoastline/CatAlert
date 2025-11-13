@@ -19,7 +19,7 @@ class AuthManager {
     private(set) var currentUser: User?
     
     // MARK: - Public Methods
-    func sendAuthorizationCode(phoone: String) async throws {
+    func sendVerificationCode(phone: String) async throws {
         
     }
     
@@ -32,7 +32,22 @@ class AuthManager {
     }
     
     var isLoggedIn: Bool {
+        //TODO: 这里在内存中无currentUser且token有效时也是true，后续需要新增currentUser的懒加载
+        tokenManager.isTokenValid()
+    }
+    
+    func getCurrentUser() async throws -> User  {
+        if let user = currentUser {
+            return user
+        }
         
+        guard tokenManager.isTokenValid() else {
+            throw AuthError.tokenInvalid
+        }
+        
+        let user:User = try await networkService.request(url: "/user", method: .get, requiresAuth: true)
+        currentUser = user
+        return user
     }
 }
 
