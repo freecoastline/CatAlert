@@ -59,7 +59,7 @@ class NetworkService {
         }
         
         guard (200...299).contains(httpResponse.statusCode) else {
-            throw AuthError.networkError("401")
+            throw AuthError.serverError(httpResponse.statusCode)
         }
         
         let decoder = JSONDecoder()
