@@ -27,7 +27,7 @@ class NetworkService {
         url: String,
         method: HTTPMethod,
         body: Encodable? = nil,
-        requrieAuth: Bool = false
+        requiresAuth: Bool = false
     ) async throws -> T  {
         let fullURL = baseURL + url
         guard let url = URL(string: fullURL) else {
@@ -37,6 +37,14 @@ class NetworkService {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if requiresAuth {
+            guard let token = TokenManager.shared.loadToken() else {
+                throw AuthError.tokenInvalid
+            }
+            
+            request.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
+        }
         
         
     }
