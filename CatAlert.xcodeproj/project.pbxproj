@@ -43,6 +43,7 @@
 				AppDelegate.swift,
 				Assets.xcassets,
 				Auth/AuthError.swift,
+				Auth/AuthManager.swift,
 				Auth/AuthToken.swift,
 				Auth/NetworkService.swift,
 				Auth/TokenManager.swift,
