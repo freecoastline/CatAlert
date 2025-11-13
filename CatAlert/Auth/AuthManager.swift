@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct SendCodeResponse: Codable {
-    let success: Bool
-    let message: String?
-}
-
-struct LoginResponse: Codable {
-    let token: AuthToken
-    let user: User
-}
-
 class AuthManager {
     // MARK: - Singleton
     static let shared = AuthManager()
