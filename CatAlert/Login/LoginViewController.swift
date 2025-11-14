@@ -51,6 +51,17 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
+    private lazy var sendCodeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .blue
+        button.setTitle("发送验证码", for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 8
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +73,8 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(phoneTextField)
+        view.addSubview(sendCodeButton)
+        view.addSubview(codeTextField)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
@@ -72,6 +85,20 @@ class LoginViewController: UIViewController {
             make.top.equalTo(titleLabel.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        
+        sendCodeButton.snp.makeConstraints { make in
+            make.top.equalTo(phoneTextField.snp.bottom).offset(10)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+            make.width.equalTo(100)
+        }
+        
+        codeTextField.snp.makeConstraints { make in
+            make.top.equalTo(sendCodeButton.snp.top)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
             make.height.equalTo(50)
         }
     }
