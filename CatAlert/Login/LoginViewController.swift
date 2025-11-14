@@ -39,6 +39,14 @@ class LoginViewController: UIViewController {
     
     // MARK: - SetupUI
     private func setupUI() {
+        view.backgroundColor = .white
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
         
     }
 }
