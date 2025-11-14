@@ -20,21 +20,33 @@ class AuthManager {
     
     // MARK: - Public Methods
     func sendVerificationCode(phone: String) async throws {
-        guard phone.count == 1, phone.hasPrefix("1") else {
+        guard phone.count == 11, phone.hasPrefix("1") else {
             throw AuthError.invalidPhoneNumber
         }
         
         let body = ["phone": phone]
-        let response:SendCodeResponse = try await networkService.request(url: "auth/verification", method: .post, body: body, requiresAuth: false)
+        let response:SendCodeResponse = try await networkService.request(url: "auth/send-code", method: .post, body: body, requiresAuth: false)
         
         guard response.success else {
             throw AuthError.unknown(response.message ?? "发送验证码失败")
         }
-        
     }
     
     func login(phone: String, code: String) async throws {
+        guard phone.count == 11, phone.hasPrefix("1") else {
+            throw AuthError.invalidPhoneNumber
+        }
         
+        guard code.count == 6, code.allSatisfy({ $0.isNumber == true }) else {
+            throw AuthError.invalidVerificationCode
+        }
+        
+        
+        let body = ["phone": phone, "code": code]
+        let loginResponse: LoginResponse = try await networkService.request(url: "/auth/login", method: .post, body: body, requiresAuth: false)
+        
+        try tokenManager.saveToken(loginResponse.token)
+        currentUser = loginResponse.user
     }
     
     func logout() {
