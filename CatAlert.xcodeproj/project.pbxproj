@@ -79,6 +79,7 @@
 				IMG_6364.JPG,
 				IMG_7585.JPG,
 				IMG_7595.JPG,
+				Login/LoginViewController.swift,
 				Managers/DataPersistenceManager.swift,
 				Managers/NotificationManager.swift,
 				Managers/ReminderManager.swift,

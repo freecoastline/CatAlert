@@ -37,7 +37,7 @@ class AuthManager {
             throw AuthError.invalidPhoneNumber
         }
         
-        guard code.count == 6, code.allSatisfy({ $0.isNumber == true }) else {
+        guard code.count == 6, code.allSatisfy({ $0.isNumber }) else {
             throw AuthError.invalidVerificationCode
         }
         
