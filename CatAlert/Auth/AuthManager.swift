@@ -28,7 +28,8 @@ class AuthManager {
     }
     
     func logout() {
-        
+        tokenManager.deleteToken()
+        currentUser = nil 
     }
     
     var isLoggedIn: Bool {
