@@ -21,6 +21,16 @@ class LoginViewController: UIViewController {
         return label
     }()
     
+    private lazy var phoneTextField: UITextField = {
+        let textFiled = UITextField()
+        textFiled.placeholder = "请输入手机号"
+        textFiled.keyboardType = .numberPad
+        textFiled.borderStyle = .roundedRect
+        textFiled.font = .systemFont(ofSize: 16)
+        textFiled.clearButtonMode = .whileEditing
+        return textFiled
+    }()
+    
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("登陆", for: .normal)
@@ -43,7 +53,6 @@ class LoginViewController: UIViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
-            make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
