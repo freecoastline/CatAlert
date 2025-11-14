@@ -20,6 +20,16 @@ class AuthManager {
     
     // MARK: - Public Methods
     func sendVerificationCode(phone: String) async throws {
+        guard phone.count == 1, phone.hasPrefix("1") else {
+            throw AuthError.invalidPhoneNumber
+        }
+        
+        let body = ["phone": phone]
+        let response:SendCodeResponse = try await networkService.request(url: "auth/verification", method: .post, body: body, requiresAuth: false)
+        
+        guard response.success else {
+            throw AuthError.unknown(response.message ?? "发送验证码失败")
+        }
         
     }
     
@@ -29,7 +39,7 @@ class AuthManager {
     
     func logout() {
         tokenManager.deleteToken()
-        currentUser = nil 
+        currentUser = nil
     }
     
     var isLoggedIn: Bool {
