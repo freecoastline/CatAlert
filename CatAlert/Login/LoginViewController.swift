@@ -41,6 +41,16 @@ class LoginViewController: UIViewController {
     }()
     
     
+    private lazy var codeTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "请输入验证码"
+        textField.keyboardType = .numberPad
+        textField.borderStyle = .roundedRect
+        textField.font = .systemFont(ofSize: 16)
+        textField.clearButtonMode = .whileEditing
+        return textField
+    }()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,13 +61,13 @@ class LoginViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
+        view.addSubview(phoneTextField)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
 
-        view.addSubview(phoneTextField)
         phoneTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)
