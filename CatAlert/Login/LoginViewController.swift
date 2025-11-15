@@ -113,6 +113,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Helper Method
+    @MainActor
     private func showAlert(_ message: String) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default))
