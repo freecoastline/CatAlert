@@ -108,8 +108,6 @@ class LoginViewController: UIViewController {
                 showAlert(message)
             }
         }
-        
-        
     }
     
     // MARK: - Helper Method
