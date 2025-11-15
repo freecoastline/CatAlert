@@ -87,8 +87,8 @@ class LoginViewController: UIViewController {
                     dismiss(animated: true)
                 }
             } catch {
-                let messasge = (error as? AuthError)?.localizedDescription ?? "登陆失败"
-                showAlert(messasge)
+                let message = (error as? AuthError)?.localizedDescription ?? "登陆失败"
+                showAlert(message)
             }
         }
     }

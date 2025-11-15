@@ -59,4 +59,3 @@ enum AuthError:Error {
         }
     }
 }
-}
