@@ -37,9 +37,9 @@ class LoginViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
         button.backgroundColor = .red
+        button.layer.cornerRadius = 8
         return button
     }()
-    
     
     private lazy var codeTextField: UITextField = {
         let textField = UITextField()
@@ -75,6 +75,7 @@ class LoginViewController: UIViewController {
         view.addSubview(phoneTextField)
         view.addSubview(sendCodeButton)
         view.addSubview(codeTextField)
+        view.addSubview(loginButton)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
@@ -101,5 +102,13 @@ class LoginViewController: UIViewController {
             make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
             make.height.equalTo(50)
         }
+        
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(codeTextField.snp.bottom).offset(30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        
     }
 }
