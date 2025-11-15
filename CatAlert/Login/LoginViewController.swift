@@ -126,6 +126,7 @@ class LoginViewController: UIViewController {
         view.addSubview(sendCodeButton)
         view.addSubview(codeTextField)
         view.addSubview(loginButton)
+        isModalInPresentation = true
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
