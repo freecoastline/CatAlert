@@ -68,6 +68,37 @@ class LoginViewController: UIViewController {
         setupUI()
     }
     
+    // MARK: - Action
+    @objc private func loginButtonTapped() {
+        
+    }
+    
+    @objc private func sendCodeButtonTapped() {
+        guard let phone = phoneTextField.text, !phone.isEmpty else {
+            showAlert("号码无效")
+            return
+        }
+        
+        Task {
+            do {
+                try await AuthManager.shared.sendVerificationCode(phone: phone)
+                showAlert("验证码发送成功")
+            } catch {
+                let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
+                showAlert(message)
+            }
+        }
+        
+        
+    }
+    
+    // MARK: - Helper Method
+    private func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default))
+        present(alert, animated: true)
+    }
+    
     // MARK: - SetupUI
     private func setupUI() {
         view.backgroundColor = .white
@@ -109,6 +140,9 @@ class LoginViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
+        
+        sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
     }
 }
