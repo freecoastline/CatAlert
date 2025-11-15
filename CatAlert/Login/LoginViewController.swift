@@ -70,7 +70,27 @@ class LoginViewController: UIViewController {
     
     // MARK: - Action
     @objc private func loginButtonTapped() {
+        guard let phone = phoneTextField.text, !phone.isEmpty else {
+            showAlert("号码无效")
+            return
+        }
         
+        guard let code = codeTextField.text, !code.isEmpty else {
+            showAlert("验证码无效")
+            return
+        }
+        
+        Task {
+            do {
+                try await AuthManager.shared.login(phone: phone, code: code)
+                await MainActor.run {
+                    dismiss(animated: true)
+                }
+            } catch {
+                let messasge = (error as? AuthError)?.localizedDescription ?? "登陆失败"
+                showAlert(messasge)
+            }
+        }
     }
     
     @objc private func sendCodeButtonTapped() {
