@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
     }()
     
     private lazy var sendCodeButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
         button.backgroundColor = .blue
         button.setTitle("发送验证码", for: .normal)
         button.clipsToBounds = true
