@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 
 class LoginViewController: UIViewController {
+    // MARK: - Init
+    deinit {
+        stopCountdown()
+    }
+    
     // MARK: - UI component
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -61,6 +66,9 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Property
+    private var countdownTimer: Timer?
+    private var countdown:Int = 60
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -103,6 +111,7 @@ class LoginViewController: UIViewController {
             do {
                 try await AuthManager.shared.sendVerificationCode(phone: phone)
                 showAlert("验证码发送成功")
+                startCountdown()
             } catch {
                 let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
                 showAlert(message)
@@ -116,6 +125,31 @@ class LoginViewController: UIViewController {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default))
         present(alert, animated: true)
+    }
+    
+    private func startCountdown() {
+        countdown = 60
+        sendCodeButton.isEnabled = false
+        sendCodeButton.backgroundColor = .gray
+        
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
+    
+    private func stopCountdown() {
+        sendCodeButton.isEnabled = true
+        sendCodeButton.backgroundColor = .blue
+        countdownTimer?.invalidate()
+        countdownTimer = nil
+        sendCodeButton.setTitle("发送验证码", for: .normal)
+    }
+    
+    @objc private func updateTimer() {
+        countdown -= 1
+        if countdown >= 1 {
+            sendCodeButton.setTitle("\(countdown)秒后发送验证码", for: .normal)
+        } else {
+            stopCountdown()
+        }
     }
     
     // MARK: - SetupUI
