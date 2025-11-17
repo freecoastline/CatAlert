@@ -126,7 +126,7 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        title = "猫咪资料"
+        navigationItem.title = "猫咪资料"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "退出登陆", style: .plain, target: self, action: #selector(logoutButtonTapped))
     }
 
