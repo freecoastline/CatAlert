@@ -131,7 +131,7 @@ class LoginViewController: UIViewController {
         countdown = 60
         sendCodeButton.isEnabled = false
         sendCodeButton.backgroundColor = .gray
-        
+        sendCodeButton.setTitle("\(countdown)秒后发送验证码", for: .normal)  // ← 添加这行
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
