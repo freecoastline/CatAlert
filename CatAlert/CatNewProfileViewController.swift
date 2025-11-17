@@ -127,6 +127,7 @@ class CatNewProfileViewController: UIViewController {
     
     private func setupNavigationBar() {
         title = "猫咪资料"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "退出登陆", style: .plain, target: self, action: #selector(logoutButtonTapped))
     }
 
     // MARK: - Data
@@ -271,6 +272,23 @@ class CatNewProfileViewController: UIViewController {
     }
     
     // MARK: - Helper methods
+    @objc private func logoutButtonTapped() {
+        let alert = UIAlertController(title: "确定退出登陆吗？", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { [weak self] _ in
+            guard let self else { return }
+            logout()
+        }))
+        present(alert, animated: true)
+    }
+    
+    private func logout() {
+        AuthManager.shared.logout()
+        let loginViewController = LoginViewController()
+        loginViewController.modalPresentationStyle = .fullScreen
+        present(loginViewController, animated: true)
+    }
+    
     private func openImageViewer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
