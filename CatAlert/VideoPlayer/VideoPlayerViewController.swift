@@ -17,6 +17,7 @@ class VideoPlayerViewController: UIViewController {
     private let videoURL: URL
     private let closeButtonHeight: CGFloat =  40.0
     private let playPauseButtonHeight: CGFloat = 60.0
+    var onDismiss: (() -> Void)?
     
     // MARK: - Init
     init(videoURL: URL) {
@@ -76,7 +77,10 @@ class VideoPlayerViewController: UIViewController {
     
     // MARK: - Selector
     @objc private func closeButtonTapped() {
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            guard let self else { return }
+            onDismiss?()
+        }
     }
     
     @objc private func playPauseButtonTapped() {
