@@ -312,7 +312,7 @@ class CatNewProfileViewController: UIViewController {
         }
     }
     
-    private func openVideoPlayer(with mediaItem: ProfileMediaItem) {
+    private func openVideoPlayer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
         guard let videoURL = mediaItem.videoURL else {
             return
         }
@@ -446,7 +446,7 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
         let mediaItem = currentTabMediaItems[indexPath.item]
         switch mediaItem.type {
         case .video:
-            openVideoPlayer(with: mediaItem)
+            openVideoPlayer(for: indexPath, with: mediaItem)
         case .image:
             openImageViewer(for: indexPath, with: mediaItem)
         }
