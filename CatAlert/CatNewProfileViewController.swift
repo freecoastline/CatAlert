@@ -316,12 +316,23 @@ class CatNewProfileViewController: UIViewController {
         guard let videoURL = mediaItem.videoURL, let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
         }
+        let image = mediaItem.thumbnail
         let cellframeInColletionView = cell.frame
         let frameInView = collectionView.convert(cellframeInColletionView, to: view)
         zoomedCellFrame = frameInView
+        imageZoomImageView.frame = frameInView
+        imageZoomImageView.image = image
+        imageZoomImageView.isHidden = false
+        imageZoomBackgroundView.alpha = 0
+        imageZoomBackgroundView.isHidden = false
         
         let playerVC = VideoPlayerViewController(videoURL: videoURL)
-        present(playerVC, animated: true)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            imageZoomImageView.frame = view.bounds
+            imageZoomBackgroundView.alpha = 1
+            present(playerVC, animated: true)
+        }
     }
     
     private func showMediaFunctions() {
