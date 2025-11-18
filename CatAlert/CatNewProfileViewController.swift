@@ -313,9 +313,13 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func openVideoPlayer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
-        guard let videoURL = mediaItem.videoURL else {
+        guard let videoURL = mediaItem.videoURL, let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
             return
         }
+        let cellframeInColletionView = cell.frame
+        let frameInView = collectionView.convert(cellframeInColletionView, to: view)
+        zoomedCellFrame = frameInView
+        
         let playerVC = VideoPlayerViewController(videoURL: videoURL)
         present(playerVC, animated: true)
     }
