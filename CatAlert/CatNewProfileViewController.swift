@@ -336,6 +336,8 @@ class CatNewProfileViewController: UIViewController {
             guard let self else { return }
             imageZoomImageView.frame = view.bounds
             imageZoomBackgroundView.alpha = 1
+        } completion: { [weak self] _ in 
+            guard let self else { return }
             present(playerVC, animated: true)
         }
     }
