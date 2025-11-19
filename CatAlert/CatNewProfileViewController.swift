@@ -327,6 +327,11 @@ class CatNewProfileViewController: UIViewController {
         imageZoomBackgroundView.isHidden = false
         
         let playerVC = VideoPlayerViewController(videoURL: videoURL)
+        playerVC.modalPresentationStyle = .overFullScreen
+        playerVC.onDismiss = { [weak self] in
+            guard let self else { return }
+            dismissImageView()
+        }
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
             imageZoomImageView.frame = view.bounds
