@@ -17,8 +17,31 @@ class RegisterViewController: UIViewController {
     
     // MARK: - UI component
     private lazy var usernameTextField: UITextField = {
-        
-    }
+        let textField = UITextField()
+        textField.placeholder = "请输入用户名"
+        textField.borderStyle = .roundedRect
+        textField.font = .systemFont(ofSize: 16)
+        textField.keyboardType = .default
+        return textField
+    }()
+    
+    private lazy var emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "请输入邮箱"
+        textField.borderStyle = .roundedRect
+        textField.font = .systemFont(ofSize: 16)
+        textField.keyboardType = .default
+        return textField
+    }()
+    
+    private lazy var passwordField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "请输入密码"
+        textField.borderStyle = .roundedRect
+        textField.font = .systemFont(ofSize: 16)
+        textField.keyboardType = .default
+        return textField
+    }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
