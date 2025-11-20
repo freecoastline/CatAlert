@@ -16,6 +16,10 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - UI component
+    private lazy var usernameTextField: UITextField = {
+        
+    }
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "欢迎注册 CatAlert"
