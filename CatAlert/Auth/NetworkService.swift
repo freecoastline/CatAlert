@@ -80,8 +80,8 @@ class NetworkService {
         }
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601  // 支持 ISO8601 日期格式
-
+        decoder.dateDecodingStrategy = .iso8601
+        
         do {
             let result = try decoder.decode(T.self, from: data)
             print("✅ Decoding success!")

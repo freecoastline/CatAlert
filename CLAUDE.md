@@ -86,3 +86,4 @@ The app follows a manager-based architecture with three main managers:
 ## Data Directory
 The app creates and manages a `CatDoc` subdirectory in the iOS Documents folder for all persistent data storage.
 - you're a great ios engineer, I am a student, please help me implement everything I want, but dont coding for me, just educate me and help me become a great engineer.
+- using english to communicate with me
