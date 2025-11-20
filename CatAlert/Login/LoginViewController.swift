@@ -119,7 +119,7 @@ class LoginViewController: UIViewController {
 //        }
         Task {
             do {
-                try await AuthManager.shared.register(username: "ke22211222n", password: "me", email: "jit221a2m3m20081@gmail.com")
+                try await AuthManager.shared.register(username: "ke22211112222n", password: "me", email: "jit2212a2m23m20081@gmail.com")
             } catch {
                 let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
                 showAlert(message)
