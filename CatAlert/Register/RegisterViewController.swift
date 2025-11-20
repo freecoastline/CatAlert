@@ -30,7 +30,7 @@ class RegisterViewController: UIViewController {
         textField.placeholder = "请输入邮箱"
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 16)
-        textField.keyboardType = .default
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
@@ -194,6 +194,9 @@ class RegisterViewController: UIViewController {
         view.addSubview(phoneTextField)
         view.addSubview(sendCodeButton)
         view.addSubview(codeTextField)
+        view.addSubview(usernameTextField)
+        view.addSubview(passwordField)
+        view.addSubview(emailTextField)
         view.addSubview(loginButton)
         isModalInPresentation = true
         titleLabel.snp.makeConstraints { make in
@@ -201,9 +204,21 @@ class RegisterViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
-
-        phoneTextField.snp.makeConstraints { make in
+        usernameTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(50)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(50)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        
+        phoneTextField.snp.makeConstraints { make in
+            make.top.equalTo(usernameTextField.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -217,6 +232,13 @@ class RegisterViewController: UIViewController {
         }
         
         codeTextField.snp.makeConstraints { make in
+            make.top.equalTo(sendCodeButton.snp.top)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
+            make.height.equalTo(50)
+        }
+        
+        passwordField.snp.makeConstraints { make in
             make.top.equalTo(sendCodeButton.snp.top)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
