@@ -72,5 +72,11 @@ class AuthManager {
         currentUser = user
         return user
     }
+    
+    func register(phone: String = "17600625896", code: String = "111", username: String, password: String, email: String) async throws {
+        let body = ["phone" : phone, "code": code, "username" : username, "password" : password, "email" : email]
+        let registerResponse: RegisterResponse = try await networkService.request(url: "/api/auth/register", method: .post, body: body, requiresAuth: false)
+        print(registerResponse.message)
+    }
 }
 

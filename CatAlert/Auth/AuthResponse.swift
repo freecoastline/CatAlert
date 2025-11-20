@@ -16,3 +16,8 @@ struct LoginResponse: Codable {
     let token: AuthToken
     let user: User
 }
+
+struct RegisterResponse: Codable {
+    let message: String
+    let user: User
+}

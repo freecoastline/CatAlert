@@ -20,7 +20,7 @@ class NetworkService {
     
     // MARK: - Properties
     private let session = URLSession.shared
-    private let baseURL = "http://127.0.0.1:8000"
+    private let baseURL = "http://192.168.31.235:8000"
     
     // MARK: - Public Method
     func request<T: Codable>(

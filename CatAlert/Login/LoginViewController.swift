@@ -102,16 +102,24 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func sendCodeButtonTapped() {
-        guard let phone = phoneTextField.text, !phone.isEmpty else {
-            showAlert("号码无效")
-            return
-        }
-        
+//        guard let phone = phoneTextField.text, !phone.isEmpty else {
+//            showAlert("号码无效")
+//            return
+//        }
+//        
+//        Task {
+//            do {
+//                try await AuthManager.shared.sendVerificationCode(phone: phone)
+//                showAlert("验证码发送成功")
+//                startCountdown()
+//            } catch {
+//                let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
+//                showAlert(message)
+//            }
+//        }
         Task {
             do {
-                try await AuthManager.shared.sendVerificationCode(phone: phone)
-                showAlert("验证码发送成功")
-                startCountdown()
+                try await AuthManager.shared.register(username: "ken", password: "me", email: "jitamm20081@gmail.com")
             } catch {
                 let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
                 showAlert(message)
