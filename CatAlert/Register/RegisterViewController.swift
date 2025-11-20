@@ -63,9 +63,9 @@ class RegisterViewController: UIViewController {
         return textFiled
     }()
     
-    private lazy var loginButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("登陆", for: .normal)
+        button.setTitle("注册", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.clipsToBounds = true
         button.backgroundColor = .red
@@ -197,7 +197,7 @@ class RegisterViewController: UIViewController {
         view.addSubview(usernameTextField)
         view.addSubview(passwordField)
         view.addSubview(emailTextField)
-        view.addSubview(loginButton)
+        view.addSubview(registerButton)
         isModalInPresentation = true
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
@@ -245,7 +245,7 @@ class RegisterViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        loginButton.snp.makeConstraints { make in
+        registerButton.snp.makeConstraints { make in
             make.top.equalTo(codeTextField.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
@@ -253,7 +253,7 @@ class RegisterViewController: UIViewController {
         }
         
         sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
     }
 }
