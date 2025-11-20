@@ -50,21 +50,59 @@ class NetworkService {
             let encoder = JSONEncoder()
             let bodyData: Data = try encoder.encode(body)
             request.httpBody = bodyData
+
+            // Debug: Print request body
+            if let jsonString = String(data: bodyData, encoding: .utf8) {
+                print("📤 Request to: \(fullURL)")
+                print("📤 Method: \(method.rawValue)")
+                print("📤 Body: \(jsonString)")
+            }
+        } else {
+            print("📤 Request to: \(fullURL)")
+            print("📤 Method: \(method.rawValue)")
+            print("📤 Body: none")
         }
-    
+
         let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw AuthError.networkError("无效的响应，可能并非HTTP协议")
         }
         
+        // Debug: Print response
+        print("📥 Response status: \(httpResponse.statusCode)")
+        if let responseString = String(data: data, encoding: .utf8) {
+            print("📥 Response body: \(responseString)")
+        }
+
         guard (200...299).contains(httpResponse.statusCode) else {
             throw AuthError.serverError(httpResponse.statusCode)
         }
-        
+
         let decoder = JSONDecoder()
-        let result = try decoder.decode(T.self, from: data)
-        return result
+        decoder.dateDecodingStrategy = .iso8601  // 支持 ISO8601 日期格式
+
+        do {
+            let result = try decoder.decode(T.self, from: data)
+            print("✅ Decoding success!")
+            return result
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("❌ 缺少字段: \(key.stringValue)")
+            print("❌ 路径: \(context.codingPath)")
+            print("❌ 说明: \(context.debugDescription)")
+        } catch let DecodingError.typeMismatch(type, context) {
+            print("❌ 类型不匹配: 期望 \(type)")
+            print("❌ 路径: \(context.codingPath)")
+            print("❌ 说明: \(context.debugDescription)")
+        } catch let DecodingError.dataCorrupted(context) {
+            print("❌ 数据损坏")
+            print("❌ 路径: \(context.codingPath)")
+            print("❌ 说明: \(context.debugDescription)")
+
+        } catch {
+            print("❌ 未知解码错误: \(error)")
+        }
+        return nil
     }
     
     
