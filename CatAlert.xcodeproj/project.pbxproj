@@ -95,6 +95,7 @@
 				Profile/ProfileHeaderCell.swift,
 				Profile/ProfileMediaItem.swift,
 				Profile/ProfileVideoCell.swift,
+				Register/RegisterViewController.swift,
 				Reminder/AddButtonCell.swift,
 				Reminder/AddReminderViewController.swift,
 				Reminder/EditReminderViewController.swift,
