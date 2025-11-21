@@ -119,7 +119,7 @@ class RegisterViewController: UIViewController {
         navigationController?.pushViewController(loginVC, animated: false)
     }
     
-    @objc private func loginButtonTapped() {
+    @objc private func registerButtonTapped() {
         guard let phone = phoneTextField.text, !phone.isEmpty else {
             showAlert("号码无效")
             return
@@ -130,9 +130,14 @@ class RegisterViewController: UIViewController {
             return
         }
         
+        guard let username = usernameTextField.text, let password = passwordField.text, let email = emailTextField.text else {
+            showAlert("user Info Invalid")
+            return
+        }
+        
         Task {
             do {
-                try await AuthManager.shared.login(phone: phone, code: code)
+                try await AuthManager.shared.register(username: username, password: password, email: email)
                 await MainActor.run {
                     dismiss(animated: true)
                 }
