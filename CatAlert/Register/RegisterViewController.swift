@@ -114,6 +114,11 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Action
+    @objc private func jumpToLoginPageButtonTapped() {
+        let loginVC = LoginViewController()
+        navigationController?.pushViewController(loginVC, animated: false)
+    }
+    
     @objc private func loginButtonTapped() {
         guard let phone = phoneTextField.text, !phone.isEmpty else {
             showAlert("号码无效")
@@ -273,6 +278,6 @@ class RegisterViewController: UIViewController {
         
         sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        
+        jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
     }
 }
