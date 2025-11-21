@@ -220,6 +220,7 @@ class RegisterViewController: UIViewController {
     // MARK: - SetupUI
     private func setupKeyboardDismissal() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
     }
     
@@ -275,7 +276,7 @@ class RegisterViewController: UIViewController {
         }
         
         sendCodeButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(10)
+            make.bottom.equalTo(titleLabel.snp.top).offset(-10)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
             make.width.equalTo(100)
