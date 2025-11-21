@@ -93,6 +93,16 @@ class RegisterViewController: UIViewController {
         return button
     }()
     
+    private lazy var jumpToLoginPageButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.backgroundColor = .blue
+        button.setTitle("跳转登陆页", for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 8
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
     // MARK: - Property
     private var countdownTimer: Timer?
     private var countdown:Int = 60
