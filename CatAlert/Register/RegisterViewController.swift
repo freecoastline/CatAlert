@@ -208,6 +208,7 @@ class RegisterViewController: UIViewController {
         view.addSubview(passwordField)
         view.addSubview(emailTextField)
         view.addSubview(registerButton)
+        view.addSubview(jumpToLoginPageButton)
         isModalInPresentation = true
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
@@ -220,15 +221,23 @@ class RegisterViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
+        
+        passwordField.snp.makeConstraints { make in
+            make.top.equalTo(usernameTextField.snp.bottom).offset(30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(50)
+            make.top.equalTo(passwordField.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
         phoneTextField.snp.makeConstraints { make in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(50)
+            make.top.equalTo(emailTextField.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -248,15 +257,15 @@ class RegisterViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        passwordField.snp.makeConstraints { make in
-            make.top.equalTo(sendCodeButton.snp.top)
+        registerButton.snp.makeConstraints { make in
+            make.top.equalTo(codeTextField.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
+            make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
-        registerButton.snp.makeConstraints { make in
-            make.top.equalTo(codeTextField.snp.bottom).offset(30)
+        jumpToLoginPageButton.snp.makeConstraints { make in
+            make.top.equalTo(registerButton.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
