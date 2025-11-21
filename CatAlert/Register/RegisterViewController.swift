@@ -111,6 +111,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupKeyboardDismissal()
     }
     
     // MARK: - Action
@@ -217,6 +218,11 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - SetupUI
+    private func setupKeyboardDismissal() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
