@@ -116,7 +116,7 @@ class RegisterViewController: UIViewController {
     // MARK: - Action
     @objc private func jumpToLoginPageButtonTapped() {
         let loginVC = LoginViewController()
-        navigationController?.pushViewController(loginVC, animated: false)
+        navigationController?.pushViewController(loginVC, animated: true)
     }
     
     @objc private func registerButtonTapped() {
@@ -149,24 +149,16 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func sendCodeButtonTapped() {
-//        guard let phone = phoneTextField.text, !phone.isEmpty else {
-//            showAlert("号码无效")
-//            return
-//        }
-//
-//        Task {
-//            do {
-//                try await AuthManager.shared.sendVerificationCode(phone: phone)
-//                showAlert("验证码发送成功")
-//                startCountdown()
-//            } catch {
-//                let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
-//                showAlert(message)
-//            }
-//        }
+        guard let phone = phoneTextField.text, !phone.isEmpty else {
+            showAlert("号码无效")
+            return
+        }
+
         Task {
             do {
-                try await AuthManager.shared.register(username: "ke222211112122122n", password: "me", email: "jit221221a12m223m20081@gmail.com")
+                try await AuthManager.shared.sendVerificationCode(phone: phone)
+                showAlert("验证码发送成功")
+                startCountdown()
             } catch {
                 let message = (error as? AuthError)?.localizedDescription ?? "发送失败"
                 showAlert(message)
@@ -282,7 +274,7 @@ class RegisterViewController: UIViewController {
         }
         
         sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
     }
 }
