@@ -231,6 +231,10 @@ class RegisterViewController: UIViewController {
         isModalInPresentation = true
         let toolbar = createKeyboardToolbar()
         phoneTextField.inputAccessoryView = toolbar
+        codeTextField.inputAccessoryView = toolbar
+        passwordField.inputAccessoryView = toolbar
+        emailTextField.inputAccessoryView = toolbar
+        usernameTextField.inputAccessoryView = toolbar
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
