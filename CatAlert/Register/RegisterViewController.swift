@@ -199,6 +199,23 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    // MARK: - Input Accessory
+    private func createKeyboardToolbar() -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
+        
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolbar.items = [flexible, doneButton]
+        
+        return toolbar
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     // MARK: - SetupUI
     private func setupUI() {
         view.backgroundColor = .white
@@ -212,6 +229,8 @@ class RegisterViewController: UIViewController {
         view.addSubview(registerButton)
         view.addSubview(jumpToLoginPageButton)
         isModalInPresentation = true
+        let toolbar = createKeyboardToolbar()
+        phoneTextField.inputAccessoryView = toolbar
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
