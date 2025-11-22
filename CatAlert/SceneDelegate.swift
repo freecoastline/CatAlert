@@ -23,11 +23,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
-        if !AuthManager.shared.isLoggedIn {
-            let registerVC = UINavigationController(rootViewController: RegisterViewController())
-            registerVC.modalPresentationStyle = .fullScreen
-            tabBarController.present(registerVC, animated: false)
-        }
+//        if !AuthManager.shared.isLoggedIn {
+//            let registerVC = UINavigationController(rootViewController: RegisterViewController())
+//            registerVC.modalPresentationStyle = .fullScreen
+//            tabBarController.present(registerVC, animated: false)
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
