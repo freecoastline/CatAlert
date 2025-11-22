@@ -215,6 +215,7 @@ class RegisterViewController: UIViewController {
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+        print("1️⃣ dismmissKeyboard")
     }
     
     // MARK: - SetupUI
@@ -222,6 +223,19 @@ class RegisterViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("1️⃣ Custom view: touchesBegan")
+    }
+    
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("1️⃣ Custom view: touchesend")
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("1️⃣ Custom view: touchescancelled")
     }
     
     private func setupUI() {
@@ -276,14 +290,14 @@ class RegisterViewController: UIViewController {
         }
         
         sendCodeButton.snp.makeConstraints { make in
-            make.bottom.equalTo(titleLabel.snp.top).offset(-10)
+            make.top.equalTo(phoneTextField.snp.bottom).offset(-10)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
             make.width.equalTo(100)
         }
         
         codeTextField.snp.makeConstraints { make in
-            make.top.equalTo(sendCodeButton.snp.top)
+            make.top.equalTo(sendCodeButton.snp.top).offset(30)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
             make.height.equalTo(50)
