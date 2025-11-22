@@ -24,6 +24,26 @@ class MessageCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Setup
+    private func setupUI() {
+        contentView.backgroundColor = .clear
+        selectionStyle = .none
+        contentView.addSubview(bubbleView)
+        bubbleView.addSubview(messageLabel)
+        messageLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(12)
+        }
+    }
+    
+    // MARK: - Init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
 }
