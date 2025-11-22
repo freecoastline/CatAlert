@@ -241,9 +241,9 @@ class RegisterViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
-        view.addSubview(phoneTextField)
-        view.addSubview(sendCodeButton)
-        view.addSubview(codeTextField)
+//        view.addSubview(phoneTextField)
+//        view.addSubview(sendCodeButton)
+//        view.addSubview(codeTextField)
         view.addSubview(usernameTextField)
         view.addSubview(passwordField)
         view.addSubview(emailTextField)
@@ -282,29 +282,29 @@ class RegisterViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-        phoneTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(30)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
-        }
-        
-        sendCodeButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(30)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(50)
-            make.width.equalTo(100)
-        }
-        
-        codeTextField.snp.makeConstraints { make in
-            make.top.equalTo(sendCodeButton.snp.top)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
-            make.height.equalTo(50)
-        }
+//        phoneTextField.snp.makeConstraints { make in
+//            make.top.equalTo(emailTextField.snp.bottom).offset(30)
+//            make.leading.equalToSuperview().offset(20)
+//            make.trailing.equalToSuperview().offset(-20)
+//            make.height.equalTo(50)
+//        }
+//        
+//        sendCodeButton.snp.makeConstraints { make in
+//            make.top.equalTo(phoneTextField.snp.bottom).offset(30)
+//            make.trailing.equalToSuperview().offset(-20)
+//            make.height.equalTo(50)
+//            make.width.equalTo(100)
+//        }
+//        
+//        codeTextField.snp.makeConstraints { make in
+//            make.top.equalTo(sendCodeButton.snp.top)
+//            make.leading.equalToSuperview().offset(20)
+//            make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
+//            make.height.equalTo(50)
+//        }
         
         registerButton.snp.makeConstraints { make in
-            make.top.equalTo(codeTextField.snp.bottom).offset(30)
+            make.top.equalTo(emailTextField.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)

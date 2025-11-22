@@ -24,9 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         if !AuthManager.shared.isLoggedIn {
-            let loginVC = UINavigationController(rootViewController: RegisterViewController())
-            loginVC.modalPresentationStyle = .fullScreen
-            tabBarController.present(loginVC, animated: false)
+            let registerVC = UINavigationController(rootViewController: RegisterViewController())
+            registerVC.modalPresentationStyle = .fullScreen
+            tabBarController.present(registerVC, animated: false)
         }
     }
 
