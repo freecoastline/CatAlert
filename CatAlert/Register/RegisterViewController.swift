@@ -290,14 +290,14 @@ class RegisterViewController: UIViewController {
         }
         
         sendCodeButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(-10)
+            make.top.equalTo(phoneTextField.snp.bottom).offset(30)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
             make.width.equalTo(100)
         }
         
         codeTextField.snp.makeConstraints { make in
-            make.top.equalTo(sendCodeButton.snp.top).offset(30)
+            make.top.equalTo(sendCodeButton.snp.top)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
             make.height.equalTo(50)
