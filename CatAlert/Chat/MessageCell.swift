@@ -45,5 +45,31 @@ class MessageCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Configure
+    func configure(with message: ChatMessage) {
+        messageLabel.text = message.content
+        if message.role == .user {
+            bubbleView.backgroundColor = .systemBlue
+            messageLabel.textColor = .white
+            
+            bubbleView.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(8)
+                make.bottom.equalToSuperview().offset(-8)
+                make.trailing.equalToSuperview().offset(-16)
+                make.leading.equalToSuperview().offset(80)
+            }
+        } else if message.role == .assistant {
+            bubbleView.backgroundColor = .systemGray
+            messageLabel.textColor = .label
+            bubbleView.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(8)
+                make.bottom.equalToSuperview().offset(-8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-80)
+            }
+            
+            
+        }
+    }
     
 }
