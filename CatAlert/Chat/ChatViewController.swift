@@ -51,7 +51,12 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as? MessageCell else {
+            #if DEBUG
+            print("❌ ERROR: Could not cast to MessageCell!")
+            #endif
+            return UITableViewCell()
+        }
         let message = messages[indexPath.row]
         cell.configure(with: message)
         return cell
