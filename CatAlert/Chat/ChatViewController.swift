@@ -15,6 +15,17 @@ class ChatViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    // MARK: - SetupUI
+    private func setupUI() {
+        view.backgroundColor = .systemBackground
+        title = "Pet Consultation"
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     // MARK: - UI Components
