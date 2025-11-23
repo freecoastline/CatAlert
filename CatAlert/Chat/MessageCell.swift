@@ -56,7 +56,7 @@ class MessageCell: UITableViewCell {
                 make.top.equalToSuperview().offset(8)
                 make.bottom.equalToSuperview().offset(-8)
                 make.trailing.equalToSuperview().offset(-16)
-                make.leading.equalToSuperview().offset(80)
+                make.leading.greaterThanOrEqualToSuperview().offset(80)
             }
         } else if message.role == .assistant {
             bubbleView.backgroundColor = .systemGray
@@ -65,10 +65,8 @@ class MessageCell: UITableViewCell {
                 make.top.equalToSuperview().offset(8)
                 make.bottom.equalToSuperview().offset(-8)
                 make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-80)
+                make.trailing.lessThanOrEqualToSuperview().offset(-80)
             }
-            
-            
         }
     }
     
