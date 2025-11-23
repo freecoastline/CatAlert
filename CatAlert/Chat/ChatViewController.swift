@@ -38,6 +38,29 @@ class ChatViewController: UIViewController {
         view.backgroundColor = .systemBackground
         return view
     }()
+    
+    private lazy var inputContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        return view
+    }()
+    
+    private lazy var inputTextField: UITextField = {
+        let input = UITextField()
+        input.placeholder = "Type a message..."
+        input.borderStyle = .roundedRect
+        input.font = .systemFont(ofSize: 16)
+        input.backgroundColor = .systemBackground
+        return input
+    }()
+    
+    private lazy var sendButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Send", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.isEnabled = false
+        return button
+    }()
 }
 
 extension ChatViewController: UITableViewDelegate {
