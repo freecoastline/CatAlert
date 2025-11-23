@@ -32,14 +32,17 @@ class CatTabBarController:UITabBarController {
         let catProfile = CatNewProfileViewController()
         let catCurrentStatus = CatCurrentStatusViewController()
         let reminderSettingsPage = ReminderSettingsViewController()
-
+        let ChatViewController = ChatViewController()
+        
         // 将设置页包装到 NavigationController 中，以支持导航栏和页面跳转
         let reminderNavController = UINavigationController(rootViewController: reminderSettingsPage)
         let catProfileNavController = UINavigationController(rootViewController: catProfile)
-        catCurrentStatus.tabBarItem = UITabBarItem(title: "提醒", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 2)
-        reminderNavController.tabBarItem = UITabBarItem(title: "设置", image: UIImage(systemName: "gear"), tag: 1)
-        catProfileNavController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person.crop.circle"), tag: 0)
-        viewControllers = [catProfileNavController, catCurrentStatus, reminderNavController]
+        let consultationNavController = UINavigationController(rootViewController: ChatViewController)
+        catCurrentStatus.tabBarItem = UITabBarItem(title: "提醒", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 3)
+        reminderNavController.tabBarItem = UITabBarItem(title: "设置", image: UIImage(systemName: "gear"), tag: 2)
+        catProfileNavController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        consultationNavController.tabBarItem = UITabBarItem(title: "智能助手", image: UIImage(systemName: "brain.head.profile.fill"), tag: 0)
+        viewControllers = [consultationNavController ,catProfileNavController, catCurrentStatus, reminderNavController]
     }
     
     override func viewDidLayoutSubviews() {
