@@ -86,6 +86,7 @@ class ChatViewController: UIViewController {
         button.tintColor = .white
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -98,8 +99,13 @@ class ChatViewController: UIViewController {
         return tool
     }()
     
+    // MARK: - Action
     @objc private func dissmissKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc private func sendCodeButtonTapped() {
+        
     }
 }
 
