@@ -109,7 +109,11 @@ class ChatViewController: UIViewController {
               !text.isEmpty else {
             return
         }
-        
+        let message = ChatMessage(content: text, role: .user)
+        messages.append(message)
+        inputTextField.text = ""
+        sendButton.isEnabled = false
+        tableView.reloadData()
     }
 }
 
