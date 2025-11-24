@@ -31,8 +31,14 @@ class ChatViewController: UIViewController {
             make.bottom.equalTo(inputContainerView.snp.top)
         }
         
-        inputTextField.snp.makeConstraints { make in
+        inputContainerView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(60)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        inputTextField.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(10)
             make.height.equalTo(40)
         }
@@ -41,6 +47,7 @@ class ChatViewController: UIViewController {
             make.leading.equalTo(inputTextField.snp.trailing).offset(10)
             make.width.equalTo(60)
             make.centerY.equalTo(inputTextField)
+            make.trailing.equalToSuperview()
         }
     }
     
@@ -75,6 +82,7 @@ class ChatViewController: UIViewController {
         button.setTitle("Send", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.isEnabled = false
+        button.backgroundColor = .systemBlue
         return button
     }()
 }
