@@ -16,4 +16,15 @@ struct ChatMessage {
         case user
         case assistant
     }
+    
+    init(id: UUID, content: String, role: MessageRole, timestamp: Date) {
+        self.id = id
+        self.content = content
+        self.role = role
+        self.timestamp = timestamp
+    }
+    
+    init(content: String, role: MessageRole) {
+        self.init(id: UUID(), content: content, role: role, timestamp: Date())
+    }
 }
