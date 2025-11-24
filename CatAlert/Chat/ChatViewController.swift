@@ -114,6 +114,15 @@ class ChatViewController: UIViewController {
         inputTextField.text = ""
         sendButton.isEnabled = false
         tableView.reloadData()
+        scrollToBottom()
+    }
+    
+    private func scrollToBottom() {
+        guard messages.count > 0 else {
+            return
+        }
+        let lastIndex = IndexPath(row: messages.count - 1, section: 0)
+        tableView.scrollToRow(at: lastIndex, at: .bottom, animated: true)
     }
 }
 
