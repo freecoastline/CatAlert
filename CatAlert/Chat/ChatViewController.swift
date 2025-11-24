@@ -105,6 +105,10 @@ class ChatViewController: UIViewController {
     }
     
     @objc private func sendCodeButtonTapped() {
+        guard let text = inputTextField.text?.trimmingCharacters(in: .whitespaces),
+              !text.isEmpty else {
+            return
+        }
         
     }
 }
