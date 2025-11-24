@@ -39,7 +39,6 @@ class ChatViewController: UIViewController {
         }
         
         inputTextField.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(10)
             make.height.equalTo(40)
             make.centerY.equalToSuperview()
@@ -94,7 +93,7 @@ class ChatViewController: UIViewController {
         let tool = UIToolbar()
         let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dissmissKeyboard))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
+        tool.sizeToFit()
         tool.items = [flexibleSpace, doneButton]
         return tool
     }()
