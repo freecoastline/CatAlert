@@ -23,8 +23,24 @@ class ChatViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Pet Consultation"
         view.addSubview(tableView)
+        view.addSubview(inputContainerView)
+        inputContainerView.addSubview(inputTextField)
+        inputContainerView.addSubview(sendButton)
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(inputContainerView.snp.top)
+        }
+        
+        inputTextField.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().offset(10)
+            make.height.equalTo(40)
+        }
+        
+        sendButton.snp.makeConstraints { make in
+            make.leading.equalTo(inputTextField.snp.trailing).offset(10)
+            make.width.equalTo(60)
+            make.centerY.equalTo(inputTextField)
         }
     }
     
