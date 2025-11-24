@@ -88,6 +88,19 @@ class ChatViewController: UIViewController {
         button.layer.cornerRadius = 8
         return button
     }()
+    
+    private var inputAccessoryToolBar: UIToolbar = {
+        let tool = UIToolbar()
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dissmissKeyboard))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        tool.items = [flexibleSpace, doneButton]
+        return tool
+    }()
+    
+    @objc private func dissmissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension ChatViewController: UITableViewDelegate {
