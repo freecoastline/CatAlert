@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class ChatViewController: UIViewController {
     // MARK: - Property
     private var messages: [ChatMessage] = []
+    private var inputContainerBottonConstraint: Constraint?
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
