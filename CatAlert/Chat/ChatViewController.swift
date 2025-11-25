@@ -18,6 +18,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        registerKeyboardNotification()
     }
     
     // MARK: - SetupUI
@@ -34,7 +35,7 @@ class ChatViewController: UIViewController {
         }
         
         inputContainerView.snp.makeConstraints { [weak self] make in
-            guard let self else { }
+            guard let self else { return }
             make.height.equalTo(60)
             make.leading.trailing.equalToSuperview()
             inputContainerBottonConstraint =  make.bottom.equalTo(view.safeAreaLayoutGuide).constraint
@@ -52,6 +53,12 @@ class ChatViewController: UIViewController {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview()
         }
+    }
+    
+    // MARK: - Observer
+    private func registerKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillshow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillhide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - UI Components
@@ -93,6 +100,14 @@ class ChatViewController: UIViewController {
     }()
     
     // MARK: - Action
+    @objc private func keyboardWillshow() {
+        
+    }
+    
+    @objc private func keyboardWillhide() {
+        
+    }
+    
     @objc private func dissmissKeyboard() {
         view.endEditing(true)
     }
