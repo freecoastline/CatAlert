@@ -116,7 +116,15 @@ class ChatViewController: UIViewController {
     }
     
     @objc private func keyboardWillhide(_ notification: Notification) {
-        
+        guard let userInfo = notification.userInfo,
+              let animateDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
+            return
+        }
+        inputContainerBottonConstraint?.update(offset: 0)
+        UIView.animate(withDuration: animateDuration) { [weak self] in
+            guard let self else { return }
+            view.layoutIfNeeded()
+        }
     }
     
     @objc private func dissmissKeyboard() {
