@@ -104,12 +104,17 @@ class ChatViewController: UIViewController {
     @objc private func keyboardWillshow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
-              let animateDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
+              let animateDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+              let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int  else {
             return
         }
         let keyboardHeight = keyFrame.height
-        inputContainerBottonConstraint?.update(offset: -keyboardHeight)
-        UIView.animate(withDuration: animateDuration) { [weak self] in
+        let bottomArea = view.safeAreaInsets.bottom
+        inputContainerBottonConstraint?.update(offset: -keyboardHeight + bottomArea)
+        
+        let animateOptions = UIView.AnimationOptions(rawValue: UInt(curve << 16))
+        
+        UIView.animate(withDuration: animateDuration, delay: 0, options: [animateOptions]) { [weak self] in
             guard let self else { return }
             view.layoutIfNeeded()
         }
