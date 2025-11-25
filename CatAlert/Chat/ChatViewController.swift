@@ -33,10 +33,11 @@ class ChatViewController: UIViewController {
             make.bottom.equalTo(inputContainerView.snp.top)
         }
         
-        inputContainerView.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        inputContainerView.snp.makeConstraints { [weak self] make in
+            guard let self else { }
             make.height.equalTo(60)
             make.leading.trailing.equalToSuperview()
+            inputContainerBottonConstraint =  make.bottom.equalTo(view.safeAreaLayoutGuide).constraint
         }
         
         inputTextField.snp.makeConstraints { make in
