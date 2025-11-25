@@ -24,6 +24,7 @@ class ChatViewController: UIViewController {
     // MARK: - SetupUI
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard)))
         title = "Pet Consultation"
         view.addSubview(tableView)
         view.addSubview(inputContainerView)
