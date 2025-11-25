@@ -26,7 +26,6 @@ class ChatViewController: UIViewController {
         view.addSubview(inputContainerView)
         inputContainerView.addSubview(inputTextField)
         inputContainerView.addSubview(sendButton)
-        inputTextField.inputAccessoryView = inputAccessoryToolBar
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(inputContainerView.snp.top)
@@ -88,15 +87,6 @@ class ChatViewController: UIViewController {
         button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
         return button
-    }()
-    
-    private var inputAccessoryToolBar: UIToolbar = {
-        let tool = UIToolbar()
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dissmissKeyboard))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        tool.sizeToFit()
-        tool.items = [flexibleSpace, doneButton]
-        return tool
     }()
     
     // MARK: - Action
