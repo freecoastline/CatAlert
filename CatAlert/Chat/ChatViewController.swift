@@ -114,7 +114,7 @@ class ChatViewController: UIViewController {
         
         let animateOptions = UIView.AnimationOptions(rawValue: UInt(curve << 16))
         
-        UIView.animate(withDuration: animateDuration, delay: 0, options: [animateOptions]) { [weak self] in
+        UIView.animate(withDuration: animateDuration, delay: 0, options: [animateOptions, .beginFromCurrentState]) { [weak self] in
             guard let self else { return }
             view.layoutIfNeeded()
         }
@@ -123,11 +123,13 @@ class ChatViewController: UIViewController {
     
     @objc private func keyboardWillhide(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let animateDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else {
+              let animateDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+              let curve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? Int  else {
             return
         }
         inputContainerBottonConstraint?.update(offset: 0)
-        UIView.animate(withDuration: animateDuration) { [weak self] in
+        let animateOptions = UIView.AnimationOptions(rawValue: UInt(curve << 16))
+        UIView.animate(withDuration: animateDuration, delay: 0, options: [animateOptions, .beginFromCurrentState]) { [weak self] in
             guard let self else { return }
             view.layoutIfNeeded()
         }
