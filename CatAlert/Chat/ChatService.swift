@@ -21,6 +21,6 @@ class ChatService {
             OpenAIMessage(role: chatMessage.role == .assistant ? "assistant" : "user", content: chatMessage.content)
         }
         
-        
+        let OpenAIRequest = OpenAIRequest(model: "gpt-3.5-turbo", messages: openAIMessages)
     }
 }
