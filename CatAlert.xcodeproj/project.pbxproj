@@ -40,6 +40,7 @@
 			membershipExceptions = (
 				"/Localized: LaunchScreen.storyboard",
 				"/Localized: Main.storyboard",
+				AI/OpenAIModels.swift,
 				AppDelegate.swift,
 				Assets.xcassets,
 				Auth/AuthError.swift,
