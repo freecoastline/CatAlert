@@ -9,7 +9,7 @@ import Foundation
 
 struct OpenAIRequest: Codable {
     let model: String
-    let message: OpenAIMessage
+    let messages: [OpenAIMessage]
 }
 
 struct OpenAIMessage: Codable {
