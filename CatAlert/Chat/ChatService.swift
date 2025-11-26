@@ -7,5 +7,9 @@
 
 import Foundation
 class ChatService {
+    // MARK: - Singleton
+    static let shared = ChatService()
+    private init() {}
+    
     
 }
