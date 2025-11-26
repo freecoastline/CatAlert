@@ -74,6 +74,7 @@
 				CatTabBarController.swift,
 				CatViewModel.swift,
 				Chat/ChatMessage.swift,
+				Chat/ChatService.swift,
 				Chat/ChatViewController.swift,
 				Chat/MessageCell.swift,
 				ImageReader.swift,
