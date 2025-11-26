@@ -22,5 +22,8 @@ class ChatService {
         }
         
         let OpenAIRequest = OpenAIRequest(model: "gpt-3.5-turbo", messages: openAIMessages)
+        let jsonData = try JSONEncoder().encode(OpenAIRequest)
+        
+        
     }
 }
