@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 
 class ChatViewController: UIViewController {
+    // MARK: - Init
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Property
     private var messages: [ChatMessage] = []
     private var inputContainerBottonConstraint: Constraint?
