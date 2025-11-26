@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+struct OpenAIRequest: Codable {
+    let model: String
+    let message: OpenAIMessage
+}
+
+struct OpenAIMessage: Codable {
+    let role: String
+    let content: String
+}
+
+struct OpenAIResponse: Codable {
+    let choices: [Choice]
+}
+
+struct Choice: Codable {
+    let message: OpenAIMessage
+}
