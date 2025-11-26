@@ -15,6 +15,9 @@ class ChatService {
     private let apiKey = "YOUR_API_KEY_HERE"  // We'll add this later
     private let baseURL = "https://api.openai.com/v1/chat/completions"
     
-    
+    // MARK: - Public methods
+    func sendMessage(_ messages: [ChatMessage]) async throws -> String {
+        
+    }
     
 }
