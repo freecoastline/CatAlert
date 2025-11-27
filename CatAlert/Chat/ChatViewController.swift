@@ -35,6 +35,7 @@ class ChatViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(inputContainerView)
         inputContainerView.addSubview(inputTextField)
+        inputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         inputContainerView.addSubview(sendButton)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -107,6 +108,14 @@ class ChatViewController: UIViewController {
     }()
     
     // MARK: - Action
+    @objc private func textFieldDidChange() {
+        guard let text = inputTextField.text?.trimmingCharacters(in: .whitespaces), !text.isEmpty else {
+            sendButton.isEnabled = false
+            return
+        }
+        sendButton.isEnabled = true
+    }
+    
     @objc private func keyboardWillshow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
