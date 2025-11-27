@@ -35,6 +35,7 @@ class ChatViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(inputContainerView)
         inputContainerView.addSubview(inputTextField)
+        inputTextField.delegate = self
         inputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         inputContainerView.addSubview(sendButton)
         tableView.snp.makeConstraints { make in
@@ -154,6 +155,11 @@ class ChatViewController: UIViewController {
     }
     
     @objc private func sendCodeButtonTapped() {
+        sendMessage()
+    }
+    
+    // MARK: - Helper
+    private func sendMessage() {
         guard let text = inputTextField.text?.trimmingCharacters(in: .whitespaces),
               !text.isEmpty else {
             return
@@ -167,9 +173,9 @@ class ChatViewController: UIViewController {
         
         Task {
             do {
-                let messsage = try await ChatService.shared.sendMessageMock(messages: messages)
+                let responseMesssage = try await ChatService.shared.sendMessageMock(messages: messages)
                 await MainActor.run {
-                    messages.append(message)
+                    messages.append(ChatMessage(content: responseMesssage, role: .assistant))
                     tableView.reloadData()
                     scrollToBottom()
                 }
@@ -180,6 +186,7 @@ class ChatViewController: UIViewController {
             }
         }
     }
+    
     
     private func scrollToBottom() {
         guard messages.count > 0 else {
@@ -210,5 +217,14 @@ extension ChatViewController: UITableViewDataSource {
         let message = messages[indexPath.row]
         cell.configure(with: message)
         return cell
+    }
+}
+
+
+extension ChatViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        sendMessage()
+        return true
     }
 }
