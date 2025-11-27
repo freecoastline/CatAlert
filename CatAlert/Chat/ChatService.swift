@@ -37,14 +37,14 @@ class ChatService {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
-        urlRequest.setValue("Bear \(apiKey)", forHTTPHeaderField: "Authentication")
+        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpBody = jsonData
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        guard let httpRespnse = response as? HTTPURLResponse,
-              (200...299).contains(httpRespnse.statusCode) else {
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
             throw ChatServiceError.serverError
         }
         

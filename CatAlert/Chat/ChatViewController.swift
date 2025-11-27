@@ -41,6 +41,7 @@ class ChatViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(inputContainerView.snp.top)
+            make.leading.trailing.equalToSuperview()
         }
         
         inputContainerView.snp.makeConstraints { [weak self] make in
