@@ -109,11 +109,10 @@ class ChatViewController: UIViewController {
     
     // MARK: - Action
     @objc private func textFieldDidChange() {
-        guard let text = inputTextField.text?.trimmingCharacters(in: .whitespaces), !text.isEmpty else {
-            sendButton.isEnabled = false
-            return
-        }
-        sendButton.isEnabled = true
+        let text = inputTextField.text ?? ""
+        let trimmedText = text.trimmingCharacters(in: .whitespaces)
+        let hasText = !trimmedText.isEmpty
+        sendButton.isEnabled = hasText
     }
     
     @objc private func keyboardWillshow(_ notification: Notification) {
