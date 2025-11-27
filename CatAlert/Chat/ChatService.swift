@@ -6,6 +6,13 @@
 //
 
 import Foundation
+
+enum ChatServiceError: Error {
+    case invalidURL
+    case serverError
+    case noResponse
+}
+
 class ChatService {
     // MARK: - Singleton
     static let shared = ChatService()
@@ -23,6 +30,16 @@ class ChatService {
         
         let OpenAIRequest = OpenAIRequest(model: "gpt-3.5-turbo", messages: openAIMessages)
         let jsonData = try JSONEncoder().encode(OpenAIRequest)
+        
+        guard let url = URL(string: baseURL) else {
+            throw ChatServiceError.invalidURL
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("Bear \(apiKey)", forHTTPHeaderField: "Authentication")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = jsonData
         
         
     }
