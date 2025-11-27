@@ -41,6 +41,14 @@ class ChatService {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpBody = jsonData
         
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let httpRespnse = response as? HTTPURLResponse,
+              (200...299).contains(httpRespnse.statusCode) else {
+            throw ChatServiceError.serverError
+        }
+        
+        
         
     }
 }
