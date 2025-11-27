@@ -52,7 +52,7 @@ class MessageCell: UITableViewCell {
             bubbleView.backgroundColor = .systemBlue
             messageLabel.textColor = .white
             
-            bubbleView.snp.makeConstraints { make in
+            bubbleView.snp.remakeConstraints { make in
                 make.top.equalToSuperview().offset(8)
                 make.bottom.equalToSuperview().offset(-8)
                 make.trailing.equalToSuperview().offset(-16)
@@ -61,7 +61,7 @@ class MessageCell: UITableViewCell {
         } else if message.role == .assistant {
             bubbleView.backgroundColor = .systemGray
             messageLabel.textColor = .label
-            bubbleView.snp.makeConstraints { make in
+            bubbleView.snp.remakeConstraints { make in
                 make.top.equalToSuperview().offset(8)
                 make.bottom.equalToSuperview().offset(-8)
                 make.leading.equalToSuperview().offset(16)
