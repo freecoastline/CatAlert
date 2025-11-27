@@ -48,7 +48,12 @@ class ChatService {
             throw ChatServiceError.serverError
         }
         
+        let openAIResponse = try JSONDecoder().decode(OpenAIResponse.self, from: data)
         
+        guard let aiMessage = openAIResponse.choices.first?.message.content else {
+            throw ChatServiceError.serverError
+        }
         
+        return aiMessage
     }
 }
