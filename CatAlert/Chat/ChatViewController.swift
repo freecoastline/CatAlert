@@ -156,6 +156,21 @@ class ChatViewController: UIViewController {
         sendButton.isEnabled = false
         tableView.reloadData()
         scrollToBottom()
+        
+        Task {
+            do {
+                let messsage = try await ChatService.shared.sendMessageMock(messages: messages)
+                await MainActor.run {
+                    messages.append(message)
+                    tableView.reloadData()
+                    scrollToBottom()
+                }
+            } catch {
+                await MainActor.run {
+                    
+                }
+            }
+        }
     }
     
     private func scrollToBottom() {
