@@ -56,4 +56,22 @@ class ChatService {
         
         return aiMessage
     }
+    
+    
+    // MARK: - Mock for Testing
+    func sendMessageMock(messages: [ChatMessage]) async throws -> String {
+        // Simulate network delay
+        try await Task.sleep(nanoseconds: 1_000_000_000)  // 1 second
+
+        // Return mock response based on user's message
+        let lastMessage = messages.last?.content ?? ""
+
+        if lastMessage.lowercased().contains("cat") {
+            return "Cats are wonderful pets! They're independent but affectionate. Is there something specific about your cat you'd like to know?"
+        } else if lastMessage.lowercased().contains("sick") {
+            return "I'm sorry to hear your pet isn't feeling well. Common symptoms to watch for include lethargy, loss of appetite, and vomiting. Have you noticed any of these?"
+        } else {
+            return "I'm here to help with your pet health questions! What would you like to know?"
+        }
+    }
 }
