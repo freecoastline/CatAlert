@@ -94,6 +94,7 @@ class ChatViewController: UIViewController {
         input.borderStyle = .roundedRect
         input.font = .systemFont(ofSize: 16)
         input.backgroundColor = .systemBackground
+        input.returnKeyType = .send
         return input
     }()
     
