@@ -95,6 +95,7 @@ class ChatViewController: UIViewController {
         input.font = .systemFont(ofSize: 16)
         input.backgroundColor = .systemBackground
         input.returnKeyType = .send
+        input.enablesReturnKeyAutomatically = true
         return input
     }()
     
