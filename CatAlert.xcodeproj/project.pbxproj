@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27AAD2B42E90082100C1AC34 /* SnapKit */; };
 		BE0B676E2EA7BB6000A99522 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE0B676D2EA7BB6000A99522 /* SnapKit */; };
+		BE3D4CEC2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4CEB2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift */; };
+		BE3D4CED2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D4CEB2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,7 @@
 		2B1627362E6BE15F008A6507 /* CatAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B16274C2E6BE162008A6507 /* CatAlertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatAlertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1627562E6BE162008A6507 /* CatAlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatAlertUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE3D4CEB2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMessage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -74,6 +77,7 @@
 				CatTabBarController.swift,
 				CatViewModel.swift,
 				Chat/ChatMessage.swift,
+				Chat/ChatModel.xcdatamodeld,
 				Chat/ChatService.swift,
 				Chat/ChatViewController.swift,
 				Chat/MessageCell.swift,
@@ -234,6 +238,7 @@
 		2B16272D2E6BE15F008A6507 = {
 			isa = PBXGroup;
 			children = (
+				BE3D4CEB2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift */,
 				BEB262A42E87843F009E1C80 /* CatAlert */,
 				2B16274F2E6BE162008A6507 /* CatAlertTests */,
 				2B1627592E6BE162008A6507 /* CatAlertUITests */,
@@ -398,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3D4CED2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3D4CEC2ED9CDB30001E848 /* ChatMessage+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
