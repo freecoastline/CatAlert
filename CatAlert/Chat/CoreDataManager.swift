@@ -40,6 +40,28 @@ class CoreDataManager {
     }
     
     
+    private func convertToStruct(_ message: Message) -> ChatMessage? {
+        guard let id = message.id,
+              let content = message.content,
+              let roleString = message.role,
+              let timeStamp = message.timestamp else {
+            return nil
+        }
+        
+        let role: ChatMessage.MessageRole = roleString == "assistant" ? .assistant : .user
+        return ChatMessage(id: id, content: content, role: role, timestamp: timeStamp)
+    }
+    
+    // MARK: - CRUD
+    private func saveMessage(_ chatMessage: ChatMessage) throws {
+        let entity = convertToEntity(chatMessage)
+        
+        do {
+            try viewContext.save()
+        } catch {
+            
+        }
+    }
     
     
 }
