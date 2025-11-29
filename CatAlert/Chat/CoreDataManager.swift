@@ -19,6 +19,9 @@ class CoreDataManager {
             }
         }
         viewContext = persistentContainer.viewContext
+        
+        viewContext.automaticallyMergesChangesFromParent = true
+        viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     
     // MARK: - Properties
