@@ -6,3 +6,8 @@
 //
 
 import Foundation
+class CoreDataManager {
+    // MARK: - Init
+    static let shared = CoreDataManager()
+    private init() {}
+}
