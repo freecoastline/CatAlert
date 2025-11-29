@@ -24,6 +24,7 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         registerKeyboardNotification()
+        fetchMessages()
     }
     
     // MARK: - SetupUI
@@ -162,6 +163,14 @@ class ChatViewController: UIViewController {
     }
     
     // MARK: - Helper
+    private func fetchMessages() {
+        do {
+            messages = try CoreDataManager.shared.fetchMessages()
+        } catch {
+            print("Failed to load messages: \(error)")
+        }
+    }
+    
     private func sendMessage() {
         guard let text = inputTextField.text?.trimmingCharacters(in: .whitespaces),
               !text.isEmpty else {
