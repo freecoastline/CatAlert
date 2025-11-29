@@ -53,7 +53,7 @@ class CoreDataManager {
     }
     
     // MARK: - CRUD
-    private func saveMessage(_ chatMessage: ChatMessage) throws {
+    func saveMessage(_ chatMessage: ChatMessage) throws {
         let entity = convertToEntity(chatMessage)
         
         do {
@@ -62,6 +62,21 @@ class CoreDataManager {
             
         }
     }
+    
+    func fetchMessages() throws -> [ChatMessage] {
+        let fetchRequest = Message.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
+        
+        do {
+            let entities = try viewContext.fetch(fetchRequest)
+            return entities.compactMap {
+                convertToStruct($0)
+            }
+        } catch {
+            
+        }
+    }
+    
     
     
 }
