@@ -64,7 +64,7 @@ class CoreDataManager {
     }
     
     func fetchMessages() throws -> [ChatMessage] {
-        let fetchRequest = Message.fetchRequest()
+        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
         
         do {
