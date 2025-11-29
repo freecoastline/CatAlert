@@ -78,5 +78,20 @@ class CoreDataManager {
     }
     
     
+    func deleteMessage(_ id: UUID) throws {
+        let fetchRequest: NSFetchRequest<Message> = Message.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let results = try viewContext.fetch(fetchRequest)
+            results.forEach {
+                viewContext.delete($0)
+            }
+            try viewContext.save()
+        } catch {
+            
+        }
+    }
+    
     
 }
