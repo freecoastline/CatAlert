@@ -8,6 +8,26 @@
 import Foundation
 import CoreData
 
+enum CoreDataError: Error {
+    case saveFailed(Error)
+    case fetchFailed(Error)
+    case deleteFailed(Error)
+    case invalidData
+    
+    var localizedDescription: String {
+        switch self {
+        case .saveFailed(let error):
+            return "Failed to save message: \(error.localizedDescription)"
+        case .fetchFailed(let error):
+            return "Failed to fetch messages: \(error.localizedDescription)"
+        case .deleteFailed(let error):
+            return "Failed to delete message: \(error.localizedDescription)"
+        case .invalidData:
+            return "Invalid message data"
+        }
+    }
+}
+
 class CoreDataManager {
     // MARK: - Init
     static let shared = CoreDataManager()
@@ -59,7 +79,7 @@ class CoreDataManager {
         do {
             try viewContext.save()
         } catch {
-            
+            throw CoreDataError.saveFailed(error)
         }
     }
     
@@ -73,7 +93,7 @@ class CoreDataManager {
                 convertToStruct($0)
             }
         } catch {
-            
+            throw CoreDataError.fetchFailed(error)
         }
     }
     
@@ -89,7 +109,7 @@ class CoreDataManager {
             }
             try viewContext.save()
         } catch {
-            
+            throw CoreDataError.deleteFailed(error)
         }
     }
     
