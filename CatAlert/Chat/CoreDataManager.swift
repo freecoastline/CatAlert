@@ -27,4 +27,19 @@ class CoreDataManager {
     // MARK: - Properties
     private let persistentContainer: NSPersistentContainer
     private let viewContext: NSManagedObjectContext
+    
+    
+    // MARK: - Helper
+    private func convertToEntity(_ chatMessage: ChatMessage) -> Message {
+        let entity = Message(context: viewContext)
+        entity.id = chatMessage.id
+        entity.content = chatMessage.content
+        entity.role = chatMessage.role == .assistant ? "assistant" : "user"
+        entity.timestamp = chatMessage.timestamp
+        return entity
+    }
+    
+    
+    
+    
 }
