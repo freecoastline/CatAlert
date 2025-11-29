@@ -6,8 +6,22 @@
 //
 
 import Foundation
+import CoreData
+
 class CoreDataManager {
     // MARK: - Init
     static let shared = CoreDataManager()
-    private init() {}
+    private init() {
+        persistentContainer = NSPersistentContainer(name: "ChatModel")
+        persistentContainer.loadPersistentStores { description, error in
+            if let error {
+                fatalError("unable to load core data stack: \(error)")
+            }
+        }
+        viewContext = persistentContainer.viewContext
+    }
+    
+    // MARK: - Properties
+    private let persistentContainer: NSPersistentContainer
+    private let viewContext: NSManagedObjectContext
 }
