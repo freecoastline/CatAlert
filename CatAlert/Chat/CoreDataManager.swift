@@ -37,6 +37,9 @@ class CoreDataManager {
             if let error {
                 fatalError("unable to load core data stack: \(error)")
             }
+            #if DEBUG
+            print("✅ Core Data loaded successfully: \(description)")
+            #endif
         }
         viewContext = persistentContainer.viewContext
         
@@ -47,18 +50,20 @@ class CoreDataManager {
     // MARK: - Properties
     private let persistentContainer: NSPersistentContainer
     private let viewContext: NSManagedObjectContext
-    
+    private enum MessageRoleString {
+        static let user = "user"
+        static let assistant = "assistant"
+    }
     
     // MARK: - Helper
     private func convertToEntity(_ chatMessage: ChatMessage) -> Message {
         let entity = Message(context: viewContext)
         entity.id = chatMessage.id
         entity.content = chatMessage.content
-        entity.role = chatMessage.role == .assistant ? "assistant" : "user"
+        entity.role = chatMessage.role == .assistant ? MessageRoleString.assistant : MessageRoleString.user
         entity.timestamp = chatMessage.timestamp
         return entity
     }
-    
     
     private func convertToStruct(_ message: Message) -> ChatMessage? {
         guard let id = message.id,
@@ -68,7 +73,7 @@ class CoreDataManager {
             return nil
         }
         
-        let role: ChatMessage.MessageRole = roleString == "assistant" ? .assistant : .user
+        let role: ChatMessage.MessageRole = roleString == MessageRoleString.assistant ? .assistant : .user
         return ChatMessage(id: id, content: content, role: role, timestamp: timeStamp)
     }
     
