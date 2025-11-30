@@ -8,6 +8,7 @@
 import Foundation
 
 struct MockData {
+    static let testCatId = "test_cat"
     static func generateTestReminders() -> [CatReminder] {
         let testCatId = "test_cat"
         let now = Date()
@@ -99,7 +100,6 @@ struct MockData {
         let calendar = Calendar.current
         let now = Date()
         let testReminderId = UUID()
-        let testCatId = "test_cat"
 
         var activities: [ActivityRecord] = []
 
