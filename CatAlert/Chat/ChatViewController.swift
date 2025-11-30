@@ -164,11 +164,22 @@ class ChatViewController: UIViewController {
     
     // MARK: - Helper
     private func fetchMessages() {
-        do {
-            messages = try CoreDataManager.shared.fetchMessages()
-        } catch {
-            print("Failed to load messages: \(error)")
+        Task {
+            do {
+                messages = try CoreDataManager.shared.fetchMessages()
+                await MainActor.run {
+                    tableView.reloadData()
+                }
+            } catch {
+                print("Failed to load messages: \(error)")
+            }
         }
+    }
+    
+    private func showErrorAlert(_ message: String) {
+        let alert =  UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default))
+        present(alert, animated: false)
     }
     
     private func sendMessage() {
@@ -181,7 +192,8 @@ class ChatViewController: UIViewController {
         do {
             try CoreDataManager.shared.saveMessage(message)
         } catch {
-            
+            showErrorAlert(error.localizedDescription)
+            return
         }
         
         inputTextField.text = ""
@@ -201,7 +213,7 @@ class ChatViewController: UIViewController {
                 }
             } catch {
                 await MainActor.run {
-                    
+                    showErrorAlert(error.localizedDescription)
                 }
             }
         }
