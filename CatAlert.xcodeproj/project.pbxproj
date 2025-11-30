@@ -114,6 +114,7 @@
 				Reminder/TimeCell.swift,
 				Reminder/TimePickerViewController.swift,
 				SceneDelegate.swift,
+				Services/MockData.swift,
 				VideoPlayer/VideoPlayerViewController.swift,
 				ViewController.swift,
 			);
