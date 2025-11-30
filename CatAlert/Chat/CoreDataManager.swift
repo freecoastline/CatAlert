@@ -117,6 +117,4 @@ class CoreDataManager {
             throw CoreDataError.deleteFailed(error)
         }
     }
-    
-    
 }

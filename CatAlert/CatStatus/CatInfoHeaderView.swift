@@ -129,6 +129,7 @@ class CatInfoHeaderView: UIView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.alignment = .center
+        stack.spacing = 12.0
         return stack
     }()
     
@@ -210,11 +211,7 @@ class CatInfoHeaderView: UIView {
         let spacer = UIView()
         spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
         stackView.addArrangedSubview(spacer)
-
         stackView.addArrangedSubview(healthStatusBadge)
-
-        stackView.spacing = 12.0  // 增大间距
-        stackView.alignment = .center
     }
 
     private func setupConstraints() {

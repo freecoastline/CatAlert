@@ -32,7 +32,6 @@ class ChatViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard)))
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(dissmissKeyboard)))
-        title = "Pet Consultation"
         view.addSubview(tableView)
         view.addSubview(inputContainerView)
         inputContainerView.addSubview(inputTextField)

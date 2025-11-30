@@ -42,7 +42,7 @@ class CatTabBarController:UITabBarController {
         reminderNavController.tabBarItem = UITabBarItem(title: "设置", image: UIImage(systemName: "gear"), tag: 2)
         catProfileNavController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person.crop.circle"), tag: 1)
         consultationNavController.tabBarItem = UITabBarItem(title: "智能助手", image: UIImage(systemName: "brain.head.profile.fill"), tag: 0)
-        viewControllers = [consultationNavController ,catProfileNavController, catCurrentStatus, reminderNavController]
+        viewControllers = [catCurrentStatus, reminderNavController, consultationNavController, catProfileNavController]
     }
     
     override func viewDidLayoutSubviews() {
