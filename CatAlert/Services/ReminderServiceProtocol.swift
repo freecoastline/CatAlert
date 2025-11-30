@@ -17,5 +17,8 @@ protocol ReminderServiceProtocol {
     
     func deleteReminder(_ id: UUID) async throws
     
-    // MARK: - 
+    // MARK: - ActicvityOperations
+    func fetchActivities(_ date: Date) async throws -> [ActivityRecord]
+    
+    func updateActivity(_ activity: ActivityRecord, status: ActivityStatus, compleTime: Date) async throws -> ActivityRecord
 }
