@@ -192,10 +192,12 @@ class ChatViewController: UIViewController {
         Task {
             do {
                 let responseMesssage = try await ChatService.shared.sendMessageMock(messages: messages)
+                let aiMessage = ChatMessage(content: responseMesssage, role: .assistant)
+                try CoreDataManager.shared.saveMessage(aiMessage)
                 await MainActor.run {
+                    messages.append(ChatMessage(content: responseMesssage, role: .assistant))
                     tableView.reloadData()
                     scrollToBottom()
-                    messages.append(ChatMessage(content: responseMesssage, role: .assistant))
                 }
             } catch {
                 await MainActor.run {
