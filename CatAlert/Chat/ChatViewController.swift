@@ -178,6 +178,12 @@ class ChatViewController: UIViewController {
         }
         let message = ChatMessage(content: text, role: .user)
         messages.append(message)
+        do {
+            try CoreDataManager.shared.saveMessage(message)
+        } catch {
+            throw CoreDataError.saveFailed(error)
+        }
+        
         inputTextField.text = ""
         sendButton.isEnabled = false
         tableView.reloadData()
@@ -186,10 +192,11 @@ class ChatViewController: UIViewController {
         Task {
             do {
                 let responseMesssage = try await ChatService.shared.sendMessageMock(messages: messages)
-                await MainActor.run {
-                    messages.append(ChatMessage(content: responseMesssage, role: .assistant))
+                try await MainActor.run {
                     tableView.reloadData()
                     scrollToBottom()
+                    messages.append(ChatMessage(content: responseMesssage, role: .assistant))
+                    try CoreDataManager.shared.saveMessage(message)
                 }
             } catch {
                 await MainActor.run {
