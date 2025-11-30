@@ -115,6 +115,7 @@
 				Reminder/TimePickerViewController.swift,
 				SceneDelegate.swift,
 				Services/MockData.swift,
+				Services/ReminderServiceProtocol.swift,
 				VideoPlayer/VideoPlayerViewController.swift,
 				ViewController.swift,
 			);
