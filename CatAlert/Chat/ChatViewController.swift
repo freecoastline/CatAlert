@@ -181,7 +181,7 @@ class ChatViewController: UIViewController {
         do {
             try CoreDataManager.shared.saveMessage(message)
         } catch {
-            throw CoreDataError.saveFailed(error)
+            
         }
         
         inputTextField.text = ""
@@ -192,11 +192,10 @@ class ChatViewController: UIViewController {
         Task {
             do {
                 let responseMesssage = try await ChatService.shared.sendMessageMock(messages: messages)
-                try await MainActor.run {
+                await MainActor.run {
                     tableView.reloadData()
                     scrollToBottom()
                     messages.append(ChatMessage(content: responseMesssage, role: .assistant))
-                    try CoreDataManager.shared.saveMessage(message)
                 }
             } catch {
                 await MainActor.run {
