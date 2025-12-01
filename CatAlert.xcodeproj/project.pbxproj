@@ -116,6 +116,7 @@
 				SceneDelegate.swift,
 				Services/MockData.swift,
 				Services/MockReminderService.swift,
+				Services/ReminderService.swift,
 				Services/ReminderServiceProtocol.swift,
 				VideoPlayer/VideoPlayerViewController.swift,
 				ViewController.swift,

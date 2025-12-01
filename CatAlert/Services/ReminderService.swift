@@ -26,8 +26,8 @@ class ReminderService: ReminderServiceProtocol {
     // MARK: - ReminderServiceProtocol - Reminder Operations
 
     func fetchReminders() async throws -> [CatReminder] {
-        // TODO: Implement
-        fatalError("Not implemented yet")
+        let reminders: [CatReminder] = try await networkService.request(url: "api/reminders", method: .get, requiresAuth: true)
+        return reminders
     }
 
     func createReminder(_ reminder: CatReminder) async throws -> CatReminder {
