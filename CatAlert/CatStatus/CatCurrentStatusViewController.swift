@@ -50,7 +50,9 @@ class CatCurrentStatusViewController:UIViewController {
             let cardView = TaskCardView()
             cardView.configure(with: record)
             cardView.onComplete = { id in
-                ReminderManager.shared.markActivityCompleted(id: id)
+                Task {
+                    ReminderManager.shared.markActivityCompleted(id: id)
+                }
             }
             taskStackView.addArrangedSubview(cardView)
         }

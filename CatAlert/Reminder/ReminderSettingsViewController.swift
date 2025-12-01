@@ -27,7 +27,9 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         allReminders = ReminderManager.shared.activeReminders
         #if DEBUG
-        ReminderManager.shared.generateTestData()
+        Task {
+            await ReminderManager.shared.generateTestData()
+        }
         #endif
         setupNavigationBar()
         setupUI()
@@ -117,7 +119,7 @@ extension ReminderSettingsViewController: UITableViewDataSource {
         }
         cell.configure(with: reminder)
         cell.onToggle = { reminderId, isOn in
-            await ReminderManager.shared.toggleReminder(id: reminderId, enabled: isOn)
+            try? await ReminderManager.shared.toggleReminder(id: reminderId, enabled: isOn)
         }
         return cell
     }
