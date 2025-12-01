@@ -54,8 +54,9 @@ class ReminderManager: ObservableObject {
         }
         var updateReminder = activeReminders[index]
         updateReminder.isEnabled = enabled
-        try await reminderService.updateReminder(updateReminder)
-        await NotificationManager.shared.updateNotification(for: activeReminders[index])
+        let updatedReminder = try await reminderService.updateReminder(updateReminder)
+        activeReminders[index] = updatedReminder
+        await NotificationManager.shared.updateNotification(for: updatedReminder)
     }
     
     func updateReminder(_ reminder: CatReminder) async throws {
@@ -132,9 +133,11 @@ extension ReminderManager {
     }
 
     // MARK: - Test Data Generation
-    func generateTestData() {
+    func generateTestData() async {
         activeReminders = MockData.generateTestReminders()
-        saveReminders()
+        for reminder in activeReminders {
+            try? await reminderService.createReminder(reminder)
+        }
         todayActivities = MockData.generateTestActivities()
     }
 }
