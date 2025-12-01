@@ -42,13 +42,10 @@ class ReminderManager: ObservableObject {
         NotificationManager.shared.scheduleNotification(for: savedReminder)
     }
     
-    func deleteReminder(id: UUID) async {
-        guard activeReminders.contains(where: { $0.id == id }) else {
-            return
-        }
+    func deleteReminder(id: UUID) async throws {
+        try await reminderService.deleteReminder(id)
         activeReminders.removeAll { $0.id == id }
         await NotificationManager.shared.cancelNotification(for: id)
-        saveReminders()
     }
 
     func toggleReminder(id: UUID, enabled: Bool) async {
@@ -60,22 +57,21 @@ class ReminderManager: ObservableObject {
         saveReminders()
     }
     
-    func updateReminder(_ reminder: CatReminder) async {
-        guard let index = activeReminders.firstIndex(where: { $0.id == reminder.id }) else {
+    func updateReminder(_ reminder: CatReminder) async throws {
+        let updateReminder = try await reminderService.updateReminder(reminder)
+        guard let index = activeReminders.firstIndex(where: { $0.id == updateReminder.id }) else {
             return
         }
-        activeReminders[index] = reminder
-        await NotificationManager.shared.updateNotification(for: reminder)
-        saveReminders()
+        activeReminders[index] = updateReminder
+        await NotificationManager.shared.updateNotification(for: updateReminder)
     }
     
-    func markActivityCompleted(id: UUID) {
+    func markActivityCompleted(id: UUID) async throws {
+        let updateActivity = try await reminderService.updateActivityStatus(id, status: .completed, completeTime: Date())
         guard let index = todayActivities.firstIndex(where: { $0.id == id}) else {
             return
         }
-        todayActivities[index].status = .completed
-        todayActivities[index].completeTime = Date()
-        saveActivityRecords()
+        todayActivities[index] = updateActivity
     }
     
     func getUpcomingReminders() -> [CatReminder] {
