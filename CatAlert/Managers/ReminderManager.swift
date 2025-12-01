@@ -35,41 +35,6 @@ class ReminderManager: ObservableObject {
         }
     }
     
-// MARK: - Private Persistence
-    private func saveReminders() {
-        do {
-            try DataPersistenceManager.shared.saveData(activeReminders, to: "reminders.json")
-        } catch {
-            print("Failed to save reminders: \(error)")
-        }
-    }
-    
-    private func loadReminders() -> [CatReminder] {
-        do {
-            return try DataPersistenceManager.shared.loadData(CatReminder.self, from: "reminders.json")
-        } catch {
-            print("Failed to load reminders: \(error)")
-            return []
-        }
-    }
-
-    private func saveActivityRecords() {
-        do {
-            try DataPersistenceManager.shared.saveData(todayActivities, to: "activity_records.json")
-        } catch {
-            print("Failed to save activities: \(error)")
-        }
-    }
-    
-    private func loadActivityRecords() -> [ActivityRecord] {
-        do {
-            return try DataPersistenceManager.shared.loadData(ActivityRecord.self, from: "activity_records.json")
-        } catch {
-            print("Failed to load activities: \(error)")
-            return []
-        }
-    }
-    
 // MARK: - Public API
     func createReminder(_ reminder: CatReminder) {
         activeReminders.append(reminder)
