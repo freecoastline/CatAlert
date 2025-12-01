@@ -14,21 +14,20 @@ class ReminderManager: ObservableObject {
     @Published var activeReminders: [CatReminder] = []
     @Published var todayActivities: [ActivityRecord] = []
     
-    // 核心方法：
-    private init() {
+    private let reminderService: ReminderServiceProtocol
+    
+    private init(service: ReminderServiceProtocol = MockReminderService.shared) {
+        self.reminderService = service
+        
         loadData()
     }
     
     private func loadData() {
-        activeReminders = loadReminders()
-        let activities = loadActivityRecords()
-        let todayStartTime = Calendar.current.startOfDay(for: Date())
-        guard let tomorrowStartTime = Calendar.current.date(byAdding: .day, value: 1, to: todayStartTime) else {
-            return
+        do {
+            
+        } catch {
+            
         }
-        todayActivities = activities.filter({
-            (todayStartTime..<tomorrowStartTime).contains($0.scheduledTime)
-        })
     }
     
 // MARK: - Private Persistence
