@@ -36,10 +36,10 @@ class ReminderManager: ObservableObject {
     }
     
 // MARK: - Public API
-    func createReminder(_ reminder: CatReminder) {
-        activeReminders.append(reminder)
-        NotificationManager.shared.scheduleNotification(for: reminder)
-        saveReminders()
+    func createReminder(_ reminder: CatReminder) async throws {
+        let savedReminder = try await reminderService.createReminder(reminder)
+        activeReminders.append(savedReminder)
+        NotificationManager.shared.scheduleNotification(for: savedReminder)
     }
     
     func deleteReminder(id: UUID) async {
