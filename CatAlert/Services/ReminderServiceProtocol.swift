@@ -20,5 +20,5 @@ protocol ReminderServiceProtocol {
     // MARK: - Activity Operations
     func fetchActivities(for date: Date) async throws -> [ActivityRecord]
     
-    func updateActivityStatus(_ activity: ActivityRecord, status: ActivityStatus, compleTime: Date) async throws -> ActivityRecord
+    func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord
 }
