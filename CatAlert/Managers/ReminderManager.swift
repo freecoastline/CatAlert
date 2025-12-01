@@ -18,15 +18,20 @@ class ReminderManager: ObservableObject {
     
     private init(service: ReminderServiceProtocol = MockReminderService.shared) {
         self.reminderService = service
-        
-        loadData()
+        Task {
+            await loadData()
+        }
     }
     
-    private func loadData() {
+    private func loadData() async {
         do {
-            
+            activeReminders = try await reminderService.fetchReminders()
+            let today = Date()
+            todayActivities = try await reminderService.fetchActivities(for: today)
         } catch {
-            
+            print("❌ Failed to load data: \(error)")
+            activeReminders = []
+            todayActivities = []
         }
     }
     
