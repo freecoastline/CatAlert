@@ -47,8 +47,12 @@ class ReminderService: ReminderServiceProtocol {
         return updateReminder
     }
 
+    private struct EmptyResponse: Codable {
+        let messageDic: Dictionary<String, String>
+    }
+    
     func deleteReminder(_ id: UUID) async throws {
-        
+        let emptyResponse: EmptyResponse = try await networkService.request(url: "api/reminders/\(id)", method: .delete, requiresAuth: true)
     }
 
     // MARK: - ReminderServiceProtocol - Activity Operations
