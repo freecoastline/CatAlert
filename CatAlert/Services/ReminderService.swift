@@ -15,7 +15,7 @@ class ReminderService: ReminderServiceProtocol {
     private let networkService: NetworkService
     
     // MARK: - Struct
-    private struct activityStatusUpdate: Codable {
+    private struct ActivityStatusUpdate: Codable {
         let status: ActivityStatus
         let completeTime: Date?
     }
@@ -63,7 +63,7 @@ class ReminderService: ReminderServiceProtocol {
     }
     
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
-        let activityStatusUpdate = activityStatusUpdate(status: status, completeTime: completeTime)
+        let activityStatusUpdate = ActivityStatusUpdate(status: status, completeTime: completeTime)
         let data = try JSONEncoder().encode(activityStatusUpdate)
         let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .put, body: data, requiresAuth: true)
         return updateActivity
