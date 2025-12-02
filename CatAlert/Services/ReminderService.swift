@@ -14,6 +14,13 @@ class ReminderService: ReminderServiceProtocol {
     // MARK: - Property
     private let networkService: NetworkService
     
+    // MARK: - Struct
+    private struct activityStatusUpdate: Codable {
+        let status: ActivityStatus
+        let completeTime: Date?
+    }
+    
+    
     // MARK: - Init
     private init(networkService: NetworkService = NetworkService.shared) {
         self.networkService = networkService
@@ -54,9 +61,11 @@ class ReminderService: ReminderServiceProtocol {
         let activityRecords: [ActivityRecord] = try await networkService.request(url: "api/reminders/" + dateString, method: .get, requiresAuth: true)
         return activityRecords
     }
-
+    
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
-        // TODO: Implement
-        fatalError("Not implemented yet")
+        let activityStatusUpdate = activityStatusUpdate(status: status, completeTime: completeTime)
+        let data = try JSONEncoder().encode(activityStatusUpdate)
+        let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .put, body: data, requiresAuth: true)
+        return updateActivity
     }
 }
