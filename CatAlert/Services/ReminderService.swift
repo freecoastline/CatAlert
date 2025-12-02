@@ -52,7 +52,7 @@ class ReminderService: ReminderServiceProtocol {
     }
     
     func deleteReminder(_ id: UUID) async throws {
-        let emptyResponse: EmptyResponse = try await networkService.request(url: "/api/reminders/\(id)", method: .delete, requiresAuth: true)
+        let _: EmptyResponse = try await networkService.request(url: "/api/reminders/\(id)", method: .delete, requiresAuth: true)
     }
 
     // MARK: - ReminderServiceProtocol - Activity Operations
@@ -61,13 +61,13 @@ class ReminderService: ReminderServiceProtocol {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: date)
-        let activityRecords: [ActivityRecord] = try await networkService.request(url: "/api/activities/" + dateString, method: .get, requiresAuth: true)
+        let activityRecords: [ActivityRecord] = try await networkService.request(url: "/api/activities?date=\(dateString)", method: .get, requiresAuth: true)
         return activityRecords
     }
     
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
         let activityStatusUpdate = ActivityStatusUpdate(status: status, completeTime: completeTime)
-        let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .patch, body: activityStatusUpdate, requiresAuth: true)
+        let updateActivity: ActivityRecord = try await networkService.request(url: "/api/reminders/\(id)", method: .put, body: activityStatusUpdate, requiresAuth: true)
         return updateActivity
     }
 }
