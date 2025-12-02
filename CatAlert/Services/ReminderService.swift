@@ -31,8 +31,8 @@ class ReminderService: ReminderServiceProtocol {
     }
 
     func createReminder(_ reminder: CatReminder) async throws -> CatReminder {
-        // TODO: Implement
-        fatalError("Not implemented yet")
+        let response: CatReminder = try await networkService.request(url: "api/reminders/\(reminder.id)", method: .post, body: reminder, requiresAuth: true)
+        return response
     }
 
     func updateReminder(_ reminder: CatReminder) async throws -> CatReminder {
@@ -48,8 +48,11 @@ class ReminderService: ReminderServiceProtocol {
     // MARK: - ReminderServiceProtocol - Activity Operations
 
     func fetchActivities(for date: Date) async throws -> [ActivityRecord] {
-        // TODO: Implement
-        fatalError("Not implemented yet")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateString = formatter.string(from: date)
+        let activityRecords: [ActivityRecord] = try await networkService.request(url: "api/reminders/" + dateString, method: .get, requiresAuth: true)
+        return activityRecords
     }
 
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
