@@ -40,11 +40,11 @@ class NetworkService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         if requiresAuth {
-            guard let token = TokenManager.shared.loadToken() else {
-                throw AuthError.tokenInvalid
-            }
+//            guard let token = TokenManager.shared.loadToken() else {
+//                throw AuthError.tokenInvalid
+//            }
             
-            request.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
+//            request.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
         }
         
         if let body = body {

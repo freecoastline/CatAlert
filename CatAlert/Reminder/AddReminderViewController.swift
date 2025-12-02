@@ -108,10 +108,12 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
     }
     
     private func saveReminder() {
-        var reminder = CatReminder(id: UUID(), catId: "胡胡", title: reminderTitle, type: reminderType, createAt: Date(), frequency: reminderFrequency, isEnabled: true)
+        var reminder = CatReminder(id: UUID().uuidString, catId: "胡胡", title: reminderTitle, type: reminderType, createAt: Date(), frequency: reminderFrequency, isEnabled: true)
         reminder.scheduledTime = reminderTimes
 
-        ReminderManager.shared.createReminder(reminder)
+        Task {
+            try? await ReminderManager.shared.createReminder(reminder)
+        }
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
         navigationController?.popViewController(animated: true)

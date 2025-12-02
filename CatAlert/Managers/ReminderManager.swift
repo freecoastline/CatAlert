@@ -16,7 +16,7 @@ class ReminderManager: ObservableObject {
     
     private let reminderService: ReminderServiceProtocol
     
-    private init(service: ReminderServiceProtocol = MockReminderService.shared) {
+    private init(service: ReminderServiceProtocol = ReminderService.shared) {
         self.reminderService = service
         Task {
             await loadData()
@@ -42,13 +42,13 @@ class ReminderManager: ObservableObject {
         NotificationManager.shared.scheduleNotification(for: savedReminder)
     }
     
-    func deleteReminder(id: UUID) async throws {
+    func deleteReminder(id: String) async throws {
         try await reminderService.deleteReminder(id)
         activeReminders.removeAll { $0.id == id }
         await NotificationManager.shared.cancelNotification(for: id)
     }
 
-    func toggleReminder(id: UUID, enabled: Bool) async throws {
+    func toggleReminder(id: String, enabled: Bool) async throws {
         guard let index = activeReminders.firstIndex(where: { $0.id == id }) else {
             return
         }
@@ -68,7 +68,7 @@ class ReminderManager: ObservableObject {
         await NotificationManager.shared.updateNotification(for: updateReminder)
     }
     
-    func markActivityCompleted(id: UUID) async throws {
+    func markActivityCompleted(id: String) async throws {
         let updateActivity = try await reminderService.updateActivityStatus(id, status: .completed, completeTime: Date())
         guard let index = todayActivities.firstIndex(where: { $0.id == id}) else {
             return

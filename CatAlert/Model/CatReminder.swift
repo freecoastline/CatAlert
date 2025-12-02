@@ -8,7 +8,7 @@
 import Foundation
 
 struct CatReminder:Codable {
-    let id:UUID
+    let id:String?
     var catId:String
     var title:String 
     var type:CatCareType
@@ -35,7 +35,7 @@ struct ReminderTime: Codable {
     }
 }
 
-enum ReminderFrequency: Codable {
+enum ReminderFrequency: String, Codable {
     case daily
     case weekly
     var displayname:String {
@@ -48,7 +48,7 @@ enum ReminderFrequency: Codable {
     }
 }
 
-enum CatCareType: Codable {
+enum CatCareType: String, Codable {
     case food
     case water
     case play

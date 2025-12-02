@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class TaskCardView:UIView {
-    private var activityId:UUID?
-    var onComplete: ((UUID) -> Void)?
+    private var activityId:String?
+    var onComplete: ((String) -> Void)?
     private static let buttonIconSize:CGFloat = 28.0
     
     private func createButtonImage(_ sysName: String) -> UIImage {

@@ -15,10 +15,10 @@ protocol ReminderServiceProtocol {
     
     func updateReminder(_ reminder: CatReminder) async throws -> CatReminder
     
-    func deleteReminder(_ id: UUID) async throws
+    func deleteReminder(_ id: String) async throws
     
     // MARK: - Activity Operations
     func fetchActivities(for date: Date) async throws -> [ActivityRecord]
     
-    func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord
+    func updateActivityStatus(_ id: String, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord
 }

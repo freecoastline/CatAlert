@@ -8,8 +8,8 @@
 import Foundation
 
 struct ActivityRecord:Codable {
-    let id: UUID
-    let reminderId: UUID
+    let id: String
+    let reminderId: String
     let catId: String
     let type: CatCareType
     var scheduledTime: Date
@@ -30,8 +30,8 @@ struct ActivityRecord:Codable {
 
 extension ActivityRecord {
     init(reminderId: UUID, catId: String, scheduledTime: Date, type: CatCareType) {
-        self.id = UUID()
-        self.reminderId = reminderId
+        self.id = UUID().uuidString
+        self.reminderId = reminderId.uuidString
         self.catId = catId
         self.scheduledTime = scheduledTime
         self.type = type

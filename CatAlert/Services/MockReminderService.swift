@@ -62,7 +62,7 @@ class MockReminderService: ReminderServiceProtocol {
         return reminders[index]
     }
 
-    func deleteReminder(_ id: UUID) async throws {
+    func deleteReminder(_ id: String) async throws {
         // Simulate network delay
         try await Task.sleep(nanoseconds: 500_000_000)  // 0.5 seconds
 
@@ -85,7 +85,7 @@ class MockReminderService: ReminderServiceProtocol {
         return filtered
     }
 
-    func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
+    func updateActivityStatus(_ id: String, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
         // Simulate network delay
         try await Task.sleep(nanoseconds: 800_000_000)  // 0.8 seconds
 

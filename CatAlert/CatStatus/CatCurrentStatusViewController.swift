@@ -12,7 +12,7 @@ import Combine
 
 class CatCurrentStatusViewController:UIViewController {
     private var cancellables = Set<AnyCancellable>()
-    private var displayedCardIds:[UUID] = []
+    private var displayedCardIds:[String] = []
     private lazy var headerStatusView = CatInfoHeaderView(frame: .zero)
     var catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
     private func observeDataChange() {

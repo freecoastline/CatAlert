@@ -16,7 +16,7 @@ struct MockData {
 
         // 1. 每日喂食提醒 - 早中晚三次
         let foodReminder1 = CatReminder(
-            id: UUID(),
+            id: UUID().uuidString,
             catId: testCatId,
             title: "早餐时间",
             type: .food,
@@ -28,7 +28,7 @@ struct MockData {
         reminders.append(foodReminder1)
 
         let foodReminder2 = CatReminder(
-            id: UUID(),
+            id: UUID().uuidString,
             catId: testCatId,
             title: "午餐时间",
             type: .food,
@@ -40,7 +40,7 @@ struct MockData {
         reminders.append(foodReminder2)
 
         let foodReminder3 = CatReminder(
-            id: UUID(),
+            id: UUID().uuidString,
             catId: testCatId,
             title: "晚餐时间",
             type: .food,
@@ -53,7 +53,7 @@ struct MockData {
 
         // 2. 换水提醒 - 每天两次
         let waterReminder1 = CatReminder(
-            id: UUID(),
+            id: UUID().uuidString,
             catId: testCatId,
             title: "换水提醒",
             type: .water,
@@ -69,7 +69,7 @@ struct MockData {
 
         // 3. 玩耍提醒 - 每天一次
         let playReminder1 = CatReminder(
-            id: UUID(),
+            id: UUID().uuidString,
             catId: testCatId,
             title: "陪胡胡玩耍",
             type: .play,
@@ -82,7 +82,7 @@ struct MockData {
 
         // 4. 禁用的提醒示例
         let disabledReminder = CatReminder(
-            id: UUID(),
+            id: UUID().uuidString,
             catId: testCatId,
             title: "夜宵时间（已禁用）",
             type: .food,

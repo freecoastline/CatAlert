@@ -76,7 +76,7 @@ class NotificationManager {
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             
             // 使用 uuidString 而不是 uuid
-            let identifier = "\(reminder.id.uuidString)_\(hour)_\(minute)"
+            let identifier = "\(reminder.id)_\(hour)_\(minute)"
             let request = UNNotificationRequest(identifier: identifier, content: mutableContent, trigger: trigger)
             
             center.add(request) { error in
@@ -96,9 +96,12 @@ class NotificationManager {
         }
     }
     
-    func cancelNotification(for reminderId: UUID) async {
+    func cancelNotification(for reminderId: String?) async {
+        guard let reminderId else {
+            return
+        }
         let notifications = await UNUserNotificationCenter.current().pendingNotificationRequests()
-        center.removePendingNotificationRequests(withIdentifiers: notifications.filter { $0.identifier.hasPrefix(reminderId.uuidString)}
+        center.removePendingNotificationRequests(withIdentifiers: notifications.filter { $0.identifier.hasPrefix(reminderId)}
             .map(\.identifier)
         )
     }

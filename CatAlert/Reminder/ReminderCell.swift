@@ -18,7 +18,7 @@ class ReminderCell: UITableViewCell {
     
     private var reminder: CatReminder?
     
-    var onToggle: ((UUID, Bool) async -> Void)?
+    var onToggle: ((String, Bool) async -> Void)?
     
     private lazy var typeIconLabel = {
         let label = UILabel()
