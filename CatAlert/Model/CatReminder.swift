@@ -7,15 +7,26 @@
 
 import Foundation
 
-struct CatReminder:Codable {
+struct CatReminder: Codable {
     let id:String?
     var catId:String
     var title:String 
     var type:CatCareType
-    var createAt:Date
+    var createAt:Date?
     var frequency:ReminderFrequency
     var isEnabled:Bool
     var scheduledTime:[ReminderTime] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case catId = "cat_id"
+        case title
+        case type
+        case createAt = "create_at"
+        case frequency
+        case isEnabled = "is_enabled"
+        case scheduledTime = "scheduled_times"
+    }
 }
 
 struct ReminderTime: Codable {
