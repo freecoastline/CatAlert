@@ -33,17 +33,17 @@ class ReminderService: ReminderServiceProtocol {
     // MARK: - ReminderServiceProtocol - Reminder Operations
 
     func fetchReminders() async throws -> [CatReminder] {
-        let reminders: [CatReminder] = try await networkService.request(url: "api/reminders", method: .get, requiresAuth: true)
+        let reminders: [CatReminder] = try await networkService.request(url: "/api/reminders", method: .get, requiresAuth: true)
         return reminders
     }
 
     func createReminder(_ reminder: CatReminder) async throws -> CatReminder {
-        let response: CatReminder = try await networkService.request(url: "api/reminders/", method: .post, body: reminder, requiresAuth: true)
+        let response: CatReminder = try await networkService.request(url: "/api/reminders", method: .post, body: reminder, requiresAuth: true)
         return response
     }
 
     func updateReminder(_ reminder: CatReminder) async throws -> CatReminder {
-        let updateReminder: CatReminder = try await networkService.request(url: "api/reminders/\(reminder.id)", method: .put, body:reminder, requiresAuth: true)
+        let updateReminder: CatReminder = try await networkService.request(url: "/api/reminders/\(reminder.id)", method: .put, body: reminder, requiresAuth: true)
         return updateReminder
     }
 
@@ -52,7 +52,7 @@ class ReminderService: ReminderServiceProtocol {
     }
     
     func deleteReminder(_ id: UUID) async throws {
-        let emptyResponse: EmptyResponse = try await networkService.request(url: "api/reminders/\(id)", method: .delete, requiresAuth: true)
+        let emptyResponse: EmptyResponse = try await networkService.request(url: "/api/reminders/\(id)", method: .delete, requiresAuth: true)
     }
 
     // MARK: - ReminderServiceProtocol - Activity Operations
@@ -61,13 +61,13 @@ class ReminderService: ReminderServiceProtocol {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: date)
-        let activityRecords: [ActivityRecord] = try await networkService.request(url: "api/activities/" + dateString, method: .get, requiresAuth: true)
+        let activityRecords: [ActivityRecord] = try await networkService.request(url: "/api/activities/" + dateString, method: .get, requiresAuth: true)
         return activityRecords
     }
     
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
         let activityStatusUpdate = ActivityStatusUpdate(status: status, completeTime: completeTime)
-        let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .put, body: activityStatusUpdate, requiresAuth: true)
+        let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .patch, body: activityStatusUpdate, requiresAuth: true)
         return updateActivity
     }
 }
