@@ -47,9 +47,7 @@ class ReminderService: ReminderServiceProtocol {
         return updateReminder
     }
 
-    private struct EmptyResponse: Codable {
-        let messageDic: Dictionary<String, String>
-    }
+    private struct EmptyResponse: Codable {}
     
     func deleteReminder(_ id: UUID) async throws {
         let _: EmptyResponse = try await networkService.request(url: "/api/reminders/\(id)", method: .delete, requiresAuth: true)
@@ -67,7 +65,7 @@ class ReminderService: ReminderServiceProtocol {
     
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
         let activityStatusUpdate = ActivityStatusUpdate(status: status, completeTime: completeTime)
-        let updateActivity: ActivityRecord = try await networkService.request(url: "/api/reminders/\(id)", method: .put, body: activityStatusUpdate, requiresAuth: true)
+        let updateActivity: ActivityRecord = try await networkService.request(url: "/api/reminders/\(id)", method: .patch, body: activityStatusUpdate, requiresAuth: true)
         return updateActivity
     }
 }
