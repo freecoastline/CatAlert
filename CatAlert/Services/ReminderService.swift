@@ -38,18 +38,17 @@ class ReminderService: ReminderServiceProtocol {
     }
 
     func createReminder(_ reminder: CatReminder) async throws -> CatReminder {
-        let response: CatReminder = try await networkService.request(url: "api/reminders/\(reminder.id)", method: .post, body: reminder, requiresAuth: true)
+        let response: CatReminder = try await networkService.request(url: "api/reminders/", method: .post, body: reminder, requiresAuth: true)
         return response
     }
 
     func updateReminder(_ reminder: CatReminder) async throws -> CatReminder {
-        // TODO: Implement
-        fatalError("Not implemented yet")
+        let updateReminder: CatReminder = try await networkService.request(url: "api/reminders/\(reminder.id)", method: .put, body:reminder, requiresAuth: true)
+        return updateReminder
     }
 
     func deleteReminder(_ id: UUID) async throws {
-        // TODO: Implement
-        fatalError("Not implemented yet")
+        
     }
 
     // MARK: - ReminderServiceProtocol - Activity Operations
@@ -58,14 +57,13 @@ class ReminderService: ReminderServiceProtocol {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: date)
-        let activityRecords: [ActivityRecord] = try await networkService.request(url: "api/reminders/" + dateString, method: .get, requiresAuth: true)
+        let activityRecords: [ActivityRecord] = try await networkService.request(url: "api/activities/" + dateString, method: .get, requiresAuth: true)
         return activityRecords
     }
     
     func updateActivityStatus(_ id: UUID, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
         let activityStatusUpdate = ActivityStatusUpdate(status: status, completeTime: completeTime)
-        let data = try JSONEncoder().encode(activityStatusUpdate)
-        let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .put, body: data, requiresAuth: true)
+        let updateActivity: ActivityRecord = try await networkService.request(url: "api/reminders/\(id)", method: .put, body: activityStatusUpdate, requiresAuth: true)
         return updateActivity
     }
 }
