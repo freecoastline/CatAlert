@@ -12,9 +12,19 @@ struct ActivityRecord:Codable {
     let reminderId: String
     let catId: String
     let type: CatCareType
-    var scheduledTime: Date
+    var scheduleTime: Date
     var completeTime: Date?
     var status: ActivityStatus
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case reminderId = "reminder_id"
+        case catId = "cat_id"
+        case type
+        case scheduleTime = "schedule_time"
+        case completeTime = "complete_time"
+        case status
+    }
     
     var typeString: String {
         switch type {
