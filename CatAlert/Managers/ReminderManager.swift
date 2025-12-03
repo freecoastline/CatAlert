@@ -36,6 +36,12 @@ class ReminderManager: ObservableObject {
     }
     
 // MARK: - Public API
+    func fetchReminders() async throws -> [CatReminder] {
+        let reminders = try await reminderService.fetchReminders()
+        activeReminders = reminders
+        return reminders
+    }
+    
     func createReminder(_ reminder: CatReminder) async throws {
         let savedReminder = try await reminderService.createReminder(reminder)
         activeReminders.append(savedReminder)

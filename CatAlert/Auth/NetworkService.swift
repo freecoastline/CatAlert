@@ -105,6 +105,4 @@ class NetworkService {
         }
         return RegisterResponse(message: "none", user: User(id: "1", phone: "111", username: "11", email: "1", role: "11", is_active: false, created_at: Date())) as! T
     }
-    
-    
 }

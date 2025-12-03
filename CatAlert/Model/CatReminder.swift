@@ -22,7 +22,7 @@ struct CatReminder: Codable {
         case catId = "cat_id"
         case title
         case type
-        case createAt = "create_at"
+        case createAt = "created_at"
         case frequency
         case isEnabled = "is_enabled"
         case scheduledTime = "scheduled_times"
