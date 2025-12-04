@@ -59,13 +59,13 @@ class ReminderService: ReminderServiceProtocol {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: date)
-        let activityRecords: [ActivityRecord] = try await networkService.request(url: "/api/activities?date=\(dateString)", method: .get, requiresAuth: true)
+        let activityRecords: [ActivityRecord] = try await networkService.request(url: "/api/activity?date=\(dateString)", method: .get, requiresAuth: true)
         return activityRecords
     }
     
     func updateActivityStatus(_ id: String, status: ActivityStatus, completeTime: Date?) async throws -> ActivityRecord {
         let activityStatusUpdate = ActivityStatusUpdate(status: status, completeTime: completeTime)
-        let updateActivity: ActivityRecord = try await networkService.request(url: "/api/activities/\(id)", method: .patch, body: activityStatusUpdate, requiresAuth: true)
+        let updateActivity: ActivityRecord = try await networkService.request(url: "/api/activity/\(id)", method: .patch, body: activityStatusUpdate, requiresAuth: true)
         return updateActivity
     }
 }

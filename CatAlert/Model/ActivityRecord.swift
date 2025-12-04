@@ -39,18 +39,18 @@ struct ActivityRecord:Codable {
 }
 
 extension ActivityRecord {
-    init(reminderId: UUID, catId: String, scheduledTime: Date, type: CatCareType) {
+    init(reminderId: UUID, catId: String, scheduleTime: Date, type: CatCareType) {
         self.id = UUID().uuidString
         self.reminderId = reminderId.uuidString
         self.catId = catId
-        self.scheduledTime = scheduledTime
+        self.scheduleTime = scheduleTime
         self.type = type
         self.status = .pending
         self.completeTime = nil
     }
 }
 
-enum ActivityStatus:Codable {
+enum ActivityStatus: String, Codable {
     case completed
     case skipped
     case expired

@@ -124,7 +124,7 @@ extension ReminderManager {
                 completed += 1
             case .expired:
                 expired += 1
-            case .pending where record.scheduledTime < oneHourLater && record.scheduledTime > now :
+            case .pending where record.scheduleTime < oneHourLater && record.scheduleTime > now :
                 upcoming += 1
             default: break
             }

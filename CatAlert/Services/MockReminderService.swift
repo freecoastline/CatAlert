@@ -79,7 +79,7 @@ class MockReminderService: ReminderServiceProtocol {
         // Filter activities for the specified date
         let calendar = Calendar.current
         let filtered = activities.filter { activity in
-            calendar.isDate(activity.scheduledTime, inSameDayAs: date)
+            calendar.isDate(activity.scheduleTime, inSameDayAs: date)
         }
 
         return filtered
