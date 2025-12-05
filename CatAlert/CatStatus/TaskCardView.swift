@@ -74,7 +74,7 @@ class TaskCardView:UIView {
     func configure(with activity:ActivityRecord) {
         resetToDefaultState()
         titleLabel.text  = activity.typeString
-        timeLabel.text = Self.dateFormatter.string(from: activity.scheduledTime)
+        timeLabel.text = Self.dateFormatter.string(from: activity.scheduleTime)
         configureIcon(for: activity.type)
         applyStatusStyle(with: activity.status)
         activityId = activity.id
