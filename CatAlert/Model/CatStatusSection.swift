@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum CatStatusSection: Int {
-    
+enum CatStatusSection: Int, CaseIterable {
+    case header
+    case tasks
 }
