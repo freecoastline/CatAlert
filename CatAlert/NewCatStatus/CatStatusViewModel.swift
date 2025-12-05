@@ -53,4 +53,9 @@ class CatStatusViewModel: ObservableObject {
         isLoading = false
     }
     
+    func refresh() async {
+        isLoading = true
+        try? await Task.sleep(nanoseconds: 500_000_000)
+        isLoading = false
+    }
 }
