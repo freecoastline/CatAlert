@@ -24,9 +24,15 @@ class CatStatusViewModel: ObservableObject {
     // MARK: - Init
     init(reminderManager: ReminderManager = .shared) {
         self.reminderManager = reminderManager
+        setupCatInfo()
     }
     
     // MARK: - Setup
+    private func setupCatInfo() {
+        catInfo = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
+        catInfo.loadImageIfNeeded()
+    }
+    
     
     
     
