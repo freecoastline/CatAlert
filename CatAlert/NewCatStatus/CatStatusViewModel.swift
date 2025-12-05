@@ -30,7 +30,7 @@ class CatStatusViewModel: ObservableObject {
     // MARK: - Setup
     private func setupCatInfo() {
         catInfo = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
-        catInfo.loadImageIfNeeded()
+        catInfo?.loadImageIfNeeded()
     }
     
     private func observeDataChanges() {
@@ -41,7 +41,16 @@ class CatStatusViewModel: ObservableObject {
         }.store(in: &cancellables)
     }
     
-    
-    
+    // MARK: - Public Methods
+    func markActivityCompleted(_ id: String) async {
+        errorMessage = nil
+        isLoading = true
+        do {
+            let _ = try await ReminderService.shared.updateActivityStatus(id, status: .completed, completeTime: Date())
+        } catch {
+            errorMessage = "完成任务失败：\(error.localizedDescription)"
+        }
+        isLoading = false
+    }
     
 }
