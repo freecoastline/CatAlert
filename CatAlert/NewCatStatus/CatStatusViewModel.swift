@@ -21,6 +21,13 @@ class CatStatusViewModel: ObservableObject {
     private let reminderManager: ReminderManager
     private var cancellables = Set<AnyCancellable>()
     
+    // MARK: - Init
+    init(reminderManager: ReminderManager = .shared) {
+        self.reminderManager = reminderManager
+    }
+    
+    // MARK: - Setup
+    
     
     
     
