@@ -33,6 +33,13 @@ class CatStatusViewModel: ObservableObject {
         catInfo.loadImageIfNeeded()
     }
     
+    private func observeDataChanges() {
+        reminderManager.$todayActivities.receive(on: DispatchQueue.main).sink { [weak self] activities in
+            guard let self else { return }
+            todayActivities = activities
+            taskCount = activities.count
+        }.store(in: &cancellables)
+    }
     
     
     
