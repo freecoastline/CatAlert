@@ -6,6 +6,9 @@
 //
 
 import Foundation
-class CatStatusViewModel {
+import Combine
+
+@MainActor
+class CatStatusViewModel: ObservableObject {
     
 }
