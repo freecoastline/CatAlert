@@ -17,6 +17,11 @@ class CatStatusViewModel: ObservableObject {
     @Published private(set) var isLoading:Bool = false
     @Published private(set) var errorMessage: String?
     
+    // MARK: - Private Property
+    private let reminderManager: ReminderManager
+    private var cancellables = Set<AnyCancellable>()
+    
+    
     
     
 }
