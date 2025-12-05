@@ -93,6 +93,7 @@
 				Model/ActivityRecord.swift,
 				Model/CatReminder.swift,
 				Model/CatSimpleInfoModel.swift,
+				Model/CatStatusSection.swift,
 				Model/HealthCondition.swift,
 				Model/TaskProgress.swift,
 				NewCatStatus/CatStatusViewModel.swift,
