@@ -10,5 +10,13 @@ import Combine
 
 @MainActor
 class CatStatusViewModel: ObservableObject {
+    // MARK: - Published Property
+    @Published private(set) var todayActivities: [ActivityRecord] = []
+    @Published private(set) var catInfo: CatSimpleInfoModel?
+    @Published private(set) var taskCount: Int = 0
+    @Published private(set) var isLoading:Bool = false
+    @Published private(set) var errorMessage: String?
+    
+    
     
 }
