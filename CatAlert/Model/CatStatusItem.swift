@@ -23,5 +23,14 @@ enum CatStatusItem: Hashable {
         }
     }
     
-    
+    static func == (lhs: CatStatusItem, rhs: CatStatusItem) -> Bool {
+        switch(lhs, rhs) {
+        case (.catInfo(let l), .catInfo(let r)):
+            return l.name == r.name
+        case (.activity(let l), .activity(let r)):
+            return l.id == r.id && l.status == r.status
+        default:
+            return false
+        }
+    }
 }
