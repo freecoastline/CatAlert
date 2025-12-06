@@ -8,6 +8,6 @@
 import Foundation
 import UIKit
 
-class CatStatusCardView:UIView {
+class CatStatusCardView: UIView {
     
 }
