@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CatStatusSection: Int, CaseIterable {
+enum CatStatusSection: Int, CaseIterable, Hashable {
     case header
     case tasks
     var titile: String? {
