@@ -22,8 +22,12 @@ class ActivitiCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Property
+    private let cardView = TaskCardView()
+    
     // MARK: - Setup
     private func setupUI() {
+        contentView.addSubview(cardView)
         
     }
 }
