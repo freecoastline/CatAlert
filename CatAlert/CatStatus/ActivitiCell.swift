@@ -9,5 +9,6 @@ import Foundation
 import UIKit
 
 class ActivitiCell: UICollectionViewCell {
+    static let identifier = "ActivitiCell"
     
 }
