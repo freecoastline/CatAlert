@@ -28,6 +28,8 @@ class ActivitiCell: UICollectionViewCell {
     // MARK: - Setup
     private func setupUI() {
         contentView.addSubview(cardView)
-        
+        cardView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
     }
 }
