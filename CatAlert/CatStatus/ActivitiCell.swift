@@ -12,6 +12,10 @@ class ActivitiCell: UICollectionViewCell {
     // MARK: - Static
     static let identifier = "ActivitiCell"
     
+    // MARK: - Property
+    private var onComplete: ((String) -> Void)?
+    private var activity: ActivityRecord?
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,5 +35,11 @@ class ActivitiCell: UICollectionViewCell {
         cardView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(8)
         }
+    }
+    
+    // MARK: - Configure
+    func configure(with activity: ActivityRecord, onComplete: @escaping (String) -> Void) {
+        self.activity = activity
+        self.onComplete = onComplete
     }
 }
