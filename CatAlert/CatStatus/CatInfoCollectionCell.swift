@@ -30,7 +30,10 @@ class CatInfoCollectionCell: UICollectionViewCell {
     
     // MARK: - Setup
     private func setupUI() {
-        
+        contentView.addSubview(headerView)
+        headerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+        }
     }
     
     // MARK: - Configure
