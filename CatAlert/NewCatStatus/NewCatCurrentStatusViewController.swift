@@ -25,6 +25,25 @@ class NewCatCurrentStatusViewController: UIViewController {
     
     // MARK: - SetupUI
     private func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
+            guard let self else { return nil }
+            let section = CatStatusSection.allCases[sectionIndex]
+            switch section {
+            case .header:
+                return createHeaderLayout()
+            case .tasks:
+                return createTasksLayout()
+            }
+        }
+        return layout
+    }
+    
+    // MARK: - Layout
+    private func createHeaderLayout() -> NSCollectionLayoutSection {
+        
+    }
+    
+    private func createTasksLayout() -> NSCollectionLayoutSection {
         
     }
     
