@@ -15,4 +15,27 @@ class CatInfoCollectionCell: UICollectionViewCell {
     // MARK: - Property
     private lazy var headerView = CatInfoHeaderView(frame: .zero)
     
+    weak var delegate: CatInfoHeaderViewDelegate?
+    
+    private var catInfo: CatSimpleInfoModel?
+    // MARK: - Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Setup
+    private func setupUI() {
+        
+    }
+    
+    // MARK: - Configure
+    func configure(with info: CatSimpleInfoModel) {
+        catInfo = info
+        headerView.delegate = delegate
+    }
 }
