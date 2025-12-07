@@ -14,5 +14,15 @@ class NewCatCurrentStatusViewController: UIViewController {
     private let viewModel = CatStatusViewModel()
     private let cancellbles = Set<AnyCancellable>()
     
-    // MARK: - 
+    // MARK: - UI components
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collection.backgroundColor = .clear
+        return collection
+    }()
+    
+    // MARK: - SetupUI
+    private func createLayout() -> UICollectionViewLayout {
+        
+    }
 }
