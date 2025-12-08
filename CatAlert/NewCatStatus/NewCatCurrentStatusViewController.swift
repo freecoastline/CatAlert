@@ -18,7 +18,7 @@ class NewCatCurrentStatusViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collection.backgroundColor = .clear
-        collection.register(ActivitiCell.self, forCellWithReuseIdentifier: ActivitiCell.identifier)
+        collection.register(ActivitiCell.self, forCellWithReuseIdentifier: ActivitiCell.reuseIdentifier)
         collection.register(CatInfoCollectionCell.self, forCellWithReuseIdentifier: CatInfoCollectionCell.reuseIdentifier)
         return collection
     }()
@@ -102,7 +102,27 @@ class NewCatCurrentStatusViewController: UIViewController {
     // MARK: - Configure
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            
+            switch itemIdentifier {
+            case .activity(let record):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivitiCell.reuseIdentifier, for: indexPath) as! ActivitiCell
+                cell.configure(with: record) {[weak self] id in
+                    Task {
+                        await self?.viewModel.markActivityCompleted(id)
+                    }
+                }
+                return cell
+            case .catInfo(let model):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatInfoCollectionCell.reuseIdentifier, for: indexPath) as! CatInfoCollectionCell
+                cell.configure(with: model)
+                cell.delegate = self
+                return cell
+            }
         })
+    }
+}
+
+extension NewCatCurrentStatusViewController: CatInfoHeaderViewDelegate {
+    func didTapAvatar() {
+        
     }
 }

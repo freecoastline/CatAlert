@@ -10,7 +10,7 @@ import UIKit
 
 class ActivitiCell: UICollectionViewCell {
     // MARK: - Static
-    static let identifier = "ActivitiCell"
+    static let reuseIdentifier = "ActivitiCell"
     
     // MARK: - Property
     private var onComplete: ((String) -> Void)?
