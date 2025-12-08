@@ -23,6 +23,8 @@ class NewCatCurrentStatusViewController: UIViewController {
         return collection
     }()
     
+    private var dataSource: UICollectionViewDiffableDataSource<CatStatusSection, CatStatusItem>?
+    
     // MARK: - SetupUI
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
