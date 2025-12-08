@@ -123,6 +123,9 @@ class NewCatCurrentStatusViewController: UIViewController {
 
 extension NewCatCurrentStatusViewController: CatInfoHeaderViewDelegate {
     func didTapAvatar() {
-        
+        let profileController = tabBarController?.viewControllers?.first { vc in
+            vc is CatProfileViewController
+        }
+        tabBarController?.selectedViewController = profileController
     }
 }
