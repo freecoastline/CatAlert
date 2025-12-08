@@ -76,8 +76,7 @@ class NewCatCurrentStatusViewController: UIViewController {
     
     // MARK: - Bind
     private func bindViewModel() {
-        viewModel.$catInfo.receive(on: DispatchQueue.main).
-        sink { [weak self] _ in
+        viewModel.$catInfo.receive(on: DispatchQueue.main).sink { [weak self] _ in
             guard let self else { return }
             updateSnapShot()
         }.store(in: &cancellbles)
