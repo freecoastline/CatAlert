@@ -53,7 +53,16 @@ class NewCatCurrentStatusViewController: UIViewController {
     }
     
     private func createTasksLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
+        let group = NSCollectionLayoutGroup(layoutSize: groupSize)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 12)
+        return section
     }
     
     // MARK: - Life Cycle
