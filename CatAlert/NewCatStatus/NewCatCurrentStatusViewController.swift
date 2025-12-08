@@ -92,6 +92,8 @@ class NewCatCurrentStatusViewController: UIViewController {
     private func updateSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<CatStatusSection, CatStatusItem>()
         
+        snapShot.appendSections([.header, .tasks])
+        
         if let catInfo = viewModel.catInfo {
             snapShot.appendItems([.catInfo(catInfo)], toSection: .header)
         }
