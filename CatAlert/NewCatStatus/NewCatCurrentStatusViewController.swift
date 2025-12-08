@@ -12,7 +12,7 @@ import Combine
 class NewCatCurrentStatusViewController: UIViewController {
     // MARK: - Property
     private let viewModel = CatStatusViewModel()
-    private let cancellbles = Set<AnyCancellable>()
+    private var cancellbles = Set<AnyCancellable>()
     
     // MARK: - UI components
     private lazy var collectionView: UICollectionView = {
@@ -71,6 +71,22 @@ class NewCatCurrentStatusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        bindViewModel()
+    }
+    
+    // MARK: - Bind
+    private func bindViewModel() {
+        viewModel.$catInfo.receive(on: DispatchQueue.main)
+        sink { [weak self] _ in
+            guard let self else { return }
+            updateSnapShot()
+        }.store(in: &cancellbles)
+        
+    }
+    
+    // MARK: - Update
+    private func updateSnapShot() {
+        
     }
     
     // MARK: - SetupUI
