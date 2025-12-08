@@ -90,7 +90,17 @@ class NewCatCurrentStatusViewController: UIViewController {
     
     // MARK: - Update
     private func updateSnapShot() {
+        var snapShot = NSDiffableDataSourceSnapshot<CatStatusSection, CatStatusItem>()
         
+        if let catInfo = viewModel.catInfo {
+            snapShot.appendItems([.catInfo(catInfo)], toSection: .header)
+        }
+        
+        let activities = viewModel.todayActivities.compactMap {
+            CatStatusItem.activity($0)
+        }
+        snapShot.appendItems(activities, toSection: .tasks)
+        dataSource?.apply(snapShot, animatingDifferences: true)
     }
     
     // MARK: - SetupUI
