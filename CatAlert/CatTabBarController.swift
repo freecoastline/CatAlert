@@ -30,7 +30,7 @@ class CatTabBarController:UITabBarController {
         tabBar.layer.insertSublayer(layer, at: 0)
         
         let catProfile = CatNewProfileViewController()
-        let catCurrentStatus = CatCurrentStatusViewController()
+        let catCurrentStatus = NewCatCurrentStatusViewController()
         let reminderSettingsPage = ReminderSettingsViewController()
         let ChatViewController = ChatViewController()
         

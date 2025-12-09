@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CatInfoHeaderViewDelegate {
+protocol CatInfoHeaderViewDelegate: AnyObject {
     func didTapAvatar()
 }
 
