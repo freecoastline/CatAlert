@@ -194,7 +194,7 @@ class CatInfoHeaderView: UIView {
         layer.cornerRadius = 13
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowOpacity = 0.4
+        layer.shadowOpacity = 0.15
         layer.shadowRadius = 6
 
         // 添加头像容器和头像
