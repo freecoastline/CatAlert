@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 import SnapKit
 
+enum TabBarTag: Int {
+    case status = 0
+    case settings = 1
+    case chat = 2
+    case profile = 3
+}
+
 class CatTabBarController:UITabBarController {
     private let customTabBarHeight:CGFloat = 60.0
     private let tabBarVerticalOffset: CGFloat = -10
@@ -38,10 +45,10 @@ class CatTabBarController:UITabBarController {
         let reminderNavController = UINavigationController(rootViewController: reminderSettingsPage)
         let catProfileNavController = UINavigationController(rootViewController: catProfile)
         let consultationNavController = UINavigationController(rootViewController: ChatViewController)
-        catCurrentStatus.tabBarItem = UITabBarItem(title: "提醒", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: 3)
-        reminderNavController.tabBarItem = UITabBarItem(title: "设置", image: UIImage(systemName: "gear"), tag: 2)
-        catProfileNavController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        consultationNavController.tabBarItem = UITabBarItem(title: "智能助手", image: UIImage(systemName: "brain.head.profile.fill"), tag: 0)
+        catCurrentStatus.tabBarItem = UITabBarItem(title: "提醒", image: UIImage(systemName: "alarm.waves.left.and.right"), tag: TabBarTag.status.rawValue)
+        reminderNavController.tabBarItem = UITabBarItem(title: "设置", image: UIImage(systemName: "gear"), tag: TabBarTag.settings.rawValue)
+        catProfileNavController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person.crop.circle"), tag: TabBarTag.profile.rawValue)
+        consultationNavController.tabBarItem = UITabBarItem(title: "智能助手", image: UIImage(systemName: "brain.head.profile.fill"), tag: TabBarTag.chat.rawValue)
         viewControllers = [catCurrentStatus, reminderNavController, consultationNavController, catProfileNavController]
     }
     
