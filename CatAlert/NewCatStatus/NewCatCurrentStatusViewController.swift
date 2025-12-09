@@ -146,8 +146,8 @@ class NewCatCurrentStatusViewController: UIViewController {
                 return cell
             case .catInfo(let model):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatInfoCollectionCell.reuseIdentifier, for: indexPath) as! CatInfoCollectionCell
-                cell.configure(with: model)
                 cell.delegate = self
+                cell.configure(with: model)
                 return cell
             }
         })
