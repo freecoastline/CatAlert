@@ -72,6 +72,7 @@ class NewCatCurrentStatusViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
+        configureDataSource()
     }
     
     // MARK: - Bind
