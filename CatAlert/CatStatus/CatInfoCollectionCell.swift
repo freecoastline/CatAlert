@@ -39,6 +39,7 @@ class CatInfoCollectionCell: UICollectionViewCell {
     // MARK: - Configure
     func configure(with info: CatSimpleInfoModel) {
         catInfo = info
+        headerView.update(with: info)
         headerView.delegate = delegate
     }
 }
