@@ -16,6 +16,7 @@ class CatStatusViewModel: ObservableObject {
     @Published private(set) var taskCount: Int = 0
     @Published private(set) var isLoading:Bool = false
     @Published private(set) var errorMessage: String?
+    @Published private(set) var noMoreData: Bool = false
     
     // MARK: - Private Property
     private let reminderManager: ReminderManager
