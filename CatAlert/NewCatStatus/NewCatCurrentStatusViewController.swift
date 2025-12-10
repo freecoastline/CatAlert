@@ -107,13 +107,29 @@ class NewCatCurrentStatusViewController: UIViewController {
         dataSource?.apply(snapShot, animatingDifferences: true)
     }
     
+    // MARK: - Helper Method
+    private func handleRefresh() {
+        
+    }
+    
     // MARK: - SetupUI
+    private func setupRefreshControl() {
+        let header = MJRefreshNormalHeader { [weak self] in
+            guard let self else { return }
+            handleRefresh()
+        }
+        header.lastUpdatedTimeLabel?.isHidden = true
+        header.stateLabel?.textColor = .gray
+        collectionView.mj_header = header
+    }
+    
     private func setupUI() {
         setupGradientBackground()
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        setupRefreshControl()
     }
     
     private func setupGradientBackground() {
