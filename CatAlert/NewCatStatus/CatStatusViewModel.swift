@@ -77,6 +77,11 @@ class CatStatusViewModel: ObservableObject {
         }
         do {
             let previousActivities = try await reminderManager.fetchActivitiesForDate(previousDay)
+            if previousActivities.isEmpty {
+                isLoading = false
+                noMoreData = true
+                return
+            }
             earlistLoadedDate = previousDay
             todayActivities.append(contentsOf: previousActivities)
         } catch {
