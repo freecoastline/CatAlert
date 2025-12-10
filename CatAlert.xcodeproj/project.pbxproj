@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27AAD2B42E90082100C1AC34 /* SnapKit */; };
 		BE0B676E2EA7BB6000A99522 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = BE0B676D2EA7BB6000A99522 /* SnapKit */; };
+		BE8E97B72EE90A080042E7FD /* MJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = BE8E97B62EE90A080042E7FD /* MJRefresh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27AAD2B52E90082100C1AC34 /* SnapKit in Frameworks */,
+				BE8E97B72EE90A080042E7FD /* MJRefresh in Frameworks */,
 				BE0B676E2EA7BB6000A99522 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +288,7 @@
 			packageProductDependencies = (
 				27AAD2B42E90082100C1AC34 /* SnapKit */,
 				BE0B676D2EA7BB6000A99522 /* SnapKit */,
+				BE8E97B62EE90A080042E7FD /* MJRefresh */,
 			);
 			productName = CatAlert;
 			productReference = 2B1627362E6BE15F008A6507 /* CatAlert.app */;
@@ -372,6 +375,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BE0B676C2EA7BB6000A99522 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				BE8E97B52EE909650042E7FD /* XCRemoteSwiftPackageReference "MJRefresh" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2B1627372E6BE15F008A6507 /* Products */;
@@ -740,6 +744,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		BE8E97B52EE909650042E7FD /* XCRemoteSwiftPackageReference "MJRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoderMJLee/MJRefresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.7.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,6 +763,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE0B676C2EA7BB6000A99522 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		BE8E97B62EE90A080042E7FD /* MJRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE8E97B52EE909650042E7FD /* XCRemoteSwiftPackageReference "MJRefresh" */;
+			productName = MJRefresh;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
