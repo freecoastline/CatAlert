@@ -113,6 +113,11 @@ class ReminderManager: ObservableObject {
         let today = Date()
         todayActivities = try await ReminderService.shared.fetchActivities(for: today)
     }
+    
+    func fetchActivitiesForDate(_ date: Date) async throws -> [ActivityRecord] {
+        let activities = try await reminderService.fetchActivities(for: date)
+        return activities
+    }
 }
 
 
