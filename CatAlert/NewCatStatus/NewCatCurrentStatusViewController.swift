@@ -139,7 +139,7 @@ class NewCatCurrentStatusViewController: UIViewController {
             guard let self else { return }
             handleLoadMore()
         }
-        
+        footer.stateLabel?.textColor = .gray
         collectionView.mj_header = header
         collectionView.mj_footer = footer
     }
