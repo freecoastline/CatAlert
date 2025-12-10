@@ -55,7 +55,14 @@ class CatStatusViewModel: ObservableObject {
     
     func refresh() async {
         isLoading = true
-        try? await Task.sleep(nanoseconds: 500_000_000)
+        errorMessage = nil
+        Task {
+            do {
+                try await reminderManager.refreshTodayData()
+            } catch {
+                errorMessage = "刷新失败：\(error.localizedDescription)"
+            }
+        }
         isLoading = false
     }
 }

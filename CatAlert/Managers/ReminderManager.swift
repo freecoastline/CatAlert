@@ -108,6 +108,11 @@ class ReminderManager: ObservableObject {
             })
         }
     }
+    
+    func refreshTodayData() async throws {
+        let today = Date()
+        todayActivities = try await ReminderService.shared.fetchActivities(for: today)
+    }
 }
 
 
