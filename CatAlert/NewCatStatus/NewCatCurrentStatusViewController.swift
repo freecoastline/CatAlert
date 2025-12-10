@@ -109,7 +109,12 @@ class NewCatCurrentStatusViewController: UIViewController {
     
     // MARK: - Helper Method
     private func handleRefresh() {
-        
+        Task {
+            await viewModel.refresh()
+            await MainActor.run {
+                collectionView.mj_header?.endRefreshing()
+            }
+        }
     }
     
     // MARK: - SetupUI
