@@ -117,6 +117,15 @@ class NewCatCurrentStatusViewController: UIViewController {
         }
     }
     
+    private func handleLoadMore() {
+        Task {
+            await viewModel.loadMore()
+            await MainActor.run {
+                collectionView.mj_footer?.endRefreshing()
+            }
+        }
+    }
+    
     // MARK: - SetupUI
     private func setupRefreshControl() {
         let header = MJRefreshNormalHeader { [weak self] in
@@ -125,7 +134,14 @@ class NewCatCurrentStatusViewController: UIViewController {
         }
         header.lastUpdatedTimeLabel?.isHidden = true
         header.stateLabel?.textColor = .gray
+        
+        let footer = MJRefreshAutoNormalFooter { [weak self] in
+            guard let self else { return }
+            handleLoadMore()
+        }
+        
         collectionView.mj_header = header
+        collectionView.mj_footer = footer
     }
     
     private func setupUI() {
