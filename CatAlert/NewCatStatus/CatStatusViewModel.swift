@@ -20,6 +20,7 @@ class CatStatusViewModel: ObservableObject {
     // MARK: - Private Property
     private let reminderManager: ReminderManager
     private var cancellables = Set<AnyCancellable>()
+    private var earlistLoadedDate: Date = Date()
     
     // MARK: - Init
     init(reminderManager: ReminderManager = .shared) {
@@ -62,6 +63,23 @@ class CatStatusViewModel: ObservableObject {
             } catch {
                 errorMessage = "刷新失败：\(error.localizedDescription)"
             }
+        }
+        isLoading = false
+    }
+    
+    func loadMore() async {
+        isLoading = true
+        let calendar = Calendar.current
+        guard let previousDay = calendar.date(byAdding: .day, value: -1, to: earlistLoadedDate) else {
+            isLoading = false
+            return
+        }
+        do {
+            let previousActivities = try await reminderManager.fetchActivitiesForDate(previousDay)
+            earlistLoadedDate = previousDay
+            todayActivities.append(contentsOf: previousActivities)
+        } catch {
+            errorMessage = "load more fail: \(error.localizedDescription)"
         }
         isLoading = false
     }
