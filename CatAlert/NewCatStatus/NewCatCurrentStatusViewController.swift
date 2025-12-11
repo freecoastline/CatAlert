@@ -153,6 +153,13 @@ class NewCatCurrentStatusViewController: UIViewController {
         setupRefreshControl()
     }
     
+    private func updateFooterVisibility() {
+        let contentHeight = collectionView.contentSize.height
+        let frameHeight = collectionView.frame.height
+        let hasEnoughContent = contentHeight > frameHeight
+        collectionView.mj_footer?.isHidden = !hasEnoughContent
+    }
+    
     private func setupGradientBackground() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
