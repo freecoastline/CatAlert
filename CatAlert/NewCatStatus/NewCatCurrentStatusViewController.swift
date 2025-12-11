@@ -113,6 +113,8 @@ class NewCatCurrentStatusViewController: UIViewController {
             await viewModel.refresh()
             await MainActor.run {
                 collectionView.mj_header?.endRefreshing()
+                collectionView.mj_footer?.resetNoMoreData()
+                updateFooterVisibility()
             }
         }
     }
