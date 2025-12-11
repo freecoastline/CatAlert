@@ -126,6 +126,13 @@ class NewCatCurrentStatusViewController: UIViewController {
         }
     }
     
+    private func updateFooterVisibility() {
+        let contentHeight = collectionView.contentSize.height
+        let frameHeight = collectionView.frame.height
+        let hasEnoughContent = contentHeight > frameHeight
+        collectionView.mj_footer?.isHidden = !hasEnoughContent
+    }
+    
     // MARK: - SetupUI
     private func setupRefreshControl() {
         let header = MJRefreshNormalHeader { [weak self] in
@@ -140,6 +147,7 @@ class NewCatCurrentStatusViewController: UIViewController {
             handleLoadMore()
         }
         footer.stateLabel?.textColor = .gray
+        footer.isHidden = true
         collectionView.mj_header = header
         collectionView.mj_footer = footer
     }
@@ -152,14 +160,7 @@ class NewCatCurrentStatusViewController: UIViewController {
         }
         setupRefreshControl()
     }
-    
-    private func updateFooterVisibility() {
-        let contentHeight = collectionView.contentSize.height
-        let frameHeight = collectionView.frame.height
-        let hasEnoughContent = contentHeight > frameHeight
-        collectionView.mj_footer?.isHidden = !hasEnoughContent
-    }
-    
+
     private func setupGradientBackground() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
