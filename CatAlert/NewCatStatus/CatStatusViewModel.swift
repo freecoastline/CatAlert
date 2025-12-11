@@ -69,6 +69,9 @@ class CatStatusViewModel: ObservableObject {
     }
     
     func loadMore() async {
+        guard !isLoading else {
+            return
+        }
         isLoading = true
         let calendar = Calendar.current
         guard let previousDay = calendar.date(byAdding: .day, value: -1, to: earlistLoadedDate) else {
