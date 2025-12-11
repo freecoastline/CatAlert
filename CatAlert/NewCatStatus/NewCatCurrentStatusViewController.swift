@@ -88,6 +88,15 @@ class NewCatCurrentStatusViewController: UIViewController {
             guard let self else { return }
             updateSnapShot()
         }.store(in: &cancellbles)
+        
+        
+        viewModel.$noMoreData.receive(on: DispatchQueue.main).sink { [weak self] noMoreData in
+            guard let self else { return }
+            if noMoreData {
+                collectionView.mj_footer?.endRefreshingWithNoMoreData()
+            }
+        }.store(in: &cancellbles)
+
     }
     
     // MARK: - Update
@@ -123,7 +132,11 @@ class NewCatCurrentStatusViewController: UIViewController {
         Task {
             await viewModel.loadMore()
             await MainActor.run {
-                collectionView.mj_footer?.endRefreshing()
+                if viewModel.noMoreData {
+                    collectionView.mj_footer?.endRefreshingWithNoMoreData()
+                } else {
+                    collectionView.mj_footer?.endRefreshing()
+                }
             }
         }
     }
