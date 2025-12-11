@@ -61,6 +61,8 @@ class CatStatusViewModel: ObservableObject {
         Task {
             do {
                 try await reminderManager.refreshTodayData()
+                earlistLoadedDate = Date()
+                noMoreData = false
             } catch {
                 errorMessage = "刷新失败：\(error.localizedDescription)"
             }
