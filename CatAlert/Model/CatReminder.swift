@@ -29,7 +29,7 @@ struct CatReminder: Codable {
     }
 }
 
-struct ReminderTime: Codable {
+struct ReminderTime: Codable, Equatable {
     let minute:Int
     let hour:Int
     
