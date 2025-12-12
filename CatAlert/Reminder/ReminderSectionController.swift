@@ -23,4 +23,12 @@ final class ReminderSectionController: ListSectionController {
         reminderItem = object as? ReminderItemModel
     }
     
+    override func sizeForItem(at index: Int) -> CGSize {
+        guard let context = collectionContext else {
+            return .zero
+        }
+        
+        let width = collectionContext.containerSize.width
+        return CGSize(width: width, height: 80.0)
+    }
 }
