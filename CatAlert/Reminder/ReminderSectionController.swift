@@ -11,6 +11,7 @@ import IGListKit
 final class ReminderSectionController: ListSectionController {
     // MARK: - Properties
     private var reminderItem: ReminderItemModel?
+    var onToggle: ((String, Bool) async -> Void)?
     
     // MARK: - LifeCycle
     override init() {
@@ -30,5 +31,14 @@ final class ReminderSectionController: ListSectionController {
         
         let width = collectionContext.containerSize.width
         return CGSize(width: width, height: 80.0)
+    }
+    
+    override func cellForItem(at index: Int) -> UICollectionViewCell {
+        guard let cell = collectionContext.dequeueReusableCell(of: ReminderCell.self, for: self, at: index) as? ReminderCell, let reminderItem = reminderItem else {
+            return UICollectionViewCell()
+        }
+        cell.onToggle = onToggle
+        cell.configure(with: reminderItem.reminder)
+        return cell
     }
 }
