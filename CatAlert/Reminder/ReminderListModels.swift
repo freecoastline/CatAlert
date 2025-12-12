@@ -21,6 +21,9 @@ struct ReminderItemModel: Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(reminder.id)
+        hasher.combine(reminder.isEnabled)
+        hasher.combine(reminder.title)
+        hasher.combine(reminder.scheduledTime)
     }
     
     var reminder: CatReminder
