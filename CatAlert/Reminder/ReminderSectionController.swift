@@ -12,5 +12,10 @@ final class ReminderSectionController: ListSectionController {
     // MARK: - Properties
     private var reminderItem: ReminderItemModel?
     
+    // MARK: - LifeCycle
+    override init() {
+        super.init()
+        inset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+    }
     
 }
