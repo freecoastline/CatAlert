@@ -114,6 +114,11 @@ class NewCatCurrentStatusViewController: UIViewController {
         }
         snapShot.appendItems(activities, toSection: .tasks)
         dataSource?.apply(snapShot, animatingDifferences: true)
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            updateFooterVisibility()
+        }
     }
     
     // MARK: - Helper Method
