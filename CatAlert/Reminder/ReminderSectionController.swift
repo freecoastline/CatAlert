@@ -41,4 +41,14 @@ final class ReminderSectionController: ListSectionController {
         cell.configure(with: reminderItem.reminder)
         return cell
     }
+    
+    override func didSelectItem(at index: Int) {
+        guard let reminderItem = reminderItem,
+              let viewController = viewController else {
+            return
+        }
+        
+        let editVC = EditReminderViewController(reminder: reminderItem.reminder)
+        viewController.navigationController?.pushViewController(editVC, animated: true)
+    }
 }
