@@ -18,4 +18,9 @@ final class ReminderSectionController: ListSectionController {
         inset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
     }
     
+    // MARK: - IGList Methods
+    override func didUpdate(to object: Any) {
+        reminderItem = object as? ReminderItemModel
+    }
+    
 }
