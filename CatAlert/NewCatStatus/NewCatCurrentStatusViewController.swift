@@ -13,7 +13,7 @@ import MJRefresh
 class NewCatCurrentStatusViewController: UIViewController {
     // MARK: - Property
     private let viewModel = CatStatusViewModel()
-    private var cancellbles = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - UI components
     private lazy var collectionView: UICollectionView = {
@@ -81,13 +81,13 @@ class NewCatCurrentStatusViewController: UIViewController {
         viewModel.$catInfo.receive(on: DispatchQueue.main).sink { [weak self] _ in
             guard let self else { return }
             updateSnapShot()
-        }.store(in: &cancellbles)
+        }.store(in: &cancellables)
         
         
         viewModel.$todayActivities.receive(on: DispatchQueue.main).sink { [weak self] _ in
             guard let self else { return }
             updateSnapShot()
-        }.store(in: &cancellbles)
+        }.store(in: &cancellables)
         
         
         viewModel.$noMoreData.receive(on: DispatchQueue.main).sink { [weak self] noMoreData in
@@ -95,7 +95,7 @@ class NewCatCurrentStatusViewController: UIViewController {
             if noMoreData {
                 collectionView.mj_footer?.endRefreshingWithNoMoreData()
             }
-        }.store(in: &cancellbles)
+        }.store(in: &cancellables)
 
     }
     
@@ -109,7 +109,7 @@ class NewCatCurrentStatusViewController: UIViewController {
             snapShot.appendItems([.catInfo(catInfo)], toSection: .header)
         }
         
-        let activities = viewModel.todayActivities.compactMap {
+        let activities = viewModel.todayActivities.map {
             CatStatusItem.activity($0)
         }
         snapShot.appendItems(activities, toSection: .tasks)
