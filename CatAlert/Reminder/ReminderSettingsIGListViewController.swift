@@ -21,6 +21,13 @@ class ReminderSettingsIGListViewController: UIViewController {
         title = "提醒设置（IGList）"
     }
     
+    // MARK: - UI component
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collection.backgroundColor = .systemGroupedBackground
+        return collection
+    }()
+    
     
     
     
