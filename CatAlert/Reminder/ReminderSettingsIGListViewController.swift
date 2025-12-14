@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 import Combine
+import IGListKit
 
 class ReminderSettingsIGListViewController: UIViewController {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private var allReminders: [CatReminder] = []
+    private lazy var listAdapter: ListAdapter = {
+        return ListAdapter(updater: ListAdapterUpdater(), viewController: self)
+    }()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -20,6 +24,7 @@ class ReminderSettingsIGListViewController: UIViewController {
         view.backgroundColor = .systemGroupedBackground
         title = "提醒设置（IGList）"
         setupUI()
+        setupAdapter()
     }
     
     // MARK: - UI component
@@ -30,6 +35,11 @@ class ReminderSettingsIGListViewController: UIViewController {
     }()
     
     // MARK: - Setup
+    private func setupAdapter() {
+        listAdapter.collectionView = collectionView
+        listAdapter.dataSource = self
+    }
+    
     private func setupUI() {
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
