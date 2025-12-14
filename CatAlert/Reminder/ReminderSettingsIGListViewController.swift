@@ -46,8 +46,18 @@ class ReminderSettingsIGListViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+}
+
+extension ReminderSettingsIGListViewController: ListAdapterDataSource {
+    func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+        <#code#>
+    }
     
+    func objects(for listAdapter: ListAdapter) -> [any ListDiffable] {
+        <#code#>
+    }
     
-    
-    
+    func emptyView(for listAdapter: ListAdapter) -> UIView? {
+        <#code#>
+    }
 }
