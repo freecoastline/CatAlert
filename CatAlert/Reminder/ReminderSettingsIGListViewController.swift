@@ -47,8 +47,8 @@ class ReminderSettingsIGListViewController: UIViewController {
         }
     }
     
-    private func buildListItems() -> [ListDiffable] {
-        var items: [ListDiffable] = []
+    private func buildListItems() -> [Hashable] {
+        var items: [Hashable] = []
         let types: [CatCareType] = [.food, .play, .water]
         
         for type in types {
@@ -74,7 +74,7 @@ extension ReminderSettingsIGListViewController: ListAdapterDataSource {
     }
     
     func objects(for listAdapter: ListAdapter) -> [any ListDiffable] {
-        <#code#>
+        buildListItems()
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
