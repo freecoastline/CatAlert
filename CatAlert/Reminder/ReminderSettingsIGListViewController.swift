@@ -46,11 +46,31 @@ class ReminderSettingsIGListViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    private func buildListItems() -> [ListDiffable] {
+        var items: [ListDiffable] = []
+        let types: [CatCareType] = [.food, .play, .water]
+        
+        for type in types {
+            let reminders = allReminders.filter{ $0.type == type }
+            guard !reminders.isEmpty else {
+                continue
+            }
+            let headerSectionViewModel = ReminderSectionHeaderModel(type: type, count: reminders.count)
+            items.append(headerSectionViewModel)
+            for reminder in reminders {
+                let item = ReminderItemModel(reminder: reminder)
+                items.append(item)
+            }
+        }
+        
+        return items
+    }
 }
 
 extension ReminderSettingsIGListViewController: ListAdapterDataSource {
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        <#code#>
+        
     }
     
     func objects(for listAdapter: ListAdapter) -> [any ListDiffable] {
@@ -58,6 +78,6 @@ extension ReminderSettingsIGListViewController: ListAdapterDataSource {
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? {
-        <#code#>
+        nil
     }
 }
