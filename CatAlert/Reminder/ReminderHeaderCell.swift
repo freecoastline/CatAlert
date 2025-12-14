@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class ReminderHeaderCell: UICollectionViewCell {
+    // MARK: - Properties
+    static let reuseIdentifier = "ReminderHeaderCell"
+    
     func configure(with: ReminderSectionHeaderModel) {
         
     }
