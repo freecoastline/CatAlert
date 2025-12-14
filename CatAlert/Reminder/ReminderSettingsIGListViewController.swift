@@ -70,7 +70,12 @@ class ReminderSettingsIGListViewController: UIViewController {
 
 extension ReminderSettingsIGListViewController: ListAdapterDataSource {
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        
+        if object is ReminderSectionHeaderModel {
+            return ReminderHeaderSectionController()
+        } else if object is ReminderItemModel {
+            return ReminderSectionController()
+        }
+        fatalError("unknow object")
     }
     
     func objects(for listAdapter: ListAdapter) -> [any ListDiffable] {
