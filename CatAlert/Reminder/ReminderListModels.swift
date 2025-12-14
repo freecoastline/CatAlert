@@ -7,9 +7,26 @@
 
 import Foundation
 import IGListSwiftKit
+import IGListKit
 
 // MARK: - Section Header Model
-struct ReminderSectionHeaderModel: Hashable {
+final class ReminderSectionHeaderModel: ListDiffable {
+    func diffIdentifier() -> any NSObjectProtocol {
+        type.rawValue as NSObjectProtocol
+    }
+    
+    func isEqual(toDiffableObject object: (any ListDiffable)?) -> Bool {
+        guard let header = object as? ReminderSectionHeaderModel else {
+            return false
+        }
+        return type == header.type && count == header.count
+    }
+    
+    init(type: CatCareType, count: Int) {
+        self.type = type
+        self.count = count
+    }
+    
     let type: CatCareType
     let count: Int
 }
