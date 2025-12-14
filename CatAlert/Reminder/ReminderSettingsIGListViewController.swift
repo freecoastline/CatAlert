@@ -19,6 +19,7 @@ class ReminderSettingsIGListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
         title = "提醒设置（IGList）"
+        setupUI()
     }
     
     // MARK: - UI component
@@ -27,6 +28,14 @@ class ReminderSettingsIGListViewController: UIViewController {
         collection.backgroundColor = .systemGroupedBackground
         return collection
     }()
+    
+    // MARK: - Setup
+    private func setupUI() {
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
     
     
     
