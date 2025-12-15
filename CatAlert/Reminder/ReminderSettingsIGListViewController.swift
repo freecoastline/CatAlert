@@ -88,6 +88,14 @@ class ReminderSettingsIGListViewController: UIViewController {
             }
         }
     }
+    
+    private func observeDataChange() {
+        ReminderManager.shared.$activeReminders.receive(on: DispatchQueue.main).sink { [weak self] reminders in
+            guard let self else { return }
+            allReminders = reminders
+            listAdapter.performUpdates(animated: true)
+        }.store(in: &cancellables)
+    }
 }
 
 extension ReminderSettingsIGListViewController: ListAdapterDataSource {
