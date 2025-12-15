@@ -73,7 +73,8 @@ class ReminderSettingsIGListViewController: UIViewController {
     }
     
     @objc private func addButtonTapped() {
-        
+        let addVC = AddReminderViewController()
+        navigationController?.pushViewController(addVC, animated: true)
     }
 }
 
