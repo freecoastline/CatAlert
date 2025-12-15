@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 class EditReminderViewController: UIViewController {
-    private var reminder: CatReminder?
-    init(reminder: CatReminder? = nil) {
+    private let reminder: CatReminder
+    init(reminder: CatReminder) {
         self.reminder = reminder
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

@@ -38,7 +38,7 @@ class CatTabBarController:UITabBarController {
         
         let catProfile = CatNewProfileViewController()
         let catCurrentStatus = NewCatCurrentStatusViewController()
-        let reminderSettingsPage = ReminderSettingsViewController()
+        let reminderSettingsPage = ReminderSettingsIGListViewController()
         let ChatViewController = ChatViewController()
         
         // 将设置页包装到 NavigationController 中，以支持导航栏和页面跳转
