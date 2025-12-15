@@ -25,6 +25,8 @@ class ReminderSettingsIGListViewController: UIViewController {
         title = "提醒设置（IGList）"
         setupUI()
         setupAdapter()
+        setNavigationBar()
+        loadData()
     }
     
     // MARK: - UI component
@@ -75,6 +77,16 @@ class ReminderSettingsIGListViewController: UIViewController {
     @objc private func addButtonTapped() {
         let addVC = AddReminderViewController()
         navigationController?.pushViewController(addVC, animated: true)
+    }
+    
+    private func loadData() {
+        Task {
+            let _ = try? await ReminderManager.shared.fetchReminders()
+            await MainActor.run {
+                allReminders = ReminderManager.shared.activeReminders
+                listAdapter.performUpdates(animated: true)
+            }
+        }
     }
 }
 
