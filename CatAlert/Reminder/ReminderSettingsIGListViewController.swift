@@ -27,6 +27,7 @@ class ReminderSettingsIGListViewController: UIViewController {
         setupAdapter()
         setNavigationBar()
         loadData()
+        observeDataChange()
     }
     
     // MARK: - UI component
