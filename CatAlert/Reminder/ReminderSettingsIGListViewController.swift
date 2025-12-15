@@ -66,6 +66,15 @@ class ReminderSettingsIGListViewController: UIViewController {
         
         return items
     }
+    
+    private func setNavigationBar() {
+        let addButton = UIBarButtonItem(image: .init(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc private func addButtonTapped() {
+        
+    }
 }
 
 extension ReminderSettingsIGListViewController: ListAdapterDataSource {
