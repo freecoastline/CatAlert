@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 class MediaCacheManager {
     // MARK: - Property
@@ -14,5 +14,7 @@ class MediaCacheManager {
     private init() {}
     
     // MARK: - imageCache
+    private let imageCache = NSCache<NSString, UIImage>()
+    private let fileManager = FileManager.default
     
 }
