@@ -31,16 +31,20 @@ final class ReminderSectionHeaderModel: ListDiffable {
     let count: Int
 }
 
-struct ReminderItemModel: Hashable {
-    static func == (lhs: ReminderItemModel, rhs: ReminderItemModel) -> Bool {
-        return lhs.reminder.id == rhs.reminder.id && lhs.reminder.title == rhs.reminder.title && lhs.reminder.scheduledTime == rhs.reminder.scheduledTime && lhs.reminder.isEnabled == rhs.reminder.isEnabled
+final class ReminderItemModel: ListDiffable {
+    init(reminder: CatReminder) {
+        self.reminder = reminder
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(reminder.id)
-        hasher.combine(reminder.isEnabled)
-        hasher.combine(reminder.title)
-        hasher.combine(reminder.scheduledTime)
+    func diffIdentifier() -> any NSObjectProtocol {
+        reminder.id as NSObjectProtocol
+    }
+    
+    func isEqual(toDiffableObject object: (any ListDiffable)?) -> Bool {
+        guard let item = object as? ReminderItemModel else {
+            return false
+        }
+        return item.reminder.catId == reminder.catId && item.reminder.id == reminder.id && item.reminder.isEnabled == reminder.isEnabled && item.reminder.scheduledTime == reminder.scheduledTime && item.reminder.type == reminder.type && item.reminder.title == item.reminder.title
     }
     
     var reminder: CatReminder

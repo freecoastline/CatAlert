@@ -8,7 +8,7 @@
 import Foundation
 
 struct CatReminder: Codable {
-    let id:String?
+    let id:String
     var catId:String
     var title:String 
     var type:CatCareType
