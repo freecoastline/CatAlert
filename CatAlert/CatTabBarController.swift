@@ -27,15 +27,6 @@ class CatTabBarController:UITabBarController {
     }
     
     private func setupTabBarController() {
-        let layer = CAShapeLayer()
-        layer.path = UIBezierPath(roundedRect: CGRect(x: tabBarHorizontalInset, y: tabBar.bounds.minY + tabBarVerticalOffset, width: tabBar.bounds.width - tabBarHorizontalInset * 2, height: customTabBarHeight), cornerRadius: customTabBarHeight / 2).cgPath
-        layer.shadowColor = UIColor.gray.cgColor
-        layer.fillColor = UIColor.white.cgColor
-        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        layer.shadowOpacity = 0.5
-        layer.masksToBounds = false
-        tabBar.layer.insertSublayer(layer, at: 0)
-        
         let catProfile = CatNewProfileViewController()
         let catCurrentStatus = NewCatCurrentStatusViewController()
         let reminderSettingsPage = ReminderSettingsIGListViewController()
@@ -57,6 +48,15 @@ class CatTabBarController:UITabBarController {
         var tabBarFrame = tabBar.frame
         tabBarFrame.size.height = customTabBarHeight
         tabBar.frame = tabBarFrame
+        
+        let layer = CAShapeLayer()
+        layer.path = UIBezierPath(roundedRect: CGRect(x: tabBarHorizontalInset, y: tabBar.bounds.minY + tabBarVerticalOffset, width: tabBar.bounds.width - tabBarHorizontalInset * 2, height: customTabBarHeight), cornerRadius: customTabBarHeight / 2).cgPath
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.fillColor = UIColor.white.cgColor
+        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        layer.shadowOpacity = 0.5
+        layer.masksToBounds = false
+        tabBar.layer.insertSublayer(layer, at: 0)
     }
 }
 
