@@ -13,7 +13,26 @@ class MediaCacheManager {
     static let shared = MediaCacheManager()
     
     struct PerformanceMetrics {
+        var cacheHits: Int = 0
+        var cacheMisses: Int = 0
+        var totalLoadTime: TimeInterval = 0
+        var loadCount: Int = 0
         
+        var cacheHitRate: Double {
+            let total = cacheHits + cacheMisses
+            return total > 0 ? Double(total) / Double(loadCount) : 0
+        }
+        
+        var averageLoadTime: TimeInterval {
+            return loadCount > 0 ? totalLoadTime / Double(loadCount) : 0
+        }
+        
+        mutating func reset() {
+            cacheHits = 0
+            cacheMisses = 0
+            totalLoadTime = 0
+            loadCount = 0
+        }
     }
     
     // MARK: - imageCache
@@ -27,7 +46,7 @@ class MediaCacheManager {
     }()
     
     // MARK: - Performance Metrics
-    //private(set) var performance = PerformanceMetrics()
+    private(set) var performance = PerformanceMetrics()
     
     // MARK: - Init
     private init() {
