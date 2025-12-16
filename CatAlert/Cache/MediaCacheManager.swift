@@ -17,4 +17,9 @@ class MediaCacheManager {
     private let imageCache = NSCache<NSString, UIImage>()
     private let fileManager = FileManager.default
     
+    // MARK: - Performance Metrics
+    //private(set) var performance = PerformanceMetrics()
+    
+    
+    
 }
