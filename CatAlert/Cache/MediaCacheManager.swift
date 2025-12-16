@@ -46,7 +46,7 @@ class MediaCacheManager {
     }()
     
     // MARK: - Performance Metrics
-    private(set) var performance = PerformanceMetrics()
+    private(set) var metrics = PerformanceMetrics()
     
     // MARK: - Init
     private init() {
@@ -68,5 +68,37 @@ class MediaCacheManager {
             let fileURL = cacheDirectory.appendingPathComponent(key)
             try? data?.write(to: fileURL)
         }
+    }
+    
+    func getImage(forKey key: String) -> UIImage? {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        if let image = imageCache.object(forKey: key as NSString) {
+            let loadTime = CFAbsoluteTimeGetCurrent() - startTime
+            metrics.cacheHits += 1
+            metrics.totalLoadTime += loadTime
+            metrics.loadCount += 1
+            print("📊 [CACHE HIT - Memory] \(String(format: "%.2f", loadTime * 1000))ms")
+            return image
+        }
+        
+        let fileURL = cacheDirectory.appendingPathComponent(key)
+        if let data = try? Data(contentsOf: fileURL),
+           let image = UIImage(data: data) {
+            imageCache.setObject(image, forKey: key as NSString)
+            let loadTime = CFAbsoluteTimeGetCurrent() - startTime
+            metrics.cacheHits += 1
+            metrics.totalLoadTime += loadTime
+            metrics.loadCount += 1
+            print("📊 [CACHE HIT - Disk] \(String(format: "%.2f", loadTime * 1000))ms")
+            return image
+        }
+        
+        // Cache miss
+            let loadTime = CFAbsoluteTimeGetCurrent() - startTime
+            metrics.cacheMisses += 1
+            metrics.totalLoadTime += loadTime
+            metrics.loadCount += 1
+            print("📊 [CACHE MISS] \(String(format: "%.2f", loadTime * 1000))ms")
+            return nil
     }
 }
