@@ -11,7 +11,6 @@ import UIKit
 class MediaCacheManager {
     // MARK: - Property
     static let shared = MediaCacheManager()
-    private init() {}
     
     // MARK: - imageCache
     private let imageCache = NSCache<NSString, UIImage>()
@@ -21,7 +20,9 @@ class MediaCacheManager {
     //private(set) var performance = PerformanceMetrics()
     
     // MARK: - Init
-    
+    private init() {
+        configureCache()
+    }
     
     // MARK: - Configure
     private func configureCache() {
