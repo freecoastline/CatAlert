@@ -20,6 +20,13 @@ class MediaCacheManager {
     // MARK: - Performance Metrics
     //private(set) var performance = PerformanceMetrics()
     
+    // MARK: - Init
     
+    
+    // MARK: - Configure
+    private func configureCache() {
+        imageCache.countLimit = 100
+        imageCache.totalCostLimit = 50 * 1024 * 1024 //50 MB
+    }
     
 }
