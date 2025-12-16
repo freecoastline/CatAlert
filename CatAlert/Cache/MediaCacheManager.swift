@@ -15,6 +15,12 @@ class MediaCacheManager {
     // MARK: - imageCache
     private let imageCache = NSCache<NSString, UIImage>()
     private let fileManager = FileManager.default
+    private lazy var cacheDirectory: URL = {
+        let paths = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)
+        let url = paths[0].appending(path: "MediaCache", directoryHint: .isDirectory)
+        try? fileManager.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
+    }()
     
     // MARK: - Performance Metrics
     //private(set) var performance = PerformanceMetrics()
