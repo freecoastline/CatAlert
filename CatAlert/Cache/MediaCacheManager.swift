@@ -59,4 +59,14 @@ class MediaCacheManager {
         imageCache.totalCostLimit = 50 * 1024 * 1024 //50 MB
     }
     
+    // MARK: - Public Methods
+    func cacheImage(_ image: UIImage, forKey key: String) {
+        imageCache.setObject(image, forKey: key as NSString)
+        Task.detached(priority: .background) { [weak self] in
+            guard let self else { return }
+            let data = image.jpegData(compressionQuality: 0.8)
+            let fileURL = cacheDirectory.appendingPathComponent(key)
+            try? data?.write(to: fileURL)
+        }
+    }
 }
