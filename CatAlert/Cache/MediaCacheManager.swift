@@ -12,6 +12,10 @@ class MediaCacheManager {
     // MARK: - Property
     static let shared = MediaCacheManager()
     
+    struct PerformanceMetrics {
+        
+    }
+    
     // MARK: - imageCache
     private let imageCache = NSCache<NSString, UIImage>()
     private let fileManager = FileManager.default
