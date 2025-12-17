@@ -75,8 +75,27 @@ class ProfileVideoCell: UICollectionViewCell {
     }
     
     func configure(with mediaItem: ProfileMediaItem) {
-        thumbnailImageView.image = mediaItem.thumbnail
+        thumbnailImageView.image = nil
+        thumbnailImageView.backgroundColor = .systemGray5
+        guard let imageKey = mediaItem.imageKey else {
+            return
+        }
         playCountLabel.text = formatPlayCount(mediaItem.playCount)
+        
+        if let image = MediaCacheManager.shared.getImage(forKey: imageKey) {
+            thumbnailImageView.image = image
+            return
+        }
+        
+        Task.detached(priority: .userInitiated) { [weak self] in
+            guard let self,
+                  let image = ImageReader.getImage(from: imageKey, type: "JPG") else { return }
+            MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
+            await MainActor.run { [weak self] in
+                guard let self else { return }
+                thumbnailImageView.image = image
+            }
+        }
     }
     
     // MARK: - Helper

@@ -94,11 +94,11 @@ class MediaCacheManager {
         }
         
         // Cache miss
-            let loadTime = CFAbsoluteTimeGetCurrent() - startTime
-            metrics.cacheMisses += 1
-            metrics.totalLoadTime += loadTime
-            metrics.loadCount += 1
-            print("📊 [CACHE MISS] \(String(format: "%.2f", loadTime * 1000))ms")
-            return nil
+        let loadTime = CFAbsoluteTimeGetCurrent() - startTime
+        metrics.cacheMisses += 1
+        metrics.totalLoadTime += loadTime
+        metrics.loadCount += 1
+        print("📊 [CACHE MISS] \(String(format: "%.2f", loadTime * 1000))ms")
+        return nil
     }
 }
