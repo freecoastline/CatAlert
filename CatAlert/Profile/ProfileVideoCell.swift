@@ -8,6 +8,9 @@
 import UIKit
 
 class ProfileVideoCell: UICollectionViewCell {
+    // MARK: - Properties
+    private var imageLoadTask: Task<Void, Never>?
+    
     // MARK: - UI Components
     private lazy var thumbnailImageView: UIImageView = {
         let view = UIImageView()
@@ -75,6 +78,7 @@ class ProfileVideoCell: UICollectionViewCell {
     }
     
     func configure(with mediaItem: ProfileMediaItem) {
+        imageLoadTask?.cancel()
         thumbnailImageView.image = nil
         thumbnailImageView.backgroundColor = .systemGray5
         guard let imageKey = mediaItem.imageKey else {
@@ -87,7 +91,7 @@ class ProfileVideoCell: UICollectionViewCell {
             return
         }
         
-        Task {
+        imageLoadTask = Task {
             if let image = await loadImage(forKey: imageKey) {
                 MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
                 await MainActor.run {
@@ -107,7 +111,8 @@ class ProfileVideoCell: UICollectionViewCell {
     // MARK: - LifeCycle
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        thumbnailImageView.image = nil
+        imageLoadTask?.cancel()
     }
     
     // MARK: - Helper
