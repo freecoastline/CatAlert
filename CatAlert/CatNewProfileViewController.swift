@@ -288,11 +288,12 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func openImageViewer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell,
+        let imageKey = mediaItem.imageKey else {
             return
         }
         
-        let image = mediaItem.imageData
+        let image = MediaCacheManager.shared.getImage(forKey: imageKey)
         let cellframeInCollectionView = cell.frame
         let frameInView = collectionView.convert(cellframeInCollectionView, to: view)
         
@@ -311,10 +312,11 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private func openVideoPlayer(for indexPath: IndexPath, with mediaItem: ProfileMediaItem) {
-        guard let videoURL = mediaItem.videoURL, let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell else {
+        guard let videoURL = mediaItem.videoURL, let cell = collectionView.cellForItem(at: indexPath) as? ProfileVideoCell,
+        let imageKey = mediaItem.imageKey else {
             return
         }
-        let image = mediaItem.thumbnail
+        let image = MediaCacheManager.shared.getImage(forKey: imageKey)
         let cellframeInColletionView = cell.frame
         let frameInView = collectionView.convert(cellframeInColletionView, to: view)
         zoomedCellFrame = frameInView
