@@ -97,6 +97,7 @@ class ProfileVideoCell: UICollectionViewCell {
                 guard !Task.isCancelled else { return }
                 MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
                 await MainActor.run {
+                    guard !Task.isCancelled else { return }
                     thumbnailImageView.image = image
                 }
             }
