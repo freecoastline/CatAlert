@@ -88,7 +88,7 @@ class ProfileVideoCell: UICollectionViewCell {
         }
         
         Task {
-            if let image = loadImage(forKey: imageKey) {
+            if let image = await loadImage(forKey: imageKey) {
                 MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
                 await MainActor.run {
                     thumbnailImageView.image = image
@@ -97,12 +97,11 @@ class ProfileVideoCell: UICollectionViewCell {
         }
     }
     
-    private func loadImage(forKey imageKey: String) -> UIImage? {
-        Task.detached(priority: .userInitiated) {
+    private func loadImage(forKey imageKey: String) async -> UIImage? {
+        await Task.detached(priority: .userInitiated) {
             let image = ImageReader.getImage(from: imageKey, type: "JPG")
             return image
-        }
-        return nil
+        }.value
     }
     
     // MARK: - LifeCycle
