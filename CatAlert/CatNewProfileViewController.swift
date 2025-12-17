@@ -636,13 +636,17 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
     }
     
     func addMediaToAlbum(image: UIImage) {
-        let mediaItem = ProfileMediaItem.image(image, playCount: 0)
+        let cacheKey = UUID().uuidString
+        MediaCacheManager.shared.cacheImage(image, forKey: cacheKey)
+        let mediaItem = ProfileMediaItem.image(cacheKey, playCount: 0)
         albumMediaItems.insert(mediaItem, at: 0)
         reloadVideoSection()
     }
     
     func addMediaToAlbum(videoURL: URL, thumbnail: UIImage) {
-        let mediaItem = ProfileMediaItem.video(thumbnail: thumbnail, videoURL: videoURL, playCount: 0)
+        let cacheKey = UUID().uuidString
+        MediaCacheManager.shared.cacheImage(thumbnail, forKey: cacheKey)
+        let mediaItem = ProfileMediaItem.video(cacheKey, videoURL: videoURL, playCount: 0)
         albumMediaItems.insert(mediaItem, at: 0)
         reloadVideoSection()
     }
