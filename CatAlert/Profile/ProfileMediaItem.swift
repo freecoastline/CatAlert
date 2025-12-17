@@ -26,7 +26,7 @@ struct ProfileMediaItem {
     }
     
     static func video(_ imageKey: String?, videoURL: URL?, playCount:Int) -> ProfileMediaItem {
-        ProfileMediaItem(type: .image, imageData: nil, imageKey: imageKey, thumbnail: nil, videoURL: videoURL, playCount: playCount)
+        ProfileMediaItem(type: .video, imageData: nil, imageKey: imageKey, thumbnail: nil, videoURL: videoURL, playCount: playCount)
     }
 }
 
