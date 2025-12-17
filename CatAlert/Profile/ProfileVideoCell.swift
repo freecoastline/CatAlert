@@ -87,15 +87,28 @@ class ProfileVideoCell: UICollectionViewCell {
             return
         }
         
-        Task.detached(priority: .userInitiated) { [weak self] in
-            guard let self,
-                  let image = ImageReader.getImage(from: imageKey, type: "JPG") else { return }
-            MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
-            await MainActor.run { [weak self] in
-                guard let self else { return }
-                thumbnailImageView.image = image
+        Task {
+            if let image = loadImage(forKey: imageKey) {
+                MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
+                await MainActor.run {
+                    thumbnailImageView.image = image
+                }
             }
         }
+    }
+    
+    private func loadImage(forKey imageKey: String) -> UIImage? {
+        Task.detached(priority: .userInitiated) {
+            let image = ImageReader.getImage(from: imageKey, type: "JPG")
+            return image
+        }
+        return nil
+    }
+    
+    // MARK: - LifeCycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
     
     // MARK: - Helper
