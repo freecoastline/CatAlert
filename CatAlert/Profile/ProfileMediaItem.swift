@@ -15,17 +15,18 @@ enum MediaType {
 struct ProfileMediaItem {
     let type: MediaType
     let imageData: UIImage?
+    let imageKey: String?
     let thumbnail: UIImage?
     let videoURL: URL?
     let playCount: Int
     
     // MARK: - convenience init
-    static func image(_ imageData: UIImage?, playCount: Int) -> ProfileMediaItem {
-        ProfileMediaItem(type: .image, imageData: imageData, thumbnail: imageData, videoURL: nil, playCount: playCount)
+    static func image(_ imageKey: String?, playCount: Int) -> ProfileMediaItem {
+        ProfileMediaItem(type: .image, imageData: nil, imageKey: imageKey, thumbnail: nil, videoURL: nil, playCount: playCount)
     }
     
-    static func video(thumbnail: UIImage?, videoURL: URL?, playCount:Int) -> ProfileMediaItem {
-        ProfileMediaItem(type: .video, imageData: nil, thumbnail: thumbnail, videoURL: videoURL, playCount: playCount)
+    static func video(_ imageKey: String?, videoURL: URL?, playCount:Int) -> ProfileMediaItem {
+        ProfileMediaItem(type: .image, imageData: nil, imageKey: imageKey, thumbnail: nil, videoURL: videoURL, playCount: playCount)
     }
 }
 
