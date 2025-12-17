@@ -92,7 +92,9 @@ class ProfileVideoCell: UICollectionViewCell {
         }
         
         imageLoadTask = Task {
+            guard !Task.isCancelled else { return }
             if let image = await loadImage(forKey: imageKey) {
+                guard !Task.isCancelled else { return }
                 MediaCacheManager.shared.cacheImage(image, forKey: imageKey)
                 await MainActor.run {
                     thumbnailImageView.image = image
