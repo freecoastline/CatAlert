@@ -134,7 +134,8 @@ class CatNewProfileViewController: UIViewController {
     private func loadMockData() {
         catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
         catModel?.loadImageIfNeeded()
-        albumImages = [
+        
+        let imageKeys = [
             "IMG_4933",
             "IMG_5771",
             "IMG_6317",
@@ -153,16 +154,13 @@ class CatNewProfileViewController: UIViewController {
             "IMG_6364",
             "IMG_7585",
             "IMG_7595"
-        ].compactMap({ imageStr in
-            ImageReader.getImage(from: imageStr, type: "JPG")
-        })
-        
-        albumMediaItems = albumImages.enumerated().map { index, image in
+        ]
+        albumMediaItems = imageKeys.enumerated().map { index, imageKey in
             if index % 2 == 0 {
-                return ProfileMediaItem.image(image, playCount: index * 10)
+                return ProfileMediaItem.image(imageKey, playCount: index * 10)
             } else {
                 let videoURL = URL(string:"https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4")
-                return ProfileMediaItem.video(thumbnail: image, videoURL: videoURL, playCount: index * 10)
+                return ProfileMediaItem.video(imageKey, videoURL: videoURL, playCount: index * 10)
             }
         }
         favoriteMediaItems = Array(albumMediaItems.prefix(6))
