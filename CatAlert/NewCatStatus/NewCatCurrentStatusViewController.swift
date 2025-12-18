@@ -204,6 +204,7 @@ class NewCatCurrentStatusViewController: UIViewController {
             switch itemIdentifier {
             case .activity(let record):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivitiCell.reuseIdentifier, for: indexPath) as? ActivitiCell else {
+                    assertionFailure("Failed to dequeue ActivitiCell")
                     return UICollectionViewCell()
                 }
                 cell.configure(with: record) {[weak self] id in
@@ -214,6 +215,7 @@ class NewCatCurrentStatusViewController: UIViewController {
                 return cell
             case .catInfo(let model):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatInfoCollectionCell.reuseIdentifier, for: indexPath) as? CatInfoCollectionCell else {
+                    assertionFailure("Failed to dequeue CatInfoCollectionCell")
                     return UICollectionViewCell()
                 }
                 cell.delegate = self

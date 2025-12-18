@@ -512,6 +512,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         switch section {
         case .header:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileHeaderCell", for: indexPath) as? ProfileHeaderCell else {
+                assertionFailure("Failed to dequeue ProfileHeaderCell")
                 return UICollectionViewCell()
             }
             if let model = catModel {
@@ -524,6 +525,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return cell
         case .bio:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileBioCell", for: indexPath) as? ProfileBioCell else {
+                assertionFailure("Failed to dequeue ProfileBioCell")
                 return UICollectionViewCell()
             }
             if let model = catModel {
@@ -532,6 +534,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return cell
         case .actionBar:
             guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileActionBarCell", for: indexPath) as? ProfileActionBarCell else {
+                assertionFailure("Failed to dequeue ProfileActionBarCell")
                 return UICollectionViewCell()
             }
             cell.configure() { [weak self] tab in
@@ -541,6 +544,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             return cell
         case .videos:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as? ProfileVideoCell else {
+                assertionFailure("Failed to dequeue ProfileVideoCell")
                 return UICollectionViewCell()
             }
             if currentTabMediaItems.count > indexPath.item {
