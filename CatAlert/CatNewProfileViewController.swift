@@ -187,7 +187,7 @@ class CatNewProfileViewController: UIViewController {
                 dismissImageView()
             } else if currentScale < 1.0 {
                 currentScale = 1.0
-                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
                     imageView.transform = .identity
                 }
             }
@@ -223,7 +223,7 @@ class CatNewProfileViewController: UIViewController {
                 if distance > 150 {
                     dismissImageView()
                 } else {
-                    UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+                    UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
                         [weak self] in
                         guard let self else { return }
                         imageView.center = view.center
@@ -232,7 +232,7 @@ class CatNewProfileViewController: UIViewController {
                     }
                 }
             } else {
-                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
                     [weak self] in
                     guard let self else { return }
                     imageView.center = view.center
@@ -247,7 +247,7 @@ class CatNewProfileViewController: UIViewController {
         guard let imageView = gesture.view else { return }
         let newScale = currentScale > 1.0 ? 1.0 : 2.0
         currentScale = newScale
-        UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+        UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
             imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
         }
     }
@@ -562,9 +562,9 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
         case .bio:
             return CGSize(width: width, height: UIConstants.CellSize.profileBioHeight)
         case .videos:
-            let totalSpacing = UIConstants.MediaItemParemeter.spacingBetweenItem * (UIConstants.MediaItemParemeter.totalItemInOneRow - 1)
-            let itemWidth = (width - totalSpacing) / UIConstants.MediaItemParemeter.totalItemInOneRow
-            let itemHeight = itemWidth * UIConstants.MediaItemParemeter.widthToHeightRatio
+            let totalSpacing = UIConstants.MediaItemParameter.spacingBetweenItem * (UIConstants.MediaItemParameter.totalItemInOneRow - 1)
+            let itemWidth = (width - totalSpacing) / UIConstants.MediaItemParameter.totalItemInOneRow
+            let itemHeight = itemWidth * UIConstants.MediaItemParameter.widthToHeightRatio
             return CGSize(width: itemWidth, height: itemHeight)
         case .actionBar:
             return CGSize(width: width, height: UIConstants.CellSize.actionBarHeight)

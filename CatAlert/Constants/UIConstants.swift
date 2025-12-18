@@ -10,7 +10,7 @@ import Foundation
 enum UIConstants {
     enum Animation {
         static let standardDuration: TimeInterval = 0.3
-        static let SpringDamping: CGFloat = 0.7
+        static let springDamping: CGFloat = 0.7
         static let initialSpringVelocity: CGFloat = 0.5
     }
     
@@ -29,7 +29,7 @@ enum UIConstants {
     }
     
     // MARK: - MediaItemSize
-    enum MediaItemParemeter {
+    enum MediaItemParameter {
         static let spacingBetweenItem: CGFloat = 2.0
         static let totalItemInOneRow: CGFloat = 3.0
         static let widthToHeightRatio: CGFloat = 1.3
