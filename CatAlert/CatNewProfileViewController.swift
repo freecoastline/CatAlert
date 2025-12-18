@@ -187,7 +187,7 @@ class CatNewProfileViewController: UIViewController {
                 dismissImageView()
             } else if currentScale < 1.0 {
                 currentScale = 1.0
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
                     imageView.transform = .identity
                 }
             }
@@ -223,7 +223,7 @@ class CatNewProfileViewController: UIViewController {
                 if distance > 150 {
                     dismissImageView()
                 } else {
-                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                    UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
                         [weak self] in
                         guard let self else { return }
                         imageView.center = view.center
@@ -232,7 +232,7 @@ class CatNewProfileViewController: UIViewController {
                     }
                 }
             } else {
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
                     [weak self] in
                     guard let self else { return }
                     imageView.center = view.center
@@ -247,7 +247,7 @@ class CatNewProfileViewController: UIViewController {
         guard let imageView = gesture.view else { return }
         let newScale = currentScale > 1.0 ? 1.0 : 2.0
         currentScale = newScale
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+        UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.SpringDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
             imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
         }
     }
@@ -332,7 +332,7 @@ class CatNewProfileViewController: UIViewController {
             guard let self else { return }
             dismissImageView()
         }
-        UIView.animate(withDuration: 0.3) { [weak self] in
+        UIView.animate(withDuration: UIConstants.Animation.standardDuration) { [weak self] in
             guard let self else { return }
             imageZoomImageView.frame = view.bounds
             imageZoomBackgroundView.alpha = 1

@@ -86,6 +86,7 @@
 				Chat/ChatViewController.swift,
 				Chat/CoreDataManager.swift,
 				Chat/MessageCell.swift,
+				Constants/UIConstants.swift,
 				ImageReader.swift,
 				IMG_4933.JPG,
 				IMG_5771.JPG,
