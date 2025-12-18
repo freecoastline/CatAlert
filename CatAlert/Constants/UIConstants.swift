@@ -34,5 +34,18 @@ enum UIConstants {
         static let totalItemInOneRow: CGFloat = 3.0
         static let widthToHeightRatio: CGFloat = 1.3
     }
+
+    // MARK: - VideoCell
+    enum VideoCell {
+        static let playCountFontSize: CGFloat = 13
+        static let playIconSize: CGFloat = 12
+        static let playIconInset: CGFloat = 8
+        static let iconLabelSpacing: CGFloat = 6
+        static let thousandThreshold = 1_000
+        static let tenThousandThreshold = 10_000
+        static let millionThreshold = 1_000_000
+    }
     
 }
+
+

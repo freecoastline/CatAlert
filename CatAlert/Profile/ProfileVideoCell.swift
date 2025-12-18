@@ -30,7 +30,7 @@ class ProfileVideoCell: UICollectionViewCell {
     
     private lazy var playCountLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
+        label.font = .systemFont(ofSize: UIConstants.VideoCell.playCountFontSize, weight: .regular)
         label.textColor = .white
         label.textAlignment = .natural
         return label
@@ -57,12 +57,12 @@ class ProfileVideoCell: UICollectionViewCell {
         }
         
         playIcon.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview().inset(8)
-            make.width.height.equalTo(12)
+            make.leading.bottom.equalToSuperview().inset(UIConstants.VideoCell.playIconInset)
+            make.width.height.equalTo(UIConstants.VideoCell.playIconSize)
         }
         
         playCountLabel.snp.makeConstraints { make in
-            make.leading.equalTo(playIcon.snp.trailing).offset(6)
+            make.leading.equalTo(playIcon.snp.trailing).offset(UIConstants.VideoCell.iconLabelSpacing)
             make.centerY.equalTo(playIcon)
         }
     }
@@ -120,11 +120,11 @@ class ProfileVideoCell: UICollectionViewCell {
     
     // MARK: - Helper
     private func formatPlayCount(_ count: Int) -> String {
-        if count < 1000 {
+        if count < UIConstants.VideoCell.thousandThreshold {
             return "\(count)"
-        } else if count < 10000 {
+        } else if count < UIConstants.VideoCell.tenThousandThreshold {
             return String(format: "%.1f", Double(count) / 1000.0) + "k"
-        } else if count < 1000000 {
+        } else if count < UIConstants.VideoCell.millionThreshold {
             return "\(count / 1000)k"
         } else {
             return "\(count / 1000000)M"
