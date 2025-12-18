@@ -46,6 +46,22 @@ enum UIConstants {
         static let millionThreshold = 1_000_000
     }
     
+    enum ReminderForm {
+        // Sections
+        enum Section: Int {
+            case basic = 0
+            case times = 1
+        }
+
+        // Basic Section Rows
+        enum BasicRow: Int {
+            case title = 0
+            case type = 1
+            case frequency = 2
+        }
+
+        static let basicSectionRowCount = 3
+    }
 }
 
 
