@@ -171,7 +171,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
                     return
                 }
                 reminderFrequency = frequency
-                tableView.reloadRows(at: [IndexPath(row: UIConstants.ReminderForm.BasicRow.frequency.rawValue, section: UIConstants.ReminderForm.BasicRow.title.rawValue)], with: .automatic)
+                tableView.reloadRows(at: [IndexPath(row: UIConstants.ReminderForm.BasicRow.frequency.rawValue, section: UIConstants.ReminderForm.Section.basic.rawValue)], with: .automatic)
             }))
         }
 
