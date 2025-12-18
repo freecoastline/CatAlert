@@ -134,7 +134,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
                 return
             }
             reminderType = .food
-            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(row: UIConstants.ReminderForm.BasicRow.type.rawValue, section: UIConstants.ReminderForm.Section.basic.rawValue)], with: .automatic)
         }))
         
         alert.addAction(UIAlertAction(title: "喂水", style: .default, handler: { [weak self] action in
@@ -142,7 +142,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
                 return
             }
             reminderType = .water
-            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(row: UIConstants.ReminderForm.BasicRow.type.rawValue, section: UIConstants.ReminderForm.Section.basic.rawValue)], with: .automatic)
         }))
 
         alert.addAction(UIAlertAction(title: "玩耍", style: .default, handler: { [weak self] action in
@@ -150,7 +150,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
                 return
             }
             reminderType = .play
-            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(row: UIConstants.ReminderForm.BasicRow.type.rawValue, section: UIConstants.ReminderForm.Section.basic.rawValue)], with: .automatic)
         }))
         
         alert.addAction(UIAlertAction(title: "取消", style: .cancel))
@@ -171,7 +171,7 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
                     return
                 }
                 reminderFrequency = frequency
-                tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+                tableView.reloadRows(at: [IndexPath(row: UIConstants.ReminderForm.BasicRow.frequency.rawValue, section: UIConstants.ReminderForm.BasicRow.title.rawValue)], with: .automatic)
             }))
         }
 
@@ -203,7 +203,7 @@ extension AddReminderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch FormSection(rawValue: section) {
         case .basic:
-            return 3
+            return UIConstants.ReminderForm.basicSectionRowCount
         case .times:
             return reminderTimes.count + 1
         default:
@@ -237,7 +237,7 @@ extension AddReminderViewController: UITableViewDataSource {
                     }
                     reminderTimes[indexPath.row] = reminderTime
                     reminderTimes.sort { $0.hour < $1.hour || ($0.hour == $1.hour && $0.minute < $1.minute) }
-                    tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+                    tableView.reloadSections(IndexSet(integer: UIConstants.ReminderForm.Section.times.rawValue), with: .automatic)
                 }
                 navigationController?.pushViewController(timePicker, animated: true)
             }
@@ -271,7 +271,7 @@ extension AddReminderViewController: UITableViewDataSource {
     
     private func cellForBasicSection(at indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
-        case 0:
+        case UIConstants.ReminderForm.BasicRow.title.rawValue:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell") as? TextFieldCell else {
                 return UITableViewCell()
             }
@@ -283,7 +283,7 @@ extension AddReminderViewController: UITableViewDataSource {
                 reminderTitle = str
             }
             return cell
-        case 1:
+        case UIConstants.ReminderForm.BasicRow.type.rawValue:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell") as? SelectionCell else {
                 return UITableViewCell()
             }
@@ -293,7 +293,7 @@ extension AddReminderViewController: UITableViewDataSource {
                 value: reminderType.displayname
             )
             return cell
-        case 2:
+        case UIConstants.ReminderForm.BasicRow.frequency.rawValue:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell") as? SelectionCell else {
                 return UITableViewCell()
             }
@@ -329,7 +329,7 @@ extension AddReminderViewController: UITableViewDataSource {
                     reminderTimes.append(reminderTime)
                     reminderTimes.sort { $0.hour < $1.hour || ($0.hour == $1.hour && $0.minute < $1.minute) }
                     updateSaveButtonState()
-                    tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+                    tableView.reloadSections(IndexSet(integer: UIConstants.ReminderForm.Section.times.rawValue), with: .automatic)
                 }
                 navigationController?.pushViewController(timePickVC, animated: true)
             }
