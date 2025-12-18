@@ -511,7 +511,9 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
 
         switch section {
         case .header:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileHeaderCell", for: indexPath) as? ProfileHeaderCell else {
+                return UICollectionViewCell()
+            }
             if let model = catModel {
                 cell.configure(with: model)
             }
@@ -521,20 +523,26 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             return cell
         case .bio:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileBioCell", for: indexPath) as! ProfileBioCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileBioCell", for: indexPath) as? ProfileBioCell else {
+                return UICollectionViewCell()
+            }
             if let model = catModel {
                 cell.configure(with: model)
             }
             return cell
         case .actionBar:
-            let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileActionBarCell", for: indexPath) as! ProfileActionBarCell
+            guard let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileActionBarCell", for: indexPath) as? ProfileActionBarCell else {
+                return UICollectionViewCell()
+            }
             cell.configure() { [weak self] tab in
                 guard let self else { return }
                 currentTab = tab
             }
             return cell
         case .videos:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as! ProfileVideoCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileVideoCell", for: indexPath) as? ProfileVideoCell else {
+                return UICollectionViewCell()
+            }
             if currentTabMediaItems.count > indexPath.item {
                 let mediaItem = currentTabMediaItems[indexPath.item]
                 cell.configure(with: mediaItem)

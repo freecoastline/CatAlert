@@ -203,7 +203,9 @@ class NewCatCurrentStatusViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .activity(let record):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivitiCell.reuseIdentifier, for: indexPath) as! ActivitiCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivitiCell.reuseIdentifier, for: indexPath) as? ActivitiCell else {
+                    return UICollectionViewCell()
+                }
                 cell.configure(with: record) {[weak self] id in
                     Task {
                         await self?.viewModel.markActivityCompleted(id)
@@ -211,7 +213,9 @@ class NewCatCurrentStatusViewController: UIViewController {
                 }
                 return cell
             case .catInfo(let model):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatInfoCollectionCell.reuseIdentifier, for: indexPath) as! CatInfoCollectionCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatInfoCollectionCell.reuseIdentifier, for: indexPath) as? CatInfoCollectionCell else {
+                    return UICollectionViewCell()
+                }
                 cell.delegate = self
                 cell.configure(with: model)
                 return cell
