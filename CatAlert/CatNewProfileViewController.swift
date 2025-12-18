@@ -180,10 +180,10 @@ class CatNewProfileViewController: UIViewController {
         case .began:
             lastScale = currentScale
         case .changed:
-            currentScale = min(max(0.5, gesture.scale * lastScale), 3.0)
+            currentScale = min(max(UIConstants.ImageZoom.minimumScale, gesture.scale * lastScale), UIConstants.ImageZoom.maximumScale)
             imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
         case .ended, .cancelled:
-            if currentScale < 0.8 {
+            if currentScale < UIConstants.ImageZoom.dismissThreshold {
                 dismissImageView()
             } else if currentScale < 1.0 {
                 currentScale = 1.0
@@ -558,17 +558,16 @@ extension CatNewProfileViewController: UICollectionViewDelegateFlowLayout {
         let width = collectionView.bounds.width
         switch section {
         case .header:
-            return CGSize(width: width, height: 200)
+            return CGSize(width: width, height: UIConstants.CellSize.profileHeaderHeight)
         case .bio:
-            return CGSize(width: width, height: 60)
+            return CGSize(width: width, height: UIConstants.CellSize.profileBioHeight)
         case .videos:
-            let spacing:CGFloat = 2
-            let totalSpacing = spacing * 2
-            let itemWidth = (width - totalSpacing) / 3.0
-            let itemHeight = itemWidth * 1.3
+            let totalSpacing = UIConstants.MediaItemParemeter.spacingBetweenItem * (UIConstants.MediaItemParemeter.totalItemInOneRow - 1)
+            let itemWidth = (width - totalSpacing) / UIConstants.MediaItemParemeter.totalItemInOneRow
+            let itemHeight = itemWidth * UIConstants.MediaItemParemeter.widthToHeightRatio
             return CGSize(width: itemWidth, height: itemHeight)
         case .actionBar:
-            return CGSize(width: width, height: 44)
+            return CGSize(width: width, height: UIConstants.CellSize.actionBarHeight)
         }
     }
     

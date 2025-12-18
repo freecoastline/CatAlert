@@ -23,7 +23,16 @@ enum UIConstants {
     
     // MARK: - CellSize
     enum CellSize {
-        static let profileHeader: CGFloat = 200.0
-        static let profileBio: CGFloat = 60.0
+        static let profileHeaderHeight: CGFloat = 200.0
+        static let profileBioHeight: CGFloat = 60.0
+        static let actionBarHeight: CGFloat = 44
     }
+    
+    // MARK: - MediaItemSize
+    enum MediaItemParemeter {
+        static let spacingBetweenItem: CGFloat = 2.0
+        static let totalItemInOneRow: CGFloat = 3.0
+        static let widthToHeightRatio: CGFloat = 1.3
+    }
+    
 }
