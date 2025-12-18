@@ -103,6 +103,6 @@ class NetworkService {
         } catch {
             print("❌ 未知解码错误: \(error)")
         }
-        return RegisterResponse(message: "none", user: User(id: "1", phone: "111", username: "11", email: "1", role: "11", is_active: false, created_at: Date())) as! T
+        throw NSError(domain: "NetworkService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode response"])
     }
 }
