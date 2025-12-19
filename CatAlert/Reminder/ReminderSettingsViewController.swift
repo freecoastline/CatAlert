@@ -99,6 +99,13 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
             make.left.bottom.right.equalToSuperview()
         }
     }
+    
+    // MARK: - Helper
+    private func showErrorAlert(_ message: String) {
+        let alert = UIAlertController(title: "错误", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default))
+        present(alert, animated: true)
+    }
 }
 
 
@@ -116,8 +123,13 @@ extension ReminderSettingsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.configure(with: reminder)
-        cell.onToggle = { reminderId, isOn in
-            try? await ReminderManager.shared.toggleReminder(id: reminderId, enabled: isOn)
+        cell.onToggle = { [weak self] reminderId, isOn in
+            guard let self else { return }
+            do {
+                try await ReminderManager.shared.toggleReminder(id: reminderId, enabled: isOn)
+            } catch {
+                showErrorAlert(AppError.reminderToggleFailed.userMessage)
+            }
         }
         return cell
     }
