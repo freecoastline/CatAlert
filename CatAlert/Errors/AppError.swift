@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AppError {
+enum AppError: Error {
     case reminderCreationFailed
     case reminderFetchFailed
     case reminderToggleFailed

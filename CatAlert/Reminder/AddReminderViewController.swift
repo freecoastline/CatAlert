@@ -112,11 +112,19 @@ class AddReminderViewController: UIViewController, UITableViewDelegate {
         reminder.scheduledTime = reminderTimes
 
         Task {
-            try? await ReminderManager.shared.createReminder(reminder)
+            do {
+                try await ReminderManager.shared.createReminder(reminder)
+                await MainActor.run {
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+                    navigationController?.popViewController(animated: true)
+                }
+            } catch {
+                await MainActor.run {
+                    showAlert(AppError.reminderCreationFailed.userMessage)
+                }
+            }
         }
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-        navigationController?.popViewController(animated: true)
     }
     
     private func showAlert(_ message: String) {
