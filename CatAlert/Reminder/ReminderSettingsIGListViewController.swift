@@ -82,7 +82,13 @@ class ReminderSettingsIGListViewController: UIViewController {
     
     private func loadData() {
         Task {
-            let _ = try? await ReminderManager.shared.fetchReminders()
+            do {
+                try await ReminderManager.shared.fetchReminders()
+            } catch {
+                await MainActor.run {
+                    showErrorAlert(AppError.reminderFetchFailed.userMessage)
+                }
+            }
             await MainActor.run {
                 allReminders = ReminderManager.shared.activeReminders
                 listAdapter.performUpdates(animated: true)
