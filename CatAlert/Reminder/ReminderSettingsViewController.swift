@@ -29,7 +29,9 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
             do {
                 try await ReminderManager.shared.fetchReminders()
             } catch {
-                showErrorAlert(AppError.reminderFetchFailed.userMessage)
+                await MainActor.run {
+                    showErrorAlert(AppError.reminderFetchFailed.userMessage)
+                }
             }
             
         }
@@ -103,13 +105,6 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.bottom.right.equalToSuperview()
         }
-    }
-    
-    // MARK: - Helper
-    private func showErrorAlert(_ message: String) {
-        let alert = UIAlertController(title: "错误", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确定", style: .default))
-        present(alert, animated: true)
     }
 }
 

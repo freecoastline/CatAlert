@@ -79,12 +79,6 @@ class CatCurrentStatusViewController:UIViewController {
         return scrollView
     }()
     
-    private func showErrorAlert(_ message: String) {
-        let alert = UIAlertController(title: "错误", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确定", style: .default))
-        present(alert, animated: true)
-    }
-    
     //任务列表
     private lazy var taskStackView = {
         let stack = UIStackView()
