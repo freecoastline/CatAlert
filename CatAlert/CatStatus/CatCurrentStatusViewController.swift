@@ -51,7 +51,14 @@ class CatCurrentStatusViewController:UIViewController {
             cardView.configure(with: record)
             cardView.onComplete = { id in
                 Task {
-                    try? await ReminderManager.shared.markActivityCompleted(id: id)
+                    do {
+                        try await ReminderManager.shared.markActivityCompleted(id: id)
+                    } catch {
+                        await MainActor.run { [weak self] in
+                            guard let self else { return }
+                            showErrorAlert(AppError.activityUpdateFailed.userMessage)
+                        }
+                    }
                 }
             }
             taskStackView.addArrangedSubview(cardView)
@@ -71,6 +78,12 @@ class CatCurrentStatusViewController:UIViewController {
         let scrollView = UIScrollView()
         return scrollView
     }()
+    
+    private func showErrorAlert(_ message: String) {
+        let alert = UIAlertController(title: "错误", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default))
+        present(alert, animated: true)
+    }
     
     //任务列表
     private lazy var taskStackView = {

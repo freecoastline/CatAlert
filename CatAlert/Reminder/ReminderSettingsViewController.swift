@@ -26,7 +26,12 @@ class ReminderSettingsViewController:UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
-            try? await ReminderManager.shared.fetchReminders()
+            do {
+                try await ReminderManager.shared.fetchReminders()
+            } catch {
+                showErrorAlert(AppError.reminderFetchFailed.userMessage)
+            }
+            
         }
         allReminders = ReminderManager.shared.activeReminders
         setupNavigationBar()
