@@ -239,17 +239,7 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
-        view.addSubview(titleLabel)
-//        view.addSubview(phoneTextField)
-//        view.addSubview(sendCodeButton)
-//        view.addSubview(codeTextField)
-        view.addSubview(usernameTextField)
-        view.addSubview(passwordField)
-        view.addSubview(emailTextField)
-        view.addSubview(registerButton)
-        view.addSubview(jumpToLoginPageButton)
-        isModalInPresentation = true
+        setupViewHeirarcy()
         let toolbar = createKeyboardToolbar()
         phoneTextField.inputAccessoryView = toolbar
         codeTextField.inputAccessoryView = toolbar
@@ -320,5 +310,16 @@ class RegisterViewController: UIViewController {
         sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupViewHeirarcy() {
+        view.backgroundColor = .white
+        view.addSubview(titleLabel)
+        view.addSubview(usernameTextField)
+        view.addSubview(passwordField)
+        view.addSubview(emailTextField)
+        view.addSubview(registerButton)
+        view.addSubview(jumpToLoginPageButton)
+        isModalInPresentation = true
     }
 }
