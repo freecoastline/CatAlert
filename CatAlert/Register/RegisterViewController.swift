@@ -239,7 +239,7 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupUI() {
-        setupViewHeirarcy()
+        setupViewHierarchy()
         setupConstraints()
         setupKeyboardToolbars()
         setupActions()
@@ -302,7 +302,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    private func setupViewHeirarcy() {
+    private func setupViewHierarchy() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(usernameTextField)

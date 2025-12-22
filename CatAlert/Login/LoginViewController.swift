@@ -162,6 +162,12 @@ class LoginViewController: UIViewController {
     
     // MARK: - SetupUI
     private func setupUI() {
+        setupViewHierarchy()
+        setupConstraints()
+        setupActions()
+    }
+    
+    private func setupViewHierarchy() {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(phoneTextField)
@@ -169,6 +175,9 @@ class LoginViewController: UIViewController {
         view.addSubview(codeTextField)
         view.addSubview(loginButton)
         isModalInPresentation = true
+    }
+    
+    private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
@@ -202,9 +211,10 @@ class LoginViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
-        
+    }
+    
+    private func setupActions() {
         sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        
     }
 }
