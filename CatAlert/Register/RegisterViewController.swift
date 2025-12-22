@@ -246,6 +246,13 @@ class RegisterViewController: UIViewController {
         passwordField.inputAccessoryView = toolbar
         emailTextField.inputAccessoryView = toolbar
         usernameTextField.inputAccessoryView = toolbar
+        
+        sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.leading.equalToSuperview().offset(20)
@@ -272,27 +279,6 @@ class RegisterViewController: UIViewController {
             make.height.equalTo(50)
         }
         
-//        phoneTextField.snp.makeConstraints { make in
-//            make.top.equalTo(emailTextField.snp.bottom).offset(30)
-//            make.leading.equalToSuperview().offset(20)
-//            make.trailing.equalToSuperview().offset(-20)
-//            make.height.equalTo(50)
-//        }
-//        
-//        sendCodeButton.snp.makeConstraints { make in
-//            make.top.equalTo(phoneTextField.snp.bottom).offset(30)
-//            make.trailing.equalToSuperview().offset(-20)
-//            make.height.equalTo(50)
-//            make.width.equalTo(100)
-//        }
-//        
-//        codeTextField.snp.makeConstraints { make in
-//            make.top.equalTo(sendCodeButton.snp.top)
-//            make.leading.equalToSuperview().offset(20)
-//            make.trailing.equalTo(sendCodeButton.snp.leading).offset(-20)
-//            make.height.equalTo(50)
-//        }
-        
         registerButton.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
@@ -306,10 +292,6 @@ class RegisterViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
-        
-        sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
     }
     
     private func setupViewHeirarcy() {
