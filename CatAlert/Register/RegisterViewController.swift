@@ -240,16 +240,21 @@ class RegisterViewController: UIViewController {
     
     private func setupUI() {
         setupViewHeirarcy()
+        setupConstraints()
+        setupKeyboardToolbars()
+        
+        sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupKeyboardToolbars() {
         let toolbar = createKeyboardToolbar()
         phoneTextField.inputAccessoryView = toolbar
         codeTextField.inputAccessoryView = toolbar
         passwordField.inputAccessoryView = toolbar
         emailTextField.inputAccessoryView = toolbar
         usernameTextField.inputAccessoryView = toolbar
-        
-        sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
-        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        jumpToLoginPageButton.addTarget(self, action: #selector(jumpToLoginPageButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstraints() {
