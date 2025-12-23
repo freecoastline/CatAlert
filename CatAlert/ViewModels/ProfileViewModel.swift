@@ -67,7 +67,7 @@ class ProfileViewModel: ObservableObject {
 
     /// Switch to a different tab
     func switchTab(to tab: ProfileActionBar.Tab) {
-        
+        guard tab != currentTab else { return }
         currentTab = tab
     }
     
