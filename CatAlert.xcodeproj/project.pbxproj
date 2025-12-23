@@ -89,6 +89,7 @@
 				Constants/UIConstants.swift,
 				Errors/AppError.swift,
 				"Extensions/UIViewController+Extensions.swift",
+				Handlers/ImageZoomHandler.swift,
 				ImageReader.swift,
 				IMG_4933.JPG,
 				IMG_5771.JPG,
