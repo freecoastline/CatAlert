@@ -18,6 +18,11 @@ class CatNewProfileViewController: UIViewController {
     private var currentScale: CGFloat = 1.0
     private var imageViewOriginalCenter: CGPoint = .zero
     
+    
+    // MARK: - ViewModel
+    private let viewModel = ProfileViewModel()
+    private var cancellables = Set<AnyCancellable>()
+    
     enum ProfileSection: Int, CaseIterable {
         case header    // 0
         case bio       // 1
