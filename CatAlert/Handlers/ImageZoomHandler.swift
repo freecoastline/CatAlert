@@ -6,4 +6,7 @@
 //
 
 import Foundation
-class ImageZoomHandler: NSObject {}
+class ImageZoomHandler: NSObject {
+    // MARK: - Properties
+    private var lastScale: CGFloat = 1.0
+}
