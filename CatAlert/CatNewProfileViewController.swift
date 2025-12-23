@@ -501,7 +501,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             cell.configure() { [weak self] tab in
                 guard let self else { return }
-                viewModel.currentTab = tab
+                viewModel.switchTab(to: tab)
             }
             return cell
         case .videos:
