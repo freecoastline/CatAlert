@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import AVFoundation
+import Combine
 
 class CatNewProfileViewController: UIViewController {
     typealias Tab = ProfileActionBar.Tab
@@ -30,14 +31,6 @@ class CatNewProfileViewController: UIViewController {
         case videos    // 3
     }
     
-    private lazy var currentTab: Tab = .album {
-        didSet {
-            UIView.performWithoutAnimation {
-                self.collectionView.reloadSections(IndexSet(integer: ProfileSection.videos.rawValue))
-            }
-        }
-    }
-    
     var catModel: CatSimpleInfoModel? {
         didSet {
             self.collectionView.reloadData()
@@ -45,23 +38,6 @@ class CatNewProfileViewController: UIViewController {
     }
     
     private var zoomedCellFrame: CGRect = .zero
-    
-    private var currentTabMediaItems: [ProfileMediaItem] {
-        switch currentTab {
-        case .album:
-            return albumMediaItems
-        case .favorite:
-            return favoriteMediaItems
-        case .like:
-            return likeMediaItems
-        }
-    }
-    
-    // MARK: - Test
-    private var albumImages: [UIImage] = []
-    private var albumMediaItems: [ProfileMediaItem] = []
-    private var favoriteMediaItems: [ProfileMediaItem] = []
-    private var likeMediaItems: [ProfileMediaItem] = []
      
     // MARK: UI Component
     private lazy var collectionView = {
@@ -110,7 +86,7 @@ class CatNewProfileViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
-        loadMockData()
+        viewModel.loadMockData()
     }
     
     // MARK: Setup
@@ -135,43 +111,6 @@ class CatNewProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "退出登陆", style: .plain, target: self, action: #selector(logoutButtonTapped))
     }
 
-    // MARK: - Data
-    private func loadMockData() {
-        catModel = CatSimpleInfoModel(name: "胡胡", age: 4.5, healthCondition: .excellent, avatarImageUrl: "IMG_7595")
-        catModel?.loadImageIfNeeded()
-        
-        let imageKeys = [
-            "IMG_4933",
-            "IMG_5771",
-            "IMG_6317",
-            "IMG_6364",
-            "IMG_7585",
-            "IMG_7595",
-            "IMG_4933",
-            "IMG_5771",
-            "IMG_6317",
-            "IMG_6364",
-            "IMG_7585",
-            "IMG_7595",
-            "IMG_4933",
-            "IMG_5771",
-            "IMG_6317",
-            "IMG_6364",
-            "IMG_7585",
-            "IMG_7595"
-        ]
-        albumMediaItems = imageKeys.enumerated().map { index, imageKey in
-            if index % 2 == 0 {
-                return ProfileMediaItem.image(imageKey, playCount: index * 10)
-            } else {
-                let videoURL = URL(string:"https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4")
-                return ProfileMediaItem.video(imageKey, videoURL: videoURL, playCount: index * 10)
-            }
-        }
-        favoriteMediaItems = Array(albumMediaItems.prefix(6))
-        likeMediaItems = Array(albumMediaItems.prefix(3))
-    }
-    
     // MARK: - Gesture
     @objc private func handleZoomImageTap() {
         dismissImageView()
@@ -466,11 +405,11 @@ extension CatNewProfileViewController: UICollectionViewDelegate {
               section == .videos else {
             return
         }
-        guard currentTabMediaItems.count > indexPath.item else {
+        guard viewModel.currentTabMediaItems.count > indexPath.item else {
             return
         }
         
-        let mediaItem = currentTabMediaItems[indexPath.item]
+        let mediaItem = viewModel.currentTabMediaItems[indexPath.item]
         switch mediaItem.type {
         case .video:
             openVideoPlayer(for: indexPath, with: mediaItem)
@@ -500,7 +439,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
         case .bio:
             return 1
         case .videos:
-            return currentTabMediaItems.count
+            return viewModel.currentTabMediaItems.count
         case .actionBar:
             return 1
         }
@@ -544,7 +483,7 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
             }
             cell.configure() { [weak self] tab in
                 guard let self else { return }
-                currentTab = tab
+                viewModel.currentTab = tab
             }
             return cell
         case .videos:
@@ -552,8 +491,8 @@ extension CatNewProfileViewController: UICollectionViewDataSource {
                 assertionFailure("Failed to dequeue ProfileVideoCell")
                 return UICollectionViewCell()
             }
-            if currentTabMediaItems.count > indexPath.item {
-                let mediaItem = currentTabMediaItems[indexPath.item]
+            if viewModel.currentTabMediaItems.count > indexPath.item {
+                let mediaItem = viewModel.currentTabMediaItems[indexPath.item]
                 cell.configure(with: mediaItem)
             }
             return cell
@@ -623,7 +562,7 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
             return
         }
         
-        addMediaToAlbum(image: image)
+        viewModel.addMediaToAlbum(image: image)
     }
     
     func handleVideo(with info: [UIImagePickerController.InfoKey : Any]) {
@@ -635,7 +574,7 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
         guard let thumbnail = generateThumbnail(from: videoURL) else {
             return
         }
-        addMediaToAlbum(videoURL: videoURL, thumbnail: thumbnail)
+        viewModel.addMediaToAlbum(videoURL: videoURL, thumbnail: thumbnail)
     }
     
     func generateThumbnail(from videoURL: URL) -> UIImage? {
@@ -651,21 +590,5 @@ extension CatNewProfileViewController: UINavigationControllerDelegate, UIImagePi
             showAlert(title: "获取缩略图失败")
             return nil
         }
-    }
-    
-    func addMediaToAlbum(image: UIImage) {
-        let cacheKey = UUID().uuidString
-        MediaCacheManager.shared.cacheImage(image, forKey: cacheKey)
-        let mediaItem = ProfileMediaItem.image(cacheKey, playCount: 0)
-        albumMediaItems.insert(mediaItem, at: 0)
-        reloadVideoSection()
-    }
-    
-    func addMediaToAlbum(videoURL: URL, thumbnail: UIImage) {
-        let cacheKey = UUID().uuidString
-        MediaCacheManager.shared.cacheImage(thumbnail, forKey: cacheKey)
-        let mediaItem = ProfileMediaItem.video(cacheKey, videoURL: videoURL, playCount: 0)
-        albumMediaItems.insert(mediaItem, at: 0)
-        reloadVideoSection()
     }
 }
