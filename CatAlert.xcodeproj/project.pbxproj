@@ -140,6 +140,7 @@
 				Services/ReminderServiceProtocol.swift,
 				VideoPlayer/VideoPlayerViewController.swift,
 				ViewController.swift,
+				ViewModels/ProfileViewModel.swift,
 			);
 			target = 2B1627352E6BE15F008A6507 /* CatAlert */;
 		};
