@@ -86,7 +86,25 @@ class CatNewProfileViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNavigationBar()
+        bindViewModel()
         viewModel.loadMockData()
+    }
+    
+    // MARK: - Bind
+    private func bindViewModel() {
+        viewModel.$currentTab.receive(on: DispatchQueue.main).sink { [weak self] _ in
+            guard let self else { return }
+            UIView.performWithoutAnimation {
+                self.reloadVideoSection()
+            }
+        }.store(in: &cancellables)
+        
+        viewModel.$albumMediaItems.receive(on: DispatchQueue.main).sink { [weak self] _ in
+            guard let self else { return }
+            UIView.performWithoutAnimation {
+                self.reloadVideoSection()
+            }
+        }.store(in: &cancellables)
     }
     
     // MARK: Setup
