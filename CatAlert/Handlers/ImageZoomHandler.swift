@@ -25,10 +25,32 @@ class ImageZoomHandler: NSObject {
     }()
     
     lazy var imageZoomImageView: UIView = {
-        let view = UIImageView()
-        view.isUserInteractionEnabled = true
-        view.contentMode = .scaleAspectFit
-        return view
+        let imageView = UIImageView()
+        imageView.isUserInteractionEnabled = true
+        imageView.contentMode = .scaleAspectFit
+        // Pinch gesture for zooming
+        let pinGesture = UIPinchGestureRecognizer(target: self, action: #selector(handleImagePinch(_:)))
+        imageView.addGestureRecognizer(pinGesture)
+        pinGesture.delegate = self
+
+        // Pan gesture for dragging
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleImagePan(_:)))
+        imageView.addGestureRecognizer(panGesture)
+        panGesture.delegate = self
+
+        // Double-tap gesture for zoom toggle
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        imageView.addGestureRecognizer(doubleTapGesture)
+        doubleTapGesture.delegate = self
+
+        // Single-tap gesture for dismiss
+        let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap))
+        imageView.addGestureRecognizer(singleTapGesture)
+        singleTapGesture.delegate = self
+        return imageView
     }()
+    
+    
     
 }
