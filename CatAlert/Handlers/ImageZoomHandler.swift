@@ -50,7 +50,11 @@ class ImageZoomHandler: NSObject {
         singleTapGesture.delegate = self
         return imageView
     }()
-    
-    
-    
 }
+
+extension ImageZoomHandler: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
+    }
+}
+
