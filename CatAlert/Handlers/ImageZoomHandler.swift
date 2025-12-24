@@ -54,6 +54,10 @@ class ImageZoomHandler: NSObject {
     
     // MARK: - Public Methods
     @objc private func handleSingleTap() {
+        dismiss()
+    }
+    
+    private func dismiss() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self else { return }
             imageZoomBackgroundView.alpha = 0
@@ -62,7 +66,6 @@ class ImageZoomHandler: NSObject {
             guard let self else { return }
             resetImageZoomState()
         }
-
     }
     
     private func resetImageZoomState() {
