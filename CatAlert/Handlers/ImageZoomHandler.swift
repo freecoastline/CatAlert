@@ -16,7 +16,7 @@ class ImageZoomHandler: NSObject {
     private var zoomedCellFrame: CGRect = .zero
     
     // MARK: - UI Components
-    lazy var imageZoomedBackGroundView: UIView = {
+    lazy var imageZoomBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black.withAlphaComponent(0.8)
         view.isHidden = true
@@ -24,7 +24,7 @@ class ImageZoomHandler: NSObject {
         return view
     }()
     
-    lazy var imageZoomImageView: UIView = {
+    lazy var imageZoomImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
@@ -50,6 +50,29 @@ class ImageZoomHandler: NSObject {
         singleTapGesture.delegate = self
         return imageView
     }()
+    
+    
+    // MARK: - Public Methods
+    @objc private func handleSingleTap() {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            imageZoomBackgroundView.alpha = 0
+            imageZoomImageView.frame = zoomedCellFrame
+        } completion: { [weak self] _ in
+            guard let self else { return }
+            resetImageZoomState()
+        }
+
+    }
+    
+    private func resetImageZoomState() {
+        self.currentScale = 1.0
+        self.lastScale = 1.0
+        self.imageZoomImageView.image = nil
+        self.imageZoomBackgroundView.isHidden = true
+        self.imageZoomImageView.transform = .identity
+        self.imageZoomImageView.isHidden = true
+    }
 }
 
 extension ImageZoomHandler: UIGestureRecognizerDelegate {
