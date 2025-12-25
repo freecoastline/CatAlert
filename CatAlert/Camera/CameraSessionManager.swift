@@ -14,6 +14,7 @@ class CameraSessionManager {
     private init(){
         session = AVCaptureSession()
         sessionQueue = DispatchQueue(label: "com.catAlert.camera.session")
+        photoOutput = AVCapturePhotoOutput()
     }
     
     // MARK: - Properties
