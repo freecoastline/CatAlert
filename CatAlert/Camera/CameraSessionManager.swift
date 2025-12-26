@@ -24,8 +24,10 @@ class CameraSessionManager {
     private let sessionQueue: DispatchQueue
     
     func requestCameraPermission() async -> Bool {
-        
+        await AVCaptureDevice.requestAccess(for: .video)
     }
+    
+    
     
     
     
