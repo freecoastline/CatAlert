@@ -9,6 +9,12 @@ import Foundation
 import AVFoundation
 
 class CameraSessionManager {
+    enum CameraError: Error {
+        case deviceNotFound
+        case configurationFailed
+        // Add more as needed
+    }
+    
     // MARK: - Singleton
     static let shared = CameraSessionManager()
     private init(){
@@ -27,6 +33,14 @@ class CameraSessionManager {
         await AVCaptureDevice.requestAccess(for: .video)
     }
     
+    func setupCamera() async throws {
+        guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
+            throw CameraError.deviceNotFound
+        }
+        
+        
+                
+    }
     
     
     
