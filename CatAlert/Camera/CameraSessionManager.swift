@@ -38,7 +38,21 @@ class CameraSessionManager {
             throw CameraError.deviceNotFound
         }
         
+        let input = try AVCaptureDeviceInput(device: camera)
         
+        await sessionQueue.async { [weak self] in
+            guard let self else { return }
+            session.beginConfiguration()
+            if session.canAddInput(input) {
+                session.addInput(input)
+                videoDeviceInput = input
+            }
+            if session.canAddOutput(photoOutput) {
+                session.addOutput(photoOutput)
+            }
+                
+            session.commitConfiguration()
+        }
                 
     }
     
