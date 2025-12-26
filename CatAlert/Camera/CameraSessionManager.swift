@@ -23,6 +23,10 @@ class CameraSessionManager {
     private let photoOutput: AVCapturePhotoOutput
     private let sessionQueue: DispatchQueue
     
+    func requestCameraPermission() async -> Bool {
+        
+    }
+    
     
     
 }
