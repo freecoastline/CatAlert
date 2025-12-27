@@ -56,7 +56,24 @@ class CameraSessionManager {
                 
     }
     
+    func startSession() {
+        sessionQueue.async { [weak self] in
+            guard let self else { return }
+            if !session.isRunning {
+                session.startRunning()
+            }
+        }
+    }
     
+    
+    func stopSession() {
+        sessionQueue.async { [weak self] in
+            guard let self else { return }
+            if session.isRunning {
+                session.stopRunning()
+            }
+        }
+    }
     
     
 }
