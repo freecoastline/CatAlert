@@ -56,6 +56,7 @@
 				Auth/User.swift,
 				Cache/MediaCacheManager.swift,
 				Camera/CameraSessionManager.swift,
+				Camera/CameraViewController.swift,
 				CatAlbumCell.swift,
 				CatCareCell.swift,
 				CatDailyCareViewController.swift,
