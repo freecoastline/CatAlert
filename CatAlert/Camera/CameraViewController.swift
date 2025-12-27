@@ -37,6 +37,12 @@ class CameraViewController: UIViewController {
     }
    
     private func setupCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(40)
+        }
         
     }
     
@@ -44,6 +50,6 @@ class CameraViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         return button
-    }
+    }()
     
 }
