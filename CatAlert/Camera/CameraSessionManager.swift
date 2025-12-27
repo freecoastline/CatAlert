@@ -40,7 +40,7 @@ class CameraSessionManager {
         
         let input = try AVCaptureDeviceInput(device: camera)
         
-        await sessionQueue.async { [weak self] in
+        await sessionQueue.sync { [weak self] in
             guard let self else { return }
             session.beginConfiguration()
             if session.canAddInput(input) {
