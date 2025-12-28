@@ -22,6 +22,9 @@ class CameraViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .black
         setupPreviewLayer()
+        Task {
+            await sessionManager.checkCameraPermission()
+        }
         setupCloseButton()
     }
     

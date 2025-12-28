@@ -40,7 +40,7 @@ class CameraSessionManager {
         
         let input = try AVCaptureDeviceInput(device: camera)
         
-        await sessionQueue.sync { [weak self] in
+        sessionQueue.sync { [weak self] in
             guard let self else { return }
             session.beginConfiguration()
             if session.canAddInput(input) {
@@ -75,5 +75,30 @@ class CameraSessionManager {
         }
     }
     
-    
+    func checkCameraPermission() async {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        switch status {
+        case .notDetermined:
+            let granted = await requestCameraPermission()
+            if granted {
+                do {
+                    try await setupCamera()
+                } catch {
+                    //
+                }
+            }
+        case .denied, .restricted:
+//            showErrorAlert("请在设置中允许相机权限")
+        case .authorized:
+            do {
+                try await setupCamera()
+            } catch {
+                await MainActor.run {
+//                    showErrorAlert("相机设置失败")
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
 }
