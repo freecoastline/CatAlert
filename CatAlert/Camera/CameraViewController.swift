@@ -21,7 +21,7 @@ class CameraViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        sessionManager.session.stopRunning()
+        sessionManager.stopSession()
     }
     
     private func setupUI() {
@@ -41,7 +41,7 @@ class CameraViewController: UIViewController {
         }
         do {
             try await sessionManager.setupCamera()
-            sessionManager.session.startRunning()
+            sessionManager.startSession()
         } catch {
             await MainActor.run {
                 AlertManager.shared.showAlert("Failed to setup camera: \(error.localizedDescription)", on: self)
