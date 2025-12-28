@@ -14,18 +14,16 @@ class AlertManager {
     private init(){}
     
     func showAlert(_ message: String, title: String = "Error", on viewController: UIViewController?) {
-        guard let viewController else {
-            print("alert container not found!")
-            return
-        }
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ok", style: .default))
-        if viewController == nil {
+        if let viewController {
+            viewController.present(alert, animated: false)
+        } else {
             if let topVC = getTopViewController() {
                 topVC.present(alert, animated: false)
+            } else {
+                print("alert container not found!")
             }
-        } else {
-            viewController.present(alert, animated: false)
         }
     }
     
