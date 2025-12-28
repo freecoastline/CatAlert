@@ -45,7 +45,7 @@ class AlertManager {
     
     private func getTopViewController(from vc: UIViewController) -> UIViewController? {
         if let viewController = vc.presentedViewController {
-            return getTopViewController(from: vc)
+            return getTopViewController(from: viewController)
         }
         
         if let navigationViewController = vc as? UINavigationController,
