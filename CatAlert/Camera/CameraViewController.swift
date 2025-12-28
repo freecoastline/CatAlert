@@ -19,13 +19,34 @@ class CameraViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        sessionManager.session.stopRunning()
+    }
+    
     private func setupUI() {
         view.backgroundColor = .black
         setupPreviewLayer()
         Task {
-            await sessionManager.checkCameraPermission()
+            await setupCameraSession()
         }
         setupCloseButton()
+    }
+    
+    private func setupCameraSession() async {
+        let granted = await sessionManager.requestCameraPermission()
+        guard granted else {
+            AlertManager.shared.showAlert("Camera permission denied", on: self)
+            return
+        }
+        do {
+            try await sessionManager.setupCamera()
+            sessionManager.session.startRunning()
+        } catch {
+            await MainActor.run {
+                AlertManager.shared.showAlert("Failed to setup camera: \(error.localizedDescription)", on: self)
+            }
+        }
     }
     
     private func setupPreviewLayer() {
@@ -51,8 +72,17 @@ class CameraViewController: UIViewController {
     
     // MARK: - UI components
     private lazy var closeButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
     
+    // MARK: - Action
+    @objc private func closeButtonTapped() {
+        dismiss(animated: true)
+    }
 }

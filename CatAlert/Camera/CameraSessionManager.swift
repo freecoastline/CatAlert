@@ -36,6 +36,8 @@ class CameraSessionManager {
     private let photoOutput: AVCapturePhotoOutput
     private let sessionQueue: DispatchQueue
     
+    
+    // MARK: - Helper methods
     func requestCameraPermission() async -> Bool {
         await AVCaptureDevice.requestAccess(for: .video)
     }
@@ -112,5 +114,11 @@ class CameraSessionManager {
         @unknown default:
             break
         }
+    }
+    
+    func createPreviewLayer() -> AVCaptureVideoPreviewLayer {
+        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        previewLayer.videoGravity = .resizeAspectFill
+        return previewLayer
     }
 }
