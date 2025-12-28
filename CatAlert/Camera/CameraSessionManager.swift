@@ -47,20 +47,25 @@ class CameraSessionManager {
         
         let input = try AVCaptureDeviceInput(device: camera)
         
-        sessionQueue.sync { [weak self] in
-            guard let self else { return }
-            session.beginConfiguration()
-            if session.canAddInput(input) {
-                session.addInput(input)
-                videoDeviceInput = input
+        await withCheckedContinuation { continuation in
+            sessionQueue.async { [weak self] in
+                guard let self else {
+                    continuation.resume()
+                    return
+                }
+                session.beginConfiguration()
+                if session.canAddInput(input) {
+                    session.addInput(input)
+                    videoDeviceInput = input
+                }
+                if session.canAddOutput(photoOutput) {
+                    session.addOutput(photoOutput)
+                }
+                    
+                session.commitConfiguration()
+                continuation.resume()
             }
-            if session.canAddOutput(photoOutput) {
-                session.addOutput(photoOutput)
-            }
-                
-            session.commitConfiguration()
         }
-                
     }
     
     func startSession() {
