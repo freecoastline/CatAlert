@@ -12,7 +12,14 @@ class CameraSessionManager {
     enum CameraError: Error {
         case deviceNotFound
         case configurationFailed
-        // Add more as needed
+        var localizedDescription: String {
+            switch self {
+            case .deviceNotFound:
+                return "Camera device not available"
+            case .configurationFailed:
+                return "Failed to configure camera"
+            }
+        }
     }
     
     // MARK: - Singleton
