@@ -13,7 +13,7 @@ class AlertManager {
     static let shared = AlertManager()
     private init(){}
     
-    func showError(_ message: String, title: String = "Error", on viewController: UIViewController?) {
+    func showAlert(_ message: String, title: String = "Error", on viewController: UIViewController?) {
         guard let viewController else {
             print("alert container not found!")
             return
@@ -23,14 +23,5 @@ class AlertManager {
         viewController.present(alert, animated: false)
     }
     
-    func showSuccess(_ message: String, title: String = "Success", on viewController: UIViewController?) {
-        guard let viewController else {
-            print("alert container not found!")
-            return
-        }
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ok", style: .default))
-        viewController.present(alert, animated: false)
-    }
     
 }
