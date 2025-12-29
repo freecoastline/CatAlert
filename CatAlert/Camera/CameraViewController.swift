@@ -19,8 +19,8 @@ class CameraViewController: UIViewController {
         setupUI()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         sessionManager.stopSession()
     }
     
@@ -36,7 +36,9 @@ class CameraViewController: UIViewController {
     private func setupCameraSession() async {
         let granted = await sessionManager.requestCameraPermission()
         guard granted else {
-            AlertManager.shared.showAlert("Camera permission denied", on: self)
+            await MainActor.run {
+                AlertManager.shared.showAlert("Camera permission denied", on: self)
+            }
             return
         }
         do {
