@@ -90,6 +90,14 @@ class CameraSessionManager {
         }
     }
     
+    func capturePhoto(completion: @escaping (Result<UIImage, Error>) -> Void) {
+        self.photoCaptureCompletion = completion
+        let photoSettings = AVCapturePhotoSettings()
+        photoSettings.flashMode = .auto
+        photoSettings.isHighResolutionPhotoEnabled = true
+        self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
+    }
+    
     func checkCameraPermission() async {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         switch status {
