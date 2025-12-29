@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import UIKit
 
-class CameraSessionManager {
+class CameraSessionManager: NSObject {
     enum CameraError: Error {
         case deviceNotFound
         case configurationFailed
@@ -95,7 +95,10 @@ class CameraSessionManager {
         let photoSettings = AVCapturePhotoSettings()
         photoSettings.flashMode = .auto
         photoSettings.isHighResolutionPhotoEnabled = true
-        self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        sessionQueue.async { [weak self] in
+            guard let self else { return }
+            photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        }
     }
     
     func checkCameraPermission() async {
@@ -124,4 +127,8 @@ class CameraSessionManager {
             break
         }
     }
+}
+
+extension CameraSessionManager: AVCapturePhotoCaptureDelegate {
+    
 }
