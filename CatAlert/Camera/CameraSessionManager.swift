@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class CameraSessionManager {
     enum CameraError: Error {
@@ -35,7 +36,7 @@ class CameraSessionManager {
     private var videoDeviceInput: AVCaptureDeviceInput?
     private let photoOutput: AVCapturePhotoOutput
     private let sessionQueue: DispatchQueue
-    
+    private var photoCaptureCompletion: ((Result<UIImage, Error>) -> Void)?
     
     // MARK: - Helper methods
     func requestCameraPermission() async -> Bool {
@@ -114,11 +115,5 @@ class CameraSessionManager {
         @unknown default:
             break
         }
-    }
-    
-    func createPreviewLayer() -> AVCaptureVideoPreviewLayer {
-        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.videoGravity = .resizeAspectFill
-        return previewLayer
     }
 }
