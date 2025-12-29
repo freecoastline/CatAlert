@@ -25,7 +25,7 @@ class CameraSessionManager: NSObject {
     
     // MARK: - Singleton
     static let shared = CameraSessionManager()
-    private init(){
+    private override init(){
         session = AVCaptureSession()
         sessionQueue = DispatchQueue(label: "com.catAlert.camera.session")
         photoOutput = AVCapturePhotoOutput()
@@ -130,5 +130,6 @@ class CameraSessionManager: NSObject {
 }
 
 extension CameraSessionManager: AVCapturePhotoCaptureDelegate {
-    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
+    }
 }
