@@ -62,6 +62,25 @@ enum UIConstants {
 
         static let basicSectionRowCount = 3
     }
+    
+    enum Camera {
+        // Capture Button
+        static let captureButtonSize: CGFloat = 70
+        static let captureButtonCornerRadius: CGFloat = 35  // Half of size for circle
+        static let captureButtonBorderWidth: CGFloat = 5
+        static let captureButtonBorderAlpha: CGFloat = 0.5
+
+        // Shadow
+        static let shadowOpacity: Float = 0.3
+        static let shadowRadius: CGFloat = 4
+        static let shadowOffset = CGSize(width: 0, height: 2)
+
+        // Layout
+        static let captureButtonBottomOffset: CGFloat = -30
+        static let closeButtonSize: CGFloat = 40
+        static let closeButtonTopOffset: CGFloat = 16
+        static let closeButtonLeadingOffset: CGFloat = 16
+    }
 }
 
 
