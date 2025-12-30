@@ -13,6 +13,7 @@ class CameraSessionManager: NSObject {
     enum CameraError: Error {
         case deviceNotFound
         case configurationFailed
+        case photoDataUnavailable
         var localizedDescription: String {
             switch self {
             case .deviceNotFound:
@@ -136,6 +137,13 @@ extension CameraSessionManager: AVCapturePhotoCaptureDelegate {
             photoCaptureCompletion = nil
             return
         }
+        
+        guard let imageData = photo.fileDataRepresentation() else {
+            photoCaptureCompletion?(.failure(CameraError.photoDataUnavailable))
+            photoCaptureCompletion = nil
+            return
+        }
+        
         
     }
 }
