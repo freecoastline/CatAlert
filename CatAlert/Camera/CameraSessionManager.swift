@@ -14,12 +14,17 @@ class CameraSessionManager: NSObject {
         case deviceNotFound
         case configurationFailed
         case photoDataUnavailable
+        case dataTransformToImageFailed
         var localizedDescription: String {
             switch self {
             case .deviceNotFound:
                 return "Camera device not available"
             case .configurationFailed:
                 return "Failed to configure camera"
+            case .photoDataUnavailable:
+                return "photo data is unavailable"
+            case .dataTransformToImageFailed:
+                return "data transform to image failed"
             }
         }
     }
@@ -140,6 +145,12 @@ extension CameraSessionManager: AVCapturePhotoCaptureDelegate {
         
         guard let imageData = photo.fileDataRepresentation() else {
             photoCaptureCompletion?(.failure(CameraError.photoDataUnavailable))
+            photoCaptureCompletion = nil
+            return
+        }
+        
+        guard let image = UIImage(data: imageData) else {
+            photoCaptureCompletion?(.failure(CameraError.dataTransformToImageFailed))
             photoCaptureCompletion = nil
             return
         }
