@@ -131,5 +131,11 @@ class CameraSessionManager: NSObject {
 
 extension CameraSessionManager: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: (any Error)?) {
+        if let error {
+            photoCaptureCompletion?(.failure(error))
+            photoCaptureCompletion = nil
+            return
+        }
+        
     }
 }
