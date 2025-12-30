@@ -83,6 +83,19 @@ class CameraViewController: UIViewController {
         return button
     }()
     
+    private lazy var captureButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.layer.cornerRadius = UIConstants.Camera.captureButtonCornerRadius
+        button.layer.borderColor = UIColor.white.withAlphaComponent(UIConstants.Camera.captureButtonBorderAlpha).cgColor
+        button.layer.borderWidth = UIConstants.Camera.captureButtonBorderWidth
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = UIConstants.Camera.shadowOffset
+        button.layer.shadowOpacity = UIConstants.Camera.shadowOpacity
+        button.layer.shadowRadius = UIConstants.Camera.shadowRadius
+        
+        return button
+    }()
+    
     // MARK: - Action
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
