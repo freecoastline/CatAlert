@@ -155,6 +155,9 @@ extension CameraSessionManager: AVCapturePhotoCaptureDelegate {
             return
         }
         
-        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            photoCaptureCompletion?(.success(image))
+        }
     }
 }
