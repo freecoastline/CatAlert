@@ -22,6 +22,14 @@ class PhotoEditViewController: UIViewController {
     // MARK: - Properties
     private let originalImage: UIImage
     
+    private lazy var imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.backgroundColor = .black
+        return iv
+    }()
+    
     init(originalImage: UIImage) {
         self.originalImage = originalImage
         super.init(nibName: nil, bundle: nil)
