@@ -129,4 +129,13 @@ class CameraViewController: UIViewController {
             }
         }
     }
+    
+    private func handleCapturedPhoto(_ image: UIImage) {
+        
+        AlertManager.shared.showAlert(
+            "Photo captured successfully! 📸\nSize: \(Int(image.size.width))x\(Int(image.size.height))",
+            title: "Success",
+            on: self
+        )
+    }
 }
