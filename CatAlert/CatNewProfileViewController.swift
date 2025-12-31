@@ -328,7 +328,7 @@ class CatNewProfileViewController: UIViewController {
         case video
     }
    
-    private func openCamera(for type: MediaCaptureType) {
+    private func openCamera(for type: MediaCaptureType) {        
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
             showAlert(title: "相机不可用", message: "当前设备不支持相机功能", showSettings: false)
             return
