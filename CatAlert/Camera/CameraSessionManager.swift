@@ -107,32 +107,32 @@ class CameraSessionManager: NSObject {
         }
     }
     
-    func checkCameraPermission() async {
-        let status = AVCaptureDevice.authorizationStatus(for: .video)
-        switch status {
-        case .notDetermined:
-            let granted = await requestCameraPermission()
-            if granted {
-                do {
-                    try await setupCamera()
-                } catch {
-                    //
-                }
-            }
-        case .denied, .restricted:
+//    func checkCameraPermission() async {
+//        let status = AVCaptureDevice.authorizationStatus(for: .video)
+//        switch status {
+//        case .notDetermined:
+//            let granted = await requestCameraPermission()
+//            if granted {
+//                do {
+//                    try await setupCamera()
+//                } catch {
+//                    //
+//                }
+//            }
+//        case .denied, .restricted:
 //            showErrorAlert("请在设置中允许相机权限")
-        case .authorized:
-            do {
-                try await setupCamera()
-            } catch {
-                await MainActor.run {
+//        case .authorized:
+//            do {
+//                try await setupCamera()
+//            } catch {
+//                await MainActor.run {
 //                    showErrorAlert("相机设置失败")
-                }
-            }
-        @unknown default:
-            break
-        }
-    }
+//                }
+//            }
+//        @unknown default:
+//            break
+//        }
+//    }
 }
 
 extension CameraSessionManager: AVCapturePhotoCaptureDelegate {

@@ -76,6 +76,87 @@ class ImageZoomHandler: NSObject {
         self.imageZoomImageView.transform = .identity
         self.imageZoomImageView.isHidden = true
     }
+    
+    @objc private func handleImagePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let imageView = gesture.view else {
+            return
+        }
+        switch gesture.state {
+        case .began:
+            lastScale = currentScale
+        case .changed:
+            currentScale = min(max(UIConstants.ImageZoom.minimumScale, gesture.scale * lastScale), UIConstants.ImageZoom.maximumScale)
+            imageView.transform = CGAffineTransform(scaleX: currentScale, y: currentScale)
+        case .ended, .cancelled:
+            if currentScale < UIConstants.ImageZoom.dismissThreshold {
+                dismiss()
+            } else if currentScale < 1.0 {
+                currentScale = 1.0
+                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+                    imageView.transform = .identity
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    @objc private func handleImagePan(_ gesture: UIPanGestureRecognizer) {
+        guard let imageView = gesture.view else { return }
+        
+        switch gesture.state {
+        case .began:
+            imageViewOriginalCenter = imageView.center
+        case .changed:
+            let transition = gesture.translation(in: view)
+            let newCenter = CGPoint(x: imageViewOriginalCenter.x + transition.x, y: imageViewOriginalCenter.y + transition.y)
+            imageView.center = newCenter
+            
+            if currentScale <= 1.0 {
+                let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
+                let maxDistance: CGFloat = 200.0
+                imageZoomBackgroundView.alpha = max(0.3, 1.0 - (distance / maxDistance) * 0.7)
+                
+                let scale = max(0.7, 1.0 - (distance / maxDistance) * 0.3)
+                imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
+        case .ended, .cancelled:
+            let transition = gesture.translation(in: view)
+            let distance:CGFloat = sqrt(pow(transition.x, 2) + pow(transition.y, 2))
+            
+            if currentScale <= 1.0 {
+                if distance > 150 {
+                    dismiss()
+                } else {
+                    UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+                        [weak self] in
+                        guard let self else { return }
+                        imageView.center = imageViewOriginalCenter
+                        imageView.transform = .identity
+                        imageZoomBackgroundView.alpha = 1.0
+                    }
+                }
+            } else {
+                UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+                    [weak self] in
+                    guard let self else { return }
+                    imageView.center = imageViewOriginalCenter
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
+        guard let imageView = gesture.view else { return }
+        let newScale = currentScale > 1.0 ? 1.0 : 2.0
+        currentScale = newScale
+        UIView.animate(withDuration: UIConstants.Animation.standardDuration, delay: 0, usingSpringWithDamping: UIConstants.Animation.springDamping, initialSpringVelocity: UIConstants.Animation.initialSpringVelocity, options: .curveEaseOut) {
+            imageView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
+        }
+    }
+    
 }
 
 extension ImageZoomHandler: UIGestureRecognizerDelegate {
