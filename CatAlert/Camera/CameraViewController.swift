@@ -104,11 +104,16 @@ class CameraViewController: UIViewController {
         button.layer.shadowOffset = UIConstants.Camera.shadowOffset
         button.layer.shadowOpacity = UIConstants.Camera.shadowOpacity
         button.layer.shadowRadius = UIConstants.Camera.shadowRadius
+        button.addTarget(self, action: #selector(captureButtonTapped), for: .touchUpInside)
         return button
     }()
     
     // MARK: - Action
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    @objc private func captureButtonTapped() {
+        
     }
 }
