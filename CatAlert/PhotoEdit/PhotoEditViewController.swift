@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class PhotoEditViewController: UIViewController {
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -16,5 +17,17 @@ class PhotoEditViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
+    }
+    
+    // MARK: - Properties
+    private let originalImage: UIImage
+    
+    init(originalImage: UIImage) {
+        self.originalImage = originalImage
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
