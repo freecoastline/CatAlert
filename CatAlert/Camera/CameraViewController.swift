@@ -24,6 +24,7 @@ class CameraViewController: UIViewController {
         sessionManager.stopSession()
     }
     
+    // MARK: - SetupUI
     private func setupUI() {
         view.backgroundColor = .black
         setupPreviewLayer()
@@ -31,6 +32,16 @@ class CameraViewController: UIViewController {
             await setupCameraSession()
         }
         setupCloseButton()
+        setupCaptureButton()
+    }
+    
+    private func setupCaptureButton() {
+        view.addSubview(captureButton)
+        captureButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(UIConstants.Camera.captureButtonBottomOffset)
+            make.height.width.equalTo(UIConstants.Camera.captureButtonSize)
+        }
     }
     
     private func setupCameraSession() async {
