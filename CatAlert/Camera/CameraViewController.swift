@@ -114,6 +114,19 @@ class CameraViewController: UIViewController {
     }
     
     @objc private func captureButtonTapped() {
-        
+        animateCaptureButton()
+    }
+    
+    // MARK: - Helper Method
+    private func animateCaptureButton() {
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            guard let self else { return }
+            captureButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.1) { [weak self] in
+                guard let self else { return }
+                captureButton.transform = .identity
+            }
+        }
     }
 }
