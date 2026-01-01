@@ -27,11 +27,19 @@ class PhotoEditViewController: UIViewController {
     private let originalImage: UIImage
     
     private lazy var imageView: UIImageView = {
-        let iv = UIImageView()
+        let iv = UIImageView(image: originalImage)
         iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.backgroundColor = .black
         return iv
+    }()
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     init(originalImage: UIImage) {
@@ -41,5 +49,10 @@ class PhotoEditViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Action
+    @objc private func backButtonTapped() {
+        
     }
 }
