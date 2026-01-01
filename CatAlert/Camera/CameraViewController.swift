@@ -115,6 +115,20 @@ class CameraViewController: UIViewController {
     
     @objc private func captureButtonTapped() {
         animateCaptureButton()
+        
+        sessionManager.capturePhoto { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let image):
+                handleCapturedPhoto(image)
+            case .failure(let error):
+                AlertManager.shared.showAlert(
+                    "Failed to capture photo: \(error.localizedDescription)",
+                    title: "Error",
+                    on: self
+                )
+            }
+        }
     }
     
     // MARK: - Helper Method
@@ -131,11 +145,8 @@ class CameraViewController: UIViewController {
     }
     
     private func handleCapturedPhoto(_ image: UIImage) {
-        
-        AlertManager.shared.showAlert(
-            "Photo captured successfully! 📸\nSize: \(Int(image.size.width))x\(Int(image.size.height))",
-            title: "Success",
-            on: self
-        )
+        let photoEditVC = PhotoEditViewController(originalImage: image)
+        photoEditVC.modalPresentationStyle = .fullScreen
+        present(photoEditVC, animated: true)
     }
 }
