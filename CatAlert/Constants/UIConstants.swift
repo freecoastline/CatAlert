@@ -81,6 +81,13 @@ enum UIConstants {
         static let closeButtonTopOffset: CGFloat = 16
         static let closeButtonLeadingOffset: CGFloat = 16
     }
+    
+    enum PhotoEdit {
+        // Navigation Buttons
+        static let navigationPadding: CGFloat = 16
+        static let backButtonSize: CGFloat = 44
+        static let nextButtonFontSize: CGFloat = 17
+    }
 }
 
 
