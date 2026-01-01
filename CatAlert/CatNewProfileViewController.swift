@@ -329,35 +329,37 @@ class CatNewProfileViewController: UIViewController {
     }
    
     private func openCamera(for type: MediaCaptureType) {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            showAlert(title: "相机不可用", message: "当前设备不支持相机功能", showSettings: false)
-            return
-        }
-        let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
-        switch cameraStatus {
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { grant in
-                DispatchQueue.main.async {
-                    [weak self] in
-                    guard let self else { return }
-                    if grant {
-                        presentCameraPicker(for: type)
-                    } else {
-                        showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频", showSettings: true)
-                    }
-                }
-            }
-        case .restricted, .denied:
-            showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频", showSettings: true)
-        case .authorized:
-            presentCameraPicker(for: type)
-        @unknown default:
-            showAlert(
-                title: "未知错误",
-                message: "无法确定相机权限状态，请稍后再试",
-                showSettings: false
-            )
-        }
+        let cam = CameraViewController()
+        present(cam, animated: true)
+//        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+//            showAlert(title: "相机不可用", message: "当前设备不支持相机功能", showSettings: false)
+//            return
+//        }
+//        let cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
+//        switch cameraStatus {
+//        case .notDetermined:
+//            AVCaptureDevice.requestAccess(for: .video) { grant in
+//                DispatchQueue.main.async {
+//                    [weak self] in
+//                    guard let self else { return }
+//                    if grant {
+//                        presentCameraPicker(for: type)
+//                    } else {
+//                        showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频", showSettings: true)
+//                    }
+//                }
+//            }
+//        case .restricted, .denied:
+//            showAlert(title: "权限被拒绝", message: "需要相机权限才能拍摄照片和视频", showSettings: true)
+//        case .authorized:
+//            presentCameraPicker(for: type)
+//        @unknown default:
+//            showAlert(
+//                title: "未知错误",
+//                message: "无法确定相机权限状态，请稍后再试",
+//                showSettings: false
+//            )
+//        }
     }
     
     private func presentCameraPicker(for type: MediaCaptureType) {

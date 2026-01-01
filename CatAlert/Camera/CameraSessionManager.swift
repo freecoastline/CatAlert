@@ -68,6 +68,7 @@ class CameraSessionManager: NSObject {
                     videoDeviceInput = input
                 }
                 if session.canAddOutput(photoOutput) {
+                    photoOutput.isHighResolutionCaptureEnabled = true
                     session.addOutput(photoOutput)
                 }
                     
