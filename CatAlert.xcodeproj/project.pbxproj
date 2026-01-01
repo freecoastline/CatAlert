@@ -114,6 +114,7 @@
 				NewCatStatus/CatStatusViewModel.swift,
 				NewCatStatus/NewCatCurrentStatusViewController.swift,
 				PhotoEdit/PhotoEditViewController.swift,
+				PhotoEdit/PhotoFilter.swift,
 				PinkbackGround.webp,
 				Profile/ProfileActionBar.swift,
 				Profile/ProfileActionBarCell.swift,

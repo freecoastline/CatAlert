@@ -45,6 +45,7 @@ class PhotoEditViewController: UIViewController {
     
     // MARK: - Properties
     private let originalImage: UIImage
+    private let ciContext: 
     
     private lazy var imageView: UIImageView = {
         let iv = UIImageView(image: originalImage)
