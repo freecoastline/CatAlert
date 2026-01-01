@@ -42,6 +42,15 @@ class PhotoEditViewController: UIViewController {
         return button
     }()
     
+    private lazy var nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Next", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     init(originalImage: UIImage) {
         self.originalImage = originalImage
         super.init(nibName: nil, bundle: nil)
@@ -53,6 +62,10 @@ class PhotoEditViewController: UIViewController {
     
     // MARK: - Action
     @objc private func backButtonTapped() {
+        
+    }
+    
+    @objc private func nextButtonTapped() {
         
     }
 }
