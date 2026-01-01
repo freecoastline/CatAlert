@@ -110,6 +110,14 @@ class PhotoEditViewController: UIViewController {
             ciFilter.setValue(1.5, forKey: kCIInputSaturationKey)
         }
         
-        return nil
+        guard let outputImage = ciFilter.outputImage else {
+            return nil
+        }
+        
+        guard let cgImage = ciContext.createCGImage(ciImage, from: outputImage.extent) else {
+            return nil
+        }
+        
+        return UIImage(cgImage: cgImage)
     }
 }
