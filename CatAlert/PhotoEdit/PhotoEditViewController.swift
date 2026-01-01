@@ -92,6 +92,12 @@ class PhotoEditViewController: UIViewController {
     
     // MARK: - Filter Application
     private func applyFilter(_ filter: PhotoFilter, to image: UIImage) -> UIImage? {
+        guard let ciImage = CIImage(image: image) else {
+            return nil
+        }
         
+        guard let filterName = filter.ciFilterName else {
+            return image
+        }
     }
 }
