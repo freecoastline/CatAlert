@@ -53,4 +53,10 @@ class FilterCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - configure
+    func configure(with originalImage: UIImage, filterName: String, isSelected: Bool) {
+        imageView.image = originalImage
+        nameLabel.text = filterName
+        nameLabel.font = isSelected ? .systemFont(ofSize: 12, weight: .bold) : .systemFont(ofSize: 12)
+    }
 }

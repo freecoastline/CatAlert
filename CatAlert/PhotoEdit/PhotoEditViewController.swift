@@ -56,6 +56,7 @@ class PhotoEditViewController: UIViewController {
     // MARK: - Properties
     private let originalImage: UIImage
     private lazy var ciContext = CIContext()
+    private let filters = PhotoFilter.allCases
     
     private lazy var imageView: UIImageView = {
         let iv = UIImageView(image: originalImage)
@@ -155,10 +156,16 @@ extension PhotoEditViewController: UICollectionViewDelegate {
 
 extension PhotoEditViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        filters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCell.identifier, for: indexPath) as? FilterCell else {
+            return UICollectionViewCell()
+        }
+        
+        let filter = filters[indexPath.item]
+        cell.configure(with: originalImage, filterName: filter.filterName, isSelected: false)
+        return cell
     }
 }
