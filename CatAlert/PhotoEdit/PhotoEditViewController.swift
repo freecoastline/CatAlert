@@ -17,6 +17,10 @@ class PhotoEditViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     // MARK: - Properties
