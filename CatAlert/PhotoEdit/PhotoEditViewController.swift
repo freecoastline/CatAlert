@@ -45,7 +45,7 @@ class PhotoEditViewController: UIViewController {
     
     // MARK: - Properties
     private let originalImage: UIImage
-    private let ciContext: 
+    private lazy var ciContext = CIContext()
     
     private lazy var imageView: UIImageView = {
         let iv = UIImageView(image: originalImage)
@@ -87,6 +87,11 @@ class PhotoEditViewController: UIViewController {
     }
     
     @objc private func nextButtonTapped() {
+        
+    }
+    
+    // MARK: - Filter Application
+    private func applyFilter(_ filter: PhotoFilter, to image: UIImage) -> UIImage? {
         
     }
 }
