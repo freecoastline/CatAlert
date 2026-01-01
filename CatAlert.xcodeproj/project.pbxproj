@@ -113,6 +113,7 @@
 				Model/TaskProgress.swift,
 				NewCatStatus/CatStatusViewModel.swift,
 				NewCatStatus/NewCatCurrentStatusViewController.swift,
+				PhotoEdit/FilterCell.swift,
 				PhotoEdit/PhotoEditViewController.swift,
 				PhotoEdit/PhotoFilter.swift,
 				PinkbackGround.webp,
