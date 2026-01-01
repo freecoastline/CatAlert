@@ -57,6 +57,7 @@ class PhotoEditViewController: UIViewController {
     private let originalImage: UIImage
     private lazy var ciContext = CIContext()
     private let filters = PhotoFilter.allCases
+    private var filterPreviews: [UIImage] = []
     
     private lazy var imageView: UIImageView = {
         let iv = UIImageView(image: originalImage)
