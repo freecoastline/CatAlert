@@ -330,6 +330,7 @@ class CatNewProfileViewController: UIViewController {
    
     private func openCamera(for type: MediaCaptureType) {
         let cam = CameraViewController()
+        cam.modalPresentationStyle = .fullScreen
         present(cam, animated: true)
 //        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
 //            showAlert(title: "相机不可用", message: "当前设备不支持相机功能", showSettings: false)
