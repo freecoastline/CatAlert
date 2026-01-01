@@ -72,6 +72,23 @@ class PhotoEditViewController: UIViewController {
         return button
     }()
     
+    private lazy var filterCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 80, height: 110)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = .clear
+        collection.showsHorizontalScrollIndicator = false
+        collection.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
+        collection.delegate = self
+        collection.dataSource = self
+        return collection
+    }()
+    
     init(originalImage: UIImage) {
         self.originalImage = originalImage
         super.init(nibName: nil, bundle: nil)
