@@ -99,5 +99,17 @@ class PhotoEditViewController: UIViewController {
         guard let filterName = filter.ciFilterName else {
             return image
         }
+        
+        guard let ciFilter = CIFilter(name: filterName) else {
+            return nil
+        }
+        
+        ciFilter.setValue(ciImage, forKey: kCIInputImageKey)
+        
+        if filter == .vivid {
+            ciFilter.setValue(1.5, forKey: kCIInputSaturationKey)
+        }
+        
+        return nil
     }
 }
