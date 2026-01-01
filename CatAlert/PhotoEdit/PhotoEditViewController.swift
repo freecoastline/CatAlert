@@ -24,6 +24,16 @@ class PhotoEditViewController: UIViewController {
         }
         setupBackButton()
         setupNextButton()
+        setupFilterCollectionView()
+    }
+    
+    private func setupFilterCollectionView() {
+        view.addSubview(filterCollectionView)
+        filterCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(130)
+        }
     }
     
     private func setupBackButton() {
@@ -136,5 +146,19 @@ class PhotoEditViewController: UIViewController {
         }
         
         return UIImage(cgImage: cgImage)
+    }
+}
+
+extension PhotoEditViewController: UICollectionViewDelegate {
+    
+}
+
+extension PhotoEditViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
     }
 }
