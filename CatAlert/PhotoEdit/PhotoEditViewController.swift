@@ -9,17 +9,42 @@ import Foundation
 import UIKit
 
 class PhotoEditViewController: UIViewController {
+    enum PhotoEdit {
+        // Navigation Buttons
+        static let navigationPadding: CGFloat = 16
+        static let backButtonSize: CGFloat = 44
+        static let nextButtonFontSize: CGFloat = 17
+    }
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
+    // MARK: - SetupUI
     private func setupUI() {
         view.backgroundColor = .black
         view.addSubview(imageView)
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    private func setupBackButton() {
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(PhotoEdit.navigationPadding)
+            make.leading.equalToSuperview().offset(PhotoEdit.navigationPadding)
+            make.height.width.equalTo(PhotoEdit.backButtonSize)
+        }
+    }
+    
+    private func setupNextButton() {
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(PhotoEdit.navigationPadding)
+            make.trailing.equalToSuperview().offset(-PhotoEdit.navigationPadding)
         }
     }
     
@@ -46,7 +71,7 @@ class PhotoEditViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Next", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        button.titleLabel?.font = .systemFont(ofSize: PhotoEdit.nextButtonFontSize, weight: .semibold)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
