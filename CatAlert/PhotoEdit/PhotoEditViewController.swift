@@ -59,6 +59,7 @@ class PhotoEditViewController: UIViewController {
     private lazy var ciContext = CIContext()
     private let filters = PhotoFilter.allCases
     private var filterPreviews: [UIImage] = []
+    private var selectedFilterIndex = 0
     
     private lazy var imageView: UIImageView = {
         let iv = UIImageView(image: originalImage)
@@ -96,6 +97,7 @@ class PhotoEditViewController: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
+        collection.allowsSelection = true
         collection.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
         collection.delegate = self
         collection.dataSource = self
