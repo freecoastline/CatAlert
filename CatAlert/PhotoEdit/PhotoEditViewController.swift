@@ -25,6 +25,7 @@ class PhotoEditViewController: UIViewController {
         setupBackButton()
         setupNextButton()
         setupFilterCollectionView()
+        generateFilterPreviews()
     }
     
     private func setupFilterCollectionView() {
@@ -155,6 +156,21 @@ class PhotoEditViewController: UIViewController {
         return renderer.image { context in
             image.draw(in: CGRect(origin: .zero, size: size))
         }
+    }
+    
+    private func generateFilterPreviews() {
+        let thumbnailSize = CGSize(width: 80, height: 80)
+        guard let thumbnail = generateThumbnail(from: originalImage, size: thumbnailSize) else {
+            return
+        }
+        
+        filterPreviews = filters.map({ filter in
+            if let filteredImage = applyFilter(filter, to: thumbnail) {
+                return filteredImage
+            } else {
+                return thumbnail
+            }
+        })
     }
 }
 
