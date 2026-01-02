@@ -189,7 +189,8 @@ extension PhotoEditViewController: UICollectionViewDataSource {
         }
         
         let filter = filters[indexPath.item]
-        cell.configure(with: originalImage, filterName: filter.filterName, isSelected: false)
+        let filterPreview = filterPreviews[indexPath.item]
+        cell.configure(with: filterPreview, filterName: filter.filterName, isSelected: false)
         return cell
     }
 }
