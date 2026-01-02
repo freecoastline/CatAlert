@@ -149,6 +149,13 @@ class PhotoEditViewController: UIViewController {
         
         return UIImage(cgImage: cgImage)
     }
+    
+    private func generateThumbnail(from image: UIImage, size: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
 }
 
 extension PhotoEditViewController: UICollectionViewDelegate {
